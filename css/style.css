@@ -53,7 +53,10 @@ p {
 .navbar-inverse .navbar-toggle .icon-bar {
     background-color: #333;
 }
-
+.navbar-header a.logo {
+    position: relative;
+    top: -14px;
+}
 ::-webkit-scrollbar {
     width: 12px;
 }
