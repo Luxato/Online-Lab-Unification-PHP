@@ -7,3 +7,5 @@ TODO :
 1# Bootstrap
 
 2# jQuery
+
+3# github.com/fontenele/bootstrap-navbar-dropdowns
