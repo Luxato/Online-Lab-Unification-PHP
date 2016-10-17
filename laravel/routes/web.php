@@ -10,8 +10,8 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
+Route::get('/foo', function () {
+	echo "this is foo";
+});
 
-Route::get('/', 'Intro@index');
+Route::get('/', 'Homepage@index');
