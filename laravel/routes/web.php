@@ -10,8 +10,8 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-Route::get('/foo', function () {
-	echo "this is foo";
-});
-
 Route::get('/', 'Homepage@index');
+/**
+ * {locale} - language = {en,sk}
+ */
+Route::get('{lang}', 'Homepage@index');

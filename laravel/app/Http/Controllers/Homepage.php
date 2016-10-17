@@ -7,13 +7,15 @@ use DB;
 use App\Http\Requests;
 
 class Homepage extends Controller {
-	public function index() {
-		$text = 'toto je vypis z controllera Intro';
+	public function index(Request $request, $locale = NULL) {
+		// Set up language
+		if (empty($locale)) {
+		    $locale = config('app.fallback_locale');
+		}
+		app()->setLocale($locale);
+
 		$data = DB::table('navigation')->get();
 		$data['navigation'] = $data->toArray();
-		/*echo '<pre>';
-		print_r( $data );
-		echo '</pre>';*/
 		return view( 'welcome', $data );
 	}
 }

@@ -49,13 +49,13 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right translation-flags">
-                <li><a href="#"><img src="./assets/img/svk_flag.png"
+                <li><a href="<?= URL::to('/sk'); ?>"><img src="./assets/img/svk_flag.png"
                                      alt="slovensky" width="20px"></a></li>
-                <li><a href="#"><img src="./assets/img/en_flag.png" alt="english" width="20px"></a></li>
+                <li><a href="<?= URL::to('/en'); ?>"><img src="./assets/img/en_flag.png" alt="english" width="20px"></a></li>
             </ul>
             <ul class="nav navbar-nav">
                 <?php foreach($navigation as $nav_link): ?>
-                    <li><a href="index.html"><?php echo $nav_link->name ?></a></li>
+                    <li><a href="index.html"><?php echo trans('navigation.'.$nav_link->name) ?></a></li>
                 <?php endforeach; ?>
                 {{--<li class="active"><a href="index.html">Experimenty</a></li>
                 <li><a href="index.html">Služby</a></li>
