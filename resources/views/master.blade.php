@@ -48,22 +48,10 @@
             <a class="navbar-brand logo" href="<?= URL::to( '/' ); ?>"><img src="./assets/img/logo.png" alt="logo" width="37px"></a>
         </div>
         <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right translation-flags">
-                <li><a href="<?= URL::to( '/sk' ); ?>"><img src="./assets/img/svk_flag.png"
-                                                            alt="slovensky" width="20px"></a></li>
-                <li><a href="<?= URL::to( '/en' ); ?>"><img src="./assets/img/en_flag.png" alt="english"
-                                                            width="20px"></a></li>
-            </ul>
             <ul class="nav navbar-nav">
                 <?php foreach($navigation as $nav_link): ?>
                 <li><a href="<?= $nav_link->name ?>"><?php echo trans( 'navigation.' . $nav_link->name ) ?></a></li>
                 <?php endforeach; ?>
-                {{--<li class="active"><a href="index.html">Experimenty</a></li>
-                <li><a href="index.html">Služby</a></li>
-                <li><a href="index.html">Predmety</a></li>
-                <li><a href="index.html">Aktuality</a></li>
-                <li><a href="index.html">Kontakt</a></li>
-                <li><a href="index.html">Mapa stránky</a></li>--}}
                 <li>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu 1 <b class="caret"></b></a>
                     <ul class="dropdown-menu multi-level">
@@ -97,6 +85,10 @@
                 </li>
             </ul>
         </div><!--/.nav-collapse -->
+<ul class="translation-flags">
+    <li><a href="<?= URL::to( '/sk' ); ?>">SK</a></li>
+    <li><a href="<?= URL::to( '/en' ); ?>">EN</a></li>
+</ul>
     </div>
 </div>
 <header>
