@@ -45,7 +45,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand logo" href="index.html"><img src="./assets/img/logo.png" alt="logo" width="37px"></a>
+            <a class="navbar-brand logo" href="<?= URL::to( '/' ); ?>"><img src="./assets/img/logo.png" alt="logo" width="37px"></a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right translation-flags">
@@ -56,7 +56,7 @@
             </ul>
             <ul class="nav navbar-nav">
                 <?php foreach($navigation as $nav_link): ?>
-                <li><a href="index.html"><?php echo trans( 'navigation.' . $nav_link->name ) ?></a></li>
+                <li><a href="<?= $nav_link->name ?>"><?php echo trans( 'navigation.' . $nav_link->name ) ?></a></li>
                 <?php endforeach; ?>
                 {{--<li class="active"><a href="index.html">Experimenty</a></li>
                 <li><a href="index.html">Služby</a></li>

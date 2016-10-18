@@ -14,4 +14,5 @@ Route::get('/', 'Homepage@index');
 /**
  * {locale} - language = {en,sk}
  */
+Route::get('contact', 'Contact@index');
 Route::get('{lang}', 'Homepage@index');
