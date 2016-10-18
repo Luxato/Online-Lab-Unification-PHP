@@ -98,7 +98,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-3" style="padding: 25px;">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav navbar-vertical">
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+        </div>
+        <div class="col-sm-9">
             @yield('content')
         </div>
     </div>
