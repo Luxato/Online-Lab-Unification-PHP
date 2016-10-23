@@ -1,7 +1,6 @@
 @extends('master')
 
 @section('content')
-    {!! Breadcrumbs::render() !!}
     <h2>Dessert cake chocolate</h2>
     <p>
         Wafer sweet roll tiramisu croissant macaroon marshmallow gingerbread. Lemon drops tart carrot cake
