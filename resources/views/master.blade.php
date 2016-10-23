@@ -98,11 +98,6 @@
 
 <div class="container">
     <div class="row">
-        <ol class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Library</a></li>
-            <li class="active">Data</li>
-        </ol>
         <div class="col-sm-3" style="padding: 25px;">
             <nav class="navbar navbar-default" role="navigation">
                 <div class="collapse navbar-collapse navbar-ex1-collapse">

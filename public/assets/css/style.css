@@ -44,7 +44,6 @@ p {
 .particles-js {
     height: 400px;
 }
-
 @media (max-width: 767px) {
     .translation-flags {
         list-style-type: none;
@@ -57,12 +56,10 @@ p {
         margin-left: -90px;
         display: block !important;
     }
-
     .navbar-collapse {
         width: 100% !important;
     }
 }
-
 .navbar-collapse {
     width: 80%;
     float: left;
@@ -93,26 +90,18 @@ p {
     top: 15px;
     right: 38px;
 }
-
-.breadcrumb {
-    background-color: transparent;
-}
-
 .navbar-vertical, .navbar-ex1-collapse {
     width: 100%;
 }
-
-.navbar-vertical li {
+.navbar-vertical li{
     display: block;
     width: 100%;
 }
-
 .translation-flags li a {
     padding-right: 0;
     padding-left: 5px;
-    color: rgb(236, 104, 24);
+    color: rgb(236,104,24);
 }
-
 .translation-flags li a:hover {
     text-decoration: none;
 }
