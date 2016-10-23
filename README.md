@@ -1,4 +1,10 @@
 # Online Laboratory Unification
+Install instructions:
+```
+git clone https://github.com/Luxato/Online-Lab-Unification-PHP.git
+composer update
+php artisan key:generate
+```
 
 TODO :
 1# change logo to .svg
