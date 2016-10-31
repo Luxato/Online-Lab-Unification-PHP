@@ -23,9 +23,11 @@ p {
     line-height: 20px;
     margin: 0 0 15px 0;
 }
+
 .nav.navbar-nav a {
     font-family: 'Raleway', sans-serif;
 }
+
 .header-bg {
     height: 400px;
     -webkit-background-size: cover;
@@ -46,6 +48,7 @@ p {
 .particles-js {
     height: 400px;
 }
+
 @media (max-width: 767px) {
     .translation-flags {
         list-style-type: none;
@@ -58,10 +61,12 @@ p {
         margin-left: -90px;
         display: block !important;
     }
+
     .navbar-collapse {
         width: 100% !important;
     }
 }
+
 .navbar-collapse {
     width: 80%;
     float: left;
@@ -92,18 +97,34 @@ p {
     top: 15px;
     right: 38px;
 }
+
 .navbar-vertical, .navbar-ex1-collapse {
     width: 100%;
 }
-.navbar-vertical li{
+
+.navbar-vertical li {
     display: block;
     width: 100%;
+    border: 1px solid #E5E5E5;
 }
+
+.navbar-vertical li a::after {
+    content: '\f054';
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    margin: 0px 0px 0px 10px;
+    text-decoration: none;
+    font-size: 11px;
+    float: right;
+}
+
 .translation-flags li a {
     padding-right: 0;
     padding-left: 5px;
-    color: rgb(236,104,24);
+    color: rgb(236, 104, 24);
 }
+
 .translation-flags li a:hover {
     text-decoration: none;
 }
@@ -216,9 +237,11 @@ footer .fa {
     font-size: 13px;
     letter-spacing: 1px;
 }
+
 .nav > li > a:hover {
     color: #EC6818 !important;
 }
+
 .dropdown-submenu > .dropdown-menu {
     top: 0;
     left: 100%;
@@ -261,4 +284,32 @@ footer .fa {
     -webkit-border-radius: 6px 0 6px 6px;
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
+}
+
+.navbar-ex1-collapse, .navbar-vertical {
+    padding: 0;
+}
+
+.breadcrumb {
+    font-family: 'Roboto', sans-serif;
+    border: 1px solid #E7ECF1;
+    background-color: #fff;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none;
+}
+
+.breadcrumb a {
+    color: #EC6818;
+}
+
+.breadcrumb > li + li:before {
+    content: "\f111";
+    color: #aaa;
+    font-family: FontAwesome;
+    font-size: 5px;
+    margin: 0 5px;
+    position: relative;
+    top: -3px;
+    opacity: .4;
 }

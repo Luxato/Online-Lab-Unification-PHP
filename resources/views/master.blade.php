@@ -130,7 +130,7 @@
 <script src="assets/js/particles-animation.js"></script>
 <script>
     $(window).load(function () {
-        $(".se-pre-con").delay(500).fadeOut("slow");
+        $(".se-pre-con").fadeOut("slow");
     });
 </script>
 <div class="se-pre-con"></div>
