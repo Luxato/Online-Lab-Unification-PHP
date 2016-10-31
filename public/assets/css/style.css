@@ -23,7 +23,9 @@ p {
     line-height: 20px;
     margin: 0 0 15px 0;
 }
-
+.nav.navbar-nav a {
+    font-family: 'Raleway', sans-serif;
+}
 .header-bg {
     height: 400px;
     -webkit-background-size: cover;
@@ -207,8 +209,16 @@ footer .fa {
 
 .nav > li > a {
     text-transform: uppercase;
+    display: block;
+    line-height: 22px;
+    color: #444 !important;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
 }
-
+.nav > li > a:hover {
+    color: #EC6818 !important;
+}
 .dropdown-submenu > .dropdown-menu {
     top: 0;
     left: 100%;
