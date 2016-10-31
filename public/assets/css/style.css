@@ -4,7 +4,7 @@
 body {
     color: #666;
     font-family: 'Roboto', sans-serif;
-    padding-top: 50px;
+    padding-top: 80px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -316,18 +316,100 @@ footer .fa {
     top: -3px;
     opacity: .4;
 }
+
 html {
     position: relative;
     min-height: 100%;
 }
+
 body {
     /* Margin bottom by footer height */
     margin-bottom: 100px;
 }
+
 footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 100px;
+}
+
+.navbar-fixed-top {
+    background-color: #FFF;
+    min-height: 80px;
+}
+
+/*
+.navbar-fixed-top {
+    background-color: rgba(256,256,256,0);
+}
+.top-nav-collapse {
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+    padding: 0;
+    background-color: rgba(0,0,0,1);
+    color: #fff!important;
+    height: 100px;
+}*/
+#login-dp {
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, .8);
+}
+
+#login-dp .help-block {
+    font-size: 12px
+}
+
+#login-dp .bottom {
+    background-color: rgba(255, 255, 255, .8);
+    border-top: 1px solid #ddd;
+    clear: both;
+    padding: 14px;
+}
+
+#login-dp .social-buttons {
+    margin: 12px 0
+}
+
+#login-dp .social-buttons a {
+    width: 49%;
+}
+
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+
+.btn-fb {
+    color: #fff;
+    background-color: #3b5998;
+}
+
+.btn-fb:hover {
+    color: #fff;
+    background-color: #496ebc
+}
+
+.btn-tw {
+    color: #fff;
+    background-color: #55acee;
+}
+
+.btn-tw:hover {
+    color: #fff;
+    background-color: #59b5fa;
+}
+@media(max-width:768px){
+    #login-dp{
+        background-color: inherit;
+        color: #fff;
+    }
+    #login-dp .bottom{
+        background-color: inherit;
+        border-top:0 none;
+    }
 }
