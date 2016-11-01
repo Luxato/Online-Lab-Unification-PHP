@@ -173,14 +173,31 @@
     });
     $(window).scroll(function() {
         var navbar = $(".navbar-fixed-top");
-        if (navbar.offset().top > 50) {
-            navbar.stop().animate({
-                'opacity': 0
-            },500);
+        var navLinks = $(".navbar-fixed-top a");
+        var logo = $(".navbar-brand.logo a");
+
+        if ($(".navbar-fixed-top").offset().top > 50) {
+            navbar.addClass('navbar-mini');
+            /*$(".navbar-fixed-top").stop().animate({
+                'min-height': '50px'
+            },250);
+            $(".navbar-fixed-top a").stop().animate({
+                'line-height': '30px'
+            },250);
+            $(".navbar-brand").stop().animate({
+                'top': '-14px'
+            },250);*/
         } else {
-            navbar.stop().animate({
-                'opacity': 1
-            },500);
+            navbar.removeClass('navbar-mini');
+            /*$(".navbar-fixed-top").stop().animate({
+                'min-height': '80px'
+            },250);
+            $(".navbar-fixed-top a").stop().animate({
+                'line-height': '48px'
+            },250);
+            $(".navbar-brand").stop().animate({
+                'top': '0'
+            },250);*/
         }
     });
 </script>

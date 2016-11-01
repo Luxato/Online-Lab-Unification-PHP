@@ -13,9 +13,9 @@ class Contact extends Controller {
 			$locale = config('app.fallback_locale');
 		}
 		app()->setLocale($locale);
+		$data['navigation'] = $this->navigation;
 
-		$data = DB::table('navigation')->get();
-		$data['navigation'] = $data->toArray();
+
 		return view( 'contact', $data );
 	}
 }

@@ -89,7 +89,6 @@ p {
 
 .navbar-header a.logo {
     position: relative;
-    top: -14px;
 }
 
 .translation-flags {
@@ -340,20 +339,11 @@ footer {
     min-height: 80px;
 }
 
-/*
-.navbar-fixed-top {
-    background-color: rgba(256,256,256,0);
+.navbar-fixed-top .navbar-nav > li > a,
+.translation-flags li a {
+    line-height: 48px;
 }
-.top-nav-collapse {
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    transition: all 1s ease;
-    padding: 0;
-    background-color: rgba(0,0,0,1);
-    color: #fff!important;
-    height: 100px;
-}*/
+
 #login-dp {
     min-width: 250px;
     padding: 14px 14px 0;
@@ -403,13 +393,40 @@ footer {
     color: #fff;
     background-color: #59b5fa;
 }
-@media(max-width:768px){
-    #login-dp{
+
+@media (max-width: 768px) {
+    #login-dp {
         background-color: inherit;
         color: #fff;
     }
-    #login-dp .bottom{
+
+    #login-dp .bottom {
         background-color: inherit;
-        border-top:0 none;
+        border-top: 0 none;
     }
+}
+
+.navbar-mini {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    min-height: 50px !important;
+}
+
+.navbar-mini .navbar-nav > li > a {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    line-height: 30px;
+}
+.navbar-mini .navbar-brand {
+    animation-name: logo-animation;
+    animation-duration: 0.5s;
+    top: -14px;
+}
+@keyframes logo-animation {
+    0%   {top: 0;}
+    100% {top: -14px;}
 }
