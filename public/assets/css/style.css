@@ -423,7 +423,7 @@ footer {
 }
 .navbar-mini .navbar-brand {
     animation-name: logo-animation;
-    animation-duration: 0.5s;
+    animation-duration: 0.4s;
     top: -14px;
 }
 @keyframes logo-animation {

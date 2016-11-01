@@ -21,8 +21,31 @@ class Controller extends BaseController {
 	}
 
 	protected function init_navigation() {
-		$data               = DB::table( 'navigation' )->where('parent_id', NULL)->get();
-		$this->navigation = $data->toArray();
+		$nav_links        = DB::table( 'navigation' )->orderBy( 'parent_id' )->get()->toArray();
+		$this->navigation = [];
+		foreach ( $nav_links as $link ) {
+			if ( empty( $link->parent_id ) ) {
+				$this->navigation[ $link->section_id ] = $link;
+				foreach ( $nav_links as $key2 => $value2 ) {
+					if ( $link->section_id == $value2->parent_id ) {
+						foreach ( $nav_links as $key => $value3 ) {
+							if ( $value2->section_id == $value3->parent_id ) {
+								$value2->children[] = $value3;
+								unset( $nav_links[ $key ] );
+							}
+						}
+						$this->navigation[ $link->section_id ]->children[] = $value2;
+						unset( $nav_links[ $key2 ] );
+					}
+				}
+
+			}
+		}
+/*		echo '<pre>';
+		print_r( $navigation );
+		echo '</pre>';*/
+		/*$time = microtime( TRUE ) - $_SERVER["REQUEST_TIME_FLOAT"];
+		echo "Process Time: {$time}";*/
 	}
 
 	protected function init_section() {
