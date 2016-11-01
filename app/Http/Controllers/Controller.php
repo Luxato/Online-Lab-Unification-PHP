@@ -21,7 +21,10 @@ class Controller extends BaseController {
 	}
 
 	protected function init_navigation() {
-		$nav_links        = DB::table( 'navigation' )->orderBy( 'parent_id' )->get()->toArray();
+		$nav_links        = DB::table( 'navigation' )
+								->orderBy( 'parent_id' )
+								->orderBy( 'order' )
+								->get()->toArray();
 		$this->navigation = [];
 		foreach ( $nav_links as $link ) {
 			if ( empty( $link->parent_id ) ) {
@@ -41,9 +44,6 @@ class Controller extends BaseController {
 
 			}
 		}
-/*		echo '<pre>';
-		print_r( $navigation );
-		echo '</pre>';*/
 		/*$time = microtime( TRUE ) - $_SERVER["REQUEST_TIME_FLOAT"];
 		echo "Process Time: {$time}";*/
 	}

@@ -51,7 +51,17 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <?php foreach($navigation as $nav_link): ?>
-                <li><a href="<?= $nav_link->name ?>"><?php echo trans( 'navigation.' . $nav_link->name ) ?></a></li>
+                    <?php if(!isset($nav_link->children)): ?>
+                        <li><a href="<?= $nav_link->name ?>"><?php echo trans( 'navigation.' . $nav_link->name ) ?></a></li>
+                    <?php else: ?>
+                        <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo trans( 'navigation.' . $nav_link->name ) ?> <b class="caret"></b></a>
+                            <ul class="dropdown-menu multi-level">
+                                <?php foreach($nav_link->children as $child_link): ?>
+                                    <li><a href="<?= $child_link->controller ?>"><?= $child_link->name ?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
                 <?php endforeach; ?>
                 <li>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu 1 <b class="caret"></b></a>
@@ -173,7 +183,6 @@
     });
     $(window).scroll(function() {
         var navbar = $(".navbar-fixed-top");
-
         if ($(".navbar-fixed-top").offset().top > 50) {
             navbar.addClass('navbar-mini');
         } else {
