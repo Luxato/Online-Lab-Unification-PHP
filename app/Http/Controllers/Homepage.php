@@ -14,8 +14,7 @@ class Homepage extends Controller {
 		}
 		app()->setLocale($locale);
 
-		$data = DB::table('navigation')->get();
-		$data['navigation'] = $data->toArray();
+		$data['navigation'] = $this->navigation;
 		return view( 'welcome', $data );
 	}
 }
