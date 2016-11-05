@@ -11,12 +11,17 @@
 |
 */
 Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
-Auth::routes();
-Auth::logout();
+
+Route::get('/admin', ['middleware' => 'auth', 'uses' => 'Admin@index']);
+Route::group(['middleware' => ['web']], function () {
+	Route::auth();
+});
 /**
  * {locale} - language = {en,sk}
  */
 Route::get('contact', ['uses' => 'Contact@index', 'as' => 'contact']);
-Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);
+
+
+/*Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);*/
 
 Route::get('/home', 'HomeController@index');
