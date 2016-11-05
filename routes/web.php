@@ -19,7 +19,8 @@ Route::group(['middleware' => ['web']], function () {
 /**
  * {locale} - language = {en,sk}
  */
-Route::get('contact', ['uses' => 'Contact@index', 'as' => 'contact']);
+Route::get('/contact', ['uses' => 'Contact@index', 'as' => 'contact']);
+Route::get('/test', ['uses' => 'Mockup@index']);
 
 
 /*Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);*/
