@@ -1,0 +1,9 @@
+.skin-blue .main-header .logo {
+    background-color: #DD4B39 !important;
+}
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
+    border-left-color: #DD4B39;
+}
+.skin-blue .main-header .navbar {
+    background-color: #e36a5b;
+}
