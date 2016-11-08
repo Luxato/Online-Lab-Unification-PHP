@@ -7,13 +7,13 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="assets/administration/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="assets/administration/dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="assets/administration/dist/css/skins/skin-blue.min.css">
-    <link rel="stylesheet" href="assets/administration/custom.css">
+    <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dist/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/custom.css">
     <script>
         window.Laravel = <?php echo json_encode([
                 'csrfToken' => csrf_token(),
@@ -78,8 +78,8 @@
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu">
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+                <li class="active"><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-home" aria-hidden="true"></i> <span>Hlavná stránka</span></a></li>
+                <li><a href="<?= url::to( '/admin/navigation' ); ?>"><i class="fa fa-bars" aria-hidden="true"></i><span>Navigácia</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
                         <span class="pull-right-container">
@@ -211,15 +211,10 @@
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 2.2.3 -->
-<script src="assets/administration/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="assets/administration/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?= URL::to( '/' ); ?>/assets/administration/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="assets/administration/dist/js/app.min.js"></script>
-
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. Slimscroll is required when using the
-     fixed layout. -->
+<script src="<?= URL::to( '/' ); ?>/assets/administration/dist/js/app.min.js"></script>
 </body>
 </html>

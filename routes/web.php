@@ -13,6 +13,7 @@
 Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
 
 Route::get('/admin', ['middleware' => 'auth', 'uses' => 'Admin@index']);
+Route::get('/admin/navigation', ['middleware' => 'auth', 'uses' => 'Admin@navigation']);
 Route::group(['middleware' => ['web']], function () {
 	Route::auth();
 });
