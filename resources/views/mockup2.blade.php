@@ -164,45 +164,50 @@
             </nav>--}}{{--
         </div>--}}
         <div class="col-sm-12 mockup">
-            <img class="img-responsive" src="<?= URL::to( '/' ); ?>/mockups/1.jpg" alt="">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="usr">Trvanie animácie:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Počiatočný uhol v stupňoch:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">Počiatočná rýchlosť vozidla v m/s:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <button style="display: block;margin: 10px 0;width: 105px;" type="button" class="btn btn-success btn-md">Generovať</button>
+                    <button type="button" class="btn btn-success btn-md">Zobraziť graf</button>
+                </div>
+                <div class="col-md-6">
+                    <label for="usr">Použiť PID regulátor:</label>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio" checked>Áno</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio">Nie</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">P:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">I:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                    <div class="form-group">
+                        <label for="usr">D:</label>
+                        <input type="text" class="form-control" id="usr">
+                    </div>
+                </div>
+            </div>
+
+            <br>
             <hr>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="usr">Trvanie animácie:</label>
-                    <input type="text" class="form-control" id="usr">
-                </div>
-                <div class="form-group">
-                    <label for="usr">Počiatočný uhol v stupňoch:</label>
-                    <input type="text" class="form-control" id="usr">
-                </div>
-                <div class="form-group">
-                    <label for="usr">Počiatočná rýchlosť vozidla v m/s:</label>
-                    <input type="text" class="form-control" id="usr">
-                </div>
-                <button style="display: block;margin: 10px 0;width: 105px;" type="button" class="btn btn-success btn-md">Generovať</button>
-                <button type="button" class="btn btn-success btn-md">Zobraziť graf</button>
-            </div>
-            <div class="col-md-6">
-                <label for="usr">Použiť PID regulátor:</label>
-                <div class="radio">
-                    <label><input type="radio" name="optradio" checked>Áno</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="optradio">Nie</label>
-                </div>
-                <div class="form-group">
-                    <label for="usr">P:</label>
-                    <input type="text" class="form-control" id="usr">
-                </div>
-                <div class="form-group">
-                    <label for="usr">I:</label>
-                    <input type="text" class="form-control" id="usr">
-                </div>
-                <div class="form-group">
-                    <label for="usr">D:</label>
-                    <input type="text" class="form-control" id="usr">
-                </div>
-            </div>
+            <br>
+            <img class="img-responsive" src="<?= URL::to( '/' ); ?>/mockups/1.jpg" alt="">
         </div>
     </div>
 </div>

@@ -20,7 +20,10 @@ Route::group(['middleware' => ['web']], function () {
  * {locale} - language = {en,sk}
  */
 Route::get('/contact', ['uses' => 'Contact@index', 'as' => 'contact']);
-Route::get('/test', ['uses' => 'Mockup@index']);
+Route::get('/test/1', ['uses' => 'Mockup@index']);
+Route::get('/test/2', ['uses' => 'Mockup@index2']);
+Route::get('/test/3', ['uses' => 'Mockup@index3']);
+Route::get('/test/4', ['uses' => 'Mockup@index4']);
 
 
 /*Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);*/
