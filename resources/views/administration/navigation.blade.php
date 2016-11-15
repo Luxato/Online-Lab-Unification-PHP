@@ -403,12 +403,11 @@
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu">
                 <!-- Optionally, you can add icons to the links -->
-                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-home" aria-hidden="true"></i> <span>Hlavná stránka</span></a>
-                </li>
-                <li class="active"><a href="<?= url::to( '/admin/navigation' ); ?>"><i class="fa fa-bars"
-                                                                                       aria-hidden="true"></i><span>Navigácia</span></a>
-                </li>
-                <li class="treeview">
+                <li class="active"><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-home" aria-hidden="true"></i> <span>Hlavná stránka</span></a></li>
+                <li><a href="<?= url::to( '/admin/navigation' ); ?>"><i class="fa fa-bars" aria-hidden="true"></i><span>Navigácia</span></a></li>
+                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span>Aktuality</span></a></li>
+                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-file-text-o" aria-hidden="true"></i> <span>Stránky</span></a></li>
+                {{--<li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -418,7 +417,7 @@
                         <li><a href="#">Link in level 2</a></li>
                         <li><a href="#">Link in level 2</a></li>
                     </ul>
-                </li>
+                </li>--}}
             </ul>
             <!-- /.sidebar-menu -->
         </section>
