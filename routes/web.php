@@ -14,6 +14,7 @@ Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
 
 Route::get('/admin', ['middleware' => 'auth', 'uses' => 'Admin@index']);
 Route::get('/admin/navigation', ['middleware' => 'auth', 'uses' => 'Admin@navigation']);
+Route::get('/admin/pages', ['middleware' => 'auth', 'uses' => 'Admin@pages']);
 Route::group(['middleware' => ['web']], function () {
 	Route::auth();
 });

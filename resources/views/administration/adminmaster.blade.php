@@ -82,6 +82,9 @@
                 <li><a href="<?= url::to( '/admin/navigation' ); ?>"><i class="fa fa-bars" aria-hidden="true"></i><span>Navigácia</span></a></li>
                 <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span>Aktuality</span></a></li>
                 <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-file-text-o" aria-hidden="true"></i> <span>Stránky</span></a></li>
+                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-users" aria-hidden="true"></i> <span>Používatelia</span></a></li>
+                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-cogs" aria-hidden="true"></i> <span>Nástroje</span></a></li>
+                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-wrench" aria-hidden="true"></i> <span>Nastavenia</span></a></li>
                 {{--<li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
                         <span class="pull-right-container">
