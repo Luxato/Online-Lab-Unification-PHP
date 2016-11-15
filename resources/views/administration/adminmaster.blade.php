@@ -81,7 +81,7 @@
                 <li class="active"><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-home" aria-hidden="true"></i> <span>Hlavná stránka</span></a></li>
                 <li><a href="<?= url::to( '/admin/navigation' ); ?>"><i class="fa fa-bars" aria-hidden="true"></i><span>Navigácia</span></a></li>
                 <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span>Aktuality</span></a></li>
-                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-file-text-o" aria-hidden="true"></i> <span>Stránky</span></a></li>
+                <li><a href="<?= url::to( '/admin/pages' ); ?>"><i class="fa fa-file-text-o" aria-hidden="true"></i> <span>Stránky</span></a></li>
                 <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-users" aria-hidden="true"></i> <span>Používatelia</span></a></li>
                 <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-cogs" aria-hidden="true"></i> <span>Nástroje</span></a></li>
                 <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-wrench" aria-hidden="true"></i> <span>Nastavenia</span></a></li>
@@ -142,5 +142,6 @@
 <script src="<?= URL::to( '/' ); ?>/assets/administration/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= URL::to( '/' ); ?>/assets/administration/dist/js/app.min.js"></script>
+    @yield('custom_scripts')
 </body>
 </html>
