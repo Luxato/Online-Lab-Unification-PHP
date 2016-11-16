@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Administration</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dist/css/skins/skin-blue.min.css">
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/custom.css">
+    @yield('custom_css')
     <script>
         window.Laravel = <?php echo json_encode([
                 'csrfToken' => csrf_token(),
@@ -87,7 +89,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="<?= url::to( '/admin/pages' ); ?>">Všetky stránky</a></li>
-                        <li><a href="#">Vytvoriť stránku</a></li>
+                        <li><a href="<?= url::to( '/admin/page_create' ); ?>">Pridať novú</a></li>
                     </ul>
                 </li>
                 <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span>Aktuality</span></a></li>

@@ -10,6 +10,9 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+// TODO AUTH ADMIN LOGIN
+Route::post('admin/page_create/', 'Admin@do_page_create');
+
 Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
 
 Route::get('/admin', ['middleware' => 'auth', 'uses' => 'Admin@index']);
@@ -19,6 +22,7 @@ Route::get('/admin/page_create', ['middleware' => 'auth', 'uses' => 'Admin@page_
 Route::group(['middleware' => ['web']], function () {
 	Route::auth();
 });
+
 /**
  * {locale} - language = {en,sk}
  */
@@ -29,6 +33,6 @@ Route::get('/test/3', ['uses' => 'Mockup@index3']);
 Route::get('/test/4', ['uses' => 'Mockup@index4']);
 
 
-/*Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);*/
+Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);
 
 Route::get('/home', 'HomeController@index');
