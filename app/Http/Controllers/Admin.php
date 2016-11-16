@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use DB;
 
 class Admin extends Controller {
 
@@ -17,12 +18,11 @@ class Admin extends Controller {
 	}
 
 	public function pages() {
-		$data['navigation'] = $this->navigation;
-
-		return view( 'administration/new_page', $data);
+		$data['pages'] = DB::table( 'navigation' )->get()->toArray();;
+		return view( 'administration/pages_list', $data);
 	}
 
-	public function create_nav_link() {
+	public function page_create() {
 
 	}
 }

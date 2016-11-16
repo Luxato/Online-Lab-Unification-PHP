@@ -79,23 +79,21 @@
             <ul class="sidebar-menu">
                 <!-- Optionally, you can add icons to the links -->
                 <li class="active"><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-home" aria-hidden="true"></i> <span>Hlavná stránka</span></a></li>
-                <li><a href="<?= url::to( '/admin/navigation' ); ?>"><i class="fa fa-bars" aria-hidden="true"></i><span>Navigácia</span></a></li>
-                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span>Aktuality</span></a></li>
-                <li><a href="<?= url::to( '/admin/pages' ); ?>"><i class="fa fa-file-text-o" aria-hidden="true"></i> <span>Stránky</span></a></li>
-                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-users" aria-hidden="true"></i> <span>Používatelia</span></a></li>
-                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-cogs" aria-hidden="true"></i> <span>Nástroje</span></a></li>
-                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-wrench" aria-hidden="true"></i> <span>Nastavenia</span></a></li>
-                {{--<li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-bars" aria-hidden="true"></i> <span>Navigácia</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
+                        <li><a href="<?= url::to( '/admin/pages' ); ?>">Všetky stránky</a></li>
+                        <li><a href="#">Vytvoriť stránku</a></li>
                     </ul>
-                </li>--}}
+                </li>
+                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span>Aktuality</span></a></li>
+                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-users" aria-hidden="true"></i> <span>Používatelia</span></a></li>
+                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-cogs" aria-hidden="true"></i> <span>Nástroje</span></a></li>
+                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-wrench" aria-hidden="true"></i> <span>Nastavenia</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
@@ -107,7 +105,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Page Header
+                @yield('title')
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
