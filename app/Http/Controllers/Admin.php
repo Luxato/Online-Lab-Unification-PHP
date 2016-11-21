@@ -28,6 +28,7 @@ class Admin extends Controller {
 		return view( 'administration/page_create' );
 	}
 
+	//TODO create model for this
 	public function do_page_create() {
 		$name       = $_POST['title'];
 		$controller = $_POST['url'];
@@ -36,6 +37,10 @@ class Admin extends Controller {
 		);
 
 		return view( 'administration/page_create' );
+	}
+
+	public function settings() {
+		return view( 'administration/settings' );
 	}
 
 }
