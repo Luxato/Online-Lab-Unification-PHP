@@ -9,3 +9,8 @@
 @stop
 
 
+@section('custom_scripts') {{--JS specified only for this site--}}
+<script>
+    $('#nav-dashboard').addClass('active');
+</script>
+@stop

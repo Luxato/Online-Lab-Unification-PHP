@@ -48,6 +48,7 @@
 <script>
     CKEDITOR.replace('editor1');
     $(function(){
+        $('#nav-navigacia').addClass('active');
         // TODO REMOVE ľíéšášľťéľížýľš AND !@#$%$^%&&&&&&&&&*)/*-+
     	$('#title-input').on('keyup', function() {
             var title = $(this).val();

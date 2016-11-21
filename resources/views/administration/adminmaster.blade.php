@@ -80,22 +80,23 @@
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu">
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-home" aria-hidden="true"></i> <span>Hlavná stránka</span></a></li>
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-bars" aria-hidden="true"></i> <span>Navigácia</span>
+                <li id="nav-dashboard"><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-home" aria-hidden="true"></i> <span>Hlavná stránka</span></a></li>
+                <li id="nav-navigacia" class="treeview">
+                    <a href="#"><i class="fa fa-bars" aria-hidden="true"></i> <span>Stránky</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="<?= url::to( '/admin/pages' ); ?>">Všetky stránky</a></li>
+                        <li><a href="<?= url::to( '/admin/navigation' ); ?>">Usporiadanie navigácie</a></li>
                         <li><a href="<?= url::to( '/admin/page_create' ); ?>">Pridať novú</a></li>
                     </ul>
                 </li>
-                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span>Aktuality</span></a></li>
-                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-users" aria-hidden="true"></i> <span>Používatelia</span></a></li>
-                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-cogs" aria-hidden="true"></i> <span>Nástroje</span></a></li>
-                <li><a href="<?= url::to( '/admin' ); ?>"><i class="fa fa-wrench" aria-hidden="true"></i> <span>Nastavenia</span></a></li>
+                <li id="nav-news"><a class="disabled" href="<?= url::to( '/admin#' ); ?>"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span>Aktuality</span></a></li>
+                <li id="nav-users"><a class="disabled" href="<?= url::to( '/admin#' ); ?>"><i class="fa fa-users" aria-hidden="true"></i> <span>Používatelia</span></a></li>
+                <li id="nav-tools"><a class="disabled" href="<?= url::to( '/admin#' ); ?>"><i class="fa fa-cogs" aria-hidden="true"></i> <span>Nástroje</span></a></li>
+                <li id="settings"><a class="disabled" href="<?= url::to( '/admin#' ); ?>"><i class="fa fa-wrench" aria-hidden="true"></i> <span>Nastavenia</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>

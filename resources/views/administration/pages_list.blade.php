@@ -44,6 +44,7 @@
 <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/dataTables.bootstrap.min.js"></script>
 <script>
     $(function () {
+        $('#nav-navigacia').addClass('active');
         $('#example2').DataTable({
             "paging": true,
             "lengthChange": false,
