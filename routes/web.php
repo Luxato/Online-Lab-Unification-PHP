@@ -20,6 +20,7 @@ Route::get('/admin/navigation', ['middleware' => 'auth', 'uses' => 'Admin@naviga
 Route::get('/admin/pages', ['middleware' => 'auth', 'uses' => 'Admin@pages']);
 Route::get('/admin/page_create', ['middleware' => 'auth', 'uses' => 'Admin@page_create']);
 Route::get('/admin/settings', ['middleware' => 'auth', 'uses' => 'Admin@settings']);
+Route::get('/admin/languages', ['middleware' => 'auth', 'uses' => 'Admin@languages']);
 Route::group(['middleware' => ['web']], function () {
 	Route::auth();
 });

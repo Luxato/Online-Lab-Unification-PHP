@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
+use App\Language;
 
 class Admin extends Controller {
 
@@ -19,7 +20,7 @@ class Admin extends Controller {
 	}
 
 	public function pages() {
-		$data['pages'] = DB::table( 'navigation' )->get()->toArray();;
+		$data['pages'] = DB::table( 'navigation' )->get()->toArray();
 
 		return view( 'administration/pages_list', $data );
 	}
@@ -41,6 +42,13 @@ class Admin extends Controller {
 
 	public function settings() {
 		return view( 'administration/settings' );
+	}
+
+	public function languages() {
+		//Language::_create('Čínština', 'cn');
+		$data['languages'] = DB::table( 'languages' )->get()->toArray();;
+
+		return view( 'administration/languages', $data );
 	}
 
 }
