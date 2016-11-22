@@ -51,4 +51,8 @@ class Admin extends Controller {
 		return view( 'administration/languages', $data );
 	}
 
+	public function create_lang() {
+		return view( 'administration/create_language');
+	}
+
 }
