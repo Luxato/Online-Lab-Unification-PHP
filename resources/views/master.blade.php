@@ -53,7 +53,7 @@
             <ul class="nav navbar-nav">
                 <?php foreach($navigation as $nav_link): ?>
                 <?php if(! isset( $nav_link->children )): ?>
-                <li><a href="<?= $nav_link->name ?>"><?php echo trans( 'navigation.' . $nav_link->name ) ?></a></li>
+                <li><a href="<?= $nav_link->controller ?>"><?php echo trans( 'navigation.' . $nav_link->name ) ?></a></li>
                 <?php else: ?>
                 <li><a class="dropdown-toggle" data-toggle="dropdown"
                        href="#"><?php echo trans( 'navigation.' . $nav_link->name ) ?> <b class="caret"></b></a>
@@ -65,37 +65,6 @@
                 </li>
                 <?php endif; ?>
                 <?php endforeach; ?>
-                <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu 1 <b class="caret"></b></a>
-                    <ul class="dropdown-menu multi-level">
-                        <li><a href="#">Some link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                        <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li class="dropdown-submenu">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="dropdown-submenu">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">The end</a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="#">Separated link</a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="#">One more separated link</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
                     <ul id="login-dp" class="dropdown-menu">

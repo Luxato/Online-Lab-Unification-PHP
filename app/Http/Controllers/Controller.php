@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use DB;
+use Request;
 
 class Controller extends BaseController {
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -54,7 +55,7 @@ class Controller extends BaseController {
 		$tmp                   = explode( '@', $controller );
 		$this->controller_name = strtolower( $tmp[0] );
 		$this->section_id      = DB::table( 'navigation' )
-		                           ->where( 'controller', $this->controller_name )
+		                           ->where( 'controller', Request::segment(1) )
 		                           ->value( 'section_id' );
 	}
 

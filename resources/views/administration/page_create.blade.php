@@ -4,7 +4,7 @@
     Pridať novú stránku
 @stop
 
-@section('custom_css') {{--CSS specified only for this site--}}
+@section('custom_css')
 <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 @stop
 
@@ -21,7 +21,7 @@
                     <input id="url-input" class="form-control" name="url" type="text" placeholder="URL">
                 </div>
                 <div class="form-group">
-                    <textarea id="editor1" name="editor" rows="10" cols="80">
+                    <textarea id="editor1" name="slovak" rows="10" cols="80">
                     </textarea>
                 </div>
             </div>
@@ -43,7 +43,7 @@
     </div>
 @stop
 
-@section('custom_scripts') {{--JS specified only for this site--}}
+@section('custom_scripts')
 <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/ckeditor/ckeditor.min.js"></script>
 <script>
     CKEDITOR.replace('editor1');

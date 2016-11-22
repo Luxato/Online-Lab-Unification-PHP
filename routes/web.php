@@ -38,6 +38,7 @@ Route::get('/test/3', ['uses' => 'Mockup@index3']);
 Route::get('/test/4', ['uses' => 'Mockup@index4']);
 
 
-Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);
+/*Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);*/
+Route::get('{slug}', ['uses' => 'Homepage@index', 'as' => 'page']);
 
 Route::get('/home', 'HomeController@index');

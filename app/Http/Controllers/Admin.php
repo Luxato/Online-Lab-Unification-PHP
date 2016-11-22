@@ -33,8 +33,9 @@ class Admin extends Controller {
 	public function do_page_create() {
 		$name       = $_POST['title'];
 		$controller = $_POST['url'];
+		$content    = $_POST['slovak'];
 		DB::table( 'navigation' )->insert(
-			[ 'name' => $name, 'controller' => $controller ]
+			[ 'name' => $name, 'controller' => $controller, 'content' => $content ]
 		);
 
 		return view( 'administration/page_create' );
@@ -51,7 +52,7 @@ class Admin extends Controller {
 	}
 
 	public function create_lang() {
-		return view( 'administration/create_language');
+		return view( 'administration/create_language' );
 	}
 
 }

@@ -9,7 +9,7 @@ use App\Language;
 
 class Worker extends Controller {
 	// TODO do not use $_POST variable, backend validation
-	public function do_create_language() {
+	protected function do_create_language() {
 		$title    = $_POST['title'];
 		$shortcut = $_POST['shortcut'];
 		Language::_create( $title, $shortcut );
@@ -20,7 +20,7 @@ class Worker extends Controller {
 		return view( 'administration/languages', $data );
 	}
 
-	public function do_delete_language() {
+	protected function do_delete_language() {
 		$language_id = $_POST['languageID'];
 		$language    = Language::find( $language_id );
 		if ( $language->delete() ) {
