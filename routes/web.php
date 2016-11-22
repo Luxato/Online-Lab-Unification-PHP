@@ -22,6 +22,7 @@ Route::get('/admin/page_create', ['middleware' => 'auth', 'uses' => 'Admin@page_
 Route::get('/admin/settings', ['middleware' => 'auth', 'uses' => 'Admin@settings']);
 Route::get('/admin/languages', ['middleware' => 'auth', 'uses' => 'Admin@languages']);
 Route::get('/admin/create_lang', ['middleware' => 'auth', 'uses' => 'Admin@create_lang']);
+Route::post('/worker/do_create_language', ['middleware' => 'auth', 'uses' => 'Worker@do_create_language']);
 Route::group(['middleware' => ['web']], function () {
 	Route::auth();
 });
