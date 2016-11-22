@@ -45,7 +45,6 @@ class Admin extends Controller {
 	}
 
 	public function languages() {
-		//Language::_create('Čínština', 'cn');
 		$data['languages'] = DB::table( 'languages' )->get()->toArray();;
 
 		return view( 'administration/languages', $data );

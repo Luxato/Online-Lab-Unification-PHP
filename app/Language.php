@@ -8,7 +8,7 @@ class Language extends Model {
 	protected $fillable = [ 'language_title', 'language_shortcut' ];
 
 	public static function select_all() {
-		$languages = Language::all()->toArray();
+		$languages = Language::all();
 
 		return $languages;
 	}
@@ -21,20 +21,21 @@ class Language extends Model {
 		$language->language_shortcut = $shortcut;
 		if ( $language->save() ) {
 			// If database insert was succesful lets create new directory and file for lang
-			//mkdir( dirname( getcwd() ) . '/resources/lang/' . $shortcut, 0777 );
 			try {
 				mkdir( dirname( getcwd() ) . '/resources/lang/' . $shortcut, 0777 );
 			} catch( \Exception $e ) {
 				// TODO log this somewehre
-				echo 'Caught exception: ', $e->getMessage(), "\n";
+				/*echo 'Caught exception: ', $e->getMessage(), "\n";*/
 			}
 			$myfile = fopen( dirname( getcwd() ) . '/resources/lang/' . $shortcut . '/' . $shortcut . '.php', "w" );
 
 		}
 	}
 
-	public static function remove() {
-
+	public static function _delete() {
+		echo '<pre>';
+		print_r( Language::find('1') );
+		echo '</pre>';
 	}
 
 	public static function create_language() {
