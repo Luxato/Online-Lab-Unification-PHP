@@ -340,22 +340,22 @@
         <div class="dd" id="nestable">
             <ol class="dd-list">
                 <?php $i = 1; foreach($navigation as $value): ?> {{--First level--}}
-                <li class="dd-item" data-id="<?= $i ?>">
-                    <div class="dd-handle"><?= $value->name ?></div>
+                <li class="dd-item dd3-item" data-id="<?= $i ?>">
+                    <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><?= $value->name ?></div>
                     <?php if(! isset( $value->children )): ?>
                 </li>
                 <?php else: ?>
                 <ol class="dd-list">
                     <?php $i ++; foreach($value->children as $sub_link): ?> {{--Second level--}}
-                    <li class="dd-item" data-id="<?= $i ?>">
-                        <div class="dd-handle"><?= $sub_link->name ?></div>
+                    <li class="dd-item dd3-item" data-id="<?= $i ?>">
+                        <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><?= $sub_link->name ?></div>
                         <?php if(! isset( $sub_link->children )): ?>
                     </li>
                     <?php else: ?>
                     <ol class="dd-list">
                         <?php $i ++; foreach($sub_link->children as $third_level): ?>
-                        <li class="dd-item" data-id="<?= $i ?>">
-                            <div class="dd-handle"><?= $third_level->name ?></div>
+                        <li class="dd-item dd3-item" data-id="<?= $i ?>">
+                            <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><?= $third_level->name ?></div>
                         </li>
                         <?php endforeach; ?>
                     </ol>
@@ -369,6 +369,9 @@
                 <?php endforeach; ?>
             </ol>
         </div>
+    </div>
+    <div class="col-md-12">
+        <button type="submit" class="btn btn-block btn-success btn-lg">Uložiť</button>
     </div>
 @stop
 
