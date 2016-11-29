@@ -44,7 +44,7 @@
             <td><?= $page->name ?></td>
             <td><?= $page->language_title ?></td>
             <td><?= $page->controller ?></td>
-            <td>-</td>
+            <td><?= $page->created_at ?></td>
             <td>-</td>
             <td>-</td>
             <td><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <a onclick="deleteModal(<?= $page->section_id ?>)"><i

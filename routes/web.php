@@ -26,6 +26,7 @@ Route::get('/admin/create_lang', ['middleware' => 'auth', 'uses' => 'Admin@creat
 Route::post('/worker/do_create_language', ['middleware' => 'auth', 'uses' => 'Worker@do_create_language']);
 Route::post('/worker/do_delete_language', ['middleware' => 'auth', 'uses' => 'Worker@do_delete_language']);
 Route::post('/worker/do_delete_page', ['middleware' => 'auth', 'uses' => 'Worker@do_delete_page']);
+Route::post('/worker/do_navigation_change_order', ['middleware' => 'auth', 'uses' => 'Worker@do_navigation_change_order']);
 
 Route::group(['middleware' => ['web']], function () {
 	Route::auth();

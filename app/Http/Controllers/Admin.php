@@ -20,16 +20,11 @@ class Admin extends Controller {
 	}
 
 	public function pages() {
-		/*$data['pages'] = DB::table( 'navigation' )->get()->toArray();*/
 		$data['pages'] = DB::table( 'navigation' )
-			->join('languages', 'navigation.language', '=', 'languages.id')
-			->get()
-			->toArray();
-/*		$users = DB::table('users')
-		           ->join('contacts', 'users.id', '=', 'contacts.user_id')
-		           ->join('orders', 'users.id', '=', 'orders.user_id')
-		           ->select('users.*', 'contacts.phone', 'orders.price')
-		           ->get();*/
+		                   ->join( 'languages', 'navigation.language', '=', 'languages.id' )
+		                   ->get()
+		                   ->toArray();
+
 		return view( 'administration/pages_list', $data );
 	}
 
@@ -48,7 +43,10 @@ class Admin extends Controller {
 		DB::table( 'navigation' )->insert(
 			[ 'name' => $name, 'controller' => $controller, 'language' => $language_id, 'content' => $content ]
 		);
-		$data['pages']  = DB::table( 'navigation' )->get()->toArray();
+		$data['pages']  = DB::table( 'navigation' )
+		                    ->join( 'languages', 'navigation.language', '=', 'languages.id' )
+		                    ->get()
+		                    ->toArray();
 		$data['status'] = 'create-success';
 
 		return view( 'administration/pages_list', $data );

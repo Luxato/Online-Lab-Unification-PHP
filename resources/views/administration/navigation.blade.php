@@ -335,56 +335,80 @@
 
 
 @section('content')
+    @if (session('message'))
+        <div id="msgSucces" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+            {{ session('message') }}
+        </div>
+    @endif
+
     <div class="cf nestable-lists">
 
         <div class="dd" id="nestable">
             <ol class="dd-list">
-                <?php $i = 1; foreach($navigation as $value): ?> {{--First level--}}
-                <li class="dd-item dd3-item" data-id="<?= $i ?>">
-                    <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><?= $value->name ?></div>
-                    <?php if(! isset( $value->children )): ?>
+				<?php $i = 1; foreach($navigation as $value): ?> {{--First level--}}
+                <li class="dd-item dd3-item" data-id="<?= $value->section_id ?>">
+                    <div class="dd-handle dd3-handle">Drag</div>
+                    <div class="dd3-content"><?= $value->name ?></div>
+					<?php if(! isset( $value->children )): ?>
                 </li>
-                <?php else: ?>
+				<?php else: ?>
                 <ol class="dd-list">
-                    <?php $i ++; foreach($value->children as $sub_link): ?> {{--Second level--}}
-                    <li class="dd-item dd3-item" data-id="<?= $i ?>">
-                        <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><?= $sub_link->name ?></div>
-                        <?php if(! isset( $sub_link->children )): ?>
+					<?php $i ++; foreach($value->children as $sub_link): ?> {{--Second level--}}
+                    <li class="dd-item dd3-item" data-id="<?= $sub_link->section_id ?>">
+                        <div class="dd-handle dd3-handle">Drag</div>
+                        <div class="dd3-content"><?= $sub_link->name ?></div>
+						<?php if(! isset( $sub_link->children )): ?>
                     </li>
-                    <?php else: ?>
+					<?php else: ?>
                     <ol class="dd-list">
-                        <?php $i ++; foreach($sub_link->children as $third_level): ?>
-                        <li class="dd-item dd3-item" data-id="<?= $i ?>">
-                            <div class="dd-handle dd3-handle">Drag</div><div class="dd3-content"><?= $third_level->name ?></div>
+						<?php $i ++; foreach($sub_link->children as $third_level): ?>
+                        <li class="dd-item dd3-item" data-id="<?= $third_level->section_id ?>">
+                            <div class="dd-handle dd3-handle">Drag</div>
+                            <div class="dd3-content"><?= $third_level->name ?></div>
                         </li>
-                        <?php endforeach; ?>
+						<?php endforeach; ?>
                     </ol>
-                    <?php endif; ?>
-                    <?php endforeach; ?>
+					<?php endif; ?>
+					<?php endforeach; ?>
                 </ol>
-                <?php endif; ?>
-                <?php
-                $i ++;
-                ?>
-                <?php endforeach; ?>
+				<?php endif; ?>
+				<?php
+				$i ++;
+				?>
+				<?php endforeach; ?>
             </ol>
         </div>
     </div>
     <div class="col-md-12">
-        <button type="submit" class="btn btn-block btn-success btn-lg">Uložiť</button>
+        <button id="submitButton" type="submit" class="btn btn-block btn-success btn-lg">Uložiť</button>
     </div>
+    <form id="saveForm" class="hidden" action="<?= URL::to( '/worker/do_navigation_change_order' ); ?>" method="POST">
+    </form>
 @stop
 
 @section('custom_scripts') {{--JS specified only for this site--}}
 <script src="<?= URL::to( '/' ); ?>/assets/administration/dist/js/jquery.nestable.js"></script>
 <script>
     $(document).ready(function () {
+        setTimeout(function () {
+            $('.alert-success').fadeOut();
+        }, 3000);
+        $('#submitButton').on('click', function () {
+            $('#saveForm').submit();
+        });
+        $('.dd').on('change', function () {
+            var orderJSON = JSON.stringify($('.dd').nestable('serialize'));
+            $('#saveForm').html('<input id="order" class="form-control" name="orderJSON" type="text" value=\'' + orderJSON + '\'>' +
+                '<input name="_token" type="hidden" id="_token" value="' + window.Laravel.csrfToken + '" />');
+        });
+
         $('#nav-navigacia').addClass('active');
         var updateOutput = function (e) {
             var list = e.length ? e : $(e.target),
-                    output = list.data('output');
+                output = list.data('output');
             if (window.JSON) {
-                output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+                //output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
             } else {
                 output.val('JSON browser support required for this demo.');
             }
@@ -392,15 +416,16 @@
 
         // activate Nestable for list 1
         $('#nestable').nestable({
-            group: 1
+            group: 1,
+            maxDepth: 3
         })
-                .on('change', updateOutput);
+            .on('change', updateOutput);
 
         // activate Nestable for list 2
         $('#nestable2').nestable({
             group: 1
         })
-                .on('change', updateOutput);
+            .on('change', updateOutput);
 
         // output initial serialised data
         updateOutput($('#nestable').data('output', $('#nestable-output')));
@@ -408,7 +433,7 @@
 
         $('#nestable-menu').on('click', function (e) {
             var target = $(e.target),
-                    action = target.data('action');
+                action = target.data('action');
             if (action === 'expand-all') {
                 $('.dd').nestable('expandAll');
             }
@@ -417,6 +442,9 @@
             }
         });
         $('#nestable3').nestable();
+        var orderJSON = JSON.stringify($('.dd').nestable('serialize'));
+        $('#saveForm').html('<input id="order" class="form-control" name="orderJSON" type="text" value=\'' + orderJSON + '\'>' +
+            '<input name="_token" type="hidden" id="_token" value="' + window.Laravel.csrfToken + '" />');
     });
 </script>
 @stop

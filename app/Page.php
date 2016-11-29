@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model {
+
 	protected $table = 'navigation';
 	protected $primaryKey = 'section_id';
 	protected $fillable = [
