@@ -24,9 +24,9 @@
                 </div>
                 <div class="form-group">
                     <label>Lokalizácia</label>
-                    <select class="form-control">
+                    <select name="language" class="form-control">
                         <?php foreach($languages as $value): ?>
-                            <option value="<?= $value->language_shortcut  ?>"><?= $value->language_title ?></option>
+                            <option value="<?= $value->id  ?>"><?= $value->language_title ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

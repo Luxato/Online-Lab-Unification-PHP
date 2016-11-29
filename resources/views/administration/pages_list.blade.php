@@ -30,11 +30,11 @@
         <thead>
         <tr>
             <th>Názov</th>
+            <th>Jazyk</th>
             <th>URL</th>
             <th>Dátum</th>
             <th>SEO Nadpis</th>
             <th>SEO kľúčové slová</th>
-            <th>SEO popis</th>
             <th>Možnosti</th>
         </tr>
         </thead>
@@ -42,8 +42,8 @@
 		<?php foreach ( $pages as $page ): ?>
         <tr>
             <td><?= $page->name ?></td>
+            <td><?= $page->language_title ?></td>
             <td><?= $page->controller ?></td>
-            <td>-</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
