@@ -37,8 +37,10 @@ class Admin extends Controller {
 		DB::table( 'navigation' )->insert(
 			[ 'name' => $name, 'controller' => $controller, 'content' => $content ]
 		);
+		$data['pages'] = DB::table( 'navigation' )->get()->toArray();
+		$data['status'] = 'create-success';
 
-		return view( 'administration/page_create' );
+		return view( 'administration/pages_list', $data );
 	}
 
 	public function settings() {

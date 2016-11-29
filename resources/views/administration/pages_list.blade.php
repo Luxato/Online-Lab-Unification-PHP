@@ -10,6 +10,19 @@
 
 
 @section('content')
+	<?php if(isset( $status ) && $status == 'create-success'): ?>
+    <div id="msgSucces" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+        Stránka bola úspešne pridaná.
+    </div>
+	<?php endif; ?>
+	<?php if(isset( $status ) && $status == 'delete-success'): ?>
+    <div id="msgSucces" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+        Stránka bola úspešne vymazaná.
+    </div>
+
+	<?php endif; ?>
     <a class="admin-sub-options success" href="<?= URL::to( '/admin/page_create' ); ?>"><i class="fa fa-plus" aria-hidden="true"></i> Vytvoriť stránku</a>
     <table id="example2" class="table table-bordered table-hover">
         <thead>
@@ -32,7 +45,7 @@
                 <td>-</td>
                 <td>-</td>
                 <td>-</td>
-                <td><i class="fa fa-pencil" aria-hidden="true"></i> | <i class="fa fa-trash" aria-hidden="true"></i></td>
+                <td><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <i class="fa fa-trash" aria-hidden="true"></i></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
@@ -55,5 +68,8 @@
             "pageLength": 20
         });
     });
+    setTimeout(function () {
+        $('.alert-success').fadeOut();
+    }, 3000);
 </script>
 @stop

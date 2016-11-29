@@ -125,7 +125,7 @@
     }
 
     setTimeout(function () {
-        $('#msgSucces').fadeOut();
+        $('.alert-success').fadeOut();
     }, 3000);
 
     $('#submitDelete').on('click', function () {
