@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use DB;
-use Session;
 use App\Language;
 use App\Page;
 

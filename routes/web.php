@@ -35,7 +35,7 @@ Route::group(['middleware' => ['web']], function () {
 /**
  * {locale} - language = {en,sk}
  */
-Route::get('/contact', ['uses' => 'Contact@index', 'as' => 'contact']);
+/*Route::get('/contact', ['uses' => 'Contact@index', 'as' => 'contact']);*/
 Route::get('/test/1', ['uses' => 'Mockup@index']);
 Route::get('/test/2', ['uses' => 'Mockup@index2']);
 Route::get('/test/3', ['uses' => 'Mockup@index3']);

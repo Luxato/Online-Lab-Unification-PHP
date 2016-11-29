@@ -11,7 +11,7 @@
 
 @section('content')
     <div class="row">
-        <form id="new-page-form" action="http://localhost:8000/admin/page_create" method="POST">
+        <form id="new-page-form" action="<?= URL('admin/page_create') ?>" method="POST">
             <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}" />
             <div class="col-lg-6">
                 <div class="form-group">

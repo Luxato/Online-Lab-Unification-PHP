@@ -120,7 +120,10 @@
     <a class="header-logo" href="index.html"><img src="./assets/img/logo_svk_full.png" alt="logo"></a>
     <div id="particles-js" style="height: 200px;"></div>
 </header>
-
+    <ol class="breadcrumb">
+        <li><a href="<?= URL('/') ?>">Home</a></li>
+        <li class="active">@yield('title')</li>
+    </ol>
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
