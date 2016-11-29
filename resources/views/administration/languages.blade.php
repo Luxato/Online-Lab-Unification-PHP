@@ -41,7 +41,7 @@
             <td><?= $page->language_title ?></td>
             <td><?= $page->language_shortcut ?></td>
             <td><i class="fa fa-pencil disabled" aria-hidden="true"></i> |
-                <a class="<?= $page->id === 0 ? 'disabled' : '' ?>" onclick="deleteModal(<?= $page->id ?>)"><i class="fa fa-trash <?= $page->id === 0 ? 'disabled' : '' ?>" aria-hidden="true"></i></a></td>
+                <a class="<?= $page->id === 0 ? 'disabled' : '' ?>" onclick="deleteModal(<?= $page->id.',\''. $page->language_title.'\'' ?>)"><i class="fa fa-trash <?= $page->id === 0 ? 'disabled' : '' ?>" aria-hidden="true"></i></a></td>
         </tr>
 		<?php endforeach; ?>
         </tbody>
@@ -119,9 +119,10 @@
         })
     });
 
-    function deleteModal(id) {
+    function deleteModal(id, name) {
         $('#deleteForm').html('<input id="title-input" class="form-control" name="languageID" type="text" value="' + id + '">' +
             '<input name="_token" type="hidden" id="_token" value="' + window.Laravel.csrfToken + '" />');
+        $('#langVar').html("<strong>'" + name + "'</strong>");
         $('#deleteModal').modal('show');
     }
 

@@ -47,7 +47,7 @@
             <td><?= $page->created_at ?></td>
             <td>-</td>
             <td>-</td>
-            <td><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <a onclick="deleteModal(<?= $page->section_id ?>)"><i
+            <td><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <a onclick="deleteModal(<?= $page->section_id.',\''. $page->name.'\'' ?>)"><i
                             class="fa fa-trash" aria-hidden="true"></i></a></td>
         </tr>
 		<?php endforeach; ?>
@@ -65,7 +65,7 @@
                         Vymazanie stránky</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Určite chcete vymazať stránky <span id="langVar">:var</span>?</p>
+                    <p>Určite chcete vymazať stránku <span id="langVar">:var</span>?</p>
                     <form id="deleteForm" action="<?= URL::to( '/worker/do_delete_page' ); ?>" method="POST"
                           style="display: none;">
 
@@ -99,9 +99,10 @@
     setTimeout(function () {
         $('.alert-success').fadeOut();
     }, 3000);
-    function deleteModal(id) {
+    function deleteModal(id, name) {
         $('#deleteForm').html('<input id="title-input" class="form-control" name="pageID" type="text" value="' + id + '">' +
             '<input name="_token" type="hidden" id="_token" value="' + window.Laravel.csrfToken + '" />');
+        $('#langVar').html("<strong>'" + name + "'</strong>");
         $('#deleteModal').modal('show');
     }
     $('#submitDelete').on('click', function () {
