@@ -15,24 +15,30 @@
             <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}" />
             <div class="col-lg-6">
                 <div class="form-group">
+                    <label for="exampleInputEmail1">Nadpis</label>
                     <input id="title-input" class="form-control" name="title" type="text" placeholder="Zadajte nadpis sem">
                 </div>
                 <div class="form-group">
+                    <label for="exampleInputEmail1">URL</label>
                     <input id="url-input" class="form-control" name="url" type="text" placeholder="URL">
                 </div>
                 <div class="form-group">
+                    <label for="exampleInputEmail1">Obsah</label>
                     <textarea id="editor1" name="slovak" rows="10" cols="80">
                     </textarea>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
+                    <label for="exampleInputEmail1">SEO nadpis</label>
                     <input class="form-control" type="text" placeholder="SEO nadpis">
                 </div>
                 <div class="form-group">
+                    <label for="exampleInputEmail1">SEO popis</label>
                     <textarea class="form-control" rows="3" placeholder="SEO popis"></textarea>
                 </div>
                 <div class="form-group">
+                    <label for="exampleInputEmail1">Kľúčové slová</label>
                     <input class="form-control" type="text" placeholder="Kľúčové slová oddelené čiarkou">
                 </div>
             </div>

@@ -26,7 +26,9 @@ class Admin extends Controller {
 	}
 
 	public function page_create() {
-		return view( 'administration/page_create' );
+		$data['languages'] = Language::select_all();
+
+		return view( 'administration/page_create', $data );
 	}
 
 	//TODO create model for this
@@ -37,7 +39,7 @@ class Admin extends Controller {
 		DB::table( 'navigation' )->insert(
 			[ 'name' => $name, 'controller' => $controller, 'content' => $content ]
 		);
-		$data['pages'] = DB::table( 'navigation' )->get()->toArray();
+		$data['pages']  = DB::table( 'navigation' )->get()->toArray();
 		$data['status'] = 'create-success';
 
 		return view( 'administration/pages_list', $data );
