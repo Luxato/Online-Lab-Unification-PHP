@@ -25,7 +25,11 @@ class Homepage extends Controller {
 		$data['navigation'] = $this->navigation;
 		$data['section_id'] = $this->section_id;
 		$page               = DB::table( 'navigation' )->where( 'controller', $slug )->get()->toArray();
-		$data['name']    = $page[0]->name;
+		if (isset($page[0]->name)) {
+			$data['name']    = $page[0]->name;
+		} else {
+			$data['name']    = 'unknown';
+		}
 		if (isset($page[0]->content)) {
 			$data['content']    = $page[0]->content;
 		} else {
