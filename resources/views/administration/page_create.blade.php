@@ -23,9 +23,12 @@
                     <input id="url-input" class="form-control" name="url" type="text" placeholder="URL">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Obsah</label>
-                    <textarea id="editor1" name="slovak" rows="10" cols="80">
-                    </textarea>
+                    <label>Lokalizácia</label>
+                    <select class="form-control">
+                        <?php foreach($languages as $value): ?>
+                            <option value="<?= $value->language_shortcut  ?>"><?= $value->language_title ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
             <div class="col-md-6">
@@ -43,6 +46,11 @@
                 </div>
             </div>
             <div class="col-md-12">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Obsah</label>
+                    <textarea id="editor1" name="slovak" rows="10" cols="80">
+                    </textarea>
+                </div>
                 <button type="submit" class="btn btn-block btn-success btn-lg">Vytvoriť</button>
             </div>
         </form>

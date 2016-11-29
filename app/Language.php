@@ -9,7 +9,6 @@ class Language extends Model {
 
 	public static function select_all() {
 		$languages = Language::all();
-
 		return $languages;
 	}
 

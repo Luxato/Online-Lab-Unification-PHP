@@ -50,7 +50,7 @@ class Admin extends Controller {
 	}
 
 	public function languages() {
-		$data['languages'] = DB::table( 'languages' )->get()->toArray();;
+		$data['languages'] = Language::select_all();
 
 		return view( 'administration/languages', $data );
 	}

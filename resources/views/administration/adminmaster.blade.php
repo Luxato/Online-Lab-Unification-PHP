@@ -122,8 +122,8 @@
                 @yield('title')
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                <li class="active">Here</li>
+                <li><a href="<?= base_path('/admin') ?>"><i class="fa fa-chevron-right" aria-hidden="true"></i> Administrácia</a></li>
+                <li class="active">@yield('title')</li>
             </ol>
         </section>
 

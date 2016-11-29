@@ -10,18 +10,18 @@
 
 
 @section('content')
-    <?php if(isset( $status ) && $status == 'create-success'): ?>
+	<?php if(isset( $status ) && $status == 'create-success'): ?>
     <div id="msgSucces" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
         <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
         Jazyk bol úspešne pridaný.
     </div>
-    <?php endif; ?>
-    <?php if(isset( $status ) && $status == 'delete-success'): ?>
-        <div id="msgSucces" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-            Jazyk bol úspešne vymazaný.
-        </div>
-    <?php endif; ?>
+	<?php endif; ?>
+	<?php if(isset( $status ) && $status == 'delete-success'): ?>
+    <div id="msgSucces" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+        Jazyk bol úspešne vymazaný.
+    </div>
+	<?php endif; ?>
 
 
     <a class="admin-sub-options success" href="<?= URL::to( '/admin/create_lang' ); ?>"><i class="fa fa-plus"
@@ -36,14 +36,14 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach ( $languages as $page ): ?>
+		<?php foreach ( $languages as $page ): ?>
         <tr>
             <td><?= $page->language_title ?></td>
             <td><?= $page->language_shortcut ?></td>
-            <td><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <a onclick="deleteModal(<?= $page->id ?>)"><i
-                            class="fa fa-trash" aria-hidden="true"></i></a></td>
+            <td><i class="fa fa-pencil disabled" aria-hidden="true"></i> |
+                <a class="<?= $page->id === 0 ? 'disabled' : '' ?>" onclick="deleteModal(<?= $page->id ?>)"><i class="fa fa-trash <?= $page->id === 0 ? 'disabled' : '' ?>" aria-hidden="true"></i></a></td>
         </tr>
-        <?php endforeach; ?>
+		<?php endforeach; ?>
         </tbody>
     </table>
 
@@ -87,20 +87,21 @@
             "info": true,
             "autoWidth": false,
             "pageLength": 20,
-            "bSort": false
+            "bSort": false,
+            "aaSorting": [[]]
         });
     });
     $(document).ready(function () {
 
         var navListItems = $('ul.setup-panel li a'),
-                allWells = $('.setup-content');
+            allWells = $('.setup-content');
 
         allWells.hide();
 
         navListItems.click(function (e) {
             e.preventDefault();
             var $target = $($(this).attr('href')),
-                    $item = $(this).closest('li');
+                $item = $(this).closest('li');
 
             if (!$item.hasClass('disabled')) {
                 navListItems.closest('li').removeClass('active');
@@ -120,7 +121,7 @@
 
     function deleteModal(id) {
         $('#deleteForm').html('<input id="title-input" class="form-control" name="languageID" type="text" value="' + id + '">' +
-                '<input name="_token" type="hidden" id="_token" value="' + window.Laravel.csrfToken + '" />');
+            '<input name="_token" type="hidden" id="_token" value="' + window.Laravel.csrfToken + '" />');
         $('#deleteModal').modal('show');
     }
 
