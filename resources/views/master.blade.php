@@ -127,10 +127,6 @@
                 </li>--}}
             </ul>
         </div><!--/.nav-collapse -->
-        <ul class="translation-flags">
-            <li><a href="<?= URL::to( '/sk' ); ?>">SK</a></li>
-            <li><a href="<?= URL::to( '/en' ); ?>">EN</a></li>
-        </ul>
     </div>
 </div>
 <header>
