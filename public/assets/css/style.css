@@ -52,6 +52,10 @@ p {
     height: 400px;
 }
 
+.strong {
+    font-weight: 700;
+}
+
 @media (max-width: 767px) {
     .translation-flags {
         list-style-type: none;
@@ -421,12 +425,18 @@ footer {
     transition: all 0.5s ease;
     line-height: 30px;
 }
+
 .navbar-mini .navbar-brand {
     animation-name: logo-animation;
     animation-duration: 0.4s;
     top: -14px;
 }
+
 @keyframes logo-animation {
-    0%   {top: 0;}
-    100% {top: -14px;}
+    0% {
+        top: 0;
+    }
+    100% {
+        top: -14px;
+    }
 }

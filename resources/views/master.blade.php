@@ -51,32 +51,46 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <?php foreach($navigation as $nav_link): ?>
-                <?php if(! isset( $nav_link->children )): ?>
-                <li><a href="<?= $nav_link->controller ?>"><?php echo trans( 'navigation.' . $nav_link->name ) ?></a></li>
-                <?php else: ?>
+				<?php foreach($navigation as $nav_link): ?>
+				<?php if(! isset( $nav_link->children )): ?>
+                <li><a href="<?= $nav_link->controller ?>"><?php echo trans( 'navigation.' . $nav_link->name ) ?></a>
+                </li>
+				<?php else: ?>
                 <li><a class="dropdown-toggle" data-toggle="dropdown"
                        href="#"><?php echo trans( 'navigation.' . $nav_link->name ) ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu multi-level">
-                        <?php foreach($nav_link->children as $child_link): ?>
+						<?php foreach($nav_link->children as $child_link): ?>
+						<?php if(! isset( $child_link->children )): ?>
                         <li><a href="<?= $child_link->controller ?>"><?= $child_link->name ?></a></li>
-                        <?php endforeach; ?>
+						<?php else: ?>
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?= $child_link->name ?> </a>
+                            <ul class="dropdown-menu">
+                                <?php foreach($child_link->children as $sub_child_link): ?>
+                                    <li><a href="<?= $sub_child_link->controller ?>"><?= $sub_child_link->name ?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </li>
+
+						<?php endif; ?>
+						<?php endforeach; ?>
                     </ul>
                 </li>
-                <?php endif; ?>
-                <?php endforeach; ?>
-                <li class="dropdown">
+				<?php endif; ?>
+				<?php endforeach; ?>
+
+                {{--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
                     <ul id="login-dp" class="dropdown-menu">
                         <li>
                             <div class="row">
                                 <div class="col-md-12">
-                                    {{--Login via
+                                    --}}{{--Login via
  <div class="social-buttons">
      <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
      <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
  </div>
- or--}}
+ or--}}{{--
                                     <form class="form" role="form" method="post" action="login" accept-charset="UTF-8"
                                           id="login-nav">
                                         <div class="form-group">
@@ -107,7 +121,7 @@
                             </div>
                         </li>
                     </ul>
-                </li>
+                </li>--}}
             </ul>
         </div><!--/.nav-collapse -->
         <ul class="translation-flags">
@@ -120,10 +134,17 @@
     <a class="header-logo" href="index.html"><img src="./assets/img/logo_svk_full.png" alt="logo"></a>
     <div id="particles-js" style="height: 200px;"></div>
 </header>
-    <ol class="breadcrumb">
-        <li><a href="<?= URL('/') ?>">Home</a></li>
-        <li class="active">@yield('title')</li>
-    </ol>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <ol class="breadcrumb">
+                <li><a href="<?= URL( '/' ) ?>">Home</a></li>
+                <li class="active">@yield('title')</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
