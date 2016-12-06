@@ -35,6 +35,10 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+        var baseUrl = "<?= URL( '/' ) ?>";
+    </script>
+    @yield('custom_top_scripts')
 </head>
 <body>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -69,6 +73,7 @@
                                 <?php foreach($child_link->children as $sub_child_link): ?>
                                     <li><a href="<?= $sub_child_link->controller ?>"><?= $sub_child_link->name ?></a></li>
                                 <?php endforeach; ?>
+                                    <li><a href="/hok">Hok</a></li>
                             </ul>
                         </li>
 
@@ -166,6 +171,7 @@
 <script src="assets/js/parallax.min.js"></script>
 <script src="assets/js/particles.min.js"></script>
 <script src="assets/js/particles-animation.js"></script>
+@yield('custom_bottom_scripts')
 <script>
     $(window).load(function () {
         $(".se-pre-con").fadeOut("slow");

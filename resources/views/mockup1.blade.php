@@ -1,238 +1,434 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>@yield('title', 'Online lab')</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="<?= URL::to( '/' ); ?>/assets/css/bootstrap.min.css" rel="stylesheet">
-    <!--google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700&amp;subset=latin-ext" rel="stylesheet">
-    <!--favicon-->
-    <link rel="apple-touch-icon" sizes="57x57" href="<?= URL::to( '/' ); ?>/assets/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="<?= URL::to( '/' ); ?>/assets/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="<?= URL::to( '/' ); ?>/assets/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="<?= URL::to( '/' ); ?>/assets/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?= URL::to( '/' ); ?>/assets/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="<?= URL::to( '/' ); ?>/assets/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="<?= URL::to( '/' ); ?>/assets/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="<?= URL::to( '/' ); ?>/assets/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="<?= URL::to( '/' ); ?>/assets/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="<?= URL::to( '/' ); ?>/assets/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?= URL::to( '/' ); ?>/assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="<?= URL::to( '/' ); ?>/assets/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= URL::to( '/' ); ?>/assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="assets/favicon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="./favicon/ms-icon-144x144.png">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link href="<?= URL::to( '/' ); ?>/assets/css/style.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <style>
-        .mockup {
-            margin: 25px 0;
+@extends('master')
+
+@section('title')
+	Hok
+@stop
+
+@section('custom_top_scripts')
+    <!-- maxima -->
+    <script type="text/javascript" src="{{ url('/') }}/applications/hok/ioLAB_files/jquery-1.6.2.js"></script>
+    <script type="text/javascript" src="{{ url('/') }}/applications/hok/ioLAB_files/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="{{ url('/') }}/applications/hok/ioLAB_files/shCore.css" type="text/css">
+    <link rel="stylesheet" href="{{ url('/') }}/applications/hok/ioLAB_files/shThemeDefault.css" type="text/css">
+    <script type="text/javascript" src="{{ url('/') }}/applications/hok/ioLAB_files/shCore.js"></script>
+    <script type="text/javascript" src="{{ url('/') }}/applications/hok/ioLAB_files/shBrushJScript.js"></script>
+
+    <script type="text/javascript" src="{{ url('/') }}/applications/hok/ioLAB_files/jquery.jqplot.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url('/') }}/applications/hok/ioLAB_files/jquery.jqplot.css">
+
+    <script type="text/javascript" src="{{ url('/') }}/applications/hok/ioLAB_files/script.js"></script>
+    <script type="text/javascript" src="{{ url('/') }}/applications/hok/ioLAB_files/ajaxupload.js"></script>
+    <script type="text/javascript" src="{{ url('/') }}/applications/hok/ioLAB_files/excanvas.js"></script>
+    <script type="text/javascript" src="{{ url('/') }}/applications/hok/ioLAB_files/jquery.flot.js"></script>
+    <script type="text/javascript" src="{{ url('/') }}/applications/hok/ioLAB_files/MathJax.js">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {inlineMath: [["$", "$"], ["\\(", "\\)"]]}
+        });
+    </script>
+    <style type="text/css">.MathJax_Preview {
+            color: #888
+        }
+
+        #MathJax_Message {
+            position: fixed;
+            left: 1em;
+            bottom: 1.5em;
+            background-color: #E6E6E6;
+            border: 1px solid #959595;
+            margin: 0px;
+            padding: 2px 8px;
+            z-index: 102;
+            color: black;
+            font-size: 80%;
+            width: auto;
+            white-space: nowrap
+        }
+
+        #MathJax_MSIE_Frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0px;
+            z-index: 101;
+            border: 0px;
+            margin: 0px;
+            padding: 0px
+        }
+
+        .MathJax_Error {
+            color: #CC0000;
+            font-style: italic
         }
     </style>
-</head>
-<body>
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand logo" href="<?= URL::to( '/' ); ?>"><img src="<?= URL::to( '/' ); ?>/assets/img/logo.png" alt="logo" width="37px"></a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <?php foreach($navigation as $nav_link): ?>
-                <?php if(!isset($nav_link->children)): ?>
-                <li><a href="<?= $nav_link->name ?>"><?php echo trans( 'navigation.' . $nav_link->name ) ?></a></li>
-                <?php else: ?>
-                <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo trans( 'navigation.' . $nav_link->name ) ?> <b class="caret"></b></a>
-                    <ul class="dropdown-menu multi-level">
-                        <?php foreach($nav_link->children as $child_link): ?>
-                        <li><a href="<?= $child_link->controller ?>"><?= $child_link->name ?></a></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </li>
-                <?php endif; ?>
-                <?php endforeach; ?>
-                <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu 1 <b class="caret"></b></a>
-                    <ul class="dropdown-menu multi-level">
-                        <li><a href="#">Some link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                        <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li class="dropdown-submenu">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="dropdown-submenu">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">The end</a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="#">Separated link</a></li>
-                                                <li class="divider"></li>
-                                                <li><a href="#">One more separated link</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-                    <ul id="login-dp" class="dropdown-menu">
-                        <li>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    {{--Login via
-                                    <div class="social-buttons">
-                                        <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-                                        <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
-                                    </div>
-                                    or--}}
-                                    <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required="">
-                                            <div class="help-block text-right"><a href="">Forget the password ?</a></div>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox"> keep me logged-in
-                                            </label>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="bottom text-center">
-                                    New here ? <a href="#"><b>Join Us</b></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!--/.nav-collapse -->
-        <ul class="translation-flags">
-            <li><a href="<?= URL::to( '/sk' ); ?>">SK</a></li>
-            <li><a href="<?= URL::to( '/en' ); ?>">EN</a></li>
-        </ul>
-    </div>
-</div>
-<header>
-    <a class="header-logo" href="index.html"><img src="<?= URL::to( '/' ); ?>/assets/img/logo_svk_full.png" alt="logo"></a>
-    <div id="particles-js" style="height: 200px;"></div>
-</header>
+    <!-- -->
 
-<div class="container">
-    <div class="row">
-{{--        <div class="col-sm-3" style="padding: 25px;">
---}}{{--            <nav class="navbar navbar-default" role="navigation">
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav navbar-vertical">
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </nav>--}}{{--
-        </div>--}}
-        <div class="col-sm-12 mockup">
-            <img class="img-responsive" src="<?= URL::to( '/' ); ?>/mockups/1.jpg" alt="">
-            <hr>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="usr">Trvanie animácie:</label>
-                    <input type="text" class="form-control" id="usr">
+    <!-- prihlásenie -->
+    <script src="{{ url('/') }}/applications/hok/ioLAB_files/jquery.min.js"></script>
+    <script src="{{ url('/') }}/applications/hok/ioLAB_files/jquery.form.js"></script>
+    <script type="text/javascript" src="{{ url('/') }}/applications/hok/ioLAB_files/main.js"></script>
+    <style type="text/css">#MathJax_About {
+            position: fixed;
+            left: 50%;
+            width: auto;
+            text-align: center;
+            border: 3px outset;
+            padding: 1em 2em;
+            background-color: #DDDDDD;
+            color: black;
+            cursor: default;
+            font-family: message-box;
+            font-size: 120%;
+            font-style: normal;
+            text-indent: 0;
+            text-transform: none;
+            line-height: normal;
+            letter-spacing: normal;
+            word-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            float: none;
+            z-index: 201;
+            border-radius: 15px;
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            -khtml-border-radius: 15px;
+            box-shadow: 0px 10px 20px #808080;
+            -webkit-box-shadow: 0px 10px 20px #808080;
+            -moz-box-shadow: 0px 10px 20px #808080;
+            -khtml-box-shadow: 0px 10px 20px #808080;
+            filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')
+        }
+
+        #MathJax_About.MathJax_MousePost {
+            outline: none
+        }
+
+        .MathJax_Menu {
+            position: absolute;
+            background-color: white;
+            color: black;
+            width: auto;
+            padding: 2px;
+            border: 1px solid #CCCCCC;
+            margin: 0;
+            cursor: default;
+            font: menu;
+            text-align: left;
+            text-indent: 0;
+            text-transform: none;
+            line-height: normal;
+            letter-spacing: normal;
+            word-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            float: none;
+            z-index: 201;
+            box-shadow: 0px 10px 20px #808080;
+            -webkit-box-shadow: 0px 10px 20px #808080;
+            -moz-box-shadow: 0px 10px 20px #808080;
+            -khtml-box-shadow: 0px 10px 20px #808080;
+            filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')
+        }
+
+        .MathJax_MenuItem {
+            padding: 2px 2em;
+            background: transparent
+        }
+
+        .MathJax_MenuArrow {
+            position: absolute;
+            right: .5em;
+            padding-top: .25em;
+            color: #666666;
+            font-size: .75em
+        }
+
+        .MathJax_MenuActive .MathJax_MenuArrow {
+            color: white
+        }
+
+        .MathJax_MenuArrow.RTL {
+            left: .5em;
+            right: auto
+        }
+
+        .MathJax_MenuCheck {
+            position: absolute;
+            left: .7em
+        }
+
+        .MathJax_MenuCheck.RTL {
+            right: .7em;
+            left: auto
+        }
+
+        .MathJax_MenuRadioCheck {
+            position: absolute;
+            left: 1em
+        }
+
+        .MathJax_MenuRadioCheck.RTL {
+            right: 1em;
+            left: auto
+        }
+
+        .MathJax_MenuLabel {
+            padding: 2px 2em 4px 1.33em;
+            font-style: italic
+        }
+
+        .MathJax_MenuRule {
+            border-top: 1px solid #CCCCCC;
+            margin: 4px 1px 0px
+        }
+
+        .MathJax_MenuDisabled {
+            color: GrayText
+        }
+
+        .MathJax_MenuActive {
+            background-color: Highlight;
+            color: HighlightText
+        }
+
+        .MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {
+            background-color: #E8E8E8
+        }
+
+        .MathJax_ContextMenu:focus {
+            outline: none
+        }
+
+        .MathJax_ContextMenu .MathJax_MenuItem:focus {
+            outline: none
+        }
+
+        #MathJax_AboutClose {
+            top: .2em;
+            right: .2em
+        }
+
+        .MathJax_Menu .MathJax_MenuClose {
+            top: -10px;
+            left: -10px
+        }
+
+        .MathJax_MenuClose {
+            position: absolute;
+            cursor: pointer;
+            display: inline-block;
+            border: 2px solid #AAA;
+            border-radius: 18px;
+            -webkit-border-radius: 18px;
+            -moz-border-radius: 18px;
+            -khtml-border-radius: 18px;
+            font-family: 'Courier New', Courier;
+            font-size: 24px;
+            color: #F0F0F0
+        }
+
+        .MathJax_MenuClose span {
+            display: block;
+            background-color: #AAA;
+            border: 1.5px solid;
+            border-radius: 18px;
+            -webkit-border-radius: 18px;
+            -moz-border-radius: 18px;
+            -khtml-border-radius: 18px;
+            line-height: 0;
+            padding: 8px 0 6px
+        }
+
+        .MathJax_MenuClose:hover {
+            color: white !important;
+            border: 2px solid #CCC !important
+        }
+
+        .MathJax_MenuClose:hover span {
+            background-color: #CCC !important
+        }
+
+        .MathJax_MenuClose:hover:focus {
+            outline: none
+        }
+    </style>
+    <style type="text/css">#MathJax_Zoom {
+            position: absolute;
+            background-color: #F0F0F0;
+            overflow: auto;
+            display: block;
+            z-index: 301;
+            padding: .5em;
+            border: 1px solid black;
+            margin: 0;
+            font-weight: normal;
+            font-style: normal;
+            text-align: left;
+            text-indent: 0;
+            text-transform: none;
+            line-height: normal;
+            letter-spacing: normal;
+            word-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            float: none;
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+            box-shadow: 5px 5px 15px #AAAAAA;
+            -webkit-box-shadow: 5px 5px 15px #AAAAAA;
+            -moz-box-shadow: 5px 5px 15px #AAAAAA;
+            -khtml-box-shadow: 5px 5px 15px #AAAAAA;
+            filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')
+        }
+
+        #MathJax_ZoomOverlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 300;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            padding: 0;
+            margin: 0;
+            background-color: white;
+            opacity: 0;
+            filter: alpha(opacity=0)
+        }
+
+        #MathJax_ZoomFrame {
+            position: relative;
+            display: inline-block;
+            height: 0;
+            width: 0
+        }
+
+        #MathJax_ZoomEventTrap {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 302;
+            display: inline-block;
+            border: 0;
+            padding: 0;
+            margin: 0;
+            background-color: white;
+            opacity: 0;
+            filter: alpha(opacity=0)
+        }
+    </style>
+@stop
+
+@section('content')
+    <div id="MathJax_Message" style="display: none;"></div>
+    <div id="wrapper">
+        <div id="container">
+            <div id="content" style="min-height: 550px;">
+                <h1>Interaktívny 3D WebGL model Segway vozidla</h1>
+                <script type="text/javascript" src="{{ url('/') }}/applications/hok/js/jQuery.js"></script>
+                <script type="text/javascript" src="{{ url('/') }}/applications/hok/js/googleGraphs.js"></script>
+                <style>
+
+                    #resetButton {
+                        display: none;
+                    }
+
+                    .pidAll {
+                        float: right;
+                    }
+
+                    #graf {
+                        display: none;
+                    }
+                    #graf div {
+                        position: relative !important;
+                    }
+
+                    #loadingGif {
+                        display: none;
+                        position: absolute;
+                        bottom: 0%;
+                        right: 0%;
+                    }
+
+                    #webGLWindow {
+                        position: relative;
+                        width: 100%;
+                        height: 500px
+                    }
+                </style>
+                <div class="col-sm-12 mockup">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <form id="segwayInputs">
+                                <div class="form-group">
+                                    <label for="timeInput">Trvanie animácie:</label>
+                                    <input class="form-control" name="time" value="5" id="timeInput" type="text" placeholder="Zadaj čas v sekundách"
+                                           onchange="checkTimeInput(this.value)">
+                                </div>
+                                <input name="angle" id="angleInput" hidden>
+                                <div class="form-group">
+                                    <label for="degreeInput">Počiatočný uhol v stupňoch:</label>
+                                    <input class="form-control" name="degree" value="30" id="degreeInput" type="text" placeholder="Zadaj uhol v stupňoch"
+                                           onchange="checkDegreeInput(this.value)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="usr">Počiatočná rýchlosť vozidla v m/s:</label>
+                                    <input class="form-control" name="speed" value="5" id="speedInput" type="text" placeholder="Zadaj rýchlosť"
+                                           onchange="checkSpeedInput(this.value)">
+                                </div>
+                                <label for="usr">Použiť PID regulátor:</label>
+                                <div class="radio">
+                                    <label><input id="pidYes" name="pid" type="radio" value="SegwayPID.mo" checked onclick="showPid()">Áno</label>
+                                </div>
+
+                                <input id="pidNo" name="pid" type="radio" value="SegwayOnly.mo" onclick="hidePid()">
+                                <label for="pidNo">nie</label>
+                                <div id="pidPart">
+                                    <label for="pInput">P: </label>
+                                    <input class="form-control" name="p" type="text" value="18" id="pInput" onchange="checkPInput(this.value)"><br>
+                                    <label for="iInput">I: </label>
+                                    <input class="form-control" name="i" type="text" value="20" id="iInput" onchange="checkIInput(this.value)"><br>
+                                    <label for="dInput">D: </label>
+                                    <input class="form-control" name="d" type="text" value="0.1" id="dInput" onchange="checkDInput(this.value)"><br>
+                                </div>
+                                <button type="submit" id="submitButton" style="display: inline-block;margin: 10px 0;width: 105px;" class="btn btn-success btn-md">Generovať</button>
+                                <button type="button" id="grafBan" onclick="grafOnOff()" class="btn btn-success btn-md">Skryť Graf</button>
+                            </form>
+                        </div>
+                        <div class="col-md-9">
+                            <div id="webGLWindow">
+                                <div id="webGL" style="position: absolute; width: 100%; height: 100%"></div>
+                                <img id="loadingGif" src="{{ url('/') }}/applications/hok/loading.gif" alt="loading gif">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="graf" style="height: 250px;"></div>
                 </div>
-                <div class="form-group">
-                    <label for="usr">Počiatočný uhol v stupňoch:</label>
-                    <input type="text" class="form-control" id="usr">
-                </div>
-                <div class="form-group">
-                    <label for="usr">Počiatočná rýchlosť vozidla v m/s:</label>
-                    <input type="text" class="form-control" id="usr">
-                </div>
-                <button style="display: block;margin: 10px 0;width: 105px;" type="button" class="btn btn-success btn-md">Generovať</button>
-                <button type="button" class="btn btn-success btn-md">Zobraziť graf</button>
-            </div>
-            <div class="col-md-6">
-                <label for="usr">Použiť PID regulátor:</label>
-                <div class="radio">
-                    <label><input type="radio" name="optradio" checked>Áno</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="optradio">Nie</label>
-                </div>
-                <div class="form-group">
-                    <label for="usr">P:</label>
-                    <input type="text" class="form-control" id="usr">
-                </div>
-                <div class="form-group">
-                    <label for="usr">I:</label>
-                    <input type="text" class="form-control" id="usr">
-                </div>
-                <div class="form-group">
-                    <label for="usr">D:</label>
-                    <input type="text" class="form-control" id="usr">
-                </div>
+
+                <button type="button" id="resetButton" onclick="reset()">Reset</button>
+
+                <script src="{{ url('/') }}/applications/hok/js/three/three.min.js"></script>
+                <script src="{{ url('/') }}/applications/hok/js/three/Animation.js"></script>
+                <script src="{{ url('/') }}/applications/hok/js/three/AnimationHandler.js"></script>
+                <script src="{{ url('/') }}/applications/hok/js/three/KeyFrameAnimation.js"></script>
+
+                <script src="{{ url('/') }}/applications/hok/js/three/ColladaLoader.js"></script>
+                <script src="{{ url('/') }}/applications/hok/js/three/OrbitControls.js"></script>
+                <script src="{{ url('/') }}/applications/hok/js/three/Detector.js"></script>
+                <script src="{{ url('/') }}/applications/hok/js/three/stats.min.js"></script>
+                <script src="{{ url('/') }}/applications/hok/js/code.js"></script>
+
+
             </div>
         </div>
+        <div id="containter_clear"></div>
     </div>
-</div>
-<footer>
-    <p>Copyright © 2016</p>
-    <ul>
-        <li>
-            <a target="_blank" href="https://github.com/Luxato/Online-Lab-Unification-PHP"><i
-                        class="fa fa-github-square" aria-hidden="true"></i></a>
-        </li>
-    </ul>
-</footer>
-<script src="<?= URL::to( '/' ); ?>/assets/js/jquery.js"></script>
-<script src="<?= URL::to( '/' ); ?>/assets/js/bootstrap.min.js"></script>
-<script src="<?= URL::to( '/' ); ?>/assets/js/parallax.min.js"></script>
-<script src="<?= URL::to( '/' ); ?>/assets/js/particles.min.js"></script>
-<script src="<?= URL::to( '/' ); ?>/assets/js/particles-animation.js"></script>
-<script>
-    $(window).load(function () {
-        $(".se-pre-con").fadeOut("slow");
-    });
-    $(window).scroll(function() {
-        var navbar = $(".navbar-fixed-top");
-        if ($(".navbar-fixed-top").offset().top > 50) {
-            navbar.addClass('navbar-mini');
-        } else {
-            navbar.removeClass('navbar-mini');
-        }
-    });
-</script>
-<div class="se-pre-con"></div>
-</body>
-</html>
+@stop
+
+@section('custom_bottom_scripts')
+@stop
