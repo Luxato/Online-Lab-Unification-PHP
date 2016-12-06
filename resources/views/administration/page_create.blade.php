@@ -5,18 +5,20 @@
 @stop
 
 @section('custom_css')
-<link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet"
+          href="<?= URL::to( '/' ); ?>/assets/administration/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 @stop
 
 
 @section('content')
     <div class="row">
-        <form id="new-page-form" action="<?= URL('admin/page_create') ?>" method="POST">
-            <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}" />
+        <form id="new-page-form" action="<?= URL( 'admin/page_create' ) ?>" method="POST">
+            <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nadpis</label>
-                    <input id="title-input" class="form-control" name="title" type="text" placeholder="Zadajte nadpis sem">
+                    <input id="title-input" class="form-control" name="title" type="text"
+                           placeholder="Zadajte nadpis sem">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">URL</label>
@@ -25,9 +27,9 @@
                 <div class="form-group">
                     <label>Lokalizácia</label>
                     <select name="language" class="form-control">
-                        <?php foreach($languages as $value): ?>
-                            <option value="<?= $value->id  ?>"><?= $value->language_title ?></option>
-                        <?php endforeach; ?>
+						<?php foreach($languages as $value): ?>
+                        <option value="<?= $value->id  ?>"><?= $value->language_title ?></option>
+						<?php endforeach; ?>
                     </select>
                 </div>
             </div>
@@ -58,25 +60,43 @@
 @stop
 
 @section('custom_scripts')
-<script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/ckeditor/ckeditor.min.js"></script>
-<script>
-    CKEDITOR.replace('editor1');
-    $(function(){
-        $('#nav-navigacia').addClass('active');
-        // TODO REMOVE ľíéšášľťéľížýľš AND !@#$%$^%&&&&&&&&&*)/*-+
-    	$('#title-input').on('keyup', function() {
-            var title = $(this).val();
-            title = title.toLowerCase();
-            title = title.trim();
-            title = title.replace(/ /g,"_");
-            for (var i = 0, max = title.length; i < max - 1; i++) {
-            	if (title[i] == '_' && title[i+1]) {
-                    console.log('true');
-                    title = title.replace("__","_");
+    <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/ckeditor/ckeditor.min.js"></script>
+    <script>
+        CKEDITOR.replace('editor1');
+        $(function () {
+            $('#nav-navigacia').addClass('active');
+            // TODO REMOVE ľíéšášľťéľížýľš AND !@#$%$^%&&&&&&&&&*)/*-+
+            $('#title-input').on('keyup', function () {
+                var title = $(this).val();
+                title = title.toLowerCase();
+                title = title.trim();
+                title = title.replace(/ /g, "_");
+                for (var i = 0, max = title.length; i < max - 1; i++) {
+                    if (title[i] == '_' && title[i + 1]) {
+                        console.log('true');
+                        title = title.replace("__", "_");
+                    }
+                }
+                title = diaConvert(title);
+                $('#url-input').val(title);
+            });
+        });
+
+        var dia = "áäčďéíľĺňóôŕšťúýÁČĎÉÍĽĹŇÓŠŤÚÝŽ";
+        var nodia = "aacdeillnoorstuyACDEILLNOSTUYZ";
+
+        function diaConvert(text) {
+            var convertText = "";
+            for (var i = 0; i < text.length; i++) {
+                if (dia.indexOf(text.charAt(i)) != -1) {
+                    convertText += nodia.charAt(dia.indexOf(text.charAt(i)));
+                }
+                else {
+                    convertText += text.charAt(i);
                 }
             }
-            $('#url-input').val(title);
-        });
-    });
-</script>
+            return convertText;
+        }
+
+    </script>
 @stop
