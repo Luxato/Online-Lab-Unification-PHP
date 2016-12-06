@@ -1,0 +1,11 @@
+# Blender MTL File: 'sustavablender3.blend'
+# Material Count: 1
+
+newmtl Gold
+Ns 62.745098
+Ka 0.000000 0.000000 0.000000
+Kd 0.079357 0.068280 0.044975
+Ks 0.133805 0.114623 0.074463
+Ni 1.000000
+d 1.000000
+illum 2

@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Pragma" content="no-cache"> 
+  <meta http-equiv="expires" content="0">
+  <title>WebGL 3D model viewer using three.js</title>
+  <script src="kniznice/three.js"></script>
+  <script src="kniznice/TrackballControls.js"></script>
+  <script src="kniznice/OrbitControls.js"></script>
+  <script src="kniznice/OBJLoader.js"></script>
+  <script src="kniznice/Detector.js"></script>
+  <script src="kniznice/MTLLoader.js"></script>
+  <script src="kniznice/OBJMTLLoader.js"></script>
+  <script src="kniznice/ImageUtils.js"></script>
+  <script src="kniznice/jquery.min.js"></script>
+   <script src="kniznice/FresnelShader.js"></script>
+</head>
+<body>
+	<style>
+	#container{
+		height:500px;
+		visibility:visible;
+		z-index:-2;
+	}
+	
+	#myForm{
+		position:absolute;
+		top:30px;
+		left:1000px;
+	}
+	
+	#vys{
+		z-index:1;
+		position:absolute;
+		top:30px;
+		left:100px;
+		color:white;
+		}
+		
+	#testovacie_pole{
+		z-index:1;
+		position:fixed;
+		top:400px;
+		left:100px;
+		color:white;
+		}
+	
+	
+	
+	
+	</style>
+  <script>
+  
+
+    // This is where our model viewer code goes.
+	//var container;
+	var camera,CubeCamera, scene, renderer;
+	var mouseX = 0, mouseY = 0;
+	var dimx=window.innerWidth;
+	var dimy=window.innerHeight;
+	 
+	var windowHalfX = window.innerWidth / 2;
+	var windowHalfY = window.innerHeight / 2;
+	var korekcia_vysky=-0.8;
+	var valec_3;
+	var tiene=true;
+	var valec_1=null;
+	var valec_2=null;
+	var valec_3=null;
+	init();
+	animate();
+	
+	 
+	/*** Initialize ***/
+	function init() {
+	  // This <div> will host the canvas for our scene.
+	  //var inputfil=document.getElementById("vyska");
+	  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+	  renderer.sortObjects = false;
+	  renderer.autoClear = false;
+	  
+	    
+	  renderer.shadowMapEnabled = true;
+	 // renderer.shadowMapAutoUpdate = true;
+	  //renderer.clearTarget( light.shadowMap );
+	  renderer.shadowMapType = THREE.PCFSoftShadowMap;
+	  //renderer.shadowMapCullFrontFaces = false;
+	  
+	  // This is the scene we will add all objects to.
+	  scene = new THREE.Scene();
+	  scene2 = new THREE.Scene();
+	  scene3 = new THREE.Scene();
+	  //scene.height=300;
+	  
+	  var rura=true;
+	  var valec_s=true;
+	  var container = document.createElement( 'div' );
+	 // container=document.getElementById("container");
+	  container.id="container";
+	  document.body.appendChild( container );
+	  // You can adjust the cameras distance and set the FOV to something
+	  // different than 45°. The last two values set the clippling plane.
+	  camera = new THREE.PerspectiveCamera( 80, dimx / dimy, 0.1, 2000 );
+	  CubeCamera = new THREE.CubeCamera( 0.01, 500, 512 );
+	  CubeCamera2 = new THREE.CubeCamera( 0.01, 500, 1024 );
+	  CubeCamera3 = new THREE.CubeCamera( 0.01, 500, 1024 );
+	  //CubeCamera = new THREE.PerspectiveCamera( 15, dimx / dimy, 0.1, 2000 );
+	  scene.add(CubeCamera);
+	  scene.add(CubeCamera2);
+	  scene.add(CubeCamera3);
+	  
+	  CubeCamera.renderTarget.mapping = new THREE.CubeRefractionMapping();
+	  CubeCamera2.renderTarget.mapping = new THREE.CubeRefractionMapping();
+	  CubeCamera3.renderTarget.mapping = new THREE.CubeRefractionMapping();
+	  var cubeMaterial = new THREE.MeshBasicMaterial( { 
+						 color: 0xffffff, 
+						 envMap: CubeCamera.renderTarget, 
+						 refractionRatio: 1.05 ,
+						 specular: 0x000000,
+						 opacity:0.1,
+						 reflectivity:1
+						 });
+						 
+	  var cubeMaterial2 = new THREE.MeshPhongMaterial( { 
+						 color: 0xffffff, 
+						 envMap: CubeCamera2.renderTarget, 
+						 bumpMap: THREE.ImageUtils.loadTexture('7718-bump11smart.png'),
+						 bumpScale: 0.03,
+						 refractionRatio: 0.75 ,
+						 specular: 0x000000,
+						// transparent:true,
+						 opacity:1,
+						 reflectivity:1
+						 });
+						 
+	  var cubeMaterial3 = new THREE.MeshBasicMaterial( { 
+						 color: 0xffffff, 
+						 envMap: CubeCamera3.renderTarget, 
+						// bumpMap: THREE.ImageUtils.loadTexture('voda-bump10.png'),
+						 refractionRatio: 1.1 ,
+						 specular: 0x000000,
+						 opacity:1,
+						 reflectivity:1 
+						 });
+						 
+						 
+	  var sklo = new THREE.MeshPhongMaterial( { 
+						 color: 0xaaaaaa, 
+						 transparent:true,
+						 //envMap: CubeCamera3.renderTarget, 
+						// refractionRatio: 1.1 ,
+						 //specular: 0xffffff,
+						 opacity:0.1,
+						 reflectivity:0.5 
+						 });
+						 
+	  var texture = THREE.ImageUtils.loadTexture("voda.jpg");//, {}, function() {renderer.render(scene);});
+	  
+	 // var valecMaterial = new THREE.MeshBasicMaterial( { 
+						// color: 0x050505,
+						// envMap: CubeCamera3.renderTarget,						 
+						 //refractionRatio: 1.1 ,
+						// specular: 0x050505,
+						// map:texture
+						 //opacity:1,
+						 //reflectivity:0.05 
+						 //});
+						 
+	  var valecMaterial = new THREE.MeshPhongMaterial( {map: THREE.ImageUtils.loadTexture('voda.jpg') } );
+	  var sky = new THREE.MeshBasicMaterial( {color:0x90b8e0 } );
+						 
+	  var material_gray = new THREE.MeshLambertMaterial( { 
+						 color: 0x050505, 
+						 reflectivity:0.97 
+						 });
+						 
+	  
+						 
+	  //var cubeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, ambient: 0xffffff, envMap: CubeCamera.renderTarget } );
+	  //var cubeMaterial = new THREE.MeshBasicMaterial( { envMap: CubeCamera.renderTarget, refractionRatio: 1 } );
+	  camera.position.x = 10;
+	  //camera.position.set(0, 3, 1.50);
+	  //camera.lookAt(new THREE.Vector3(0,0,0));
+
+	  
+	/*var geometry = new THREE.CubeGeometry( 10, 10, 10);
+    var material = new THREE.MeshPhongMaterial( {map: THREE.ImageUtils.loadTexture('voda.jpg') } );
+ 
+    mesh = new THREE.Mesh(geometry, material );
+    mesh.position.z = -50;
+    scene.add( mesh );*/
+	  // These variables set the camera behaviour and sensitivity.
+	  
+	  controls = new THREE.OrbitControls (camera ,renderer.domElement);
+	  //controls.addEventListener( 'change', render );
+	  //controls = new THREE.TrackballControls( camera );
+	  controls.rotateSpeed = 5.0;
+	  controls.zoomSpeed = 5;
+	  controls.panSpeed = 2;
+	  controls.noZoom = false;
+	  controls.noPan = false;
+	  controls.staticMoving = true;
+	  controls.dynamicDampingFactor = 0.3;
+	 
+	  
+	 
+	  // You can set the color of the ambient light to any value.
+	  // I have chose a completely white light because I want to paint
+	  // all the shading into my texture. You propably want something darker.
+	  /*var ambient = new THREE.AmbientLight( 0xa0a0a0 );
+	  scene.add( ambient );*/
+	  
+
+	  var directionalLight = new THREE.DirectionalLight( 0xffffee,4);
+			directionalLight.position.set( -20, 20, -24 );
+			//directionalLight.target.position.set( 2, 0, 11 );
+			//directionalLight.angle=Math.PI;
+			//directionalLight.onlyShadow=true;
+			//directionalLight.exponent=0.1;
+			directionalLight.shadowCameraLeft=-40;
+
+			directionalLight.shadowCameraRight=50;
+
+			directionalLight.shadowCameraTop=50;
+
+			directionalLight.shadowCameraBottom=-30;
+			
+			directionalLight.shadowBias = 0.01;
+			directionalLight.castShadow = true;
+			directionalLight.shadowDarkness = 0.6;
+			//directionalLight.shadowCameraVisible = true;
+			directionalLight.shadowCameraNear = 1;
+			directionalLight.shadowCameraFar = 100;
+			directionalLight.shadowMapWidth = 512; // default is 512
+			directionalLight.shadowMapWidth = 512; // default is 512
+			directionalLight.shadowMapHeight = 512; // default is 512
+			scene.add( directionalLight );
+			
+			
+		var directionalLight2 = new THREE.DirectionalLight( 0xffffee,1);
+			directionalLight2.position.set( 20, -40, 24 );
+			
+			//directionalLight2.castShadow = true;
+			//directionalLight2.shadowDarkness = 0.9;
+			scene.add( directionalLight2 );
+			
+		/*var spotlight=new THREE.SpotLight( 0xffffee,0.2);
+			spotlight.position.set( -14, 10, -14 );
+			spotlight.castShadow = true;
+			spotlight.shadowCameraNear = 1;
+			spotlight.shadowCameraFar = 100;
+			spotlight.shadowDarkness = 0.4;
+			spotlight.shadowCameraVisible = true;
+			scene.add( spotlight );*/
+			
+		/*var light = new THREE.PointLight( 0xffffff, 1, 0 );
+		light.position.set( 2, 200, -110 );
+		scene.add( light );*/
+			
+	  /*var directionalLight2 = new THREE.DirectionalLight( 0xffffff,1 );
+			directionalLight2.position.set( 2, 20, -11 );
+			scene.add( directionalLight2 );*/
+			
+	  /*var directionalLight3 = new THREE.SpotLight( 0xffffff,1 );
+			directionalLight3.position.set( 10, 10, -3 );
+			scene2.add( directionalLight3 );*/
+			
+	  var hemLight = new THREE.HemisphereLight(0xffffee, 0xffffee, 1);
+			scene.add(hemLight);
+	
+	  /*var ambLight = new THREE.AmbientLight(0x040404);
+			scene.add(ambLight);*/
+			
+		/*areaLight1 = new THREE.AreaLight( 0xffffff, 1 );
+		areaLight1.position.set( 2, 20, -11 );
+		//areaLight1.rotation.set( -0.74719, 0.0001, 0.0001 );
+		areaLight1.width = 10;
+		areaLight1.height = 1;
+
+		scene.add( areaLight1 );*/
+			
+	/*  var hemLight2 = new THREE.HemisphereLight(0xffffff, 0xffffff, 1);
+			scene2.add(hemLight2);*/
+	 
+	  // Uncomment these lines to create a simple directional light.
+	  // var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+	  // directionalLight.position.set( 0, 0, 1 ).normalize();
+	  // scene.add( directionalLight );
+	 
+	  /*** Texture Loading ***/
+	 /* var manager = new THREE.LoadingManager();
+	  manager.onProgress = function ( item, loaded, total ) {
+		console.log( item, loaded, total );
+	  };*/
+	 // var texture = new THREE.Texture();
+	  //var loader = new THREE.ImageLoader( manager );
+	 
+	  // You can set the texture properties in this function. 
+	  // The string has to be the path to your texture file.
+	 /* loader.load( 'cervena.png', function ( image ) {
+		texture.image = image;
+		texture.needsUpdate = false;
+		// I wanted a nearest neighbour filtering for my low-poly character,
+		// so that every pixel is crips and sharp. You can delete this lines
+		// if have a larger texture and want a smooth linear filter.
+		texture.magFilter = THREE.NearestFilter;
+		texture.minFilter = THREE.NearestMipMapLinearFilter;
+	  } );*/
+	 
+	 
+	 
+	 
+	 
+	var fShader = THREE.FresnelShader;
+	
+	var fresnelUniforms = 
+	{
+		"texture": { type: "t", value: THREE.ImageUtils.loadTexture( "voda.jpg" ) },
+		"mRefractionRatio": { type: "f", value: 1.3 },
+		"mFresnelBias": 	{ type: "f", value: 0.5 },
+		"mFresnelPower": 	{ type: "f", value: 2 },
+		"mFresnelScale": 	{ type: "f", value: 1.0 },
+		"tCube": 			{ type: "t", value: CubeCamera.renderTarget } //  textureCube }
+	};
+	
+	// create custom material for the shader
+	var customMaterial = new THREE.ShaderMaterial( 
+	{
+		//bumpMap: THREE.ImageUtils.loadTexture('7718-bump11smart.png'),
+	    uniforms: 		fresnelUniforms,
+		vertexShader:   fShader.vertexShader,
+		fragmentShader: fShader.fragmentShader
+	}   );
+	 
+	//customMaterial.map    = THREE.ImageUtils.loadTexture('voda.jpg');
+	customMaterial.bumpMap = THREE.ImageUtils.loadTexture('7718-bump11smart.png');
+	 
+	 
+	 
+	 
+	 
+	 
+	  /*** OBJ Loading ***/
+	  var loader = new THREE.OBJMTLLoader();
+	  
+	  var loader2 = new THREE.OBJLoader();
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  loader.load( 'objekty2/stol.obj','objekty2/stol.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			var textura=THREE.ImageUtils.loadTexture('textury/wood-texture1024.jpg');
+			textura.wrapS=textura.wrapT=THREE.MirroredRepeatWrapping; 
+			textura.repeat.set(2,-2);
+			//textura.offset.set( 1, 0);
+			child.material.map = textura;
+			child.material.bumpMap = textura;
+			child.material.bumpScale= 0.02;
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty2/miestnost3.obj','objekty2/miestnost3.mtl', function ( event ) {
+		var object = event;
+		var s=0;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh && s==4) {
+			var textura=THREE.ImageUtils.loadTexture('textury/wood-flooring1024.jpg');
+			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
+			textura.repeat.set(3,3);
+			child.material.map = textura;
+			child.material.wrapAround=true;
+			//child.material.bumpMap = textura;
+			//child.material.bumpScale= 0.05;
+			child.receiveShadow = true;
+		  }
+		  
+		  if ( child instanceof THREE.Mesh && s==3) {
+			var textura=THREE.ImageUtils.loadTexture('textury/white_paint_stucco.jpg');
+			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
+			textura.repeat.set(10,10);
+			child.material.map = textura;
+			child.material.bumpMap = textura;
+			child.material.bumpScale= 0.02;
+			child.material.wrapAround=true;
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		  
+		  if ( child instanceof THREE.Mesh && s==5) {
+			var textura=THREE.ImageUtils.loadTexture('textury/white_paint_stucco.jpg');
+			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
+			textura.repeat.set(10,10);
+			child.material.map = textura;
+			//child.material.transparent=true;
+			//child.material.opacity=0.99;
+			child.material.bumpMap = textura;
+			child.material.bumpScale= 0.02;
+			child.material.wrapAround=true;
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		  s=s+1;
+		  
+		} );
+		s=0;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.castShadow = true;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  /**SUSTAVA  SUSTAVA  SUSTAVA  SUSTAVA  SUSTAVA  SUSTAVA  SUSTAVA  SUSTAVA  SUSTAVA  SUSTAVA  SUSTAVA  SUSTAVA  SUSTAVA  SUSTAVA  **/  
+	  loader.load( 'objekty2/zaklad.obj','objekty2/zaklad.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			var textura=THREE.ImageUtils.loadTexture('textury/brushed_aluminium_texture512.jpg');
+			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
+			textura.repeat.set(5,5);
+			child.material.map = textura;
+			//child.material.bumpMap = textura;
+			child.material.bumpScale= 0.001;
+			child.castShadow = true;
+			child.receiveShadow = false;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	   loader.load( 'objekty2/nadrz.obj','objekty2/nadrz.mtl', function ( event ) {
+		var object = event;
+		//object.traverse( function ( child ) {
+		 // if ( child instanceof THREE.Mesh ) {
+	//		child.material = sklo;
+	//	  }
+	//	} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.castShadow = true;
+		object.position.y += korekcia_vysky;
+	    object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	  loader.load( 'objekty2/nadrz_inv.obj','objekty2/nadrz_inv.mtl', function ( event ) {
+		var object = event;
+	//	object.traverse( function ( child ) {
+	//	  if ( child instanceof THREE.Mesh ) {
+	//		child.material = sklo;
+	//	  }
+	//	} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.castShadow = true;
+		object.position.y += korekcia_vysky;
+	    object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	  loader.load( 'objekty2/noha.obj','objekty2/noha.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.position.z -= 2.09376;
+		object.position.y += korekcia_vysky;
+		//object.castShadow = true;
+	    object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	  loader.load( 'objekty2/noha.obj','objekty2/noha.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		object.position.z += 2.85;
+		object.position.y += korekcia_vysky;
+		//object.castShadow = true;
+	    object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	  loader.load( 'objekty2/valec.obj','objekty2/valec.mtl', function ( event ) {
+		var object = event;
+	//	object.traverse( function ( child ) {
+	//	  if ( child instanceof THREE.Mesh ) {
+	//		child.material = valecMaterial;
+	//	  }
+	//	} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		object.position.z += 2.1954;
+		object.position.y += korekcia_vysky;
+		//object.castShadow = true;
+	    object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	  loader.load( 'objekty2/valec.obj','objekty2/valec.mtl', function ( event ) {
+		nadrzka2 = event;
+		nadrzka2.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		nadrzka2.position.y += korekcia_vysky;
+		//object.castShadow = true;
+	    nadrzka2.castShadow = true;
+	    nadrzka2.receiveShadow = true;
+		scene.add( nadrzka2 );
+	  });
+	  
+
+	  
+	  loader.load( 'objekty2/valec.obj','objekty2/valec.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		object.position.z -= 2.09376;
+		object.position.y += korekcia_vysky;
+		//object.castShadow = true;
+	    object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	   loader.load( 'objekty2/hadicky.obj','objekty2/hadicky.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		object.position.y += korekcia_vysky;
+		//object.castShadow = true;
+	    object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	  
+	  //PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  
+	  
+	   loader.load( 'objekty2/plc.obj','objekty2/plc.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.position.z += 2.09376;
+		object.position.x=-0.08754;
+		object.position.y=0.31454;
+		object.position.z=-1.80383;
+		object.position.y += korekcia_vysky;
+		
+		//object.castShadow = true;
+	    //object.receiveShadow = false;
+		object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  
+	  loader.load( 'objekty2/plc.obj','objekty2/plc.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.position.z += 2.09376;
+		object.position.x=-0.08239;
+		object.position.y=0.31454;
+		object.position.z=0.28754;
+		object.position.y += korekcia_vysky;
+		//object.castShadow = true;
+	    //object.receiveShadow = false;
+		object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+
+	  
+	  
+	  
+	   loader.load( 'objekty2/plc_inv.obj','objekty2/plc_inv.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.position.z += 2.09376;
+		object.position.y += korekcia_vysky;
+		//object.castShadow = true;
+	    //object.receiveShadow = false;
+		object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+
+	    
+	  
+	  
+	  
+	  loader.load( 'objekty2/plc.obj','objekty2/plc.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.position.z += 2.09376;
+		object.position.x=0.19058;
+		object.position.y=0.15790;
+		object.position.z=1.17330;
+		object.rotation.y=Math.PI/2;
+		object.position.y += korekcia_vysky;
+		//object.castShadow = true;
+	    //object.receiveShadow = false;
+		object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	   loader.load( 'objekty2/plc.obj','objekty2/plc.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.position.z += 2.09376;
+		object.position.x=0.19058;
+		object.position.y=0.15790;
+		object.position.z=-0.97240;
+		object.rotation.y=Math.PI/2;
+		object.position.y += korekcia_vysky;
+		//object.castShadow = true;
+	    //object.receiveShadow = false;
+		object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	  
+	  
+	   loader.load( 'objekty2/pumpa.obj','objekty2/pumpa.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.position.z += 2.09376;
+		object.position.y += korekcia_vysky;
+		//object.rotation
+		//object.castShadow = true;
+	    //object.receiveShadow = false;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  loader.load( 'objekty2/uchytka.obj','objekty2/uchytka.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.position.z += 2.09376;
+		object.position.y += korekcia_vysky;
+		object.position.y+=0.64;
+		object.position.z+=2.775;
+		object.rotation.x +=Math.PI;
+		//object.castShadow = true;
+	    //object.receiveShadow = false;
+		object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  loader.load( 'objekty2/uchytka.obj','objekty2/uchytka.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.position.z += 2.09376;
+		object.position.y += korekcia_vysky;
+		
+		//object.castShadow = true;
+	    //object.receiveShadow = false;
+		object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  loader.load( 'objekty2/uchytka.obj','objekty2/uchytka.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.position.z += 2.09376;
+		object.position.y += korekcia_vysky;
+		object.position.z -=2.08623;
+		//object.castShadow = true;
+	    //object.receiveShadow = false;
+		object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader2.load( 'objekty2/obloha.obj', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.material = sky;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.position.z += 2.09376;
+		object.position.y += korekcia_vysky;
+		//object.castShadow = true;
+	    //object.receiveShadow = false;
+		scene.add( object );
+	  });
+	   
+	  
+	  
+	  //VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  
+	  loader2.load( 'objekty2/voda.obj', function ( event ) {
+		valec_1 = event;
+		valec_1.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.material = customMaterial;
+		  }
+		} );
+
+
+		valec_1.scale.y=0.7;
+		valec_1.position.z += 2.1954;
+		valec_1.position.y += korekcia_vysky+0.03;
+		//CubeCamera.position=valec_1.position;
+		//CubeCamera.position.y+=10;
+		scene2.add( valec_1 );
+	  });
+	  
+	  
+	  
+	  loader2.load( 'objekty2/voda.obj', function ( event ) {
+		valec_2 = event;
+		valec_2.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.material = customMaterial;
+		  }
+		} );
+
+	 
+		valec_2.scale.y=0.5;
+		//object.position.y -= 1.01;
+		valec_2.position.y += korekcia_vysky+0.03;
+		//valec_2.position.x += 2;
+		CubeCamera2.position=valec_2.position;
+		CubeCamera2.position.y+=1.5;
+		scene2.add( valec_2 );
+	  });
+	  
+	  
+	  loader2.load( 'objekty2/voda.obj', function ( event ) {
+		valec_3 = event;
+		valec_3.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			//child.material.map = texture;
+			child.material = customMaterial;
+			//CubeCamera.position=child.position;
+		  }
+		} );
+
+		
+		valec_3.scale.y=0.2;	    
+		valec_3.position.z -= 2.09376;
+		valec_3.position.y += korekcia_vysky+0.03;
+		valec_3.castShadow = true;
+		valec_3.receiveShadow = true;
+		CubeCamera3.position=valec_3.position;
+		CubeCamera3.position.y+=0.5;
+		scene2.add( valec_3 );
+	  });
+		// drawRefractingObject: function() {
+
+		// create additional camera
+		/*this.rSphereCamera = new THREE.CubeCamera(0.1, 1000, 1000);
+		this.scene.add(this.rSphereCamera);
+		this.rSphereCamera.renderTarget.mapping = new THREE.CubeRefractionMapping();
+
+		// create refracting material and spherical mesh
+		var rMaterial = new THREE.MeshBasicMaterial({ 
+			color: 0xffffff, 
+			envMap: this.rSphereCamera.renderTarget, 
+			refractionRatio: 1, 
+			reflectivity: 0.8
+		});
+
+		this.rSphere = new THREE.Mesh( new THREE.SphereGeometry(0.5, 32, 32), rMaterial);
+		this.rSphere.position.set(2, 0, 0);
+		this.rSphereCamera.position = this.rSphere.position;
+		this.scene.add(this.rSphere);
+		//}*/
+
+	 
+	  // We set the renderer to the size of the window and
+	  // append a canvas to our HTML page.
+	  
+	  renderer.setSize( dimx, dimy );
+	  //renderer.setSize( 700, 400 );
+	  renderer.setClearColor( 0xa0b0c0, 1);
+	  container.appendChild( renderer.domElement );
+	}
+	
+	
+	  
+	 
+	/*** The Loop ***/
+	function animate() {
+	  // This function calls itself on every frame. You can for example change
+	  // the objects rotation on every call to create a turntable animation.
+	  requestAnimationFrame( animate );
+	 
+	  // On every frame we need to calculate the new camera position
+	  // and have it look exactly at the center of our scene.
+	  controls.update();
+	  //camera.lookAt(scene.position);
+	  //renderer.render(scene, camera);
+	  render();
+	  }
+	  
+	function render() 
+	{
+		/*// move the CubeCamera to the position of the object
+		//    that has a reflective surface, "take a picture" in each direction
+		//    and apply it to the surface.
+		// need to hide surface before and after so that it does not
+		//    "get in the way" of the camera
+		mirrorCube.visible = false;
+		mirrorCubeCamera.updateCubeMap( renderer, scene );
+		mirrorCube.visible = true;
+		mirrorSphere.visible = false;
+		mirrorSphereCamera.updateCubeMap( renderer, scene );
+		mirrorSphere.visible = true;
+		
+		renderer.render( scene, camera );
+	}*/
+	  
+	  
+	  renderer.clear();
+	  /*renderer.render( scene3, camera );
+	  renderer.clearDepth();*/
+	  if(valec_1 != null)valec_1.visible=false;
+	  if(valec_2 != null)valec_2.visible=false;
+	  if(valec_3 != null)valec_3.visible=false;
+	  //valec_3.scale.y=1;
+	  //CubeCamera.rotation.copy( camera.rotation );
+	  //CubeCamera.position.copy( valec_3.position );
+	  if(valec_1 != null){
+	  CubeCamera.position.x=valec_1.position.x+0.4;
+	  CubeCamera.position.z=valec_1.position.z;
+	  CubeCamera.position.y=valec_1.position.y;
+	  }
+	  
+	  if(valec_2 != null){
+	  CubeCamera2.position.x=valec_2.position.x+0.25;
+	  CubeCamera2.position.z=valec_2.position.z+0.25;
+	  CubeCamera2.position.y=valec_2.position.y+0.5;
+	  }
+	  
+	  if(valec_3 != null){
+	  CubeCamera3.position.x=valec_3.position.x+0.5;
+	  CubeCamera3.position.z=valec_3.position.z;
+	  CubeCamera3.position.y=valec_3.position.y+0.5;
+	  }
+	  
+	  if(typeof nadrzka2 !== 'undefined') nadrzka2.visible=false;
+	  CubeCamera.updateCubeMap( renderer, scene );
+	  CubeCamera2.updateCubeMap( renderer, scene );
+	  CubeCamera3.updateCubeMap( renderer, scene );
+	  //CubeCamera.rotation.y+=1;
+	  if(valec_1 != null)valec_1.visible=true;
+	  if(valec_2 != null)valec_2.visible=true;
+	  if(valec_3 != null)valec_3.visible=true;
+	  if(typeof nadrzka2 !== 'undefined') nadrzka2.visible=true;
+	  renderer.render( scene2, camera );
+	  //renderer.clearDepth();
+	  renderer.render( scene, camera );
+	  //renderer.render( scene, Cubecamera );
+	  
+	  
+       /* rSphere.visible = false;
+        rSphereCamera.updateCubeMap(renderer, scene);
+        rSphere.visible = true;*/
+
+       //renderer.render(scene, camera);
+  
+	}
+
+	  
+	  
+	
+	
+	function vypocet(){
+	if(typeof control2!=='undefined')clearInterval(control2);
+	valec_1.scale.y=document.getElementById("h1").value/30;
+	valec_2.scale.y=document.getElementById("h2").value/30;
+	valec_3.scale.y=document.getElementById("h3").value/30;
+	}
+	
+	
+	
+	
+	function ajax2()
+	{
+		valec_1.scale.y=document.getElementById("h1").value/30;
+		valec_2.scale.y=document.getElementById("h2").value/30;
+		valec_3.scale.y=document.getElementById("h3").value/30;
+		var xmlhttp2;
+		if (window.XMLHttpRequest)
+		{// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp2=new XMLHttpRequest();
+		}
+		else
+		{// code for IE6, IE5
+			xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp2.onreadystatechange=function()
+		{ 
+			if (xmlhttp2.readyState==1) document.getElementById("testovacie_pole").innerHTML+="Loading";
+			if (xmlhttp2.readyState==4 && xmlhttp2.status==200)
+			{
+				var string2=xmlhttp2.responseText;
+				document.getElementById("testovacie_pole").innerHTML="";
+				
+				var udaje2=JSON.parse(string2);
+				console.log(udaje2);
+				
+				animation(udaje2,valec_1,valec_2,valec_3);
+			}
+		}
+		data=form();
+		xmlhttp2.open("POST","vypocet_dr.php",true);
+		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		document.getElementById("testovacie_pole").innerHTML=data;
+		xmlhttp2.send(data);
+	}
+	
+	function form()
+	{
+		var temp='q1='+dajHodnotu('q1');
+		temp+='&q2='+dajHodnotu('q2');
+		temp+='&q3='+dajHodnotu('q3');
+		temp+='&ro='+dajHodnotu('ro');
+		/*temp+='&R1='+dajHodnotu('R1');
+		temp+='&R2='+dajHodnotu('R2');
+		temp+='&R3='+dajHodnotu('R3');
+		temp+='&F1='+dajHodnotu('F1');
+		temp+='&F2='+dajHodnotu('F2');
+		temp+='&F3='+dajHodnotu('F3');*/
+		
+		temp+='&R1=8000';
+		temp+='&R2=8000';
+		temp+='&R3=8000';
+		temp+='&F1=0.00785';
+		temp+='&F2=0.00785';
+		temp+='&F3=0.00785';
+		
+		temp+='&h1='+dajHodnotu('h1');
+		temp+='&h2='+dajHodnotu('h2');
+		temp+='&h3='+dajHodnotu('h3');
+		temp+='&st='+dajHodnotu('st');
+		temp+='&nv='+dajHodnotu('nv');
+		if(document.getElementById("checkbox").checked)
+		{
+			temp+='&checked=true';
+			temp+='&ref='+dajHodnotu('ref');
+			temp+='&P='+dajHodnotu('P');
+			temp+='&Ti='+dajHodnotu('Ti');
+			temp+='&Td='+dajHodnotu('Td');
+		}
+		return temp;
+	}
+	
+	function dajHodnotu(str)
+	{
+		return document.getElementById(str).value;
+	}
+	function animation(pole,objekt1,objekt2,objekt3)
+	{
+		control2=setInterval(function(){animTimer(pole,objekt1,objekt2,objekt3)},40);
+		j=0;
+	}
+	
+	
+	function animTimer(pole,objekt1,objekt2,objekt3)
+	{
+		if (j<pole[1].length){
+			objekt1.scale.y=(pole[1][j]/30);
+			objekt2.scale.y=(pole[2][j]/30);
+			objekt3.scale.y=(pole[3][j]/30);
+		}
+		else clearInterval(control2);
+		j++;
+	}
+		
+  </script>
+	<div id="vys">
+	<button type="button" onclick=vypocet() >Zmeň</button>
+
+	                
+                <!--<p><label class="field">Parameter:</label><input class="textbox" id="p" name="p" value="1" step="0.01"></p>-->
+                <p><label class="field">Prítok 1:</label><input class="textbox" id="q1" name="q1" value="0" type="number" ></p>
+				<p><label class="field">Prítok 2:</label><input class="textbox" id="q2" name="q2" value="0" type="number" ></p>
+				<p><label class="field">Prítok 3:</label><input class="textbox" id="q3" name="q3" value="0" type="number" ></p>
+                <p><label class="field">Hustota:</label><input class="textbox" id="ro" name="ro" value="1" type="number" ></p>
+                <!--<p><label class="field">Hydraulický odpor 1:</label><input class="textbox" id="R1" name="R1" value="8000" type="number" ></p>
+                <p><label class="field">Hydraulický odpor 2:</label><input class="textbox" id="R2" name="R2" value="8000" type="number" ></p>
+				<p><label class="field">Hydraulický odpor 3:</label><input class="textbox" id="R3" name="R3" value="8000" type="number" ></p>
+                <p><label class="field">Prierez valca 1:</label><input class="textbox" id="F1" name="F1" value="0.00785" type="number" ></p>
+                <p><label class="field">Prierez valca 2:</label><input class="textbox" id="F2" name="F2" value="0.00785" type="number" ></p>
+				<p><label class="field">Prierez valca 3:</label><input class="textbox" id="F3" name="F3" value="0.00785" type="number" ></p>-->
+				<p><label class="field">Počiatočná hladina valca 1:</label><input class="textbox" id="h1" name="h1" value="5" type="number" ></p>
+                <p><label class="field">Počiatočná hladina valca 2:</label><input class="textbox" id="h2" name="h2" value="5" type="number" ></p>
+				<p><label class="field">Počiatočná hladina valca 3:</label><input class="textbox" id="h3" name="h3" value="5" type="number" ></p>
+                <p><label class="field">Simulačný čas:</label><input class="textbox" id="st" name="st" value="20" type="number" ></p>
+                <p><label class="field">Počet hodnôt:</label><input class="textbox" id="nv" name="nv" value="200" type="number" ></p>
+				<p><label class="field">With/Without Controller:</label><input type="checkbox" id="checkbox" name="ifController" checked="checked"></p>
+                <p><label class="field">P:</label><input class="textbox" id="P" name="P" value="35" type="number" min="0" max="500" step="0.01"></p>
+                <p><label class="field">Ti:</label><input class="textbox" id="Ti" name="Ti" value="1.5" type="number" min="0" max="500" step="0.01"></p>
+                <p><label class="field">Td:</label><input class="textbox" id="Td" name="Td" value="1" type="number" min="0" max="500" step="0.01"></p>
+                <p><label class="field">Požadovaná hladina 1:</label><input class="textbox" id="ref" name="ref" value="10" type="number" min="0" max="28" step="0.01"></p>
+				<button type="button" onclick=ajax2() >Simulácia</button>
+            <!--    <div class="Con">
+                <p><label class="field">P:</label><input class="textbox" id="P" name="P" value="35" type="number" min="0" max="500" step="0.01"></p>
+                <p><label class="field">Ti:</label><input class="textbox" id="Ti" name="Ti" value="1.5" type="number" min="0" max="500" step="0.01"></p>
+                <p><label class="field">Td:</label><input class="textbox" id="Td" name="Td" value="1" type="number" min="0" max="500" step="0.01"></p>
+                <p><label class="field">Set point:</label><input class="textbox" id="ref" name="ref" value="8" type="number" min="0" max="50" step="0.01"></p>
+                </div> -->
+
+	</div>
+  
+        
+   
+	
+	<div id="testovacie_pole">
+	
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Blender MTL File: 'sustavablender8.blend'
+# Material Count: 1
+
+newmtl Sklo2
+Ns 135.294118
+Ka 0.000000 0.000000 0.000000
+Kd 0.287071 0.287071 0.287071
+Ks 0.252248 0.241839 0.212134
+Ni 1.560000
+d 0.600000
+illum 2

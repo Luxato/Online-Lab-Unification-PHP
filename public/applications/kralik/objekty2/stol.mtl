@@ -1,0 +1,12 @@
+# Blender MTL File: 'sustavablender10.blend'
+# Material Count: 1
+
+newmtl Drevo
+Ns 17.647059
+Ka 0.000000 0.000000 0.000000
+Kd 0.287292 0.300000 0.290439
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\\xampp\\htdocs\\subory\\nove\\textury\\wood-texture.jpg

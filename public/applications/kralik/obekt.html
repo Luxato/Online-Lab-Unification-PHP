@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Pragma" content="no-cache"> 
+  <meta http-equiv="expires" content="0">
+  <title>WebGL 3D model viewer using three.js</title>
+  <script src="kniznice/three.js"></script>
+  <script src="kniznice/TrackballControls.js"></script>
+  <script src="kniznice/OrbitControls.js"></script>
+  <script src="kniznice/OBJLoader.js"></script>
+  <script src="kniznice/Detector.js"></script>
+  <script src="kniznice/MTLLoader.js"></script>
+  <script src="kniznice/OBJMTLLoader.js"></script>
+  <script src="kniznice/jquery.min.js"></script>
+</head>
+<body>
+	<style>
+	#container{
+		height:500px;
+		visibility:visible;
+		z-index:-2;
+	}
+	
+	#myForm{
+		position:absolute;
+		top:30px;
+		left:1000px;
+	}
+	
+	#vys{
+		z-index:1;
+		position:absolute;
+		top:30px;
+		left:100px;
+		color:white;
+		}
+		
+	#testovacie_pole{
+		z-index:1;
+		position:fixed;
+		top:400px;
+		left:100px;
+		color:white;
+		}
+	
+	
+	
+	
+	</style>
+  <script>
+  
+
+    // This is where our model viewer code goes.
+	//var container;
+	var camera,CubeCamera, scene, renderer;
+	var mouseX = 0, mouseY = 0;
+	var dimx=window.innerWidth;
+	var dimy=window.innerHeight;
+	 
+	var windowHalfX = window.innerWidth / 2;
+	var windowHalfY = window.innerHeight / 2;
+	var korekcia_vysky=-0.8;
+	var valec_3;
+	var tiene=false;
+	var valec_1=null;
+	var valec_2=null;
+	var valec_3=null;
+	init();
+	animate();
+	
+	 
+	/*** Initialize ***/
+	function init() {
+	  // This <div> will host the canvas for our scene.
+	  //var inputfil=document.getElementById("vyska");
+	  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+	  renderer.sortObjects = false;
+	  renderer.autoClear = false;
+	  
+	  
+	  
+	 
+	  
+	  
+	  
+	  
+	  
+	  renderer.shadowMapEnabled = tiene;
+	  //renderer.shadowMapAutoUpdate = false;
+	  //renderer.clearTarget( light.shadowMap );
+	  renderer.shadowMapType = THREE.PCFSoftShadowMap;
+	 // renderer.shadowMapCullFrontFaces = false;
+	  
+	  // This is the scene we will add all objects to.
+	  scene = new THREE.Scene();
+	  scene2 = new THREE.Scene();
+	  scene3 = new THREE.Scene();
+	  //scene.height=300;
+	  
+	  var rura=true;
+	  var valec_s=true;
+	  var container = document.createElement( 'div' );
+	 // container=document.getElementById("container");
+	  container.id="container";
+	  document.body.appendChild( container );
+	  // You can adjust the cameras distance and set the FOV to something
+	  // different than 45°. The last two values set the clippling plane.
+	  camera = new THREE.PerspectiveCamera( 85, dimx / dimy, 0.1, 2000 );
+	  CubeCamera = new THREE.CubeCamera( 0.01, 500, 512 );
+	  CubeCamera2 = new THREE.CubeCamera( 0.01, 500, 512 );
+	  CubeCamera3 = new THREE.CubeCamera( 0.01, 500, 1024 );
+	  //CubeCamera = new THREE.PerspectiveCamera( 15, dimx / dimy, 0.1, 2000 );
+	  scene.add(CubeCamera);
+	  scene.add(CubeCamera2);
+	  scene.add(CubeCamera3);
+	  
+	  CubeCamera.renderTarget.mapping = new THREE.CubeRefractionMapping();
+	  CubeCamera2.renderTarget.mapping = new THREE.CubeRefractionMapping();
+	  CubeCamera3.renderTarget.mapping = new THREE.CubeRefractionMapping();
+	  var cubeMaterial = new THREE.MeshBasicMaterial( { 
+						 color: 0xffffff, 
+						 envMap: CubeCamera.renderTarget, 
+						 refractionRatio: 1.1 ,
+						 specular: 0x000000,
+						 opacity:1,
+						 reflectivity:1 
+						 });
+						 
+	  var cubeMaterial2 = new THREE.MeshPhongMaterial( { 
+						 color: 0xffffff, 
+						 envMap: CubeCamera2.renderTarget, 
+						 refractionRatio: 1.1 ,
+						 specular: 0x000000,
+						 opacity:1,
+						 reflectivity:1
+						 });
+						 
+	  var cubeMaterial3 = new THREE.MeshPhongMaterial( { 
+						 color: 0xffffff, 
+						 envMap: CubeCamera.renderTarget, 
+						 refractionRatio: 1.1 ,
+						 specular: 0x000000,
+						 opacity:1,
+						 reflectivity:1 
+						 });
+						 
+	  var material_gray = new THREE.MeshLambertMaterial( { 
+						 color: 0x050505, 
+						 reflectivity:0.97 
+						 });
+						 
+	  var sky = new THREE.MeshBasicMaterial( {color:0xa0c0d0 } );
+	  //var cubeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, ambient: 0xffffff, envMap: CubeCamera.renderTarget } );
+	  //var cubeMaterial = new THREE.MeshBasicMaterial( { envMap: CubeCamera.renderTarget, refractionRatio: 1 } );
+	  camera.position.x = 10;
+	  //camera.position.set(0, 3, 1.50);
+	  //camera.lookAt(new THREE.Vector3(0,0,0));
+
+	  
+	 
+	  // These variables set the camera behaviour and sensitivity.
+	  
+	  controls = new THREE.OrbitControls (camera ,renderer.domElement);
+	  //controls.addEventListener( 'change', render );
+	  //controls = new THREE.TrackballControls( camera );
+	  controls.rotateSpeed = 5.0;
+	  controls.zoomSpeed = 5;
+	  controls.panSpeed = 2;
+	  controls.noZoom = false;
+	  controls.noPan = false;
+	  controls.staticMoving = true;
+	  controls.dynamicDampingFactor = 0.3;
+	 
+	  
+	 
+	  // You can set the color of the ambient light to any value.
+	  // I have chose a completely white light because I want to paint
+	  // all the shading into my texture. You propably want something darker.
+	  var ambient = new THREE.AmbientLight( 0xa0a0a0 );
+	  scene.add( ambient );
+	  
+
+	  var directionalLight = new THREE.SpotLight( 0xffffff,1 );
+			directionalLight.position.set( 10, 10, -3 );
+			directionalLight.castShadow = true;
+			directionalLight.shadowDarkness = 0.7;
+			//directionalLight.shadowCameraVisible = true;
+			directionalLight.shadowCameraNear = 2;
+			directionalLight.shadowCameraFar = 50;
+			directionalLight.shadowMapWidth = 4096; // default is 512
+			directionalLight.shadowMapHeight = 4096; // default is 512
+			scene.add( directionalLight );
+			
+	 /* var directionalLight2 = new THREE.DirectionalLight( 0xffffff,1 );
+			directionalLight2.position.set( -100, 100, 0 );
+			scene.add( directionalLight2 );*/
+			
+	  var directionalLight3 = new THREE.SpotLight( 0xffffff,1 );
+			directionalLight3.position.set( 10, 10, -3 );
+			scene2.add( directionalLight3 );
+			
+	  var hemLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1);
+			scene.add(hemLight);
+	
+	  var ambLight = new THREE.AmbientLight(0xffffff);
+			scene.add(ambLight);
+			
+	  var hemLight2 = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.5);
+			scene2.add(hemLight2);
+	 
+	  // Uncomment these lines to create a simple directional light.
+	  // var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+	  // directionalLight.position.set( 0, 0, 1 ).normalize();
+	  // scene.add( directionalLight );
+	 
+	  /*** Texture Loading ***/
+	 /* var manager = new THREE.LoadingManager();
+	  manager.onProgress = function ( item, loaded, total ) {
+		console.log( item, loaded, total );
+	  };*/
+	 // var texture = new THREE.Texture();
+	  //var loader = new THREE.ImageLoader( manager );
+	 
+	  // You can set the texture properties in this function. 
+	  // The string has to be the path to your texture file.
+	 /* loader.load( 'cervena.png', function ( image ) {
+		texture.image = image;
+		texture.needsUpdate = false;
+		// I wanted a nearest neighbour filtering for my low-poly character,
+		// so that every pixel is crips and sharp. You can delete this lines
+		// if have a larger texture and want a smooth linear filter.
+		texture.magFilter = THREE.NearestFilter;
+		texture.minFilter = THREE.NearestMipMapLinearFilter;
+	  } );*/
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	  /*** OBJ Loading ***/
+	  var loader = new THREE.OBJMTLLoader();
+	  
+	  var loader2 = new THREE.OBJLoader();
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  loader2.load( 'objekty2/obloha.obj', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.material = sky;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		//object.position.z += 2.09376;
+		object.position.y += korekcia_vysky;
+		//object.castShadow = true;
+	    //object.receiveShadow = false;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  loader.load( 'objekty/plc s.obj','objekty/plc s.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.22609+0.18, -0.75982, 0.55816);
+		object.position.y += korekcia_vysky;
+		object.castShadow = true;
+	    object.receiveShadow = false;
+		scene.add( object );
+	  });
+	  
+	  
+	  /*loader.load( 'objekty/plc s.obj','objekty/plc s.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.22609, -0.75982, 1.47709);
+		scene.add( object );
+	  });*/
+	  
+	  
+	  loader.load( 'objekty/plc s.obj','objekty/plc s.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.22609+0.18, -0.75982, -0.34272);
+		object.position.y += korekcia_vysky;
+		object.castShadow = true;
+	    object.receiveShadow = false;
+		scene.add( object );
+	  });
+	  
+	  loader.load( 'objekty/plc s.obj','objekty/plc s.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(-0.31285, 0.32782, 0.29894);
+		object.rotation.y=-45*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/plc s.obj','objekty/plc s.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(-0.36610, 0.32782, 1.22701);
+		object.rotation.y=-45*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/plc s.obj','objekty/plc s.mtl', function ( event ) {
+		var object = event;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(-0.31285, 0.32782, -0.54546);
+		object.rotation.y=-45*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/stena.obj','objekty/stena.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.y += korekcia_vysky;
+		//object.position.y -= 2.5;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  
+	  //rurky strieborne//////////////////////////////////////////////////////////////////////////////
+	 
+	 /*loader.load( 'objekty/rurky strieborne.obj','objekty/rurky strieborne.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  /*if ( child instanceof THREE.Mesh ) {
+			child.material.map = texture;
+		  }*/
+		/*} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.y -= 2.5;
+		scene.add( object );
+	  });*/
+	  
+	  
+	  // uchytky////////////////////////////////////////////////////////////////////////////////////////////////
+	  
+	  //stredna dolna
+	  loader.load( 'objekty/uchytka_low.obj','objekty/uchytka_low.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.y -= 2.5;
+		object.position.y += korekcia_vysky;
+		object.castShadow = true;
+		scene.add( object );
+	  });
+	  
+	  
+	  //lava dolna
+	  loader.load( 'objekty/uchytka sd.obj','objekty/uchytka sd.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			//child.material.map = texture;
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.z -= 1.01;
+		object.position.y += korekcia_vysky;
+		object.castShadow = true;
+		scene.add( object );
+	  });
+	  
+	  
+	  //prava dolna
+	  loader.load( 'objekty/uchytka sd.obj','objekty/uchytka sd.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.z += 1.01;
+		object.position.y += korekcia_vysky;
+		object.castShadow = true;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  //stredna horna
+	  loader.load( 'objekty/uchytka sd.obj','objekty/uchytka sd.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			//child.material.map = texture;
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.y -= 2.5;
+		object.position.y += 2;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  //lava horna
+	  loader.load( 'objekty/uchytka sd.obj','objekty/uchytka sd.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.z -= 1.01;
+		object.position.y += 2;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  //prava horna
+	  loader.load( 'objekty/uchytka sd.obj','objekty/uchytka sd.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.z += 1.01;
+		object.position.y += 2;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+
+	  
+	  
+	  
+	  
+	  
+	  loader.load( 'objekty/zlatarura l.obj','objekty/zlatarura l.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.30800+0.18, -1.22272, 0.54);
+		//object.position.y -= 2.5;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/zlatarura l.obj','objekty/zlatarura l.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.30800+0.18, -1.22272, -0.33662);
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/zlatarura l.obj','objekty/zlatarura l.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(-0.35398, -0.12329, 1.22187);
+		object.rotation.y=-140*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/zlatarura l.obj','objekty/zlatarura l.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(-0.3271, -0.116, 0.26880);
+		object.rotation.y=-150*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/zlatarura l.obj','objekty/zlatarura l.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(-0.29978, -0.14329, -0.54002);
+		object.rotation.y=-129*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/zlatarura s.obj','objekty/zlatarura s.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.x += 0.18;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/zlaty_ohyb.obj','objekty/zlaty_ohyb.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(-0.55463, -0.18532, 0.98421);
+		object.rotation.y=130*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/zlaty_ohyb.obj','objekty/zlaty_ohyb.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(-0.47752, -0.18532, 0.00186);
+		object.rotation.y=119*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/zlaty_ohyb.obj','objekty/zlaty_ohyb.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(-0.53916, -0.203, -0.73545);
+		object.rotation.y=141*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/valec velky.obj','objekty/valec velky.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.y -= 2.5;
+		object.position.y += korekcia_vysky;
+		object.castShadow = true;
+		object.receiveShadow = true;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  
+	  ////////////////////////////koncovky/////////////////////////
+	  
+	  
+	  
+	  
+	  
+	  
+	  loader.load( 'objekty/koniec_str_m.obj','objekty/koniec_str_m.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.48364, -0.91977, 0.98440);
+		//object.rotation.set(0*Math.PI/180, 56*Math.PI/180, -90*Math.PI/180);
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  
+	  loader.load( 'objekty/koniec_str_m.obj','objekty/koniec_str_m.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.47747, -0.91977, -0.77267);
+		//object.rotation.set(0*Math.PI/180, 56*Math.PI/180, -90*Math.PI/180);
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  loader.load( 'objekty/koniec_str_v.obj','objekty/koniec_str_v.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.47709, -0.94192, 0.10168);
+		object.rotation.set(180*Math.PI/180, 0*Math.PI/180, 0*Math.PI/180);
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	   loader.load( 'objekty/koniec_str_v.obj','objekty/koniec_str_v.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.49427, -0.15438, 0.93438);
+		//object.rotation.set(180*Math.PI/180, 0*Math.PI/180, 0*Math.PI/180);
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/koniec_str_v.obj','objekty/koniec_str_v.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.53763, -0.15438, -0.01645);
+		//object.rotation.set(180*Math.PI/180, 0*Math.PI/180, 0*Math.PI/180);
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader.load( 'objekty/koniec_str_v.obj','objekty/koniec_str_v.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.53028, -0.15438, -1.03264);
+		//object.rotation.set(180*Math.PI/180, 0*Math.PI/180, 0*Math.PI/180);
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  
+	  
+	  
+	  //pri: valec lavy stredny pravy
+	  loader.load( 'objekty/rurka_nova.obj','objekty/rurka_nova.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = rura;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.31193, -0.29351, 1.23977);
+		object.rotation.set(0*Math.PI/180, 40*Math.PI/180, -90*Math.PI/180);
+		//object.rotation.x=90*Math.PI/180;
+		//object.rotation.y=90*Math.PI/180;
+		//object.rotation.z=90*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	   loader.load( 'objekty/rurka_nova.obj','objekty/rurka_nova.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = rura;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.27723, -0.29351, 0.24182);
+		object.rotation.set(0*Math.PI/180, 56*Math.PI/180, -90*Math.PI/180);
+		//object.position.y -= 2.5;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	   loader.load( 'objekty/rurka_nova.obj','objekty/rurka_nova.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = rura;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.27723, -0.29351, -0.75716);
+		object.rotation.set(0*Math.PI/180, 56*Math.PI/180, -90*Math.PI/180);
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  //////////////////////////////////
+	  
+	  
+	    loader.load( 'objekty/rurka_nova.obj','objekty/rurka_nova.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = rura;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.05106, -0.178, 1.44722);
+		//object.rotation.set(90*Math.PI/180, 180*Math.PI/180, 19*Math.PI/180);
+		object.rotation.x=75*Math.PI/180;
+		object.rotation.y=-15*Math.PI/180;
+		object.rotation.z=47*Math.PI/180;
+		//object.rotation.x=1*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	    loader.load( 'objekty/rurka_nova.obj','objekty/rurka_nova.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = rura;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.12606, -0.17, -0.40384);
+		//object.rotation.set(0*Math.PI/180, 56*Math.PI/180, -90*Math.PI/180);
+		object.rotation.x=83*Math.PI/180;
+		object.rotation.y=-7*Math.PI/180;
+		object.rotation.z=39*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	    loader.load( 'objekty/rurka_nova.obj','objekty/rurka_nova.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = rura;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.033, -0.132, 0.572);
+		//object.rotation.set(0*Math.PI/180, 56*Math.PI/180, -90*Math.PI/180);
+		object.rotation.x=83*Math.PI/180;
+		object.rotation.y=-7*Math.PI/180;
+		object.rotation.z=61*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	    loader.load( 'objekty/rurka_nova.obj','objekty/rurka_nova.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = rura;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.30655+0.18, -1.05, 0.98370);
+		//object.rotation.set(0*Math.PI/180, 56*Math.PI/180, -90*Math.PI/180);
+		object.rotation.x=180*Math.PI/180;
+		object.rotation.y=90*Math.PI/180;
+		object.rotation.z=0*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		
+		scene.add( object );
+	  });
+	  
+	  
+	    loader.load( 'objekty/rurka_nova.obj','objekty/rurka_nova.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = rura;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.set(0.30038+0.18, -1.21749, -0.60173);
+		//object.rotation.set(0*Math.PI/180, 56*Math.PI/180, -90*Math.PI/180);
+		object.rotation.x=0*Math.PI/180;
+		object.rotation.y=90*Math.PI/180;
+		object.rotation.z=-90*Math.PI/180;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  loader.load( 'objekty/cierny_valec.obj','objekty/cierny_valec.mtl', function ( event ) {
+		var object = event;
+
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.y -= 2.5;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  loader.load( 'objekty/cierny_valec.obj','objekty/cierny_valec.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.x -= 0.3;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  
+	  
+	  
+	  
+	 
+	 
+	 
+	 
+	 loader.load( 'objekty/hadicky.obj','objekty/hadicky.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = true;
+			child.receiveShadow = true;
+		  }
+		} );
+		//object.material.depthWrite=false;
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  
+	  	  //valce
+	  
+	  //stredny
+	  loader.load( 'objekty/valec stredny.obj','objekty/valec stredny.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = valec_s;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		//object.position.y -= 2.5;
+		object.position.y += korekcia_vysky;
+		object.castShadow = true;
+		scene.add( object );
+	  });
+	  
+	  //pravy
+	  loader.load( 'objekty/valec stredny.obj','objekty/valec stredny.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = valec_s;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.z -= 1.01;
+		object.position.y += korekcia_vysky;
+		scene.add( object );
+	  });
+	  
+	  //lavy
+	  loader.load( 'objekty/valec stredny.obj','objekty/valec stredny.mtl', function ( event ) {
+		var object = event;
+		object.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.castShadow = valec_s;
+			child.receiveShadow = true;
+		  }
+		} );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.position.z += 1.01;
+		object.position.y += korekcia_vysky;
+		object.castShadow = true;
+		scene.add( object );
+	  });
+	  
+	  
+	  loader2.load( 'objekty/valec.obj', function ( event ) {
+		valec_1 = event;
+		valec_1.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.material = cubeMaterial;
+		  }
+		} );
+
+	 
+		// My initial model was too small, so I scaled it upwards.
+		//object.scale = new THREE.Vector3( 25, 25, 25 );
+		valec_1.scale.y=0.7;
+		valec_1.position.z += 1.01;
+		valec_1.position.y += korekcia_vysky;
+		CubeCamera.position=valec_1.position;
+		scene2.add( valec_1 );
+	  });
+	  
+	  
+	  
+	  loader2.load( 'objekty/valec.obj', function ( event ) {
+		valec_2 = event;
+		valec_2.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			child.material = cubeMaterial2;
+		  }
+		} );
+
+	 
+		// My initial model was too small, so I scaled it upwards.
+		//object.scale = new THREE.Vector3( 25, 25, 25 );
+		valec_2.scale.y=0.5;
+		//object.position.y -= 1.01;
+		valec_2.position.y += korekcia_vysky;
+		CubeCamera2.position=valec_2.position;
+		scene2.add( valec_2 );
+	  });
+	  
+	  
+	  loader2.load( 'objekty/valec.obj', function ( event ) {
+		valec_3 = event;
+		valec_3.traverse( function ( child ) {
+		  if ( child instanceof THREE.Mesh ) {
+			//child.material.map = texture;
+			child.material = cubeMaterial3;
+			//CubeCamera.position=child.position;
+		  }
+		} );
+
+		
+		valec_3.scale.y=0.2;	    
+		valec_3.position.z -= 1.01;
+		valec_3.position.y += korekcia_vysky;
+		valec_3.castShadow = true;
+		valec_3.receiveShadow = true;
+		CubeCamera3.position=valec_3.position;
+		scene2.add( valec_3 );
+	  });
+		// drawRefractingObject: function() {
+
+		// create additional camera
+		/*this.rSphereCamera = new THREE.CubeCamera(0.1, 1000, 1000);
+		this.scene.add(this.rSphereCamera);
+		this.rSphereCamera.renderTarget.mapping = new THREE.CubeRefractionMapping();
+
+		// create refracting material and spherical mesh
+		var rMaterial = new THREE.MeshBasicMaterial({ 
+			color: 0xffffff, 
+			envMap: this.rSphereCamera.renderTarget, 
+			refractionRatio: 1, 
+			reflectivity: 0.8
+		});
+
+		this.rSphere = new THREE.Mesh( new THREE.SphereGeometry(0.5, 32, 32), rMaterial);
+		this.rSphere.position.set(2, 0, 0);
+		this.rSphereCamera.position = this.rSphere.position;
+		this.scene.add(this.rSphere);*/
+		//}
+
+	 
+	  // We set the renderer to the size of the window and
+	  // append a canvas to our HTML page.
+	  
+	  renderer.setSize( dimx, dimy );
+	  //renderer.setSize( 700, 400 );
+	  renderer.setClearColor( 0x303030, 1);
+	  container.appendChild( renderer.domElement );
+	}
+	
+	
+	  
+	 
+	/*** The Loop ***/
+	function animate() {
+	  // This function calls itself on every frame. You can for example change
+	  // the objects rotation on every call to create a turntable animation.
+	  requestAnimationFrame( animate );
+	 
+	  // On every frame we need to calculate the new camera position
+	  // and have it look exactly at the center of our scene.
+	  controls.update();
+	  //camera.lookAt(scene.position);
+	  //renderer.render(scene, camera);
+	  render();
+	  }
+	  
+	function render() 
+	{
+		/*// move the CubeCamera to the position of the object
+		//    that has a reflective surface, "take a picture" in each direction
+		//    and apply it to the surface.
+		// need to hide surface before and after so that it does not
+		//    "get in the way" of the camera
+		mirrorCube.visible = false;
+		mirrorCubeCamera.updateCubeMap( renderer, scene );
+		mirrorCube.visible = true;
+		mirrorSphere.visible = false;
+		mirrorSphereCamera.updateCubeMap( renderer, scene );
+		mirrorSphere.visible = true;
+		
+		renderer.render( scene, camera );
+	}*/
+	  
+	  
+	  renderer.clear();
+	  /*renderer.render( scene3, camera );
+	  renderer.clearDepth();*/
+	  if(valec_1 != null)valec_1.visible=false;
+	  if(valec_2 != null)valec_2.visible=false;
+	  if(valec_3 != null)valec_3.visible=false;
+	  //valec_3.scale.y=1;
+	  //CubeCamera.rotation.copy( camera.rotation );
+	  //CubeCamera.position.copy( valec_3.position );
+	  if(valec_1 != null){
+	  CubeCamera.position.x=valec_1.position.x+0.5;
+	  CubeCamera.position.z=valec_1.position.z;
+	  CubeCamera.position.y=valec_1.position.y+0.5;
+	  }
+	  
+	  if(valec_2 != null){
+	  CubeCamera2.position.x=valec_2.position.x+0.5;
+	  CubeCamera2.position.z=valec_2.position.z;
+	  CubeCamera2.position.y=valec_2.position.y+0.5;
+	  }
+	  
+	  if(valec_3 != null){
+	  CubeCamera3.position.x=valec_3.position.x+0.5;
+	  CubeCamera3.position.z=valec_3.position.z;
+	  CubeCamera3.position.y=valec_3.position.y+0.5;
+	  }
+	  
+	  CubeCamera.updateCubeMap( renderer, scene );
+	  CubeCamera2.updateCubeMap( renderer, scene );
+	  CubeCamera3.updateCubeMap( renderer, scene );
+	  //CubeCamera.rotation.y+=1;
+	  if(valec_1 != null)valec_1.visible=true;
+	  if(valec_2 != null)valec_2.visible=true;
+	  if(valec_3 != null)valec_3.visible=true;
+	  renderer.render( scene2, camera );
+	  //renderer.clearDepth();
+	  renderer.render( scene, camera );
+	  //renderer.render( scene, Cubecamera );
+	  
+	  
+       /* rSphere.visible = false;
+        rSphereCamera.updateCubeMap(renderer, scene);
+        rSphere.visible = true;*/
+
+       //renderer.render(scene, camera);
+  
+	}
+
+	  
+	  
+	
+	
+	function vypocet(){
+	if(typeof control2!=='undefined')clearInterval(control2);
+	valec_1.scale.y=document.getElementById("h1").value/30;
+	valec_2.scale.y=document.getElementById("h2").value/30;
+	valec_3.scale.y=document.getElementById("h3").value/30;
+	}
+	
+	
+	
+	
+	function ajax2()
+	{
+		valec_1.scale.y=document.getElementById("h1").value/30;
+		valec_2.scale.y=document.getElementById("h2").value/30;
+		valec_3.scale.y=document.getElementById("h3").value/30;
+		var xmlhttp2;
+		if (window.XMLHttpRequest)
+		{// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp2=new XMLHttpRequest();
+		}
+		else
+		{// code for IE6, IE5
+			xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp2.onreadystatechange=function()
+		{ 
+			if (xmlhttp2.readyState==1) document.getElementById("testovacie_pole").innerHTML+="Loading";
+			if (xmlhttp2.readyState==4 && xmlhttp2.status==200)
+			{
+				var string2=xmlhttp2.responseText;
+				document.getElementById("testovacie_pole").innerHTML="";
+				
+				var udaje2=JSON.parse(string2);
+				console.log(udaje2);
+				
+				animation(udaje2,valec_1,valec_2,valec_3);
+			}
+		}
+		data=form();
+		xmlhttp2.open("POST","vypocet_dr.php",true);
+		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		document.getElementById("testovacie_pole").innerHTML=data;
+		xmlhttp2.send(data);
+	}
+	
+	function form()
+	{
+		var temp='q1='+dajHodnotu('q1');
+		temp+='&q2='+dajHodnotu('q2');
+		temp+='&q3='+dajHodnotu('q3');
+		temp+='&ro='+dajHodnotu('ro');
+		temp+='&R1='+dajHodnotu('R1');
+		temp+='&R2='+dajHodnotu('R2');
+		temp+='&R3='+dajHodnotu('R3');
+		temp+='&F1='+dajHodnotu('F1');
+		temp+='&F2='+dajHodnotu('F2');
+		temp+='&F3='+dajHodnotu('F3');
+		temp+='&h1='+dajHodnotu('h1');
+		temp+='&h2='+dajHodnotu('h2');
+		temp+='&h3='+dajHodnotu('h3');
+		temp+='&st='+dajHodnotu('st');
+		temp+='&nv='+dajHodnotu('nv');
+		if(document.getElementById("checkbox").checked)
+		{
+			temp+='&checked=true';
+			temp+='&ref='+dajHodnotu('ref');
+			temp+='&P='+dajHodnotu('P');
+			temp+='&Ti='+dajHodnotu('Ti');
+			temp+='&Td='+dajHodnotu('Td');
+		}
+		return temp;
+	}
+	
+	function dajHodnotu(str)
+	{
+		return document.getElementById(str).value;
+	}
+	function animation(pole,objekt1,objekt2,objekt3)
+	{
+		control2=setInterval(function(){animTimer(pole,objekt1,objekt2,objekt3)},40);
+		j=0;
+	}
+	
+	
+	function animTimer(pole,objekt1,objekt2,objekt3)
+	{
+		if (j<pole[1].length){
+			objekt1.scale.y=(pole[1][j]/30);
+			objekt2.scale.y=(pole[2][j]/30);
+			objekt3.scale.y=(pole[3][j]/30);
+		}
+		else clearInterval(control2);
+		j++;
+	}
+		
+  </script>
+	<div id="vys">
+	<button type="button" onclick=vypocet() >Zmeň</button>
+
+	                
+                <!--<p><label class="field">Parameter:</label><input class="textbox" id="p" name="p" value="1" step="0.01"></p>-->
+                <p><label class="field">Prítok 1:</label><input class="textbox" id="q1" name="q1" value="0.01" type="number" ></p>
+				<p><label class="field">Prítok 2:</label><input class="textbox" id="q2" name="q2" value="0.01" type="number" ></p>
+				<p><label class="field">Prítok 3:</label><input class="textbox" id="q3" name="q3" value="0.01" type="number" ></p>
+                <p><label class="field">Hustota:</label><input class="textbox" id="ro" name="ro" value="1" type="number" ></p>
+                <p><label class="field">Hydraulický odpor 1:</label><input class="textbox" id="R1" name="R1" value="8000" type="number" ></p>
+                <p><label class="field">Hydraulický odpor 2:</label><input class="textbox" id="R2" name="R2" value="8000" type="number" ></p>
+				<p><label class="field">Hydraulický odpor 3:</label><input class="textbox" id="R3" name="R3" value="8000" type="number" ></p>
+                <p><label class="field">Prierez valca 1:</label><input class="textbox" id="F1" name="F1" value="0.00785" type="number" ></p>
+                <p><label class="field">Prierez valca 2:</label><input class="textbox" id="F2" name="F2" value="0.00785" type="number" ></p>
+				<p><label class="field">Prierez valca 3:</label><input class="textbox" id="F3" name="F3" value="0.00785" type="number" ></p>
+				<p><label class="field">Počiatočná hladina valca 1:</label><input class="textbox" id="h1" name="h1" value="5" type="number" ></p>
+                <p><label class="field">Počiatočná hladina valca 2:</label><input class="textbox" id="h2" name="h2" value="5" type="number" ></p>
+				<p><label class="field">Počiatočná hladina valca 3:</label><input class="textbox" id="h3" name="h3" value="5" type="number" ></p>
+                <p><label class="field">Simulačný čas:</label><input class="textbox" id="st" name="st" value="20" type="number" ></p>
+                <p><label class="field">Počet hodnôt:</label><input class="textbox" id="nv" name="nv" value="200" type="number" ></p>
+				<p><label class="field">With/Without Controller:</label><input type="checkbox" id="checkbox" name="ifController"></p>
+                <p><label class="field">P:</label><input class="textbox" id="P" name="P" value="35" type="number" min="0" max="500" step="0.01"></p>
+                <p><label class="field">Ti:</label><input class="textbox" id="Ti" name="Ti" value="1.5" type="number" min="0" max="500" step="0.01"></p>
+                <p><label class="field">Td:</label><input class="textbox" id="Td" name="Td" value="1" type="number" min="0" max="500" step="0.01"></p>
+                <p><label class="field">Požadovaná hladina 1:</label><input class="textbox" id="ref" name="ref" value="8" type="number" min="0" max="50" step="0.01"></p>
+				<button type="button" onclick=ajax2() >Simulácia</button>
+            <!--    <div class="Con">
+                <p><label class="field">P:</label><input class="textbox" id="P" name="P" value="35" type="number" min="0" max="500" step="0.01"></p>
+                <p><label class="field">Ti:</label><input class="textbox" id="Ti" name="Ti" value="1.5" type="number" min="0" max="500" step="0.01"></p>
+                <p><label class="field">Td:</label><input class="textbox" id="Td" name="Td" value="1" type="number" min="0" max="500" step="0.01"></p>
+                <p><label class="field">Set point:</label><input class="textbox" id="ref" name="ref" value="8" type="number" min="0" max="50" step="0.01"></p>
+                </div> -->
+
+	</div>
+  
+        
+   
+	
+	<div id="testovacie_pole">
+	
+	</div>
+	
+</body>
+</html>

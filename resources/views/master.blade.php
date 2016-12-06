@@ -38,7 +38,6 @@
     <script>
         var baseUrl = "<?= URL( '/' ) ?>";
     </script>
-    @yield('custom_top_scripts')
 </head>
 <body>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -68,12 +67,11 @@
                         <li><a href="<?= $child_link->controller ?>"><?= $child_link->name ?></a></li>
 						<?php else: ?>
                         <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?= $child_link->name ?> </a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?= trans( 'navigation.' . $child_link->name) ?> </a>
                             <ul class="dropdown-menu">
                                 <?php foreach($child_link->children as $sub_child_link): ?>
                                     <li><a href="<?= $sub_child_link->controller ?>"><?= $sub_child_link->name ?></a></li>
                                 <?php endforeach; ?>
-                                    <li><a href="/hok">Hok</a></li>
                             </ul>
                         </li>
 

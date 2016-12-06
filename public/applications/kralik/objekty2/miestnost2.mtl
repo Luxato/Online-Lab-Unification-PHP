@@ -1,0 +1,32 @@
+# Blender MTL File: 'sustavablender10.blend'
+# Material Count: 3
+
+newmtl podlahaizby
+Ns 54.901961
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.156566 0.156566 0.156566
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\\xampp\\htdocs\\subory\\nove\\textury\\wood-flooring.jpg
+
+newmtl stenaizby
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\\xampp\\htdocs\\subory\\nove\\textury\\seamless_wall_texture.jpg
+
+newmtl stenaizby2
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\\xampp\\htdocs\\subory\\nove\\textury\\seamless_wall_texture.jpg
