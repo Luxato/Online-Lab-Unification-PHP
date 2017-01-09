@@ -36,8 +36,8 @@ Route::group(['middleware' => ['web']], function () {
  * {locale} - language = {en,sk}
  */
 /*Route::get('/contact', ['uses' => 'Contact@index', 'as' => 'contact']);*/
-Route::get('/hok', ['uses' => 'Mockup@index']);
-Route::get('/kralik', ['uses' => 'Mockup@index2']);
+Route::get('/3D-model-sagway-vozidla', ['uses' => 'Mockup@index']);
+Route::get('/3D-model-hydraulickej-sustavy', ['uses' => 'Mockup@index2']);
 Route::get('/test/3', ['uses' => 'Mockup@index3']);
 Route::get('/test/4', ['uses' => 'Mockup@index4']);
 

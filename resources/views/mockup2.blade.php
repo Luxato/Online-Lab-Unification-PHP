@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('title')
-    Králik
+    3D model hydraulickej sústavy
 @stop
 
 @section('content')

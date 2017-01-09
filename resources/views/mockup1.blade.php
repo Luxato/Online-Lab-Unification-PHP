@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('title')
-	Hok
+    3D model sagway vozidla
 @stop
 
 @section('custom_top_scripts')
