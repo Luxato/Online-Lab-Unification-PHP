@@ -258,9 +258,6 @@ footer .fa {
     border-radius: 0 6px 6px 6px;
 }
 
-.dropdown-submenu:hover > .dropdown-menu {
-    display: block;
-}
 
 .dropdown-submenu > a:after {
     display: block;
@@ -408,6 +405,13 @@ footer {
         background-color: inherit;
         border-top: 0 none;
     }
+
+}
+
+@media (min-width: 768px) {
+    .dropdown-submenu:hover > .dropdown-menu {
+        display: block;
+    }
 }
 
 .navbar-mini {
@@ -438,5 +442,11 @@ footer {
     }
     100% {
         top: -14px;
+    }
+}
+
+@media (min-width: 767px) {
+    .navbar-nav .dropdown-menu .caret {
+        transform: rotate(-90deg);
     }
 }
