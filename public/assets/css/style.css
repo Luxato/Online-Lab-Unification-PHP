@@ -10,15 +10,18 @@ body {
 h1, h2, h3, h4, h5, h6 {
     color: #333;
     font-weight: 400;
-    line-height: 1.5em;
+    line-height: 1.4em;
+    margin-top: 0;
 }
 
 .navbar-inverse {
     background: #fff;
 }
-
+h1 {
+    font-size: 25px;
+}
 h2 {
-    font-size: 24px;
+    font-size: 22px;
 }
 
 p {
@@ -258,7 +261,6 @@ footer .fa {
     border-radius: 0 6px 6px 6px;
 }
 
-
 .dropdown-submenu > a:after {
     display: block;
     content: " ";
@@ -300,6 +302,7 @@ footer .fa {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-top: none;
+    padding-left: 75px;
 }
 
 .breadcrumb a {
@@ -324,7 +327,7 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 100px;
+    margin-bottom: 170px;
 }
 
 footer {
