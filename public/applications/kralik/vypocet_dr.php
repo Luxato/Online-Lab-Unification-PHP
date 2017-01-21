@@ -1,5 +1,5 @@
 <?php
-	
+exit;
 	function replaceStringWithTag($tag, $content, $fileContent){
 		$newTag = '#' . $tag . '#';
 		$replaced = str_replace($newTag, $content, $fileContent);

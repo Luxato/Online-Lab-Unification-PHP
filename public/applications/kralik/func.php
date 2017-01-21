@@ -1,4 +1,5 @@
 <?php
+exit;
 function data2array($request,$response) 
 { $arr=json_decode($request, true);
   $no = count($arr[params][outputVariables]); 
