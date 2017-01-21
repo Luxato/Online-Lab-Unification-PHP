@@ -1,6 +1,7 @@
-/*html, body {
-    height: 100%;
-}*/
+.light-gray {
+    background: #eaeaea;
+}
+
 body {
     color: #666;
     font-family: 'Roboto', sans-serif;
@@ -17,9 +18,15 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-inverse {
     background: #fff;
 }
+
+.navbar-default {
+    border-color: rgba(192, 192, 192, 1);
+}
+
 h1 {
     font-size: 25px;
 }
+
 h2 {
     font-size: 22px;
 }
@@ -398,6 +405,17 @@ footer {
     background-color: #59b5fa;
 }
 
+.navbar-nav > li > .dropdown-menu, .dropdown-submenu > .dropdown-menu {
+    border-radius: 0;
+}
+.dropdown-menu>li>a {
+    padding: 9px 20px;
+}
+.dropdown-menu {
+    box-shadow: none;
+    padding: 0 0;
+}
+
 @media (max-width: 768px) {
     #login-dp {
         background-color: inherit;
@@ -439,6 +457,38 @@ footer {
     top: -14px;
 }
 
+#content code {
+    display: block;
+    padding: 10px;
+}
+
+code {
+    border-radius: 0;
+    background: transparent;
+}
+
+#content td {
+    padding: 5px 0;
+}
+
+#content tbody {
+    border: 1px solid #cacaca;
+}
+
+#content table tr:nth-child(odd) {
+    background-color: rgb(210, 210, 210);
+}
+
+#content table {
+    margin: 0 auto 15px auto;
+    border: 0;
+}
+
+#content table th {
+    padding: 10px;
+    border: 0px;
+}
+
 @keyframes logo-animation {
     0% {
         top: 0;
@@ -452,4 +502,39 @@ footer {
     .navbar-nav .dropdown-menu .caret {
         transform: rotate(-90deg);
     }
+}
+
+#gotoTop {
+    display: none;
+    z-index: 299;
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.3);
+    font-size: 20px;
+    line-height: 36px;
+    text-align: center;
+    color: #FFF;
+    top: auto;
+    left: auto;
+    right: 30px;
+    bottom: 50px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.dropdown-menu a {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+#gotoTop:hover {
+    background: #d65e16;
+    transition: background-color .2s linear;
+    -webkit-transition: background-color .2s linear;
+    -o-transition: background-color .2s linear;
+}
+
+.stretched #gotoTop {
+    bottom: 30px;
 }

@@ -154,6 +154,7 @@
                         class="fa fa-github-square" aria-hidden="true"></i></a>
         </li>
     </ul>
+    <div id="gotoTop" style="display: block;"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
 </footer>
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
@@ -186,6 +187,38 @@
             $('.nav li.open').not($(this).parents("li")).removeClass("open");
 
             return false;
+        });
+    });
+    // Go top
+    /*if($window.scrollTop() > 450) {
+        $goToTopEl.fadeIn();
+    } else {
+        $goToTopEl.fadeOut();
+    }*/
+    $(document).ready(function() {
+        var scrollHeight = $(document).height();
+        var scrollPosition = $(window).height() + $(window).scrollTop();
+        if(scrollHeight == scrollPosition) {
+            $('#gotoTop').fadeIn();
+        } else {
+            $('#gotoTop').fadeOut();
+        }
+        $(window).scroll(function() {
+            if($(this).scrollTop() > 100){
+                $('#gotoTop').fadeIn();
+            }
+            else{
+                $('#gotoTop').fadeOut();
+            }
+        });
+        $('#gotoTop').click(function() {
+            $('html, body').stop().animate({
+                scrollTop: 0
+            }, 500, function() {
+                $('#goTop').stop().animate({
+                    top: '-100px'
+                }, 500);
+            });
         });
     });
 </script>
