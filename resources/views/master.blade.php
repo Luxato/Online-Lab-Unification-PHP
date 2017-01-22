@@ -205,8 +205,9 @@
     $(document).ready(function() {
         var scrollHeight = $(document).height();
         var scrollPosition = $(window).height() + $(window).scrollTop();
-        if(scrollHeight == scrollPosition) {
-            $('#gotoTop').fadeIn();
+        if((scrollHeight == scrollPosition) && ($(window).scrollTop() != 0)) {
+           $('#gotoTop').fadeIn();
+            console.log('test');
         } else {
             $('#gotoTop').fadeOut();
         }
