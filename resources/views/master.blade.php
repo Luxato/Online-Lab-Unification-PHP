@@ -166,8 +166,15 @@
     $(window).load(function () {
         $(".se-pre-con").fadeOut("slow");
     });
+    if  (window.innerWidth <= 768) {
+        $(".navbar-fixed-top").addClass('navbar-mini');
+    }
     $(window).scroll(function () {
         var navbar = $(".navbar-fixed-top");
+        if  (window.innerWidth <= 768) {
+            navbar.addClass('navbar-mini');
+            return;
+        }
         if ($(".navbar-fixed-top").offset().top > 50) {
             navbar.addClass('navbar-mini');
         } else {
