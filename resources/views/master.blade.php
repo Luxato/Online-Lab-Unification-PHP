@@ -40,6 +40,7 @@
     </script>
 </head>
 <body>
+<div class="se-pre-con"></div>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -230,6 +231,5 @@
         });
     });
 </script>
-<div class="se-pre-con"></div>
 </body>
 </html>
