@@ -25,11 +25,9 @@
         <thead>
         <tr>
             <th>Názov</th>
-            <th>Jazyk</th>
+            <th>Jazyky</th>
             <th>URL</th>
             <th>Dátum</th>
-            <th>SEO Nadpis</th>
-            <th>SEO kľúčové slová</th>
             <th>Možnosti</th>
         </tr>
         </thead>
@@ -38,10 +36,8 @@
         <tr>
             <td><?= $page->name ?></td>
             <td><?= $page->language_title ?></td>
-            <td><?= $page->controller ?></td>
+            <td>/<?= $page->controller ?></td>
             <td><?= $page->created_at ?></td>
-            <td>-</td>
-            <td>-</td>
             <td><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <a onclick="deleteModal(<?= $page->section_id.',\''. $page->name.'\'' ?>)"><i
                             class="fa fa-trash" aria-hidden="true"></i></a></td>
         </tr>
