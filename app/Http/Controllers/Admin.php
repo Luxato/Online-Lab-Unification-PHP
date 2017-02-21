@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
 use App\Language;
+use App\Page;
+
 
 class Admin extends Controller {
 
@@ -30,9 +32,17 @@ class Admin extends Controller {
 
 	public function page_create() {
 		$data['languages'] = Language::select_all();
-
 		return view( 'administration/page_create', $data );
 	}
+/*
+
+	public function page_store(Request $request) {
+		$request->all();
+		exit;
+
+		Page::create();
+		return redirect()->route('');
+	}*/
 
 	//TODO create model for this
 	public function do_page_create() {

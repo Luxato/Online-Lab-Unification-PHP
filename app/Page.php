@@ -20,4 +20,8 @@ class Page extends Model {
 	public static function select_all() {
 		return Page::all();
 	}
+
+	public static function _create() {
+
+	}
 }

@@ -12,7 +12,7 @@
 
 @section('content')
     <div class="row">
-        <form id="new-page-form" action="<?= URL( 'admin/page_create' ) ?>" method="POST">
+        <form id="new-page-form" action="<?= URL( 'admin/_pages/' ) ?>" method="POST">
             <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
             <div class="col-lg-6">
                 <div class="form-group">
@@ -53,8 +53,9 @@
                     <textarea id="editor1" name="slovak" rows="10" cols="80">
                     </textarea>
                 </div>
-                <button type="submit" class="btn btn-block btn-success btn-lg">Vytvoriť</button>
             </div>
+            <button id="addLanguage" class="btn btn-info btn-lg" style="width: 49%; float: left; margin-right: 10px;">Pridať jazykovú mutáciu</button>
+            <button type="submit" class="btn btn-success btn-lg" style="width: 49%;">Vytvoriť</button>
         </form>
     </div>
 @stop
@@ -63,6 +64,7 @@
     <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/ckeditor/ckeditor.min.js"></script>
     <script>
         CKEDITOR.replace('editor1');
+        /*CKEDITOR.replace('editor2');*/
         $(function () {
             $('#nav-navigacia').addClass('active');
             // TODO REMOVE ľíéšášľťéľížýľš AND !@#$%$^%&&&&&&&&&*)/*-+

@@ -1,3 +1,10 @@
+h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 23px;
+    text-align: center;
+}
+
 .skin-blue .main-header .logo {
     background-color: #DD4B39 !important;
 }
@@ -36,6 +43,28 @@
     pointer-events: none;
     cursor: not-allowed !important;
 }
+
 .disabled:hover {
     opacity: 0.5;
+}
+
+hr {
+    background-color: slategray;
+    height: 2px;
+    border: 0;
+    margin: 0;
+}
+
+.another-lang {
+    border-top: 1px solid black;
+    display: inline-block;
+}
+
+.cancelLang {
+    color: #d90b0b;
+    font-size: 30px;
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+
 }
