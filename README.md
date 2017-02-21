@@ -19,3 +19,7 @@ TODO :
 3# github.com/fontenele/bootstrap-navbar-dropdowns
 
 4# github.com/VincentGarreau/particles.js
+
+5# https://laravelcollective.com/docs/5.0/html#installation
+...
+wysiwyg/ckeditor, jquery nestable 
