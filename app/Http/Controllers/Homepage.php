@@ -25,15 +25,13 @@ class Homepage extends Controller {
 		$data['navigation'] = $this->navigation;
 		$data['section_id'] = $this->section_id;
 		$page               = DB::table( 'navigation' )->where( 'controller', $slug )->get()->toArray();
-		if (isset($page[0]->name)) {
-			$data['name']    = $page[0]->name;
-		} else {
-			$data['name']    = 'unknown';
+		if ( isset( $page[0]->content_file ) ) {
+			$data['content_file'] = $page[0]->content_file;
 		}
-		if (isset($page[0]->content)) {
-			$data['content']    = $page[0]->content;
+		if ( isset( $page[0]->name ) ) {
+			$data['name'] = $page[0]->name;
 		} else {
-			$data['content'] = '<h2 class="text-center">Na túto stránku sme ešte nič nepridali :/</h2>';
+			$data['name'] = 'unknown';
 		}
 
 		return view( 'welcome', $data );

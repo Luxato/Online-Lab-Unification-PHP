@@ -12,12 +12,12 @@
 
 @section('content')
     <div class="row">
-        <form id="new-page-form" action="<?= URL( 'admin/_pages/' ) ?>" method="POST">
+        <form id="new-page-form" action="<?= URL( 'admin/pages/' ) ?>" method="POST">
             <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nadpis</label>
-                    <input id="title-input" class="form-control" name="title" type="text"
+                    <input id="title-input" class="form-control" name="name" type="text"
                            placeholder="Zadajte nadpis sem">
                 </div>
                 <div class="form-group">
@@ -50,7 +50,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Obsah</label>
-                    <textarea id="editor1" name="slovak" rows="10" cols="80">
+                    <textarea id="editor1" name="cont" rows="10" cols="80">
                     </textarea>
                 </div>
             </div>

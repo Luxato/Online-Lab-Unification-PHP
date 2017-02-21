@@ -66,9 +66,9 @@
                 </div>
                 <div class="modal-body">
                     <p>Určite chcete vymazať stránku <span id="langVar">:var</span>?</p>
+                    
                     <form id="deleteForm" action="<?= URL::to( '/worker/do_delete_page' ); ?>" method="POST"
                           style="display: none;">
-
                     </form>
                 </div>
                 <div class="modal-footer">
