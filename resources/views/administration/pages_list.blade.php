@@ -10,19 +10,14 @@
 
 
 @section('content')
-	<?php if(isset( $status ) && $status == 'create-success'): ?>
-    <div id="msgSucces" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-        Stránka bola úspešne pridaná.
-    </div>
-	<?php endif; ?>
-	<?php if(isset( $status ) && $status == 'delete-success'): ?>
-    <div id="msgSucces" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-        Stránka bola úspešne vymazaná.
-    </div>
 
-	<?php endif; ?>
+    @if (Session::has('success'))
+        <div id="msgSucces" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+            {{ Session::get('success') }}
+        </div>
+    @endif
+
     <a class="admin-sub-options success" href="<?= URL::to( '/admin/page_create' ); ?>"><i class="fa fa-plus"
                                                                                            aria-hidden="true"></i>
         Vytvoriť stránku</a>
@@ -66,10 +61,9 @@
                 </div>
                 <div class="modal-body">
                     <p>Určite chcete vymazať stránku <span id="langVar">:var</span>?</p>
+                    {!! Form::open(['url' => URL::to( '/admin/pages/' ), 'method' => 'delete', 'id' => 'deleteForm']) !!}
 
-                    <form id="deleteForm" action="<?= URL::to( '/worker/do_delete_page' ); ?>" method="POST"
-                          style="display: none;">
-                    </form>
+                    {!! Form::close() !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Zavrieť</button>
@@ -99,10 +93,12 @@
     setTimeout(function () {
         $('.alert-success').fadeOut();
     }, 3000);
+    var action = $('#deleteForm').attr('action');
     function deleteModal(id, name) {
-        $('#deleteForm').html('<input id="title-input" class="form-control" name="pageID" type="text" value="' + id + '">' +
+        $('#deleteForm').html('<input name="_method" type="hidden" value="DELETE">' +
             '<input name="_token" type="hidden" id="_token" value="' + window.Laravel.csrfToken + '" />');
         $('#langVar').html("<strong>'" + name + "'</strong>");
+        $('#deleteForm').attr('action', action + '/' + id);
         $('#deleteModal').modal('show');
     }
     $('#submitDelete').on('click', function () {

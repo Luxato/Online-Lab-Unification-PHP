@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Administration;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
+use Session;
 use DB;
 use App\Page;
 
+/**
+ * REST Controller for database table pages
+ */
 class PageController extends Controller {
 	/**
 	 * Display a listing of the resource.
@@ -40,9 +45,6 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\RESPONSE
 	 */
 	public function store( Request $request ) {
-		echo '<pre>';
-		print_r( $request->all() );
-		echo '</pre>';
 		$page               = new Page;
 		$page->name         = $request->name;
 		$page->controller   = $request->url;
@@ -53,7 +55,9 @@ class PageController extends Controller {
 			$created_page = fopen( dirname( getcwd() ) . '/resources/custom_pages/' . $request->url . '.php', "w" );
 			fwrite( $created_page, $request->cont );
 		}
+		Session::flash( 'success', "Stránka bola úspešne vytvorená." );
 
+		return redirect( 'admin/pages' );
 	}
 
 	/**
@@ -98,6 +102,13 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy( $id ) {
-		$language = Page::findOrFail( $id );
+		$page = Page::findOrFail( $id );
+		if ( $page->delete() ) {
+			if ( unlink( dirname( getcwd() ) . '/resources/custom_pages/' . $page->content_file ) ) {
+				Session::flash( 'success', "Stránka bola úspešne vymazaná." );
+
+				return redirect( 'admin/pages' );
+			}
+		}
 	}
 }

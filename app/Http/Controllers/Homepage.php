@@ -24,7 +24,12 @@ class Homepage extends Controller {
 	public function index( Request $request, $slug = NULL ) {
 		$data['navigation'] = $this->navigation;
 		$data['section_id'] = $this->section_id;
-		$page               = DB::table( 'navigation' )->where( 'controller', $slug )->get()->toArray();
+		if ( ! isset( $slug ) ) {
+			$blade = 'default';
+		} else {
+			$page  = DB::table( 'navigation' )->where( 'controller', $slug )->get()->toArray();
+			$blade = 'user_created_pages/' . $page[0]->controller;
+		}
 		if ( isset( $page[0]->content_file ) ) {
 			$data['content_file'] = $page[0]->content_file;
 		}
@@ -34,6 +39,6 @@ class Homepage extends Controller {
 			$data['name'] = 'unknown';
 		}
 
-		return view( 'welcome', $data );
+		return view( $blade, $data );
 	}
 }

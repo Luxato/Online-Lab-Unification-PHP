@@ -17,12 +17,6 @@ class Page extends Model {
 		'content_file'
 	];
 
-	public static function create_file($name, $content) {
-		//TODO check if same file exists if so return FALSE
-		//TODO if does not exists create file, write content there and return TRUE
-
-	}
-
 	public static function select_all() {
 		return Page::all();
 	}

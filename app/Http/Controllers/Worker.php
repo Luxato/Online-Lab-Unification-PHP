@@ -34,7 +34,7 @@ class Worker extends Controller {
 		return view( 'administration/languages', $data );
 	}
 
-	protected function do_delete_page() {
+/*	protected function do_delete_page() {
 		$post_id  = $_POST['pageID'];
 		$language = Page::find( $post_id );
 		if ( $language->delete() ) {
@@ -43,7 +43,7 @@ class Worker extends Controller {
 		$data['pages'] = Page::select_all();
 
 		return view( 'administration/pages_list', $data );
-	}
+	}*/
 
 	public function do_navigation_change_order() {
 		// TODO VALIDATION

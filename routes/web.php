@@ -22,7 +22,7 @@ Route::post('/worker/do_delete_page', ['middleware' => 'auth', 'uses' => 'Worker
 Route::get('/admin', ['middleware' => 'auth', 'uses' => 'Admin@index']);
 Route::get('/admin/navigation', ['middleware' => 'auth', 'uses' => 'Admin@navigation']);
 //Route::get('/admin/pages', ['middleware' => 'auth', 'uses' => 'Admin@pages']);
-/*Route::get('/admin/page_create', ['middleware' => 'auth', 'uses' => 'Admin@page_create']);*/
+Route::get('/admin/page_create', ['middleware' => 'auth', 'uses' => 'Admin@page_create']);
 Route::get('/admin/settings', ['middleware' => 'auth', 'uses' => 'Admin@settings']);
 Route::get('/admin/languages', ['middleware' => 'auth', 'uses' => 'Admin@languages']);
 Route::get('/admin/create_lang', ['middleware' => 'auth', 'uses' => 'Admin@create_lang']);
@@ -39,10 +39,7 @@ Route::group(['middleware' => ['web']], function () {
  * {locale} - language = {en,sk}
  */
 /*Route::get('/contact', ['uses' => 'Contact@index', 'as' => 'contact']);*/
-Route::get('/3D-model-sagway-vozidla', ['uses' => 'Mockup@index']);
-Route::get('/3D-model-hydraulickej-sustavy', ['uses' => 'Mockup@index2']);
-Route::get('/test/3', ['uses' => 'Mockup@index3']);
-Route::get('/test/4', ['uses' => 'Mockup@index4']);
+/*Route::get('/3D-model-hydraulickej-sustavy', ['uses' => 'Mockup@index2']);*/
 
 
 /*Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);*/
