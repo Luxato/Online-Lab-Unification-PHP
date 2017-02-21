@@ -49,11 +49,22 @@ class PageController extends Controller {
 		$page->name         = $request->name;
 		$page->controller   = $request->url;
 		$page->language     = $request->language;
-		$page->content_file = $request->url . '.php';
+		$page->content_file = $request->url . '.blade.php';
 		if ( $page->save() ) {
 			// If saving to database was succesfull let's create a file and put content in it.
-			$created_page = fopen( dirname( getcwd() ) . '/resources/custom_pages/' . $request->url . '.php', "w" );
-			fwrite( $created_page, $request->cont );
+			$content = "
+				@extends('master')
+
+				@section('title')
+					$request->name
+				@stop
+
+				@section('content')
+				    $request->cont
+				@stop
+			";
+			$created_page = fopen( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $request->url . '.blade.php', "w" );
+			fwrite( $created_page, $content );
 		}
 		Session::flash( 'success', "Stránka bola úspešne vytvorená." );
 
@@ -104,7 +115,7 @@ class PageController extends Controller {
 	public function destroy( $id ) {
 		$page = Page::findOrFail( $id );
 		if ( $page->delete() ) {
-			if ( unlink( dirname( getcwd() ) . '/resources/custom_pages/' . $page->content_file ) ) {
+			if ( unlink( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $page->content_file ) ) {
 				Session::flash( 'success', "Stránka bola úspešne vymazaná." );
 
 				return redirect( 'admin/pages' );
