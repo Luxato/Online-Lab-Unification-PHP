@@ -17,6 +17,10 @@ class Page extends Model {
 		'content_file'
 	];
 
+	public function language() {
+		return $this->belongsToMany( 'App\Language' );
+	}
+
 	public static function select_all() {
 		return Page::all();
 	}

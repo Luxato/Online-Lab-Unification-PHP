@@ -17,16 +17,17 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nadpis</label>
-                    <input id="title-input" class="form-control" name="name" type="text"
+                    <input id="title-input" class="form-control" name="0-name" type="text"
                            placeholder="Zadajte nadpis sem">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">URL</label>
-                    <input id="url-input" class="form-control" name="url" type="text" placeholder="URL">
+                    <input id="url-input" class="form-control" name="0-url" type="text" placeholder="URL">
                 </div>
                 <div class="form-group">
                     <label>Lokalizácia</label>
-                    <select id="languageSelection" name="language" class="form-control">
+                    <select id="languageSelection" name="0-language" class="form-control">
+                        <option value="none">Výber jazyka</option>
 						<?php foreach($languages as $value): ?>
                         <option value="<?= $value->id  ?>"><?= $value->language_title ?></option>
 						<?php endforeach; ?>
@@ -36,21 +37,21 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="exampleInputEmail1">SEO nadpis</label>
-                    <input class="form-control" type="text" placeholder="SEO nadpis">
+                    <input class="form-control disabled" type="text" placeholder="SEO nadpis">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">SEO popis</label>
-                    <textarea class="form-control" rows="3" placeholder="SEO popis"></textarea>
+                    <textarea class="form-control disabled" rows="3" placeholder="SEO popis"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Kľúčové slová</label>
-                    <input class="form-control" type="text" placeholder="Kľúčové slová oddelené čiarkou">
+                    <input class="form-control disabled" type="text" placeholder="Kľúčové slová oddelené čiarkou">
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Obsah</label>
-                    <textarea id="editor" name="cont" rows="6" cols="80">
+                    <textarea id="editor" name="0-cont" rows="6" cols="80">
                     </textarea>
                 </div>
             </div>
@@ -70,14 +71,10 @@
 @section('custom_scripts')
     <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/ckeditor/ckeditor.min.js"></script>
     <script>
-        CKEDITOR.editorConfig = function( config )
-        {
-            config.height = '300px';
-        };
-        CKEDITOR.replace('editor');
         $(function () {
+            CKEDITOR.replace('editor');
             $('#nav-navigacia').addClass('active');
-            // TODO REMOVE ľíéšášľťéľížýľš AND !@#$%$^%&&&&&&&&&*)/*-+
+            // TODO REMOVE !@#$%$^%&&&&&&&&&*)/*-+
             $('#title-input').on('keyup', function () {
                 var title = $(this).val();
                 title = title.toLowerCase();
@@ -125,24 +122,30 @@
             }
         });
 
+        selectBoxes = [];
+        selectBoxes.push({
+            'id': '#languageSelection',
+            'index': 0
+        });
+
         function addLangSection(i) {
             var newLang =
                 '<div id="langSection' + i + '" class="lang-section" style="display:none;">' +
                 '<hr> ' +
-                '<h2>Jazyková mutácia ' + i + '</h2>' +
+                '<h2>Ďalšia jazyková mutácia</h2>' +
                 '<div class="cancelLang"><i class="fa fa-times" aria-hidden="true"></i></div>' +
                 '<div class="col-lg-6">' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">Nadpis</label>' +
-                '<input id="title-input" class="form-control" name="name" type="text" placeholder="Zadajte nadpis sem">' +
+                '<input class="form-control" name="'+i+'-name" type="text" placeholder="Zadajte nadpis sem">' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">URL</label>' +
-                '<input id="url-input" class="form-control" name="url" type="text" placeholder="URL">' +
+                '<input class="form-control" name="'+i+'-url" type="text" placeholder="URL">' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label>Lokalizácia</label>' +
-                '<select name="language" class="form-control">' +
+                '<select id="'+i+'-langSelection" name="'+ i +'-language" class="form-control">' +
                 '</select>' +
                 '</div>' +
                 '</div>' +
@@ -163,7 +166,7 @@
                 '<div class="col-md-12">' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">Obsah</label>' +
-                '<textarea id="editor' + i + '" name="cont" rows="6" cols="80">' +
+                '<textarea id="editor' + i + '" name="'+i+'-cont" rows="6" cols="80">' +
                 '</textarea>' +
                 '</div>' +
                 '</div>' +
@@ -175,16 +178,59 @@
             $('html, body').stop().animate({
                 scrollTop: offset.top
             });
+
+            selectBoxes.push({
+                'id': '#' + i + '-langSelection'
+            });
+            $('#languageSelection option').each(function (index) {
+                $('#' + i + '-langSelection').append($('<option>', {
+                    value: $(this)[0].value,
+                    text: $(this).text()
+                }));
+            });
+
+            /*var watcher = new Worker();
+            watcher.languages();*/
+
         }
 
 
-        function worker() {
+        function Worker() {
+            this.numberOfInstances = 0;
             this.init = function () {
-
             };
             this.reorder = function () {
+//TODO CHANGE NUMBERS AFTER DELETE
+            };
+            this.languages = function () {
+                this.numberOfInstances++;
+                var allowedLanguages = [];
+                for (var index in selectBoxes) {
+                    console.log('selectBoxes length = ' + selectBoxes.length);
+                    if (index != 0 && (selectBoxes.length - 1 == this.numberOfInstances)) {
+                        console.log('zapisujem nasledovne optiony ');
+                        console.log(allowedLanguages);
+                        for (var key in allowedLanguages) {
+                            $(selectBoxes[index].id).append($('<option>', {
+                                value: allowedLanguages[key].id,
+                                text: allowedLanguages[key].language
+                            }));
+                        }
+                    }
+                    var tmp = selectBoxes[index].id;
+                    var allowedLanguages = [];
+                    $(selectBoxes[index].id + ' option:not(:selected)').each(function (index) {
+                        allowedLanguages.push({
+                            'id': tmp,
+                            'language': $(this).text()
+                        });
+                    });
+                }
 
-            }
+            };
+            this.init();
         }
+
+
     </script>
 @stop

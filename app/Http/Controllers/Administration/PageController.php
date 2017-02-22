@@ -53,29 +53,42 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\RESPONSE
 	 */
 	public function store( Request $request ) {
-		echo '<pre>';
-		print_r( $request );
-		echo '</pre>';
-		exit;
+		$languages = [];
+		foreach ( $request->all() as $name => $value ) {
+			/*var_dump($key);
+			echo "<br>";
+			var_dump($value);
+			echo "<br>";*/
+			$tmp = explode( '-', $name );
+			if (isset($tmp[1])) {
+				if ( $tmp[1] == 'language' ) {
+					$languages[] = $value;
+				}
+			}
+		}
 		$page               = new Page;
-		$page->name         = $request->name;
-		$page->controller   = $request->url;
-		$page->language     = $request->language;
-		$page->content_file = $request->url . '.blade.php';
+		$page->name         = $request->input('0-name');
+		$page->controller   = $request->input('0-url');
+		//$page->language     = $request->input('0-language');
+		$page->content_file = $request->input('0-url') . '.blade.php';
 		if ( $page->save() ) {
+			// Save languages
+			$page = Page::findOrFail( $page->section_id );
+			$page->language()->sync( $languages );
+
 			// If saving to database was succesfull let's create a file and put content in it.
-			$content      = "
-				@extends('master')
+			$content      = '
+				@extends(\'master\')
 
-				@section('title')
-					$request->name
+				@section(\'title\')
+					'.$request->input('0-name').'
 				@stop
 
-				@section('content')
-				    $request->cont
+				@section(\'content\')
+				    '.$request->input('0-cont').'
 				@stop
-			";
-			$created_page = fopen( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $request->url . '.blade.php', "w" );
+			';
+			$created_page = fopen( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $request->input('0-url') . '.blade.php', "w" );
 			fwrite( $created_page, $content );
 		}
 		Session::flash( 'success', "Stránka bola úspešne vytvorená." );

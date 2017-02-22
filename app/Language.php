@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Language extends Model {
 	protected $fillable = [ 'language_title', 'language_shortcut' ];
 
+	public function page() {
+		return $this->belongsToMany( 'App\Page' );
+	}
+
 	public static function _create( $title, $shortcut ) {
 		// TODO check if its not duplicate
 		// Insert new language to Database
