@@ -9,11 +9,17 @@ use Illuminate\Support\Facades\Redirect;
 use Session;
 use DB;
 use App\Page;
+use App\Language;
 
 /**
  * REST Controller for database table pages
  */
 class PageController extends Controller {
+
+	public function __construct() {
+		$this->middleware( 'auth' );
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -34,7 +40,9 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
-		//
+		return view( 'administration/page_create', [
+			'languages' => Language::all()
+		] );
 	}
 
 	/**
@@ -52,7 +60,7 @@ class PageController extends Controller {
 		$page->content_file = $request->url . '.blade.php';
 		if ( $page->save() ) {
 			// If saving to database was succesfull let's create a file and put content in it.
-			$content = "
+			$content      = "
 				@extends('master')
 
 				@section('title')

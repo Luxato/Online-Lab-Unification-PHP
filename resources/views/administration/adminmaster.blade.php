@@ -90,7 +90,7 @@
                     <ul class="treeview-menu">
                         <li><a href="<?= url::to( '/admin/pages' ); ?>">Všetky stránky</a></li>
                         <li><a href="<?= url::to( '/admin/navigation' ); ?>">Usporiadanie navigácie</a></li>
-                        <li><a href="<?= url::to( '/admin/page_create' ); ?>">Pridať novú</a></li>
+                        <li><a href="<?= url::to( '/admin/pages/create' ); ?>">Pridať novú</a></li>
                     </ul>
                 </li>
                 <li id="nav-news"><a class="disabled" href="<?= url::to( '/admin#' ); ?>"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span>Aktuality</span></a></li>

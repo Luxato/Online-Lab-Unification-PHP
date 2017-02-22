@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Language extends Model {
 	protected $fillable = [ 'language_title', 'language_shortcut' ];
 
-	public static function select_all() {
-		$languages = Language::all();
-		return $languages;
-	}
-
 	public static function _create( $title, $shortcut ) {
 		// TODO check if its not duplicate
 		// Insert new language to Database
@@ -29,12 +24,6 @@ class Language extends Model {
 			$myfile = fopen( dirname( getcwd() ) . '/resources/lang/' . $shortcut . '/' . $shortcut . '.php', "w" );
 
 		}
-	}
-
-	public static function _delete() {
-		echo '<pre>';
-		print_r( Language::find('1') );
-		echo '</pre>';
 	}
 
 	public static function create_language() {

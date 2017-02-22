@@ -21,7 +21,7 @@ class Admin extends Controller {
 		return view( 'administration/navigation', $data );
 	}
 
-	public function pages() {
+/*	public function pages() {
 		$data['pages'] = DB::table( 'navigation' )
 		                   ->join( 'languages', 'navigation.language', '=', 'languages.id' )
 		                   ->get()
@@ -33,19 +33,9 @@ class Admin extends Controller {
 	public function page_create() {
 		$data['languages'] = Language::select_all();
 		return view( 'administration/page_create', $data );
-	}
-/*
-
-	public function page_store(Request $request) {
-		$request->all();
-		exit;
-
-		Page::create();
-		return redirect()->route('');
 	}*/
 
-	//TODO create model for this
-	public function do_page_create() {
+	/*public function do_page_create() {
 		$name        = $_POST['title'];
 		$controller  = $_POST['url'];
 		$content     = $_POST['slovak'];
@@ -60,7 +50,7 @@ class Admin extends Controller {
 		$data['status'] = 'create-success';
 
 		return view( 'administration/pages_list', $data );
-	}
+	}*/
 
 	public function settings() {
 		return view( 'administration/settings' );
