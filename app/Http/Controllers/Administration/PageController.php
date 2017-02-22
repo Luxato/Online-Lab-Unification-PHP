@@ -53,6 +53,10 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\RESPONSE
 	 */
 	public function store( Request $request ) {
+		echo '<pre>';
+		print_r( $request );
+		echo '</pre>';
+		exit;
 		$page               = new Page;
 		$page->name         = $request->name;
 		$page->controller   = $request->url;

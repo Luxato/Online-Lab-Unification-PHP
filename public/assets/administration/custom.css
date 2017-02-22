@@ -1,10 +1,3 @@
-h2 {
-    margin: 0;
-    padding: 0;
-    font-size: 23px;
-    text-align: center;
-}
-
 .skin-blue .main-header .logo {
     background-color: #DD4B39 !important;
 }
@@ -55,16 +48,34 @@ hr {
     margin: 0;
 }
 
-.another-lang {
-    border-top: 1px solid black;
-    display: inline-block;
+#another-lang h2 {
+    margin: 10px 0;
+    padding: 0;
+    font-size: 23px;
+    text-align: center;
 }
 
 .cancelLang {
     color: #d90b0b;
     font-size: 30px;
     position: absolute;
-    right: 15px;
+    right: 60px;
     cursor: pointer;
+    top: -1px;
+}
+.cancelLang:hover {
+    color: #ee3030;
+    font-size: 32px;
+}
 
+.lang-section {
+    position: relative;
+    display: inline-block;
+    padding: 0 60px 0 60px;
+}
+
+.btn-disabled {
+    opacity: 0.5;
+    background: #a7a7a7 !important;
+    cursor: not-allowed;
 }
