@@ -11,8 +11,10 @@
 
 
 @section('content')
+    Nie je hotova validacia, preto by sa malo vyplnit vsetko co ide.
+    <br>
     <div class="row">
-        <form id="new-page-form" action="<?= URL( 'admin/pages/' ) ?>" method="POST">
+        <form id="new-page-form" onsubmit="return validateForm()" action="<?= URL( 'admin/pages/' ) ?>" method="POST">
             <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
             <div class="col-lg-6">
                 <div class="form-group">
@@ -71,6 +73,23 @@
 @section('custom_scripts')
     <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/ckeditor/ckeditor.min.js"></script>
     <script>
+        function hasDuplicates(array) {
+            return (new Set(array)).size !== array.length;
+        }
+        function validateForm() {
+            var selectedValues = [];
+            for (var box in selectBoxes) {
+                //console.log(selectBoxes[box].id);
+                selectedValues.push($(selectBoxes[box].id + ' option:selected')[0]['value']);
+            }
+            console.log(selectedValues);
+            if (hasDuplicates(selectedValues)) {
+                generate('warning', '<div class="activity-item"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <div class="activity">Vyplnené jazyky v lokalizácii musia byť rôzne a zároveň musia byť zvolené.</div> </div>');
+                return false;
+            } else {
+                return true;
+            }
+        }
         $(function () {
             CKEDITOR.replace('editor');
             $('#nav-navigacia').addClass('active');
@@ -137,36 +156,36 @@
                 '<div class="col-lg-6">' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">Nadpis</label>' +
-                '<input class="form-control" name="'+i+'-name" type="text" placeholder="Zadajte nadpis sem">' +
+                '<input class="form-control" name="' + i + '-name" type="text" placeholder="Zadajte nadpis sem">' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">URL</label>' +
-                '<input class="form-control" name="'+i+'-url" type="text" placeholder="URL">' +
+                '<input class="form-control" name="' + i + '-url" type="text" placeholder="URL">' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label>Lokalizácia</label>' +
-                '<select id="'+i+'-langSelection" name="'+ i +'-language" class="form-control">' +
+                '<select id="' + i + '-langSelection" name="' + i + '-language" class="form-control">' +
                 '</select>' +
                 '</div>' +
                 '</div>' +
                 '<div class="col-md-6">' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">SEO nadpis</label>' +
-                '<input class="form-control" type="text" placeholder="SEO nadpis">' +
+                '<input class="form-control disabled" type="text" placeholder="SEO nadpis">' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">SEO popis</label>' +
-                '<textarea class="form-control" rows="3" placeholder="SEO popis"></textarea>' +
+                '<textarea class="form-control disabled" rows="3" placeholder="SEO popis"></textarea>' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">Kľúčové slová</label>' +
-                '<input class="form-control" type="text" placeholder="Kľúčové slová oddelené čiarkou">' +
+                '<input class="form-control disabled" type="text" placeholder="Kľúčové slová oddelené čiarkou">' +
                 '</div>' +
                 '</div>' +
                 '<div class="col-md-12">' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">Obsah</label>' +
-                '<textarea id="editor' + i + '" name="'+i+'-cont" rows="6" cols="80">' +
+                '<textarea id="editor' + i + '" name="' + i + '-cont" rows="6" cols="80">' +
                 '</textarea>' +
                 '</div>' +
                 '</div>' +
@@ -180,18 +199,15 @@
             });
 
             selectBoxes.push({
-                'id': '#' + i + '-langSelection'
+                'id': '#langSection' + '' + i
             });
+
             $('#languageSelection option').each(function (index) {
                 $('#' + i + '-langSelection').append($('<option>', {
                     value: $(this)[0].value,
                     text: $(this).text()
                 }));
             });
-
-            /*var watcher = new Worker();
-            watcher.languages();*/
-
         }
 
 

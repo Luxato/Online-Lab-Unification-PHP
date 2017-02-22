@@ -12,6 +12,7 @@ use App\Page;
 class Worker extends Controller {
 	// TODO do not use $_POST variable,
 	// TODO backend validation
+	// TODO move to own controller LanguageController
 	protected function do_create_language() {
 		$title    = $_POST['title'];
 		$shortcut = $_POST['shortcut'];
