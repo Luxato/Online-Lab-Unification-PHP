@@ -23,3 +23,4 @@ TODO :
 5# https://laravelcollective.com/docs/5.0/html#installation
 ...
 wysiwyg/ckeditor, jquery nestable 
+notyjs

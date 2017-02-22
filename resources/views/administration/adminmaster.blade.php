@@ -15,7 +15,118 @@
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dist/css/skins/skin-blue.min.css">
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/custom.css">
-    @yield('custom_css')
+    <style>
+        .animated {
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+        @-webkit-keyframes bounceInLeft {
+            0%, 60%, 75%, 90%, 100% {
+                -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(-3000px, 0, 0);
+                transform: translate3d(-3000px, 0, 0);
+            }
+
+            60% {
+                opacity: 1;
+                -webkit-transform: translate3d(25px, 0, 0);
+                transform: translate3d(25px, 0, 0);
+            }
+
+            75% {
+                -webkit-transform: translate3d(-10px, 0, 0);
+                transform: translate3d(-10px, 0, 0);
+            }
+
+            90% {
+                -webkit-transform: translate3d(5px, 0, 0);
+                transform: translate3d(5px, 0, 0);
+            }
+
+            100% {
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+
+        @keyframes bounceInLeft {
+            0%, 60%, 75%, 90%, 100% {
+                -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(-3000px, 0, 0);
+                transform: translate3d(-3000px, 0, 0);
+            }
+
+            60% {
+                opacity: 1;
+                -webkit-transform: translate3d(25px, 0, 0);
+                transform: translate3d(25px, 0, 0);
+            }
+
+            75% {
+                -webkit-transform: translate3d(-10px, 0, 0);
+                transform: translate3d(-10px, 0, 0);
+            }
+
+            90% {
+                -webkit-transform: translate3d(5px, 0, 0);
+                transform: translate3d(5px, 0, 0);
+            }
+
+            100% {
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+
+        .bounceInLeft {
+            -webkit-animation-name: bounceInLeft;
+            animation-name: bounceInLeft;
+        }
+        @-webkit-keyframes bounceOutRight {
+            20% {
+                opacity: 1;
+                -webkit-transform: translate3d(-20px, 0, 0);
+                transform: translate3d(-20px, 0, 0);
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: translate3d(2000px, 0, 0);
+                transform: translate3d(2000px, 0, 0);
+            }
+        }
+
+        @keyframes bounceOutRight {
+            20% {
+                opacity: 1;
+                -webkit-transform: translate3d(-20px, 0, 0);
+                transform: translate3d(-20px, 0, 0);
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: translate3d(2000px, 0, 0);
+                transform: translate3d(2000px, 0, 0);
+            }
+        }
+
+        .bounceOutRight {
+            -webkit-animation-name: bounceOutRight;
+            animation-name: bounceOutRight;
+        }
+    </style>
     <script>
         window.Laravel = <?php echo json_encode([
                 'csrfToken' => csrf_token(),
@@ -154,6 +265,39 @@
 <script src="<?= URL::to( '/' ); ?>/assets/administration/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= URL::to( '/' ); ?>/assets/administration/dist/js/app.min.js"></script>
-    @yield('custom_scripts')
+<script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/noty/jquery.noty.packaged.min.js"></script>
+<script>
+    /*var notification_html = [];
+    notification_html[0] = '<div class="activity-item"> <i class="fa fa-tasks text-warning"></i> <div class="activity"> There are <a href="#">6 new tasks</a> waiting for you. Don\'t forget! <span>About 3 hours ago</span> </div> </div>',
+        notification_html[1] = '<div class="activity-item"> <i class="fa fa-check text-success"></i> <div class="activity"> Mail server was updated. See <a href="#">changelog</a> <span>About 2 hours ago</span> </div> </div>',
+        notification_html[3] = '<div class="activity-item"> <i class="fa fa-check" aria-hidden="true"></i> <div class="activity"> Stránka bola úspečne vytvorená.</div> </div>';
+*/
+    function generate(type, text) {
+        var n = noty({
+            text        : text,
+            type        : type,
+            dismissQueue: true,
+            progressBar : true,
+            timeout     : 5000,
+            layout      : 'topRight',
+            closeWith   : ['click'],
+            theme       : 'relax',
+            maxVisible  : 10,
+            animation   : {
+                open  : 'animated bounceInLeft',
+                close : 'animated bounceOutRight',
+                easing: 'swing',
+                speed : 500
+            }
+        });
+        return n;
+    }
+</script>
+@if (Session::has('success'))
+    <script>
+        generate('success', '<div class="activity-item"> <i class="fa fa-check" aria-hidden="true"></i> <div class="activity">{{ Session::get('success') }}</div> </div>');
+    </script>
+@endif
+@yield('custom_scripts');
 </body>
 </html>

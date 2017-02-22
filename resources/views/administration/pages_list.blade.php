@@ -10,13 +10,6 @@
 
 
 @section('content')
-    @if (Session::has('success'))
-        <div id="msgSucces" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-            {{ Session::get('success') }}
-        </div>
-    @endif
-
     <a class="admin-sub-options success" href="<?= URL::to( '/admin/pages/create' ); ?>"><i class="fa fa-plus"
                                                                                            aria-hidden="true"></i>
         Vytvoriť stránku</a>
