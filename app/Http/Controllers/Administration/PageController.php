@@ -142,7 +142,8 @@ echo '</pre>';*/
 	 */
 	public function destroy( $id ) {
 		$page = Page::findOrFail( $id );
-		if ( $page->delete() ) {
+		if ( $page->language()->sync( [] ) ) {
+			$page->delete();
 			if ( unlink( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $page->content_file ) ) {
 				Session::flash( 'success', "Stránka bola úspešne vymazaná." );
 
