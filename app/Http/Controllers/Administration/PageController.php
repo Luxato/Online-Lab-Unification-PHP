@@ -26,11 +26,14 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$data['pages'] = DB::table( 'navigation' )
+		/*$data['pages'] = DB::table( 'navigation' )
 		                   ->join( 'languages', 'navigation.language', '=', 'languages.id' )
 		                   ->get()
-		                   ->toArray();
-
+		                   ->toArray();*/
+		$data['pages'] = Page::with('language')->get();
+/*echo '<pre>';
+print_r( $data['pages'] );
+echo '</pre>';*/
 		return view( 'administration/pages_list', $data );
 	}
 

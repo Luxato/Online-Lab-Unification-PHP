@@ -10,7 +10,6 @@
 
 
 @section('content')
-
     @if (Session::has('success'))
         <div id="msgSucces" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
             <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
@@ -25,20 +24,32 @@
         <thead>
         <tr>
             <th>Názov</th>
-            <th>Jazyky</th>
+            <th>Lokalizácia</th>
             <th>URL</th>
             <th>Dátum</th>
             <th>Možnosti</th>
         </tr>
         </thead>
         <tbody>
-		<?php foreach ( $pages as $page ): ?>
+		<?php foreach ( $pages->toArray() as $page ): ?>
         <tr>
-            <td><?= $page->name ?></td>
-            <td><?= $page->language_title ?></td>
-            <td>/<?= $page->controller ?></td>
-            <td><?= $page->created_at ?></td>
-            <td><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <a onclick="deleteModal(<?= $page->section_id.',\''. $page->name.'\'' ?>)"><i
+            <td><?= $page['name'] ?></td>
+            <td>
+                <?php
+                    $l = 0;
+                    foreach ($page['language'] as $language) {
+	                    echo $language['language_title'];
+	                    if (++$l == sizeof($page['language'])) {
+		                    echo " ";
+	                    } else {
+		                    echo ", ";
+                        }
+                    }
+                ?>
+            </td>
+            <td>/<?= $page['controller'] ?></td>
+            <td><?= $page['created_at'] ?></td>
+            <td><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <a onclick="deleteModal(<?= $page['section_id'].',\''. $page['name'].'\'' ?>)"><i
                             class="fa fa-trash" aria-hidden="true"></i></a></td>
         </tr>
 		<?php endforeach; ?>
