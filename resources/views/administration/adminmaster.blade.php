@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dist/css/skins/skin-blue.min.css">
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/custom.css">
+    @yield('custom_css')
     <style>
         .animated {
             -webkit-animation-duration: 1s;

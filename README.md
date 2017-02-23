@@ -4,6 +4,9 @@ Install instructions:
 git clone https://github.com/Luxato/Online-Lab-Unification-PHP.git
 composer update
 php artisan key:generate
+
+set CHMOD resources/views/user_created_pages to 777
+set CHMOD resources to 777
 ```
 
 TODO :
