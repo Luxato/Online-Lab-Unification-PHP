@@ -408,9 +408,11 @@ footer {
 .navbar-nav > li > .dropdown-menu, .dropdown-submenu > .dropdown-menu {
     border-radius: 0;
 }
-.dropdown-menu>li>a {
+
+.dropdown-menu > li > a {
     padding: 9px 20px;
 }
+
 .dropdown-menu {
     box-shadow: none;
     padding: 0 0;
@@ -537,4 +539,72 @@ code {
 
 .stretched #gotoTop {
     bottom: 30px;
+}
+
+.featured-misc {
+    position: absolute;
+    bottom: 20px;
+    margin: 0 0 0 10px;
+}
+
+.featured-misc a {
+    color: #fff;
+}
+
+.featured-misc a:hover {
+    text-decoration: none;
+}
+
+.featured-image img {
+    width: 100%;
+}
+
+.featured-image {
+    position: relative;
+    opacity: 0.8;
+}
+
+.featured-image:hover {
+    animation-name: featured;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+.featured-date {
+    color: whitesmoke;
+}
+.news-date {
+    position: absolute;
+    bottom: 0;
+    left: 105px;
+    width: 100%;
+    font-style: italic;
+}
+.news {
+    width: 100%;
+    clear: both;
+    display: inline-block;
+    margin: 15px 0;
+    position: relative;
+}
+.news-image {
+    float: left;
+}
+
+.news-headline h3 {
+    font-size: 15px;
+    float: left;
+    margin-left: 10px;
+}
+
+@keyframes featured {
+    0% {
+        opacity: 0.8;
+    }
+    70% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 1;
+    }
 }
