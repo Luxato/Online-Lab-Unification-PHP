@@ -135,10 +135,12 @@
     <div id="particles-js" style="height: 200px;"></div>
 </header>
 
+<div class="breadcrumb-wrapper">
     <ol class="breadcrumb">
         <li><a href="<?= URL( '/' ) ?>">Home</a></li>
         <li class="active">@yield('title')</li>
     </ol>
+</div>
 
 <div class="container">
     <div class="row">

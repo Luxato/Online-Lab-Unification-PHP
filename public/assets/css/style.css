@@ -301,15 +301,18 @@ footer .fa {
 .navbar-ex1-collapse, .navbar-vertical {
     padding: 0;
 }
-
-.breadcrumb {
-    font-family: 'Roboto', sans-serif;
+.breadcrumb-wrapper {
     border: 1px solid #E7ECF1;
     background-color: #fff;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-top: none;
-    padding-left: 75px;
+}
+.breadcrumb {
+    font-family: 'Roboto', sans-serif;
+    background-color: transparent;
+    width: 1170px;
+    margin: 0 auto;
 }
 
 .breadcrumb a {
