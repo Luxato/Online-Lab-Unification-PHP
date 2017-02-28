@@ -150,13 +150,37 @@
     </div>
 </div>
 <footer>
-    <p>Copyright © 2016</p>
+    <div class="container" style="height: 100%;">
+        <div class="row" style="height: 100%;">
+            <div class="col-md-3" style="border-right: 2px solid #f0f0f0; height: 100%;">
+                <div class="footer-header">Web služby</div>
+                <ul>
+                    <li><a href="#">3D Model segway vozidla</a></li>
+                    <li><a href="#">3D Model hydraulickej sústavy</a></li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div class="footer-right">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://github.com/Luxato/Online-Lab-Unification-PHP"><i
+                                        class="fa fa-github-square" aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{--<p>Copyright © 2016</p>
     <ul>
         <li>
             <a target="_blank" href="https://github.com/Luxato/Online-Lab-Unification-PHP"><i
                         class="fa fa-github-square" aria-hidden="true"></i></a>
         </li>
-    </ul>
+    </ul>--}}
     <div id="gotoTop" style="display: block;"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
 </footer>
 <script src="assets/js/jquery.js"></script>

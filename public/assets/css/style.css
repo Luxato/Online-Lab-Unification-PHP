@@ -171,8 +171,16 @@ header .header-logo {
 }
 
 footer {
-    height: 100px;
-    background: #333;
+    height: 150px;
+    background: #1d1d1d;
+}
+
+footer a {
+    color: white;
+}
+
+footer a:hover {
+    color: white;
 }
 
 footer p {
@@ -185,13 +193,14 @@ footer p {
 }
 
 footer ul {
-    margin: 0 auto;
-    width: 100px;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
 }
 
-footer ul li {
+/*footer ul li {
     display: inline;
-}
+}*/
 
 footer i {
     color: lightgray;
@@ -301,6 +310,7 @@ footer .fa {
 .navbar-ex1-collapse, .navbar-vertical {
     padding: 0;
 }
+
 .breadcrumb-wrapper {
     border: 1px solid #E7ECF1;
     background-color: #fff;
@@ -308,6 +318,7 @@ footer .fa {
     border-top-right-radius: 0;
     border-top: none;
 }
+
 .breadcrumb {
     font-family: 'Roboto', sans-serif;
     background-color: transparent;
@@ -345,7 +356,7 @@ footer {
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 100px;
+    /*height: 100px;*/
 }
 
 .navbar-fixed-top {
@@ -576,6 +587,7 @@ code {
 .featured-date {
     color: whitesmoke;
 }
+
 .news-date {
     position: absolute;
     bottom: 0;
@@ -583,6 +595,7 @@ code {
     width: 100%;
     font-style: italic;
 }
+
 .news {
     width: 100%;
     clear: both;
@@ -590,6 +603,7 @@ code {
     margin: 15px 0;
     position: relative;
 }
+
 .news-image {
     float: left;
 }
@@ -610,4 +624,22 @@ code {
     100% {
         opacity: 1;
     }
+}
+
+.footer-header {
+    font-size: 19px;
+    color: whitesmoke;
+    padding: 5px 0 10px 0;
+}
+.footer-right {
+    text-align: center;
+    line-height: 150px;
+}
+.footer-right li {
+    display: inline;
+    margin-right: 5px;
+}
+
+.footer-right .fa {
+    color: #fff;
 }
