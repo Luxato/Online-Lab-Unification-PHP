@@ -11,7 +11,6 @@
 
 
 @section('content')
-    Nie je hotova validacia, preto by sa malo vyplnit vsetko co ide.
     <br>
     <div class="row">
         <form id="new-page-form" onsubmit="return validateForm()" action="<?= URL( 'admin/pages/' ) ?>" method="POST">
@@ -20,16 +19,16 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nadpis</label>
                     <input id="title-input" class="form-control" name="name[]" type="text"
-                           placeholder="Zadajte nadpis sem">
+                           placeholder="Zadajte nadpis sem" required="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">URL</label>
-                    <input id="url-input" class="form-control" name="url[]" type="text" placeholder="URL">
+                    <input id="url-input" class="form-control" name="url[]" type="text" placeholder="URL" required="">
                 </div>
                 <div class="form-group">
                     <label>Lokalizácia</label>
-                    <select id="languageSelection" name="language[]" class="form-control">
-                        <option value="none">Výber jazyka</option>
+                    <select id="languageSelection" name="language[]" class="form-control" required="">
+                        <option value="">Výber jazyka</option>
 						<?php foreach($languages as $value): ?>
                         <option value="<?= $value->id  ?>"><?= $value->language_title ?></option>
 						<?php endforeach; ?>
@@ -90,7 +89,14 @@
                 return true;
             }
         }
+
         $(function () {
+            $('#new-page-form').parsley().on('field:validated', function() {
+                var ok = $('.parsley-error').length === 0;
+                $('.bs-callout-info').toggleClass('hidden', !ok);
+                $('.bs-callout-warning').toggleClass('hidden', ok);
+            });
+
             CKEDITOR.replace('editor');
             $('#nav-navigacia').addClass('active');
             // TODO REMOVE !@#$%$^%&&&&&&&&&*)/*-+
@@ -127,7 +133,7 @@
         }
 
         var i = 0;
-        var maxLanguages = $('#languageSelection').children('option').length - 1;
+        var maxLanguages = $('#languageSelection').children('option').length - 2;
         $('#addLanguage').on('click', function (e) {
             e.preventDefault();
             if (maxLanguages <= 0) {
@@ -156,15 +162,15 @@
                 '<div class="col-lg-6">' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">Nadpis</label>' +
-                '<input class="form-control" name="name[]" type="text" placeholder="Zadajte nadpis sem">' +
+                '<input class="form-control" name="name[]" type="text" placeholder="Zadajte nadpis sem" required="">' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">URL</label>' +
-                '<input class="form-control" name="url[]" type="text" placeholder="URL">' +
+                '<input class="form-control" name="url[]" type="text" placeholder="URL" required="">' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label>Lokalizácia</label>' +
-                '<select id="' + i + '-langSelection" name="language[]" class="form-control">' +
+                '<select id="' + i + '-langSelection" name="language[]" class="form-control" required="">' +
                 '</select>' +
                 '</div>' +
                 '</div>' +
@@ -208,6 +214,13 @@
                     text: $(this).text()
                 }));
             });
+
+            //Reinitialize validator
+            $('#new-page-form').parsley().on('field:validated', function() {
+                var ok = $('.parsley-error').length === 0;
+                $('.bs-callout-info').toggleClass('hidden', !ok);
+                $('.bs-callout-warning').toggleClass('hidden', ok);
+            });
         }
 
 
@@ -216,7 +229,7 @@
             this.init = function () {
             };
             this.reorder = function () {
-//TODO CHANGE NUMBERS AFTER DELETE
+
             };
             this.languages = function () {
                 this.numberOfInstances++;
@@ -246,7 +259,5 @@
             };
             this.init();
         }
-
-
     </script>
 @stop

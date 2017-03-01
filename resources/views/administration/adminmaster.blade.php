@@ -268,6 +268,7 @@
 <!-- AdminLTE App -->
 <script src="<?= URL::to( '/' ); ?>/assets/administration/dist/js/app.min.js"></script>
 <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/noty/jquery.noty.packaged.min.js"></script>
+<script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/parsley.min.js"></script>
 <script>
     /*var notification_html = [];
     notification_html[0] = '<div class="activity-item"> <i class="fa fa-tasks text-warning"></i> <div class="activity"> There are <a href="#">6 new tasks</a> waiting for you. Don\'t forget! <span>About 3 hours ago</span> </div> </div>',
