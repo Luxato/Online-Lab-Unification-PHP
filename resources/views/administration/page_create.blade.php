@@ -19,16 +19,16 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nadpis</label>
-                    <input id="title-input" class="form-control" name="0-name" type="text"
+                    <input id="title-input" class="form-control" name="name[]" type="text"
                            placeholder="Zadajte nadpis sem">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">URL</label>
-                    <input id="url-input" class="form-control" name="0-url" type="text" placeholder="URL">
+                    <input id="url-input" class="form-control" name="url[]" type="text" placeholder="URL">
                 </div>
                 <div class="form-group">
                     <label>Lokalizácia</label>
-                    <select id="languageSelection" name="0-language" class="form-control">
+                    <select id="languageSelection" name="language[]" class="form-control">
                         <option value="none">Výber jazyka</option>
 						<?php foreach($languages as $value): ?>
                         <option value="<?= $value->id  ?>"><?= $value->language_title ?></option>
@@ -53,7 +53,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Obsah</label>
-                    <textarea id="editor" name="0-cont" rows="6" cols="80">
+                    <textarea id="editor" name="cont[]" rows="6" cols="80">
                     </textarea>
                 </div>
             </div>
@@ -156,15 +156,15 @@
                 '<div class="col-lg-6">' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">Nadpis</label>' +
-                '<input class="form-control" name="' + i + '-name" type="text" placeholder="Zadajte nadpis sem">' +
+                '<input class="form-control" name="name[]" type="text" placeholder="Zadajte nadpis sem">' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">URL</label>' +
-                '<input class="form-control" name="' + i + '-url" type="text" placeholder="URL">' +
+                '<input class="form-control" name="url[]" type="text" placeholder="URL">' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label>Lokalizácia</label>' +
-                '<select id="' + i + '-langSelection" name="' + i + '-language" class="form-control">' +
+                '<select id="' + i + '-langSelection" name="language[]" class="form-control">' +
                 '</select>' +
                 '</div>' +
                 '</div>' +
@@ -185,7 +185,7 @@
                 '<div class="col-md-12">' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">Obsah</label>' +
-                '<textarea id="editor' + i + '" name="' + i + '-cont" rows="6" cols="80">' +
+                '<textarea id="editor' + i + '" name="cont[]" rows="6" cols="80">' +
                 '</textarea>' +
                 '</div>' +
                 '</div>' +
