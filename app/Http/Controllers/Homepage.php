@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Language;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
@@ -24,9 +25,13 @@ class Homepage extends Controller {
 
 	public function index( Request $request, $slug = NULL ) {
 		$pages = Page::with( 'feature' )->get()->toArray();
-		echo '<pre>';
+		/*echo '<pre>';
 		print_r( $pages );
-		echo '</pre>';
+		echo '</pre>';*/
+
+/*		echo '<pre>';
+		print_r( \Session::all() );
+		echo '</pre>';*/
 
 		$data['navigation'] = $this->navigation;
 		$data['section_id'] = $this->section_id;
@@ -46,5 +51,15 @@ class Homepage extends Controller {
 		}
 
 		return view( $blade, $data );
+	}
+
+	public function set_language( $lang ) {
+		foreach ( Language::all()->toArray() as $language ) {
+			if ( $language['language_shortcut'] = $lang ) {
+				\Session::set( 'applocale', $lang );
+			}
+		}
+
+		return redirect( '/' );
 	}
 }

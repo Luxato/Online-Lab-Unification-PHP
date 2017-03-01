@@ -40,5 +40,6 @@ Route::group(['middleware' => ['web']], function () {
 
 /*Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);*/
 Route::get('{slug}', ['uses' => 'Homepage@index', 'as' => 'page']);
+Route::get('setlang/{lang}', 'Homepage@set_language');
 
 Route::get('/home', 'HomeController@index');
