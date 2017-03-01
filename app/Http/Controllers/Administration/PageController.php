@@ -27,17 +27,21 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		/*$data['pages'] = DB::table( 'navigation' )
-		                   ->join( 'languages', 'navigation.language', '=', 'languages.id' )
-		                   ->get()
-		                   ->toArray();*/
-		$data['pages'] = Page::with( 'language' )->get();
+		$languages = Language::all()->toArray();
+		$pages = Page::with( 'feature' )->get()->toArray();
 
-		/*echo '<pre>';
-		print_r( $data['pages'] );
-		echo '</pre>';*/
+		//TODO this can be done with SQL as well!!!
+		foreach ($pages as &$page) {
+			foreach ($page['feature'] as &$feature) {
+				foreach($languages as $language) {
+					if ($feature['language_id'] == $language['id']) {
+					    $feature['language'] = $language['language_title'];
+					}
+				}
+			}
+		}
 
-		return view( 'administration/pages_list', $data );
+		return view( 'administration/pages_list', ['pages' => $pages]);
 	}
 
 	/**
@@ -59,13 +63,6 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\RESPONSE
 	 */
 	public function store( Request $request ) {
-		echo '<pre>';
-		print_r( $request->all() );
-		echo '</pre>';
-
-		echo '<pre>';
-		print_r( Page::find( 4 )->feature()->get() );
-		echo '</pre>';
 		$inputs = [
 			'title'       => 'name',
 			'controller'  => 'url',

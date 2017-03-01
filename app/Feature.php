@@ -12,5 +12,9 @@ class Feature extends Model {
 		return $this->belongsToMany( 'App\Page' );
 	}
 
+	public function language()
+	{
+		return $this->hasOne('App\Language');
+	}
 
 }

@@ -24,21 +24,13 @@
         </tr>
         </thead>
         <tbody>
-		<?php foreach ( $pages->toArray() as $page ): ?>
+		<?php foreach ( $pages as $page ): ?>
         <tr>
-            <td><?= $page['name'] ?></td>
+            <td><?= isset($page['feature'][0]['title']) ? $page['feature'][0]['title'] : '' ?></td>
             <td>
-                <?php
-                    $l = 0;
-                    foreach ($page['language'] as $language) {
-	                    echo $language['language_title'];
-	                    if (++$l == sizeof($page['language'])) {
-		                    echo " ";
-	                    } else {
-		                    echo ", ";
-                        }
-                    }
-                ?>
+                <?php foreach($page['feature'] as $value): ?>
+                    <?= $value['language'] ?>
+                <?php endforeach; ?>
             </td>
             <td>/<?= $page['controller'] ?></td>
             <td><?= $page['created_at'] ?></td>

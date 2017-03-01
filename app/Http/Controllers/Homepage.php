@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
+use App\Page;
 
 class Homepage extends Controller {
 
@@ -22,6 +23,11 @@ class Homepage extends Controller {
 	}*/
 
 	public function index( Request $request, $slug = NULL ) {
+		$pages = Page::with( 'feature' )->get()->toArray();
+		echo '<pre>';
+		print_r( $pages );
+		echo '</pre>';
+
 		$data['navigation'] = $this->navigation;
 		$data['section_id'] = $this->section_id;
 		if ( ! isset( $slug ) ) {

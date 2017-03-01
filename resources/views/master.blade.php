@@ -57,7 +57,7 @@
             <ul class="nav navbar-nav">
 				<?php foreach($navigation as $nav_link): ?>
 				<?php if(! isset( $nav_link->children )): ?>
-                <li><a href="<?= $nav_link->controller ?>"><?php echo trans( $nav_link->name ) ?></a>
+                <li><a href="<?= $nav_link->controller ?>"><?php echo $nav_link->name ?></a>
                 </li>
 				<?php else: ?>
                 <li><a class="dropdown-toggle" data-toggle="dropdown"
