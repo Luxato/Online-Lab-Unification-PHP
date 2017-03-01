@@ -28,20 +28,20 @@ class PageController extends Controller {
 	 */
 	public function index() {
 		$languages = Language::all()->toArray();
-		$pages = Page::with( 'feature' )->get()->toArray();
+		$pages     = Page::with( 'feature' )->get()->toArray();
 
 		//TODO this can be done with SQL as well!!!
-		foreach ($pages as &$page) {
-			foreach ($page['feature'] as &$feature) {
-				foreach($languages as $language) {
-					if ($feature['language_id'] == $language['id']) {
-					    $feature['language'] = $language['language_title'];
+		foreach ( $pages as &$page ) {
+			foreach ( $page['feature'] as &$feature ) {
+				foreach ( $languages as $language ) {
+					if ( $feature['language_id'] == $language['id'] ) {
+						$feature['language'] = $language['language_title'];
 					}
 				}
 			}
 		}
 
-		return view( 'administration/pages_list', ['pages' => $pages]);
+		return view( 'administration/pages_list', [ 'pages' => $pages ] );
 	}
 
 	/**
@@ -77,8 +77,8 @@ class PageController extends Controller {
 				$feature->{$column} = $request[ $input ][ $i ];
 			}
 			$language_shortcut     = Language::findOrFail( $request['language'][ $i ] )->language_shortcut;
-			$feature->content_file = $request['url'][ $i ] . '_' . $language_shortcut . '.blade.php';
-			$this->create_page_file($feature->content_file, $request['url'][$i], $request['cont'][$i]);
+			$feature->content_file = $request['url'][ $i ] . '_' . $language_shortcut;
+			$this->create_page_file( $feature->content_file . '.blade.php', $request['url'][ $i ], $request['cont'][ $i ] );
 			$feature->save();
 			$new_features[] = $feature->id;
 		}

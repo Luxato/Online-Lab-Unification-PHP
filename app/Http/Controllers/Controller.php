@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Page;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -15,17 +16,28 @@ class Controller extends BaseController {
 	public $navigation = FALSE;
 	public $section_id = FALSE;
 	public $controller_name = FALSE;
+	public $language = FALSE;
+
+	public $todo = 0;
 
 	public function __construct() {
+		$this->init_locale();
 		$this->init_navigation();
 		$this->init_section();
 	}
 
 	protected function init_navigation() {
-		$nav_links        = DB::table( 'navigation' )
+		/*$nav_links        = DB::table( 'navigation' )
 								->orderBy( 'parent_id' )
 								->orderBy( 'order' )
-								->get()->toArray();
+								->get()->toArray();*/
+		// TODO modify select, not to select *
+		$this->todo++;
+		$nav_links = DB::select( DB::raw("SELECT * FROM feature_page as f
+		JOIN navigation ON f.page_id = navigation.section_id
+		JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
+		JOIN languages ON features.language_id = languages.id WHERE languages.language_shortcut = '$this->language') as sub ON f.feature_id = sub.fid;"));
+
 		$this->navigation = [];
 		foreach ( $nav_links as $link ) {
 			if ( empty( $link->parent_id ) ) {
@@ -59,4 +71,14 @@ class Controller extends BaseController {
 		                           ->value( 'section_id' );
 	}
 
+	protected function init_locale() {
+		if ( \Session::has( 'applocale' ) ) {
+			$locale = \Session::get( 'applocale' );
+		} else {
+			$locale = \Config::get( 'app.fallback_locale' );
+		}
+
+		\App::setlocale( $locale );
+		$this->language = $locale;
+	}
 }

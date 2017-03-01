@@ -14,13 +14,13 @@ class Language {
 	 * @return mixed
 	 */
 	public function handle( $request, Closure $next ) {
-		if ( \Session::has( 'applocale' ) ) {
+		/*if ( \Session::has( 'applocale' ) ) {
 			$locale = \Session::get( 'applocale' );
 		} else {
 			$locale = \Config::get( 'app.fallback_locale' );
 		}
 
-		\App::setlocale( $locale );
+		\App::setlocale( $locale );*/
 
 		return $next( $request );
 	}

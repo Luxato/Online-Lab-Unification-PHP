@@ -24,30 +24,24 @@ class Homepage extends Controller {
 	}*/
 
 	public function index( Request $request, $slug = NULL ) {
-		$pages = Page::with( 'feature' )->get()->toArray();
-		/*echo '<pre>';
-		print_r( $pages );
-		echo '</pre>';*/
-
-/*		echo '<pre>';
-		print_r( \Session::all() );
-		echo '</pre>';*/
-
+		//$pages = Page::with( 'feature' )->get()->toArray();
 		$data['navigation'] = $this->navigation;
 		$data['section_id'] = $this->section_id;
 		if ( ! isset( $slug ) ) {
 			$blade = 'default';
 		} else {
-			$page  = DB::table( 'navigation' )->where( 'controller', $slug )->get()->toArray();
-			$blade = 'user_created_pages/' . $page[0]->controller;
-		}
-		if ( isset( $page[0]->content_file ) ) {
-			$data['content_file'] = $page[0]->content_file;
-		}
-		if ( isset( $page[0]->name ) ) {
-			$data['name'] = $page[0]->name;
-		} else {
-			$data['name'] = 'unknown';
+			foreach ( $this->navigation as $link ) {
+				if ( $link->controller == trim( $slug ) ) {
+					$blade = 'user_created_pages/' . $link->content_file;
+					break;
+				}
+			}
+			if ( ! isset( $blade ) ) {
+				//TODO error 404
+				$this->todo ++;
+				abort(404);
+			}
+
 		}
 
 		return view( $blade, $data );

@@ -57,15 +57,15 @@
             <ul class="nav navbar-nav">
 				<?php foreach($navigation as $nav_link): ?>
 				<?php if(! isset( $nav_link->children )): ?>
-                <li><a href="<?= $nav_link->controller ?>"><?php echo $nav_link->name ?></a>
+                <li><a href="<?= $nav_link->controller ?>"><?php echo $nav_link->title ?></a>
                 </li>
 				<?php else: ?>
                 <li><a class="dropdown-toggle" data-toggle="dropdown"
-                       href="#"><?php echo trans( $nav_link->name ) ?> <b class="caret"></b></a>
+                       href="#"><?php echo trans( $nav_link->title ) ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu multi-level">
 						<?php foreach($nav_link->children as $child_link): ?>
 						<?php if(! isset( $child_link->children )): ?>
-                        <li><a href="<?= $child_link->controller ?>"><?= $child_link->name ?></a></li>
+                        <li><a href="<?= $child_link->controller ?>"><?= $child_link->title ?></a></li>
 						<?php else: ?>
                         <li class="dropdown-submenu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?= trans( $child_link->name) ?> </a>
