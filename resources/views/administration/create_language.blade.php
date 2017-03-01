@@ -13,7 +13,7 @@
     <div class="row form-group">
         <div class="col-xs-12">
             <ul class="nav nav-pills nav-justified thumbnail setup-panel">
-                <li class="active"><a href="#step-1">
+                <li id="firstStep" class="active"><a href="#step-1">
                         <h4 class="list-group-item-heading">Krok 1</h4>
                         <p class="list-group-item-text">Vyplnenie informácií o jazyku</p>
                     </a></li>
@@ -49,7 +49,22 @@
                 <div class="col-md-12 well">
                     <div class="col-lg-6 col-lg-offset-3">
                         <h1 class="text-center">Krok 2</h1>
-                        V kroku 2 budu vsetky polozky ktore sa budu dat prelozit... <br>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Default</th>
+                                <th>Cieľový jazyk</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($translations as $value): ?>
+                            	<tr>
+                                    <td><input type="text" value="<?= $value['field'] ?>" disabled></td>
+                                    <td><input type="text"></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
                         <button id="activate-step-2" class="btn btn-success btn-sm pull-right">Vytvoriť</button>
                     </div>
                 </div>
@@ -100,6 +115,10 @@
             }
         });
         $('ul.setup-panel li.active a').trigger('click');
+
+        $('#firstStep').on('click', function() {
+            $('ul.setup-panel li:eq(1)').addClass('disabled');
+        });
 
         $("#langCreate").on('submit', function(e){
             e.preventDefault();

@@ -238,6 +238,56 @@ footer .fa {
     top: 0;
 }
 
+#preLoader {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: white;
+    z-index: 999;
+}
+.kp-loading2 {
+    z-index: 999;
+    margin: 0;
+    border-bottom: 3px solid #ffc995;
+    border-left: 3px solid #ffc995;
+    border-right: 3px solid #ffc995;
+    border-top: 3px solid #ff7e00;
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    -webkit-animation: rot .5s infinite linear;
+    -moz-animation: rot .5s infinite linear;
+    animation: rot .5s infinite linear;
+}
+
+
+@-webkit-keyframes rot {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}
+
+@-moz-keyframes rot {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(359deg);
+    }
+}
+
+@keyframes rot {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
 .se-pre-con {
     position: fixed;
     left: 0;
@@ -355,6 +405,7 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+    z-index: 9999;
     /* Set the fixed height of the footer here */
     /*height: 100px;*/
 }

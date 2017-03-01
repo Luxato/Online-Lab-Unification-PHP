@@ -40,7 +40,16 @@
     </script>
 </head>
 <body>
-<div class="se-pre-con"></div>
+{{--<div class="se-pre-con"></div>--}}
+<div id="preLoader">
+    <div style=" position: absolute;top: 50%;left: 50%;width: 100%;margin-left: -50%;margin-top:-100px;text-align: center;">
+
+        <div style="width: 50px; height: 50px; margin: 0 auto">
+            <div class="kp-loading2"></div>
+        </div>
+        <h3 style="margin-top: 20px; font-weight: bold">One moment...</h3>
+    </div>
+</div>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -190,7 +199,7 @@
 @yield('custom_bottom_scripts')
 <script>
     $(window).load(function () {
-        $(".se-pre-con").fadeOut("slow");
+        $("#preLoader").fadeOut("slow");
     });
     if  (window.innerWidth <= 768) {
         $(".navbar-fixed-top").addClass('navbar-mini');

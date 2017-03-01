@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use DB;
 use App\Language;
-use App\Page;
+use App\Translation;
 
 
 class Admin extends Controller {
@@ -63,7 +62,9 @@ class Admin extends Controller {
 	}
 
 	public function create_lang() {
-		return view( 'administration/create_language' );
+		return view( 'administration/create_language', [
+			'translations' => Translation::all()->toArray()
+		]);
 	}
 
 }
