@@ -83,18 +83,12 @@
 				<?php endif; ?>
 				<?php endforeach; ?>
 
-                {{--<li class="dropdown">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
                     <ul id="login-dp" class="dropdown-menu">
                         <li>
                             <div class="row">
                                 <div class="col-md-12">
-                                    --}}{{--Login via
- <div class="social-buttons">
-     <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-     <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
- </div>
- or--}}{{--
                                     <form class="form" role="form" method="post" action="login" accept-charset="UTF-8"
                                           id="login-nav">
                                         <div class="form-group">
@@ -125,9 +119,14 @@
                             </div>
                         </li>
                     </ul>
-                </li>--}}
+                </li>
             </ul>
         </div><!--/.nav-collapse -->
+        <ul class="translation-flags">
+            <?php foreach($languages as $language): ?>
+               <li><a href="<?= URL::to( 'setlang/' . $language['language_shortcut'] ); ?>"><?= strtoupper($language['language_shortcut']) ?></a></li>
+            <?php endforeach; ?>
+        </ul>
     </div>
 </div>
 <header>

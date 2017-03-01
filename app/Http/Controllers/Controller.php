@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Language;
 use App\Page;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -21,42 +22,13 @@ class Controller extends BaseController {
 	public $todo = 0;
 
 	public function __construct() {
-		$this->init_locale();
+		//$this->init_locale();
 		$this->init_navigation();
 		$this->init_section();
 	}
 
 	protected function init_navigation() {
-		/*$nav_links        = DB::table( 'navigation' )
-								->orderBy( 'parent_id' )
-								->orderBy( 'order' )
-								->get()->toArray();*/
-		// TODO modify select, not to select *
-		$this->todo++;
-		$nav_links = DB::select( DB::raw("SELECT * FROM feature_page as f
-		JOIN navigation ON f.page_id = navigation.section_id
-		JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
-		JOIN languages ON features.language_id = languages.id WHERE languages.language_shortcut = '$this->language') as sub ON f.feature_id = sub.fid;"));
 
-		$this->navigation = [];
-		foreach ( $nav_links as $link ) {
-			if ( empty( $link->parent_id ) ) {
-				$this->navigation[ $link->section_id ] = $link;
-				foreach ( $nav_links as $key2 => $value2 ) {
-					if ( $link->section_id == $value2->parent_id ) {
-						foreach ( $nav_links as $key => $value3 ) {
-							if ( $value2->section_id == $value3->parent_id ) {
-								$value2->children[] = $value3;
-								unset( $nav_links[ $key ] );
-							}
-						}
-						$this->navigation[ $link->section_id ]->children[] = $value2;
-						unset( $nav_links[ $key2 ] );
-					}
-				}
-
-			}
-		}
 		/*$time = microtime( TRUE ) - $_SERVER["REQUEST_TIME_FLOAT"];
 		echo "Process Time: {$time}";*/
 	}
@@ -71,7 +43,7 @@ class Controller extends BaseController {
 		                           ->value( 'section_id' );
 	}
 
-	protected function init_locale() {
+/*	protected function init_locale() {
 		if ( \Session::has( 'applocale' ) ) {
 			$locale = \Session::get( 'applocale' );
 		} else {
@@ -80,5 +52,7 @@ class Controller extends BaseController {
 
 		\App::setlocale( $locale );
 		$this->language = $locale;
-	}
+		echo "jazyk je $locale";
+	}*/
+
 }
