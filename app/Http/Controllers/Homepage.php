@@ -61,12 +61,28 @@ class Homepage extends Controller {
 		$data['languages']  = Language::all()->toArray();
 		if ( ! isset( $slug ) ) {
 			// TODO change this to dynamic
-			$blade = 'user_created_pages/' . 'aktuality';
+			$blade = 'user_created_pages/' . 'aktuality_sk';
 		} else {
 			foreach ( $this->navigation as $link ) {
 				if ( $link->controller == trim( $slug ) ) {
 					$blade = 'user_created_pages/' . $link->content_file;
 					break;
+				}
+				if (isset($link->children)) {
+					foreach($link->children as $child) {
+						if ( $child->controller == trim( $slug ) ) {
+							$blade = 'user_created_pages/' . $child->content_file;
+							break;
+						}
+						if (isset($child->children)) {
+							foreach($child->children as $subchild) {
+								if ( $subchild->controller == trim( $slug ) ) {
+									$blade = 'user_created_pages/' . $subchild->content_file;
+									break;
+								}
+							}
+						}
+					}
 				}
 			}
 			if ( ! isset( $blade ) ) {

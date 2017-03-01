@@ -68,7 +68,7 @@
                         <li><a href="<?= $child_link->controller ?>"><?= $child_link->title ?></a></li>
 						<?php else: ?>
                         <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?= trans( $child_link->name) ?> </a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?= trans( $child_link->title) ?> </a>
                             <ul class="dropdown-menu">
                                 <?php foreach($child_link->children as $sub_child_link): ?>
                                     <li><a href="<?= $sub_child_link->controller ?>"><?= $sub_child_link->name ?></a></li>
