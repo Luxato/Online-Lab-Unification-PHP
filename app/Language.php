@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Language extends Model {
 	protected $fillable = [ 'language_title', 'language_shortcut' ];
 
-	public static function _create( $title, $shortcut ) {
+	public static function _create( $title, $shortcut, $keys, $values ) {
 		// TODO check if its not duplicate
 		// Insert new language to Database
 		$language                    = new Language;
@@ -18,11 +18,17 @@ class Language extends Model {
 			try {
 				mkdir( dirname( getcwd() ) . '/resources/lang/' . $shortcut, 0777 );
 			} catch( \Exception $e ) {
-				// TODO log this somewehre
+				// Todo log this somewehre
 				/*echo 'Caught exception: ', $e->getMessage(), "\n";*/
 			}
-			$myfile = fopen( dirname( getcwd() ) . '/resources/lang/' . $shortcut . '/' . $shortcut . '.php', "w" );
-
+			$myfile = fopen( dirname( getcwd() ) . '/resources/lang/' . $shortcut . '/translation.php', "w" );
+			$template = '';
+			$template .= "<?php return [";
+			for ($i = 0; $i < sizeof($keys); $i++) {
+				$template .= "'$keys[$i]' => '$values[$i]',";
+			}
+			$template .= "];";
+			fwrite( $myfile, $template );
 		}
 	}
 

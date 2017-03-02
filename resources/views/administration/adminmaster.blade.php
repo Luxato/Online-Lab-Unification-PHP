@@ -235,7 +235,7 @@
                 @yield('title')
             </h1>
             <ol class="breadcrumb">
-                <li><a href="<?= base_path('/admin') ?>"><i class="fa fa-chevron-right" aria-hidden="true"></i> Administrácia</a></li>
+                <li><a href="<?= URL::to('/admin') ?>"><i class="fa fa-chevron-right" aria-hidden="true"></i> Hlavná stránka</a></li>
                 <li class="active">@yield('title')</li>
             </ol>
         </section>

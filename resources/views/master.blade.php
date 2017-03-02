@@ -40,6 +40,7 @@
     </script>
 </head>
 <body>
+<?= App::getLocale() ?>
 {{--<div class="se-pre-con"></div>--}}
 <div id="preLoader">
     <div style=" position: absolute;top: 50%;left: 50%;width: 100%;margin-left: -50%;margin-top:-100px;text-align: center;">
@@ -93,7 +94,7 @@
 				<?php endforeach; ?>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?= trans('translation.login') ?></b> <span class="caret"></span></a>
                     <ul id="login-dp" class="dropdown-menu">
                         <li>
                             <div class="row">
@@ -101,19 +102,19 @@
                                     <form class="form" role="form" method="post" action="login" accept-charset="UTF-8"
                                           id="login-nav">
                                         <div class="form-group">
-                                            <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                            <label class="sr-only" for="exampleInputEmail2"><?= trans('translation.email_address') ?></label>
                                             <input type="email" class="form-control" id="exampleInputEmail2"
-                                                   placeholder="Email address" required="">
+                                                   placeholder="<?= trans('translation.email_address') ?>" required="">
                                         </div>
                                         <div class="form-group">
-                                            <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                            <label class="sr-only" for="exampleInputPassword2"><?= trans('translation.password') ?></label>
                                             <input type="password" class="form-control" id="exampleInputPassword2"
-                                                   placeholder="Password" required="">
+                                                   placeholder="<?= trans('translation.password') ?>" required="">
                                             <div class="help-block text-right"><a href="">Forget the password ?</a>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                            <button type="submit" class="btn btn-primary btn-block"><?= trans('translation.sign_in')  ?></button>
                                         </div>
                                         <div class="checkbox">
                                             <label>
