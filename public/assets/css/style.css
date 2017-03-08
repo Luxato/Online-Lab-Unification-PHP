@@ -1,3 +1,6 @@
+.navbar-fixed-bottom, .navbar-fixed-top {
+    z-index: 50;
+}
 .light-gray {
     background: #eaeaea;
 }
@@ -708,7 +711,7 @@ aside {
 }
 
 aside ul.left {
-    width: 80%;
+    width: 70%;
     display: inline-block;
     float: left;
 }
@@ -732,7 +735,7 @@ aside ul, .months ul {
     padding: 0;
 }
 
-.navbar {
+.logged .navbar {
     top: 30px;
 }
 
@@ -759,4 +762,8 @@ aside ul, .months ul {
     color: #EF8646;
     text-align: center;
     font-size: 17px;
+}
+
+.panel-child {
+    background: #000;
 }

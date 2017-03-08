@@ -40,7 +40,7 @@
         var baseUrl = "<?= URL( '/' ) ?>";
     </script>
 </head>
-<body>
+<body <?= Session::get('logged_user_id') ? 'class="logged"' : '' ?>>
 {{--<div class="se-pre-con"></div>--}}
 <div id="preLoader">
     <div style=" position: absolute;top: 50%;left: 50%;width: 100%;margin-left: -50%;margin-top:-100px;text-align: center;">
@@ -51,16 +51,28 @@
         <h3 style="margin-top: 20px; font-weight: bold">One moment...</h3>
     </div>
 </div>
-<aside>
-    <div class="container">
-        <ul class="user-panel left">
-            <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Vytvoriť api kľúč</a></li>
-        </ul>
-        <div class="user-panel logout">
-            <a href="#">prihlásený užívateľ: Michal <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+<?php if(Session::get('logged_user_id')): ?>
+    <aside>
+        <div class="container">
+            <ul class="user-panel left">
+                <li><a href="#">API kľúč <i class="fa fa-angle-down" aria-hidden="true"></i></a></li>
+                {{--<li>
+                    <ul>
+                        <li class="panel-child">
+                            <a href="#">API kľúč</a>
+                        </li>
+                        <li class="panel-child">
+                            <a href="#">API kľúč</a>
+                        </li>
+                    </ul>
+                </li>--}}
+            </ul>
+            <div class="user-panel logout pull-right">
+                <a href="#">prihlásený užívateľ: <?= Session::get('logged_email') ?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            </div>
         </div>
-    </div>
-</aside>
+    </aside>
+<?php endif; ?>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -109,16 +121,16 @@
                         <li>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form class="form" role="form" method="post" action="login" accept-charset="UTF-8"
-                                          id="login-nav">
+                                    <form class="form" role="form" method="post" action="<?= URL('/login/custom') ?>" id="login-nav">
+                                        <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
                                         <div class="form-group">
                                             <label class="sr-only" for="exampleInputEmail2"><?= trans('translation.email_address') ?></label>
-                                            <input type="email" class="form-control" id="exampleInputEmail2"
+                                            <input name="email" type="email" class="form-control" id="exampleInputEmail2"
                                                    placeholder="<?= trans('translation.email_address') ?>" required="">
                                         </div>
                                         <div class="form-group">
                                             <label class="sr-only" for="exampleInputPassword2"><?= trans('translation.password') ?></label>
-                                            <input type="password" class="form-control" id="exampleInputPassword2"
+                                            <input name="password" type="password" class="form-control" id="exampleInputPassword2"
                                                    placeholder="<?= trans('translation.password') ?>" required="">
                                             <div class="help-block text-right"><a href="">Forget the password ?</a>
                                             </div>

@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function is_user() {
+    	if ($this->type == 'user') {
+    	    return TRUE;
+    	} else {
+    		return FALSE;
+	    }
+    }
 }

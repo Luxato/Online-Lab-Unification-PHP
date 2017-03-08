@@ -10,6 +10,7 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+
 // TODO AUTH ADMIN LOGIN
 Route::post('admin/page_create/', 'Admin@do_page_create');
 
@@ -28,9 +29,25 @@ Route::post('/worker/do_create_language', ['middleware' => 'auth', 'uses' => 'Wo
 Route::post('/worker/do_delete_language', ['middleware' => 'auth', 'uses' => 'Worker@do_delete_language']);
 Route::post('/worker/do_navigation_change_order', ['middleware' => 'auth', 'uses' => 'Worker@do_navigation_change_order']);
 
-Route::group(['middleware' => ['web']], function () {
+/*Route::group(['middleware' => ['web']], function () {
 	Route::auth();
-});
+});*/
+
+// Authentication Routes...
+$this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+$this->post('login', 'Auth\LoginController@login');
+$this->post('logout', 'Auth\LoginController@logout')->name('logout');
+
+// Registration Routes...
+$this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+$this->post('register', 'Auth\RegisterController@register');
+
+// Password Reset Routes...
+/*$this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+$this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+$this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+$this->post('password/reset', 'Auth\ResetPasswordController@reset');*/
+
 
 /**
  * {locale} - language = {en,sk}
@@ -43,3 +60,8 @@ Route::get('{slug}', ['uses' => 'Homepage@index', 'as' => 'page']);
 Route::get('setlang/{lang}', 'Homepage@set_language');
 
 Route::get('/home', 'HomeController@index');
+
+Route::post('/login/custom', [
+	'uses' => 'LoginController@login',
+	'as'   =>  'login.custom'
+] );
