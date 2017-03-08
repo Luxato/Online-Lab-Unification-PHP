@@ -28,7 +28,7 @@ class Homepage extends Controller {
 		if ( \Session::has( 'applocale' ) ) {
 			$locale = \Session::get( 'applocale' );
 		} else {
-			$locale = \Config::get( 'app.fallback_locale' );
+			$locale = \Config::get( 'app.locale' );
 		}
 		\App::setlocale( $locale );
 

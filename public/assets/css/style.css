@@ -726,7 +726,7 @@ aside a:hover {
     color: #EF8646;
 }
 
-aside ul {
+aside ul, .months ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -736,3 +736,27 @@ aside ul {
     top: 30px;
 }
 
+.widget {
+    height: 100%;
+    width: 100%;
+    border-left: 2px solid black;
+    display: inline-block;
+}
+
+.months ul {
+    margin: 0 0 0 15px;
+}
+
+.months ul li {
+    background: url('../img/cubic.png') no-repeat left center;
+    padding: 3px 0 3px 10px;
+    /* reset styles (optional): */
+    list-style: none;
+    margin: 0;
+}
+
+.months ul li a {
+    color: #EF8646;
+    text-align: center;
+    font-size: 17px;
+}

@@ -24,6 +24,8 @@ TODO :
 4# github.com/VincentGarreau/particles.js
 
 5# https://laravelcollective.com/docs/5.0/html#installation
+
+6# http://silviomoreto.github.io/bootstrap-select/
 ...
 wysiwyg/ckeditor, jquery nestable 
 notyjs
