@@ -218,7 +218,7 @@ function pocitaj(){
 
         }
 		console.log($( "#segwayInputs" ).serialize());
-	    $.post("http://localhost:8000/applications/hok/model.php",$( "#segwayInputs" ).serialize(), function (data) {
+	    $.post("http://147.175.105.140:8033/~stranovsky/public/applications/hok/model.php",$( "#segwayInputs" ).serialize(), function (data) {
 	    	$("#loadingGif").hide();
 	    	//console.log(data);
 	        if(data==false){

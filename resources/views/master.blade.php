@@ -40,7 +40,6 @@
     </script>
 </head>
 <body>
-<?= App::getLocale() ?>
 {{--<div class="se-pre-con"></div>--}}
 <div id="preLoader">
     <div style=" position: absolute;top: 50%;left: 50%;width: 100%;margin-left: -50%;margin-top:-100px;text-align: center;">
@@ -51,6 +50,16 @@
         <h3 style="margin-top: 20px; font-weight: bold">One moment...</h3>
     </div>
 </div>
+<aside>
+    <div class="container">
+        <ul class="user-panel left">
+            <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Vytvoriť api kľúč</a></li>
+        </ul>
+        <div class="user-panel logout">
+            <a href="#">prihlásený užívateľ: Michal <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+        </div>
+    </div>
+</aside>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">

@@ -245,6 +245,7 @@ footer .fa {
     background: white;
     z-index: 999;
 }
+
 .kp-loading2 {
     z-index: 999;
     margin: 0;
@@ -259,7 +260,6 @@ footer .fa {
     -moz-animation: rot .5s infinite linear;
     animation: rot .5s infinite linear;
 }
-
 
 @-webkit-keyframes rot {
     from {
@@ -682,10 +682,12 @@ code {
     color: whitesmoke;
     padding: 5px 0 10px 0;
 }
+
 .footer-right {
     text-align: center;
     line-height: 150px;
 }
+
 .footer-right li {
     display: inline;
     margin-right: 5px;
@@ -694,3 +696,43 @@ code {
 .footer-right .fa {
     color: #fff;
 }
+
+aside {
+    background: #222;
+    height: 30px;
+    width: 100%;
+    /*position: absolute;*/
+    top: 0;
+    position: fixed;
+    z-index: 999;
+}
+
+aside ul.left {
+    width: 80%;
+    display: inline-block;
+    float: left;
+}
+
+aside a {
+    color: white;
+    border: 1px solid #333;
+    line-height: 30px;
+    padding: 10px;
+}
+
+aside a:hover {
+    text-decoration: none;
+    background: #333;
+    color: #EF8646;
+}
+
+aside ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    top: 30px;
+}
+
