@@ -26,6 +26,9 @@ TODO :
 5# https://laravelcollective.com/docs/5.0/html#installation
 
 6# http://silviomoreto.github.io/bootstrap-select/
+
+7# https://github.com/dangrossman/bootstrap-daterangepicker
+
 ...
 wysiwyg/ckeditor, jquery nestable 
 notyjs

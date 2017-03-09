@@ -22,29 +22,31 @@ Pridať novú aktualitu
 				       placeholder="Zadajte nadpis sem" required="">
 			</div>
 			<div class="form-group">
-				<label for="exampleInputEmail1">Ak</label>
-				<input id="url-input" class="form-control" name="url[]" type="text" placeholder="URL" required="">
+				<label for="exampleInputEmail1">Kategória</label>
+                <select id="languageSelection" name="language[]" class="form-control" required="">
+                    <option value="0">Nezaradené</option>
+                </select>
 			</div>
 		</div>
 		<div class="col-md-6">
+            <label for="exampleInputEmail1">Do kedy je aktualita aktuálna</label>
+            <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                <span></span> <b class="caret"></b>
+            </div>
+		</div>
+		<div class="col-md-12">
             <div class="form-group">
                 <label for="exampleInputEmail1">Obsah</label>
                 <textarea id="editor" name="cont[]" rows="6" cols="80">
                     </textarea>
             </div>
 		</div>
-		<div class="col-md-12">
-			{{--<div class="form-group">
-				<label for="exampleInputEmail1">Obsah</label>
-				<textarea id="editor" name="cont[]" rows="6" cols="80">
-                    </textarea>
-			</div>--}}
-		</div>
 
 		<div id="another-lang"></div>
 
 		<div class="col-md-12">
-			<button type="submit" class="btn btn-success btn-lg pull-right" style="width: 49%;">Vytvoriť</button>
+			<button type="submit" class="btn btn-success btn-lg pull-right disabled" style="width: 49%;">Vytvoriť</button>
 		</div>
 	</form>
 </div>
@@ -54,5 +56,27 @@ Pridať novú aktualitu
 <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/ckeditor/ckeditor.min.js"></script>
 <script>
     CKEDITOR.replace('editor');
+
+    $(function() {
+
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+
+        function cb(start, end) {
+            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+
+        $('#reportrange').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')]
+            }
+        }, cb);
+
+        cb(start, end);
+
+    });
 </script>
 @stop

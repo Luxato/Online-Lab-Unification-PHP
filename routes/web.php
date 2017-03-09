@@ -18,6 +18,8 @@ Route::post('admin/page_create/', 'Admin@do_page_create');
 Route::resource('admin/pages', 'Administration\PageController');
 // Resource for news
 Route::resource('admin/news', 'Administration\NewsController');
+// Resource for users
+Route::resource('admin/users', 'Administration\UserController');
 
 Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
 
@@ -43,6 +45,12 @@ $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 // Registration Routes...
 $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 $this->post('register', 'Auth\RegisterController@register');
+Route::post('/login/custom', [
+	'uses' => 'LoginController@login',
+	'as'   =>  'login.custom'
+] );
+
+$this->get('/login/logout', 'LoginController@logout');
 
 // Password Reset Routes...
 /*$this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
@@ -62,8 +70,3 @@ Route::get('{slug}', ['uses' => 'Homepage@index', 'as' => 'page']);
 Route::get('setlang/{lang}', 'Homepage@set_language');
 
 Route::get('/home', 'HomeController@index');
-
-Route::post('/login/custom', [
-	'uses' => 'LoginController@login',
-	'as'   =>  'login.custom'
-] );

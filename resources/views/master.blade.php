@@ -28,7 +28,8 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="./favicon/ms-icon-144x144.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
     <link href="assets/css/style.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,7 +41,7 @@
         var baseUrl = "<?= URL( '/' ) ?>";
     </script>
 </head>
-<body <?= Session::get('logged_user_id') ? 'class="logged"' : '' ?>>
+<body <?= Session::get( 'logged_user_id' ) ? 'class="logged"' : '' ?>>
 {{--<div class="se-pre-con"></div>--}}
 <div id="preLoader">
     <div style=" position: absolute;top: 50%;left: 50%;width: 100%;margin-left: -50%;margin-top:-100px;text-align: center;">
@@ -51,27 +52,32 @@
         <h3 style="margin-top: 20px; font-weight: bold">One moment...</h3>
     </div>
 </div>
-<?php if(Session::get('logged_user_id')): ?>
-    <aside>
-        <div class="container">
-            <ul class="user-panel left">
-                <li><a href="#">API kľúč <i class="fa fa-angle-down" aria-hidden="true"></i></a></li>
-                <li class="panel-sub">
+<?php if(Session::get( 'logged_user_id' )): ?>
+<aside>
+    <div class="container">
+        <nav class="primary_nav_wrap">
+            <ul>
+                <li><a href="#">API kľúče <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                     <ul>
-                        <li class="panel-child">
-                            <a href="#">API kľúč</a>
-                        </li>
-                        <li class="panel-child">
-                            <a href="#">API kľúč</a>
-                        </li>
+                        <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Vytvoriť API kľúč</a></li>
                     </ul>
                 </li>
             </ul>
-            <div class="user-panel logout pull-right">
-                <a href="#">prihlásený užívateľ: <?= Session::get('logged_email') ?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-            </div>
+        </nav>
+        <div class="user-panel logout pull-right">
+            <nav class="primary_nav_wrap">
+                <ul>
+                    <li><a href="#">prihlásený užívateľ: <?= Session::get( 'logged_email' ) ?> <i class="fa fa-angle-down"
+                                                                                                  aria-hidden="true"></i></a></a>
+                        <ul>
+                            <li><a href="<?= url('login/logout') ?>"><i class="fa fa-sign-out" aria-hidden="true"></i> Odhlásiť</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </aside>
+    </div>
+</aside>
 <?php endif; ?>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
@@ -100,11 +106,12 @@
                         <li><a href="<?= $child_link->controller ?>"><?= $child_link->title ?></a></li>
 						<?php else: ?>
                         <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?= trans( $child_link->title) ?> </a>
+                            <a href="#" class="dropdown-toggle"
+                               data-toggle="dropdown"> <?= trans( $child_link->title ) ?> </a>
                             <ul class="dropdown-menu">
-                                <?php foreach($child_link->children as $sub_child_link): ?>
-                                    <li><a href="<?= $sub_child_link->controller ?>"><?= $sub_child_link->name ?></a></li>
-                                <?php endforeach; ?>
+								<?php foreach($child_link->children as $sub_child_link): ?>
+                                <li><a href="<?= $sub_child_link->controller ?>"><?= $sub_child_link->name ?></a></li>
+								<?php endforeach; ?>
                             </ul>
                         </li>
 
@@ -115,52 +122,62 @@
 				<?php endif; ?>
 				<?php endforeach; ?>
 
-                <?php if(!Session::get('logged_user_id')): ?>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?= trans('translation.login') ?></b> <span class="caret"></span></a>
-                        <ul id="login-dp" class="dropdown-menu">
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <form class="form" role="form" method="post" action="<?= URL('/login/custom') ?>" id="login-nav">
-                                            <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
-                                            <div class="form-group">
-                                                <label class="sr-only" for="exampleInputEmail2"><?= trans('translation.email_address') ?></label>
-                                                <input name="email" type="email" class="form-control" id="exampleInputEmail2"
-                                                       placeholder="<?= trans('translation.email_address') ?>" required="">
+				<?php if(! Session::get( 'logged_user_id' )): ?>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle"
+                       data-toggle="dropdown"><b><?= trans( 'translation.login' ) ?></b> <span class="caret"></span></a>
+                    <ul id="login-dp" class="dropdown-menu">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form class="form" role="form" method="post" action="<?= URL( '/login/custom' ) ?>"
+                                          id="login-nav">
+                                        <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
+                                        <div class="form-group">
+                                            <label class="sr-only"
+                                                   for="exampleInputEmail2"><?= trans( 'translation.email_address' ) ?></label>
+                                            <input name="email" type="email" class="form-control"
+                                                   id="exampleInputEmail2"
+                                                   placeholder="<?= trans( 'translation.email_address' ) ?>"
+                                                   required="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only"
+                                                   for="exampleInputPassword2"><?= trans( 'translation.password' ) ?></label>
+                                            <input name="password" type="password" class="form-control"
+                                                   id="exampleInputPassword2"
+                                                   placeholder="<?= trans( 'translation.password' ) ?>" required="">
+                                            <div class="help-block text-right"><a href="">Forget the password ?</a>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="sr-only" for="exampleInputPassword2"><?= trans('translation.password') ?></label>
-                                                <input name="password" type="password" class="form-control" id="exampleInputPassword2"
-                                                       placeholder="<?= trans('translation.password') ?>" required="">
-                                                <div class="help-block text-right"><a href="">Forget the password ?</a>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary btn-block"><?= trans('translation.sign_in')  ?></button>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> keep me logged-in
-                                                </label>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="bottom text-center">
-                                        New here ? <a href="#"><b>Join Us</b></a>
-                                    </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit"
+                                                    class="btn btn-primary btn-block"><?= trans( 'translation.sign_in' )  ?></button>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> keep me logged-in
+                                            </label>
+                                        </div>
+                                    </form>
                                 </div>
-                            </li>
-                        </ul>
-                    </li>
-                <?php endif; ?>
+                                <div class="bottom text-center">
+                                    New here ? <a href="#"><b>Join Us</b></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+				<?php endif; ?>
 
             </ul>
         </div><!--/.nav-collapse -->
         <ul class="translation-flags">
-            <?php foreach($languages as $language): ?>
-               <li><a href="<?= URL::to( 'setlang/' . $language['language_shortcut'] ); ?>"><?= strtoupper($language['language_shortcut']) ?></a></li>
-            <?php endforeach; ?>
+			<?php foreach($languages as $language): ?>
+            <li>
+                <a href="<?= URL::to( 'setlang/' . $language['language_shortcut'] ); ?>"><?= strtoupper( $language['language_shortcut'] ) ?></a>
+            </li>
+			<?php endforeach; ?>
         </ul>
     </div>
 </div>
@@ -228,12 +245,12 @@
     $(window).load(function () {
         $("#preLoader").fadeOut("slow");
     });
-    if  (window.innerWidth <= 768) {
+    if (window.innerWidth <= 768) {
         $(".navbar-fixed-top").addClass('navbar-mini');
     }
     $(window).scroll(function () {
         var navbar = $(".navbar-fixed-top");
-        if  (window.innerWidth <= 768) {
+        if (window.innerWidth <= 768) {
             navbar.addClass('navbar-mini');
             return;
         }
@@ -243,13 +260,13 @@
             navbar.removeClass('navbar-mini');
         }
     });
-    $(document).ready(function() {
-        $('.navbar a.dropdown-toggle').on('click', function(e) {
+    $(document).ready(function () {
+        $('.navbar a.dropdown-toggle').on('click', function (e) {
             var $el = $(this);
             var $parent = $(this).offsetParent(".dropdown-menu");
             $(this).parent("li").toggleClass('open');
 
-            if(!$parent.parent().hasClass('nav')) {
+            if (!$parent.parent().hasClass('nav')) {
                 $el.next().css({"top": $el[0].offsetTop, "left": $parent.outerWidth() - 4});
             }
 
@@ -260,31 +277,31 @@
     });
     // Go top
     /*if($window.scrollTop() > 450) {
-        $goToTopEl.fadeIn();
-    } else {
-        $goToTopEl.fadeOut();
-    }*/
-    $(document).ready(function() {
+     $goToTopEl.fadeIn();
+     } else {
+     $goToTopEl.fadeOut();
+     }*/
+    $(document).ready(function () {
         var scrollHeight = $(document).height();
         var scrollPosition = $(window).height() + $(window).scrollTop();
-        if((scrollHeight == scrollPosition) && ($(window).scrollTop() != 0)) {
-           $('#gotoTop').fadeIn();
+        if ((scrollHeight == scrollPosition) && ($(window).scrollTop() != 0)) {
+            $('#gotoTop').fadeIn();
             console.log('test');
         } else {
             $('#gotoTop').fadeOut();
         }
-        $(window).scroll(function() {
-            if($(this).scrollTop() > 100){
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
                 $('#gotoTop').fadeIn();
             }
-            else{
+            else {
                 $('#gotoTop').fadeOut();
             }
         });
-        $('#gotoTop').click(function() {
+        $('#gotoTop').click(function () {
             $('html, body').stop().animate({
                 scrollTop: 0
-            }, 500, function() {
+            }, 500, function () {
                 $('#goTop').stop().animate({
                     top: '-100px'
                 }, 500);

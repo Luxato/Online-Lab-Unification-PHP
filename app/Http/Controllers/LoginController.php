@@ -29,5 +29,16 @@ class LoginController extends Controller {
 		}
 	}
 
+	/**
+	 * Logout our user
+	 */
+	public function logout() {
+		Session::flush('logged_user_id');
+		Session::flush('logged_email');
+		Auth::logout();
+
+		return back();
+	}
+
 
 }

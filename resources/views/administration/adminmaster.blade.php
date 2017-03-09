@@ -15,6 +15,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dist/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css">
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/custom.css">
     @yield('custom_css')
     <style>
@@ -217,7 +218,18 @@
                         <li><a href="<?= url::to( '/admin/news' ); ?>">Pridať novú</a></li>
                     </ul>
                 </li>
-                <li id="nav-users"><a class="disabled" href="<?= url::to( '/admin#' ); ?>"><i class="fa fa-users" aria-hidden="true"></i> <span>Používatelia</span></a></li>
+
+                <li id="nav-users" class="treeview">
+                    <a href="#"><i class="fa fa-users" aria-hidden="true"></i> <span>Užívatelia</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= url::to( '/admin/users' ); ?>">Všetci užívatelia</a></li>
+                    </ul>
+                </li>
+
                 <li id="nav-tools"><a class="disabled" href="<?= url::to( '/admin#' ); ?>"><i class="fa fa-cogs" aria-hidden="true"></i> <span>Nástroje</span></a></li>
                 <li id="nav-languages" class="treeview">
                     <a href="#"><i class="fa fa-language" aria-hidden="true"></i> <span>Jazyky</span>
@@ -275,6 +287,8 @@
 <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="<?= URL::to( '/' ); ?>/assets/administration/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= URL::to( '/' ); ?>/assets/administration/dist/js/app.min.js"></script>
 <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/noty/jquery.noty.packaged.min.js"></script>
