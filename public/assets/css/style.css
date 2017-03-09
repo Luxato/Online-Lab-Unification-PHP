@@ -1,6 +1,7 @@
 .navbar-fixed-bottom, .navbar-fixed-top {
     z-index: 50;
 }
+
 .light-gray {
     background: #eaeaea;
 }
@@ -739,6 +740,10 @@ aside ul, .months ul {
     top: 30px;
 }
 
+.logged header {
+    margin-top: 30px;
+}
+
 .widget {
     height: 100%;
     width: 100%;
@@ -766,4 +771,18 @@ aside ul, .months ul {
 
 .panel-child {
     background: #000;
+}
+
+.panel-sub {
+    width: 200px;
+}
+
+.panel-sub a, .panel-sub ul, .panel-sub li {
+    display: inline-block;
+    width: 100%;
+    height: 20px;
+    line-height:20px;
+
+}
+.panel-sub a {
 }

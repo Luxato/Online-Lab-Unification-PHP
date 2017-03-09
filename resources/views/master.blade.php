@@ -56,7 +56,7 @@
         <div class="container">
             <ul class="user-panel left">
                 <li><a href="#">API kľúč <i class="fa fa-angle-down" aria-hidden="true"></i></a></li>
-                {{--<li>
+                <li class="panel-sub">
                     <ul>
                         <li class="panel-child">
                             <a href="#">API kľúč</a>
@@ -65,7 +65,7 @@
                             <a href="#">API kľúč</a>
                         </li>
                     </ul>
-                </li>--}}
+                </li>
             </ul>
             <div class="user-panel logout pull-right">
                 <a href="#">prihlásený užívateľ: <?= Session::get('logged_email') ?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
@@ -115,43 +115,46 @@
 				<?php endif; ?>
 				<?php endforeach; ?>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?= trans('translation.login') ?></b> <span class="caret"></span></a>
-                    <ul id="login-dp" class="dropdown-menu">
-                        <li>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <form class="form" role="form" method="post" action="<?= URL('/login/custom') ?>" id="login-nav">
-                                        <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
-                                        <div class="form-group">
-                                            <label class="sr-only" for="exampleInputEmail2"><?= trans('translation.email_address') ?></label>
-                                            <input name="email" type="email" class="form-control" id="exampleInputEmail2"
-                                                   placeholder="<?= trans('translation.email_address') ?>" required="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only" for="exampleInputPassword2"><?= trans('translation.password') ?></label>
-                                            <input name="password" type="password" class="form-control" id="exampleInputPassword2"
-                                                   placeholder="<?= trans('translation.password') ?>" required="">
-                                            <div class="help-block text-right"><a href="">Forget the password ?</a>
+                <?php if(!Session::get('logged_user_id')): ?>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?= trans('translation.login') ?></b> <span class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form class="form" role="form" method="post" action="<?= URL('/login/custom') ?>" id="login-nav">
+                                            <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputEmail2"><?= trans('translation.email_address') ?></label>
+                                                <input name="email" type="email" class="form-control" id="exampleInputEmail2"
+                                                       placeholder="<?= trans('translation.email_address') ?>" required="">
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block"><?= trans('translation.sign_in')  ?></button>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox"> keep me logged-in
-                                            </label>
-                                        </div>
-                                    </form>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputPassword2"><?= trans('translation.password') ?></label>
+                                                <input name="password" type="password" class="form-control" id="exampleInputPassword2"
+                                                       placeholder="<?= trans('translation.password') ?>" required="">
+                                                <div class="help-block text-right"><a href="">Forget the password ?</a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-block"><?= trans('translation.sign_in')  ?></button>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"> keep me logged-in
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="bottom text-center">
+                                        New here ? <a href="#"><b>Join Us</b></a>
+                                    </div>
                                 </div>
-                                <div class="bottom text-center">
-                                    New here ? <a href="#"><b>Join Us</b></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
+                            </li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
             </ul>
         </div><!--/.nav-collapse -->
         <ul class="translation-flags">

@@ -206,7 +206,17 @@
                         <li><a href="<?= url::to( '/admin/pages/create' ); ?>">Pridať novú</a></li>
                     </ul>
                 </li>
-                <li id="nav-news"><a class="disabled" href="<?= url::to( '/admin#' ); ?>"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span>Aktuality</span></a></li>
+
+                <li id="nav-news" class="treeview">
+                    <a href="#"><i class="fa fa-thumb-tack" aria-hidden="true"></i> <span>Aktuality</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= url::to( '/admin/news' ); ?>">Pridať novú</a></li>
+                    </ul>
+                </li>
                 <li id="nav-users"><a class="disabled" href="<?= url::to( '/admin#' ); ?>"><i class="fa fa-users" aria-hidden="true"></i> <span>Používatelia</span></a></li>
                 <li id="nav-tools"><a class="disabled" href="<?= url::to( '/admin#' ); ?>"><i class="fa fa-cogs" aria-hidden="true"></i> <span>Nástroje</span></a></li>
                 <li id="nav-languages" class="treeview">

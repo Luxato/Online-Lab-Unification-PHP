@@ -16,6 +16,8 @@ Route::post('admin/page_create/', 'Admin@do_page_create');
 
 // Resource for pages
 Route::resource('admin/pages', 'Administration\PageController');
+// Resource for news
+Route::resource('admin/news', 'Administration\NewsController');
 
 Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
 

@@ -25,6 +25,9 @@ class Language extends Model {
 			$template = '';
 			$template .= "<?php return [";
 			for ($i = 0; $i < sizeof($keys); $i++) {
+				if ($values[$i] == '' || empty($values[$i])) {
+				    continue;
+				}
 				$template .= "'$keys[$i]' => '$values[$i]',";
 			}
 			$template .= "];";
