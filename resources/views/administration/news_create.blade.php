@@ -15,24 +15,36 @@ Pridať novú aktualitu
 <div class="row">
 	<form id="new-page-form" onsubmit="return validateForm()" action="<?= URL( 'admin/pages/' ) ?>" method="POST">
 		<input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
-		<div class="col-lg-6">
+		<div class="col-md-6">
 			<div class="form-group">
 				<label for="exampleInputEmail1">Nadpis</label>
 				<input id="title-input" class="form-control" name="name[]" type="text"
 				       placeholder="Zadajte nadpis sem" required="">
 			</div>
-			<div class="form-group">
-				<label for="exampleInputEmail1">Kategória</label>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Jazyk</label>
                 <select id="languageSelection" name="language[]" class="form-control" required="">
-                    <option value="0">Nezaradené</option>
+					<?php foreach($languages as $language): ?>
+                    <option value="<?= $language->id ?>"><?= $language->language_title ?></option>
+					<?php endforeach; ?>
                 </select>
-			</div>
+            </div>
 		</div>
 		<div class="col-md-6">
-            <label for="exampleInputEmail1">Do kedy je aktualita aktuálna</label>
-            <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-                <span></span> <b class="caret"></b>
+            <div class="form-group" style="height: 59px;">
+                <label for="exampleInputEmail1">Do kedy je aktualita aktuálna</label>
+                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                    <span></span> <b class="caret"></b>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Kategória</label>
+                <select id="languageSelection" name="language[]" class="form-control" required="">
+                <?php foreach($categories as $category): ?>
+                    <option value="<?= $category->id ?>"><?= $category->name ?></option>
+                <?php endforeach; ?>
+                </select>
             </div>
 		</div>
 		<div class="col-md-12">
@@ -58,6 +70,7 @@ Pridať novú aktualitu
     CKEDITOR.replace('editor');
 
     $(function() {
+        $('#nav-news').addClass('active');
 
         var start = moment().subtract(29, 'days');
         var end = moment();

@@ -3,23 +3,22 @@
 namespace App\Http\Controllers\Administration;
 
 use App\Http\Controllers\Controller;
-
-use App\News_categorie;
-use App\Language;
+use App\Http\Middleware\Language;
+use App\Setting;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller {
+class SettingsController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-
-		return view( 'administration/news_create', [
-			'categories' => News_categorie::all(),
-			'languages'  => Language::all()
-		] );
+		return view( 'administration/settings', [
+			'settings' => Setting::all(),
+			'default_lang' => $this->get_default_lang(),
+			'languages' => \App\Language::all()
+		]);
 	}
 
 	/**

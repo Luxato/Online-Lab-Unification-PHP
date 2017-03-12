@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Language;
-use App\Page;
+use App\Setting;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -17,7 +16,7 @@ class Controller extends BaseController {
 	public $navigation = FALSE;
 	public $section_id = FALSE;
 	public $controller_name = FALSE;
-	public $language = FALSE;
+	public $default_language = FALSE;
 
 	public $todo = 0;
 
@@ -25,6 +24,7 @@ class Controller extends BaseController {
 		//$this->init_locale();
 		$this->init_navigation();
 		$this->init_section();
+		$this->set_app_language();
 	}
 
 	protected function init_navigation() {
@@ -54,5 +54,11 @@ class Controller extends BaseController {
 		$this->language = $locale;
 		echo "jazyk je $locale";
 	}*/
+	public function set_app_language() {
+		$this->default_language = Setting::all()[3]->setting_value;
+	}
 
+	public function get_default_lang() {
+		return $this->default_language;
+	}
 }

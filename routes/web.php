@@ -22,12 +22,14 @@ Route::resource('admin/news', 'Administration\NewsController');
 Route::resource('admin/users', 'Administration\UserController');
 // Resource for News-Categories
 Route::resource('admin/news-categories', 'Administration\NewsCategoriesController');
+// Resource for settings
+Route::resource('admin/settings', 'Administration\SettingsController');
 
 Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
 
 Route::get('/admin', ['middleware' => 'auth', 'uses' => 'Admin@index']);
 Route::get('/admin/navigation', ['middleware' => 'auth', 'uses' => 'Admin@navigation']);
-Route::get('/admin/settings', ['middleware' => 'auth', 'uses' => 'Admin@settings']);
+//Route::get('/admin/settings', ['middleware' => 'auth', 'uses' => 'Admin@settings']);
 Route::get('/admin/languages', ['middleware' => 'auth', 'uses' => 'Admin@languages']);
 Route::get('/admin/create_lang', ['middleware' => 'auth', 'uses' => 'Admin@create_lang']);
 

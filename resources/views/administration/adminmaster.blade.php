@@ -215,7 +215,7 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<?= url::to( '/admin/news-categories' ); ?>">Kategórie</a></li>
+                        <li><a href="<?= url::to( '/admin/news' ); ?>">Kategórie</a></li>
                         <li><a href="<?= url::to( '/admin/news' ); ?>">Pridať novú</a></li>
                     </ul>
                 </li>

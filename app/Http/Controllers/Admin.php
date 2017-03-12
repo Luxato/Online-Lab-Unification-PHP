@@ -51,9 +51,9 @@ class Admin extends Controller {
 		return view( 'administration/pages_list', $data );
 	}*/
 
-	public function settings() {
+	/*public function settings() {
 		return view( 'administration/settings' );
-	}
+	}*/
 
 	public function languages() {
 		$data['languages'] = Language::all();
