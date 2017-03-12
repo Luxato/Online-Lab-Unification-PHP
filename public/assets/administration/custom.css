@@ -88,3 +88,11 @@ hr {
 .parsley-errors-list {
     list-style-type: none;
 }
+
+.admin-sub-options {
+    cursor: pointer;
+}
+
+#dropForm {
+    display: none;
+}

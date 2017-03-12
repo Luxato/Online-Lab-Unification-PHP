@@ -20,6 +20,8 @@ Route::resource('admin/pages', 'Administration\PageController');
 Route::resource('admin/news', 'Administration\NewsController');
 // Resource for users
 Route::resource('admin/users', 'Administration\UserController');
+// Resource for News-Categories
+Route::resource('admin/news-categories', 'Administration\NewsCategoriesController');
 
 Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
 
