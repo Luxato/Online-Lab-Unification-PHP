@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Administration;
 
+use App\Actuality;
+use Session;
 use App\Http\Controllers\Controller;
 
 use App\News_categorie;
@@ -39,7 +41,20 @@ class NewsController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store( Request $request ) {
-		//
+		$actuality = new Actuality();
+		$actuality->name = $request->name;
+		$actuality->content = $request->cont;
+		$actuality->language = $request->language[0];
+		$actuality->category = $request->category;
+		if ($request->infinity !== 'on') {
+		    $actuality->from = $request->startDate;
+		    $actuality->to = $request->endDate;
+		}
+		$actuality->save();
+
+		Session::flash( 'success', "Aktualita bola úspešne vytvorená." );
+
+		return back();
 	}
 
 	/**
