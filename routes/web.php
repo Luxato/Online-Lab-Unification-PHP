@@ -25,7 +25,12 @@ Route::resource('admin/news-categories', 'Administration\NewsCategoriesControlle
 // Resource for settings
 Route::resource('admin/settings', 'Administration\SettingsController');
 
+// Resource for settings
+Route::resource('aktuality', 'ActualitiesController');
+
 Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
+
+Route::get('/', ['uses' => 'ActualitiesController@index']);
 
 Route::get('/admin', ['middleware' => 'auth', 'uses' => 'Admin@index']);
 Route::get('/admin/navigation', ['middleware' => 'auth', 'uses' => 'Admin@navigation']);
@@ -61,13 +66,6 @@ $this->get('/login/logout', 'LoginController@logout');
 $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');*/
-
-
-/**
- * {locale} - language = {en,sk}
- */
-/*Route::get('/contact', ['uses' => 'Contact@index', 'as' => 'contact']);*/
-
 
 /*Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);*/
 Route::get('{slug}', ['uses' => 'Homepage@index', 'as' => 'page']);

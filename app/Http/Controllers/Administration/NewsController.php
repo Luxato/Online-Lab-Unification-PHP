@@ -41,20 +41,23 @@ class NewsController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store( Request $request ) {
-		$actuality = new Actuality();
-		$actuality->name = $request->name;
-		$actuality->content = $request->cont;
+		$actuality           = new Actuality();
+		$actuality->name     = $request->name;
+		$actuality->content  = $request->cont;
 		$actuality->language = $request->language[0];
 		$actuality->category = $request->category;
-		if ($request->infinity !== 'on') {
-		    $actuality->from = $request->startDate;
-		    $actuality->to = $request->endDate;
+		if ( $request->infinity !== 'on' ) {
+			$actuality->from = $request->startDate;
+			$actuality->to   = $request->endDate;
+		}
+		if ( $filename = $this->uploadFile( $actuality, $request->file( 'thumbnail' ) ) ) {
+			$actuality->thumbnail_path = $filename;
 		}
 		$actuality->save();
 
 		Session::flash( 'success', "Aktualita bola úspešne vytvorená." );
 
-		return back();
+		return redirect( 'admin/news-categories' );
 	}
 
 	/**
@@ -100,5 +103,25 @@ class NewsController extends Controller {
 	 */
 	public function destroy( $id ) {
 		//
+	}
+
+	private function uploadFile( $actuality, $file ) {
+		if ( ! $file ) {
+			return FALSE;
+		}
+		if ( $file || ! $file->isValid() ) {
+			$filepath   = storage_path( 'uploads/' . $actuality->id );
+			$extenstion = $file->getClientOriginalExtension();
+			//$filename   = $file->getClientOriginalName() . '_' . time();
+			$filename = str_replace(
+				".$extenstion",
+				"-" . time() . ".$extenstion",
+				$file->getClientOriginalName()
+			);
+
+			$file->move( $filepath, $filename );
+
+			return 'storage/uploads/' . $filename;
+		}
 	}
 }

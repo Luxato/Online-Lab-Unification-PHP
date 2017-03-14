@@ -13,7 +13,7 @@
 @section('content')
     <br>
     <div class="row">
-        <form id="new-page-form" onsubmit="return validateForm()" action="<?= URL( 'admin/news/' ) ?>" method="POST">
+        <form id="new-page-form" onsubmit="return validateForm()" action="<?= URL( 'admin/news/' ) ?>" method="POST" enctype="multipart/form-data">
             <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
             <div id="dateRange"></div>
             <div class="col-md-6">
@@ -29,6 +29,11 @@
                         <option value="<?= $language->id ?>"><?= $language->language_title ?></option>
 						<?php endforeach; ?>
                     </select>
+                    <div class="form-group">
+                        <br>
+                        <label class="control-label">Upload thumbnailu</label>
+                        <input name="thumbnail" type="file" class="file">
+                    </div>
                 </div>
             </div>
             <div class="col-md-6">
@@ -99,13 +104,6 @@
 
         var startDate = 0;
         var endDate = 0;
-        /*$('#reportrange').change(function(){
-         startDate = $('input[name="daterangepicker_start"]')[0].value;
-         console.log('nastala zmena');
-         });*/
-        /*$('input[name="daterangepicker_end"]').on('change', function(){
-         endDate = $(this)[0].value;
-         });*/
         function validateForm() {
             var dateRange = $('#dateRange');
             dateRange.empty();
