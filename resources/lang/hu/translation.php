@@ -1,1 +1,0 @@
-<?php return [ 'login' => 'reber', 'forget_the_password' => 'sdvsd', ];

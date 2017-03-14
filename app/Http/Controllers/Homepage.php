@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Actuality;
 use App\Language;
+use App\News_categorie;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
@@ -59,23 +61,44 @@ class Homepage extends Controller {
 		$data['navigation'] = $this->navigation;
 		$data['section_id'] = $this->section_id;
 		$data['languages']  = Language::all()->toArray();
+
+		if ( $slug === 'aktuality' ) {
+			$data['actualities'] = Actuality::getAll();
+			$data['categories']  = [];
+			$uniqueCat = TRUE;
+			foreach ( $data['actualities'] as $actuality ) {
+				foreach($data['categories'] as $category) {
+					if ($category['id'] == $actuality->id ) {
+						$uniqueCat = FALSE;
+					}
+				}
+				if ($uniqueCat) {
+					$data['categories'][] = [
+						'id'   => $actuality->category,
+						'name' => $actuality->name
+					];
+				}
+			}
+
+			return view( 'aktuality', $data );
+		}
 		if ( ! isset( $slug ) ) {
 			// TODO change this to dynamic
-			$blade = 'user_created_pages/' . 'aktuality_sk';
+			$blade = 'default';
 		} else {
 			foreach ( $this->navigation as $link ) {
 				if ( $link->controller == trim( $slug ) ) {
 					$blade = 'user_created_pages/' . $link->content_file;
 					break;
 				}
-				if (isset($link->children)) {
-					foreach($link->children as $child) {
+				if ( isset( $link->children ) ) {
+					foreach ( $link->children as $child ) {
 						if ( $child->controller == trim( $slug ) ) {
 							$blade = 'user_created_pages/' . $child->content_file;
 							break;
 						}
-						if (isset($child->children)) {
-							foreach($child->children as $subchild) {
+						if ( isset( $child->children ) ) {
+							foreach ( $child->children as $subchild ) {
 								if ( $subchild->controller == trim( $slug ) ) {
 									$blade = 'user_created_pages/' . $subchild->content_file;
 									break;

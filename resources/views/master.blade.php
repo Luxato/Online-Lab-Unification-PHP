@@ -123,6 +123,8 @@
 				<?php endforeach; ?>
 
 				<?php if(! Session::get( 'logged_user_id' )): ?>
+
+                <li><a href="aktuality"><?= trans( 'translation.actualities' ) ?></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle"
                        data-toggle="dropdown"><b><?= trans( 'translation.login' ) ?></b> <span class="caret"></span></a>

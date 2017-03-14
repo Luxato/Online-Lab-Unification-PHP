@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Actuality;
 use Illuminate\Http\Request;
+use DB;
 
 class ActualitiesController extends Controller {
 	/**
@@ -21,10 +21,14 @@ class ActualitiesController extends Controller {
 		echo $locale;
 		/*SELECT * FROM actualities as a
 JOIN languages as l ON a.language = l.id
-JOIN news_categories as c ON a.category = c.id*/
-		echo '<pre>';
-		print_r( Actuality::all() );
-		echo '</pre>';
+JOIN news_
+		categories as c ON a.category = c.id*/
+		$actualities = DB::select(DB::raw("SELECT * FROM actualities as a
+								JOIN languages as l ON a.language = l.id
+								JOIN news_categories as c ON a.category = c.id"));
+		return view( 'aktuality', [
+			'actualities' => $actualities
+		] );
 	}
 
 	/**

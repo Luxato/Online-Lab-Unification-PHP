@@ -1,10 +1,18 @@
 @extends('master')
 
 @section('title')
-    Aktuality
+	<?= trans( 'translation.actualities' ) ?>
 @stop
 
 @section('content')
+    <?php
+            echo '<pre>';
+            print_r( $actualities );
+            echo '</pre>';
+        echo '<pre>';
+        print_r( $categories );
+        echo '</pre>';
+    ?>
     <style>
         [class*="col-"] {
             float: none;
@@ -93,8 +101,9 @@
             </div>
             <div class="col-md-2 widget">
                 <select class="selectpicker" data-style="btn-warning">
-                    <option value="0">Nezaradené</option>
-                    <option value="1">Zaradene</option>
+                    <?php foreach($categories as $category): ?>
+                        <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                    <?php endforeach; ?>
                 </select>
                 <h2 style="margin-top: 10px; margin-bottom:0;">Archív</h2>
                 <div class="months">

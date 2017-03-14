@@ -25,12 +25,8 @@ Route::resource('admin/news-categories', 'Administration\NewsCategoriesControlle
 // Resource for settings
 Route::resource('admin/settings', 'Administration\SettingsController');
 
-// Resource for settings
-Route::resource('aktuality', 'ActualitiesController');
 
 Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
-
-Route::get('/', ['uses' => 'ActualitiesController@index']);
 
 Route::get('/admin', ['middleware' => 'auth', 'uses' => 'Admin@index']);
 Route::get('/admin/navigation', ['middleware' => 'auth', 'uses' => 'Admin@navigation']);
