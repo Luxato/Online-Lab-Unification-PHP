@@ -3,5 +3,6 @@
 	'sign_in'       => 'Sign in',
 	'email_address' => 'Email address',
 	'password'      => 'password',
-	'actualities'    => 'news'
+	'actualities'   => 'News',
+	'archive'       => 'Archive'
 ];

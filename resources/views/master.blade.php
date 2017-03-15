@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <!--google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="<?= url('assets/css/style.css') ?>" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -88,7 +88,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand logo" href="<?= URL::to( '/' ); ?>"><img src="./assets/img/logo.png" alt="logo"
+            <a class="navbar-brand logo" href="<?= URL::to( '/' ); ?>"><img src="<?= url('assets/img/logo.png') ?>" alt="logo"
                                                                             width="37px"></a>
         </div>
         <div class="collapse navbar-collapse">
@@ -184,7 +184,7 @@
     </div>
 </div>
 <header>
-    <a class="header-logo" href="index.html"><img src="./assets/img/logo_svk_full.png" alt="logo"></a>
+    <a class="header-logo" href="index.html"><img src="<?= url('assets/img/logo_svk_full.png') ?>" alt="logo"></a>
     <div id="particles-js" style="height: 200px;"></div>
 </header>
 
@@ -236,11 +236,11 @@
     </ul>--}}
     <div id="gotoTop" style="display: block;"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
 </footer>
-<script src="assets/js/jquery.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/parallax.min.js"></script>
-<script src="assets/js/particles.min.js"></script>
-<script src="assets/js/particles-animation.js"></script>
+<script src="<?= url('assets/js/jquery.js') ?>"></script>
+<script src="<?= url('assets/js/bootstrap.min.js') ?>"></script>
+<script src="<?= url('assets/js/parallax.min.js') ?>"></script>
+<script src="<?= url('assets/js/particles.min.js') ?>"></script>
+<script src="<?= url('assets/js/particles-animation.js') ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 @yield('custom_bottom_scripts')
 <script>

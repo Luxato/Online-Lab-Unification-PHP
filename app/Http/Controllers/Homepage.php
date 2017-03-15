@@ -12,7 +12,7 @@ use App\Page;
 
 class Homepage extends Controller {
 
-	public $navigation = [];
+	//public $navigation = [];
 
 	/*public function index(Request $request, $locale = NULL) {
 		// Set up language
@@ -27,36 +27,7 @@ class Homepage extends Controller {
 	}*/
 
 	public function index( Request $request, $slug = NULL ) {
-		if ( \Session::has( 'applocale' ) ) {
-			$locale = \Session::get( 'applocale' );
-		} else {
-			$locale = \Config::get( 'app.locale' );
-		}
-		\App::setlocale( $locale );
 
-		$nav_links = DB::select( DB::raw( "SELECT * FROM feature_page as f
-		JOIN navigation ON f.page_id = navigation.section_id
-		JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
-		JOIN languages ON features.language_id = languages.id WHERE languages.language_shortcut = '$locale') as sub ON f.feature_id = sub.fid;" ) );
-
-		foreach ( $nav_links as $link ) {
-			if ( empty( $link->parent_id ) ) {
-				$this->navigation[ $link->section_id ] = $link;
-				foreach ( $nav_links as $key2 => $value2 ) {
-					if ( $link->section_id == $value2->parent_id ) {
-						foreach ( $nav_links as $key => $value3 ) {
-							if ( $value2->section_id == $value3->parent_id ) {
-								$value2->children[] = $value3;
-								unset( $nav_links[ $key ] );
-							}
-						}
-						$this->navigation[ $link->section_id ]->children[] = $value2;
-						unset( $nav_links[ $key2 ] );
-					}
-				}
-
-			}
-		}
 
 		$data['navigation'] = $this->navigation;
 		$data['section_id'] = $this->section_id;
@@ -65,14 +36,14 @@ class Homepage extends Controller {
 		if ( $slug === 'aktuality' ) {
 			$data['actualities'] = Actuality::getAll();
 			$data['categories']  = [];
-			$uniqueCat = TRUE;
+			$uniqueCat           = TRUE;
 			foreach ( $data['actualities'] as $actuality ) {
-				foreach($data['categories'] as $category) {
-					if ($category['id'] == $actuality->id ) {
+				foreach ( $data['categories'] as $category ) {
+					if ( $category['id'] == $actuality->id ) {
 						$uniqueCat = FALSE;
 					}
 				}
-				if ($uniqueCat) {
+				if ( $uniqueCat ) {
 					$data['categories'][] = [
 						'id'   => $actuality->category,
 						'name' => $actuality->name
@@ -121,9 +92,24 @@ class Homepage extends Controller {
 		foreach ( Language::all()->toArray() as $language ) {
 			if ( $language['language_shortcut'] = $lang ) {
 				\Session::set( 'applocale', $lang );
+				echo '<pre>';
+				print_r( \Session::all() );
+				echo '</pre>';
 			}
 		}
 
 		return redirect( '/' );
+	}
+
+	public function aktuality( $id ) {
+		$actualities = DB::select( DB::raw( "SELECT * FROM actualities
+									WHERE id = '$id'" ) );
+
+		return view( 'aktualita', [
+			'actualities' => $actualities[0],
+			'navigation'  => $this->navigation,
+			'languages'   => Language::all()->toArray()
+		] );
+
 	}
 }

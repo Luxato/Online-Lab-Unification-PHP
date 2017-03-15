@@ -64,6 +64,7 @@ $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');*/
 
 /*Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);*/
+Route::get('aktualita/{slug}', ['uses' => 'Homepage@aktuality']);
 Route::get('{slug}', ['uses' => 'Homepage@index', 'as' => 'page']);
 Route::get('setlang/{lang}', 'Homepage@set_language');
 

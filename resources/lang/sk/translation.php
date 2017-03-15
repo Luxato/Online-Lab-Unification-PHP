@@ -3,5 +3,6 @@
 	'sign_in'       => 'Prihlásiť sa',
 	'email_address' => 'Email',
 	'password'      => 'Heslo',
-	'actualities'    => 'Aktuality'
+	'actualities'   => 'Aktuality',
+	'archive'       => 'Archív'
 ];

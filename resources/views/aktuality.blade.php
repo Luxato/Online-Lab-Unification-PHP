@@ -5,14 +5,6 @@
 @stop
 
 @section('content')
-    <?php
-            echo '<pre>';
-            print_r( $actualities );
-            echo '</pre>';
-        echo '<pre>';
-        print_r( $categories );
-        echo '</pre>';
-    ?>
     <style>
         [class*="col-"] {
             float: none;
@@ -20,84 +12,23 @@
             vertical-align: top;
         }
     </style>
-    <h1>Aktuality</h1>
+    <h1><?= trans( 'translation.actualities' ) ?></h1>
     <div class="container">
         <div class="row" style="display: table;">
-            <div class="col-md-4">
-                <div class="featured-image">
-                    <a href="#">
-                        <img src="http://uniqmag.different-themes.com/html/demo/block-layout-4/2.jpg" alt="">
-                    </a>
-                    <div class="featured-misc">
-                        <h2><a href="#">Lorem ipsum dolor sit amet</a></h2>
-                        <div class="featured-date">Feb 20, 2017</div>
+            <div class="col-md-9">
+                <?php foreach($actualities as $actuality): ?>
+                    <div class="col-md-4" style="float: left;margin-bottom: 20px;">
+                        <div class="featured-image">
+                            <a href="#">
+                                <img src="http://uniqmag.different-themes.com/html/demo/block-layout-4/2.jpg" alt="">
+                            </a>
+                            <div class="featured-misc">
+                                <h2><a href="<?= url('aktualita/'. $actuality->id .'') ?>"><?= $actuality->name ?></a></h2>
+                                <div class="featured-date"><?= $actuality->created_at ?></div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="news">
-                    <div class="news-image">
-                        <a href="#"><img src="http://uniqmag.different-themes.com/html/demo/block-layout-2/13.jpg"
-                                         alt=""></a>
-                    </div>
-                    <div class="news-headline"><a href="#"><h3>Lorem ipsum dolot sit amet</h3></a></div>
-                    <div class="news-date">Feb 20, 2017</div>
-                </div>
-
-                <div class="news">
-                    <div class="news-image">
-                        <a href="#"><img src="http://uniqmag.different-themes.com/html/demo/block-layout-2/13.jpg"
-                                         alt=""></a>
-                    </div>
-                    <div class="news-headline"><a href="#"><h3>Lorem ipsum dolot sit amet</h3></a></div>
-                    <div class="news-date">Feb 20, 2017</div>
-                </div>
-
-                <div class="news">
-                    <div class="news-image">
-                        <a href="#"><img src="http://uniqmag.different-themes.com/html/demo/block-layout-2/13.jpg"
-                                         alt=""></a>
-                    </div>
-                    <div class="news-headline"><a href="#"><h3>Lorem ipsum dolot sit amet</h3></a></div>
-                    <div class="news-date">Feb 20, 2017</div>
-                </div>
-
-            </div>
-            <div class="col-md-4">
-                <div class="featured-image">
-                    <a href="#">
-                        <img src="http://uniqmag.different-themes.com/html/demo/block-layout-4/2.jpg" alt="">
-                    </a>
-                    <div class="featured-misc">
-                        <h2><a href="#">Lorem ipsum dolor sit amet</a></h2>
-                        <div class="featured-date">Feb 20, 2017</div>
-                    </div>
-                </div>
-                <div class="news">
-                    <div class="news-image">
-                        <a href="#"><img src="http://uniqmag.different-themes.com/html/demo/block-layout-2/13.jpg"
-                                         alt=""></a>
-                    </div>
-                    <div class="news-headline"><a href="#"><h3>Lorem ipsum dolot sit amet</h3></a></div>
-                    <div class="news-date">Feb 20, 2017</div>
-                </div>
-
-                <div class="news">
-                    <div class="news-image">
-                        <a href="#"><img src="http://uniqmag.different-themes.com/html/demo/block-layout-2/13.jpg"
-                                         alt=""></a>
-                    </div>
-                    <div class="news-headline"><a href="#"><h3>Lorem ipsum dolot sit amet</h3></a></div>
-                    <div class="news-date">Feb 20, 2017</div>
-                </div>
-
-                <div class="news">
-                    <div class="news-image">
-                        <a href="#"><img src="http://uniqmag.different-themes.com/html/demo/block-layout-2/13.jpg"
-                                         alt=""></a>
-                    </div>
-                    <div class="news-headline"><a href="#"><h3>Lorem ipsum dolot sit amet</h3></a></div>
-                    <div class="news-date">Feb 20, 2017</div>
-                </div>
+                <?php endforeach; ?>
             </div>
             <div class="col-md-2 widget">
                 <select class="selectpicker" data-style="btn-warning">
@@ -105,7 +36,7 @@
                         <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
                     <?php endforeach; ?>
                 </select>
-                <h2 style="margin-top: 10px; margin-bottom:0;">Archív</h2>
+                <h2 style="margin-top: 10px; margin-bottom:0;"><?= trans( 'translation.archive' ) ?></h2>
                 <div class="months">
                     <ul>
                         <li><a href="#">Januar 2017</a></li>
