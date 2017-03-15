@@ -28,6 +28,14 @@ class Homepage extends Controller {
 
 	public function index( Request $request, $slug = NULL ) {
 
+		if ( \Session::has( 'applocale' ) ) {
+			$locale = \Session::get( 'applocale' );
+		} else {
+			$locale = \Config::get( 'app.locale' );
+		}
+		\App::setlocale( $locale );
+
+		$this->init_navigation($locale);
 
 		$data['navigation'] = $this->navigation;
 		$data['section_id'] = $this->section_id;
@@ -38,15 +46,16 @@ class Homepage extends Controller {
 			$data['categories']  = [];
 			$uniqueCat           = TRUE;
 			foreach ( $data['actualities'] as $actuality ) {
+				$uniqueCat = TRUE;
 				foreach ( $data['categories'] as $category ) {
-					if ( $category['id'] == $actuality->id ) {
+					if ( $category['id'] == $actuality->catID ) {
 						$uniqueCat = FALSE;
 					}
 				}
 				if ( $uniqueCat ) {
 					$data['categories'][] = [
-						'id'   => $actuality->category,
-						'name' => $actuality->name
+						'id'   => $actuality->catID,
+						'name' => $actuality->catname
 					];
 				}
 			}

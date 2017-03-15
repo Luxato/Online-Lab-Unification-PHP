@@ -51,7 +51,7 @@ class NewsController extends Controller {
 			$actuality->to   = $request->endDate;
 		}
 		if ( $filename = $this->uploadFile( $actuality, $request->file( 'thumbnail' ) ) ) {
-			$actuality->thumbnail_path = $filename;
+			$actuality->thumbnail_path = public_path( 'uploads/') . $filename;
 		}
 		$actuality->save();
 
@@ -110,7 +110,7 @@ class NewsController extends Controller {
 			return FALSE;
 		}
 		if ( $file || ! $file->isValid() ) {
-			$filepath   = storage_path( 'uploads/' . $actuality->id );
+			$filepath   = public_path( 'uploads/' . $actuality->id );
 			$extenstion = $file->getClientOriginalExtension();
 			//$filename   = $file->getClientOriginalName() . '_' . time();
 			$filename = str_replace(
@@ -121,7 +121,7 @@ class NewsController extends Controller {
 
 			$file->move( $filepath, $filename );
 
-			return 'storage/uploads/' . $filename;
+			return $filename;
 		}
 	}
 }

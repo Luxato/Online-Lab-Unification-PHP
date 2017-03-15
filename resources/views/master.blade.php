@@ -1,3 +1,8 @@
+<?php
+    if (empty($navigation)) {
+        $navigation = [];
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

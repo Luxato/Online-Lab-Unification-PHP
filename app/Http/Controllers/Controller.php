@@ -26,17 +26,7 @@ class Controller extends BaseController {
 		$this->set_app_language();
 	}
 
-	protected function init_navigation() {
-		echo '<pre>';
-		print_r( \Session::all() );
-		echo '</pre>';
-		if ( \Session::has( 'applocale' ) ) {
-			$locale = \Session::get( 'applocale' );
-		} else {
-			$locale = \Config::get( 'app.locale' );
-		}
-		\App::setlocale( $locale );
-		echo $locale;
+	protected function init_navigation($locale) {
 		$nav_links = DB::select( DB::raw( "SELECT * FROM feature_page as f
 		JOIN navigation ON f.page_id = navigation.section_id
 		JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
@@ -60,6 +50,7 @@ class Controller extends BaseController {
 
 			}
 		}
+
 	}
 
 	protected function init_section() {
