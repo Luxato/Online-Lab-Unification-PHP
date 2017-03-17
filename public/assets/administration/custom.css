@@ -60,7 +60,7 @@ hr {
     font-size: 30px;
     position: absolute;
     right: 60px;
-    cursor: not-allowed;
+    cursor: pointer;
     top: -1px;
 }
 .cancelLang:hover {

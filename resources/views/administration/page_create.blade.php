@@ -223,6 +223,14 @@
             });
         }
 
+        $(document).on('click', 'div.cancelLang', function() {
+            var langSection = $(this).closest('div.lang-section');
+            langSection.fadeOut('slow', function () {
+                langSection.remove();
+            });
+            maxLanguages--;
+            $('#addLanguage').removeClass('btn-disabled');
+        });
 
         function Worker() {
             this.numberOfInstances = 0;
