@@ -215,6 +215,7 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
+                        <li><a href="#">Všetky aktuality</a></li>
                         <li><a href="<?= url::to( '/admin/news-categories' ); ?>">Kategórie</a></li>
                         <li><a href="<?= url::to( '/admin/news' ); ?>">Pridať novú</a></li>
                     </ul>
@@ -240,7 +241,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="<?= url::to( '/admin/languages' ); ?>">Jazyky</a></li>
-                        <li><a href="<?= url::to( '/admin/create_lang' ); ?>">Vytvoriť jazyk</a></li>
+                        <li><a href="<?= url::to( '/admin/languages/create' ); ?>">Vytvoriť jazyk</a></li>
                     </ul>
                 </li>
                 <li id="nav-settings"><a href="<?= url::to( '/admin/settings' ); ?>"><i class="fa fa-wrench" aria-hidden="true"></i> <span>Nastavenia</span></a></li>

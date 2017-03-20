@@ -40,7 +40,7 @@
         <tr>
             <td><?= $page->language_title ?></td>
             <td><?= $page->language_shortcut ?></td>
-            <td><i class="fa fa-pencil disabled" aria-hidden="true"></i> |
+            <td><a href="languages/<?= $page->id ?>/edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
                 <a class="<?= $page->id === 0 ? 'disabled' : '' ?>" onclick="deleteModal(<?= $page->id.',\''. $page->language_title.'\'' ?>)"><i class="fa fa-trash <?= $page->id === 0 ? 'disabled' : '' ?>" aria-hidden="true"></i></a></td>
         </tr>
 		<?php endforeach; ?>
