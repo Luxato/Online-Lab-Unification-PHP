@@ -47,7 +47,7 @@
     </script>
 </head>
 <body <?= Session::get( 'logged_user_id' ) ? 'class="logged"' : '' ?>>
-{{--<div class="se-pre-con"></div>--}}
+
 <div id="preLoader">
     <div style=" position: absolute;top: 50%;left: 50%;width: 100%;margin-left: -50%;margin-top:-100px;text-align: center;">
 
@@ -154,22 +154,18 @@
                                             <input name="password" type="password" class="form-control"
                                                    id="exampleInputPassword2"
                                                    placeholder="<?= trans( 'translation.password' ) ?>" required="">
-                                            <div class="help-block text-right"><a href="">Forget the password ?</a>
+                                            <div class="help-block text-right"><a href=""><?= trans('translation.lost_password') ?></a>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <button type="submit"
                                                     class="btn btn-primary btn-block"><?= trans( 'translation.sign_in' )  ?></button>
                                         </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox"> keep me logged-in
-                                            </label>
-                                        </div>
                                     </form>
                                 </div>
                                 <div class="bottom text-center">
-                                    New here ? <a href="#"><b>Join Us</b></a>
+                                    <div><?= trans('translation.or') ?></div>
+                                    <button type="button" class="btn btn-default" id="showModal" href="#"><?= trans('translation.create_account') ?></button>
                                 </div>
                             </div>
                         </li>
@@ -232,13 +228,47 @@
             </div>
         </div>
     </div>
-    {{--<p>Copyright © 2016</p>
-    <ul>
-        <li>
-            <a target="_blank" href="https://github.com/Luxato/Online-Lab-Unification-PHP"><i
-                        class="fa fa-github-square" aria-hidden="true"></i></a>
-        </li>
-    </ul>--}}
+    <div id="registrationModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><?= trans('translation.registration') ?></h4>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-1">
+                                    <div class="form-group">
+                                        <label for="name">Username <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                        <input type="text" class="form-control" id="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Email <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                        <input type="text" class="form-control" id="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Password <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                        <input type="text" class="form-control" id="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Repeat password <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                        <input type="text" class="form-control" id="name">
+                                    </div>
+                                    <i class="fa fa-asterisk required" aria-hidden="true"></i> - Povinná položka
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success"><?= trans('translation.create') ?></button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <div id="gotoTop" style="display: block;"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
 </footer>
 <script src="<?= url('assets/js/jquery.js') ?>"></script>
@@ -281,13 +311,10 @@
 
             return false;
         });
+        $('#showModal').on('click', function() {
+           $('#registrationModal').modal('show');
+        });
     });
-    // Go top
-    /*if($window.scrollTop() > 450) {
-     $goToTopEl.fadeIn();
-     } else {
-     $goToTopEl.fadeOut();
-     }*/
     $(document).ready(function () {
         var scrollHeight = $(document).height();
         var scrollPosition = $(window).height() + $(window).scrollTop();

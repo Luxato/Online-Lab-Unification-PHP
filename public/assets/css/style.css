@@ -844,3 +844,9 @@ aside ul, .months ul {
 .primary_nav_wrap ul li:hover > ul {
     display: block
 }
+.required {
+    color: hotpink;
+    font-size: 7px !important;
+    position: relative;
+    top: -7px;
+}

@@ -34,4 +34,9 @@ class User extends Authenticatable
     		return FALSE;
 	    }
     }
+
+    public function register_user() {
+    	//TODO create USER type user
+
+    }
 }
