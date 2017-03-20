@@ -177,9 +177,11 @@
         </div><!--/.nav-collapse -->
         <ul class="translation-flags">
 			<?php foreach($languages as $language): ?>
-            <li>
-                <a href="<?= URL::to( 'setlang/' . $language['language_shortcut'] ); ?>"><?= strtoupper( $language['language_shortcut'] ) ?></a>
-            </li>
+            <?php if(Session::get( 'applocale' ) !== $language['language_shortcut']): ?>
+                <li>
+                    <a href="<?= URL::to( 'setlang/' . $language['language_shortcut'] ); ?>"><?= strtoupper( $language['language_shortcut'] ) ?></a>
+                </li>
+            <?php endif; ?>
 			<?php endforeach; ?>
         </ul>
     </div>
