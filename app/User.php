@@ -7,8 +7,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable {
 	use Notifiable;
+	protected $with = ['apikey'];
 
-	public function user() {
+	public function apikey() {
 		return $this->hasOne( 'App\Apikey' );
 	}
 

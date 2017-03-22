@@ -11,5 +11,8 @@
 	'create'         => 'Vytvoriť',
 	'close'          => 'Zavrieť',
 	'or'          => 'Alebo',
-	'lost_password' => 'Zabudli ste heslo?'
+	'lost_password' => 'Zabudli ste heslo?',
+	'create_api_key' => 'Vytvoriť API kľúč',
+	'logged_user' => 'Prihlásený používateľ',
+	'logout' => 'Odhlásiť sa',
 ];

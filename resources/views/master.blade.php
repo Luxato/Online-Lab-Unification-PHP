@@ -47,11 +47,6 @@
     </script>
 </head>
 <body <?= Session::get( 'logged_user_id' ) ? 'class="logged"' : '' ?>>
-<?php
-    echo '<pre>';
-    print_r( Session::all() );
-    echo '</pre>';
-?>
 <div id="preLoader">
     <div style=" position: absolute;top: 50%;left: 50%;width: 100%;margin-left: -50%;margin-top:-100px;text-align: center;">
 
@@ -65,21 +60,24 @@
 <aside>
     <div class="container">
         <nav class="primary_nav_wrap">
-            <ul>
+            {{--<ul>
                 <li><a href="#">API kľúče <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                     <ul>
                         <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Vytvoriť API kľúč</a></li>
                     </ul>
                 </li>
+            </ul>--}}
+            <ul>
+                <li><a data-toggle="modal" data-target="#apiModal"><i class="fa fa-plus" aria-hidden="true"></i> <?= trans('translation.create_api_key') ?></a></li>
             </ul>
         </nav>
         <div class="user-panel logout pull-right">
             <nav class="primary_nav_wrap">
                 <ul>
-                    <li><a href="#">prihlásený užívateľ: <?= Session::get( 'logged_email' ) ?> <i class="fa fa-angle-down"
-                                                                                                  aria-hidden="true"></i></a></a>
+                    <li><a href="#"><?= trans('translation.logged_user') ?>: <?= $user->name ?> <i class="fa fa-angle-down"
+                                                                                                  aria-hidden="true"></i></a>
                         <ul>
-                            <li><a href="<?= url('login/logout') ?>"><i class="fa fa-sign-out" aria-hidden="true"></i> Odhlásiť</a></li>
+                            <li><a href="<?= url('login/logout') ?>"><i class="fa fa-sign-out" aria-hidden="true"></i> <?= trans('translation.logout') ?></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -177,24 +175,6 @@
                     </ul>
                 </li>
 				<?php else: ?>
-                    {{--Only logged users can see this--}}
-                    <div id="apiModal" class="modal fade" tabindex="-1" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Modal title</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p>One fine body&hellip;</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
 
                 <?php endif; ?>
 
@@ -377,5 +357,26 @@
         });
     });
 </script>
+{{--Only logged users can see this--}}
+<div id="apiModal" class="modal fade" tabindex="-2" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><?= trans('translation.create_api_key') ?></h4>
+            </div>
+            <div class="modal-body">
+                <strong>Váš api kľúč:</strong>
+                <pre>
+                     <?= isset($user->apikey->key) ? $user->apikey->key : 'Api kľúč je potrebné vygenerovať' ?>
+                </pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zavrieť</button>
+                <button type="button" class="btn btn-primary">Generovať</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 </body>
 </html>

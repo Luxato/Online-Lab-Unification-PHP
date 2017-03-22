@@ -15,13 +15,14 @@ class LoginController extends Controller {
 			'password' => $request->password
 		] )
 		) {
-			$user = User::where( 'email', $request->email )->first();
+			$user = User::where( 'email', $request->email )->first();;
 			if ( $user->is_user() ) { // We don't want admins here..
 				// We have user, lets create session
 				Session::set( 'logged_user_id', $user->id );
 				Session::set( 'logged_email', $user->email );
+				isset($user->apikey->key) ? Session::set( 'apikey', $user->apikey->key ) : Session::set( 'apikey', FALSE ) ;
 
-				return redirect('/');
+				return redirect( '/' );
 			}
 		} else {
 			// Authentificaiton failed
@@ -33,8 +34,8 @@ class LoginController extends Controller {
 	 * Logout our user
 	 */
 	public function logout() {
-		Session::flush('logged_user_id');
-		Session::flush('logged_email');
+		Session::flush( 'logged_user_id' );
+		Session::flush( 'logged_email' );
 		Auth::logout();
 
 		return back();

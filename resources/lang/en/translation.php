@@ -10,5 +10,8 @@
 	'create'         => 'Create',
 	'close'          => 'Close',
 	'or'          => 'Or',
-	'lost_password' => 'Lost password?'
+	'lost_password' => 'Lost password?',
+	'create_api_key' => 'Create API key',
+	'logged_user' => 'Logged as',
+	'logout' => 'Logout',
 ];

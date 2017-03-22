@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actuality;
 use App\Language;
 use App\News_categorie;
+use App\User;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
@@ -34,6 +35,10 @@ class Homepage extends Controller {
 			$locale = \Config::get( 'app.locale' );
 		}
 		\App::setlocale( $locale );
+
+		if ( \Session::has( 'logged_user_id' ) ) {
+			$data['user'] = User::findOrFail(\Session::get( 'logged_user_id' ));
+		}
 
 		$this->init_navigation($locale);
 
@@ -101,9 +106,6 @@ class Homepage extends Controller {
 		foreach ( Language::all()->toArray() as $language ) {
 			if ( $language['language_shortcut'] = $lang ) {
 				\Session::set( 'applocale', $lang );
-				echo '<pre>';
-				print_r( \Session::all() );
-				echo '</pre>';
 			}
 		}
 

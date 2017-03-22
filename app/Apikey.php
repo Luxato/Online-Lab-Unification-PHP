@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Apikey extends Model {
-	public function apikey() {
+	public function user() {
 		return $this->belongsTo( 'App\User' );
 	}
 }
