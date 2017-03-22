@@ -27,6 +27,10 @@ Route::resource('admin/settings', 'Administration\SettingsController');
 // Resource for languages
 Route::resource('admin/languages', 'Administration\LanguageController');
 
+// FRONT reources
+// Resource for users
+Route::resource('users', 'UserController');
+
 
 Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
 

@@ -47,7 +47,11 @@
     </script>
 </head>
 <body <?= Session::get( 'logged_user_id' ) ? 'class="logged"' : '' ?>>
-
+<?php
+    echo '<pre>';
+    print_r( Session::all() );
+    echo '</pre>';
+?>
 <div id="preLoader">
     <div style=" position: absolute;top: 50%;left: 50%;width: 100%;margin-left: -50%;margin-top:-100px;text-align: center;">
 
@@ -127,9 +131,9 @@
 				<?php endif; ?>
 				<?php endforeach; ?>
 
+                <li><a href="aktuality"><?= trans( 'translation.actualities' ) ?></a></li>
 				<?php if(! Session::get( 'logged_user_id' )): ?>
 
-                <li><a href="aktuality"><?= trans( 'translation.actualities' ) ?></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle"
                        data-toggle="dropdown"><b><?= trans( 'translation.login' ) ?></b> <span class="caret"></span></a>
@@ -237,37 +241,37 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"><?= trans('translation.registration') ?></h4>
                 </div>
-                <div class="modal-body">
-                    <form action="">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-4 col-md-offset-1">
-                                    <div class="form-group">
-                                        <label for="name">Username <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
-                                        <input type="text" class="form-control" id="name">
+                <form action="<?= url('users') ?>" method="POST">
+                    <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-4 col-md-offset-1">
+                                        <div class="form-group">
+                                            <label for="username">Username <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                            <input name="username" type="text" class="form-control" id="username">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                            <input name="email" type="email" class="form-control" id="email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="passoword">Password <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                            <input type="password" class="form-control" id="passoword">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password_repeat">Repeat password <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                            <input type="password" class="form-control" id="password_repeat">
+                                        </div>
+                                        <i class="fa fa-asterisk required" aria-hidden="true"></i> - Povinná položka
                                     </div>
-                                    <div class="form-group">
-                                        <label for="name">Email <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
-                                        <input type="text" class="form-control" id="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Password <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
-                                        <input type="text" class="form-control" id="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Repeat password <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
-                                        <input type="text" class="form-control" id="name">
-                                    </div>
-                                    <i class="fa fa-asterisk required" aria-hidden="true"></i> - Povinná položka
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success"><?= trans('translation.create') ?></button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success"><?= trans('translation.create') ?></button>
+                    </div>
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
