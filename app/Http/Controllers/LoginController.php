@@ -13,9 +13,9 @@ class LoginController extends Controller {
 		if ( Auth::attempt( [
 			'email'    => $request->email,
 			'password' => $request->password
-		] )
+		], false, false )
 		) {
-			$user = User::where( 'email', $request->email )->first();;
+			$user = User::where( 'email', $request->email )->first();
 			if ( $user->is_user() ) { // We don't want admins here..
 				// We have user, lets create session
 				Session::set( 'logged_user_id', $user->id );

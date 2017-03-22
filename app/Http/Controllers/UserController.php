@@ -21,7 +21,7 @@ class UserController extends Controller {
 		$user        = new User();
 		$user->name  = $request['username'];
 		$user->email = $request['email'];
-		$user->password = Hash::make($request['password']);
+		$user->password = Hash::make(trim($request['password']));
 		$user->save();
 		Session::set( 'logged_user_id', $user->id );
 		Session::set( 'logged_email', $user->email );
