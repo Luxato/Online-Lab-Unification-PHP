@@ -30,7 +30,8 @@ Route::resource('admin/languages', 'Administration\LanguageController');
 // FRONT reources
 // Resource for users
 Route::resource('users', 'UserController');
-
+// Resource for api
+Route::match(['get', 'post'], '/api/{apiname}', 'ApiController@index');
 
 Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
 

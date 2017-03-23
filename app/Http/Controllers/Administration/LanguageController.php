@@ -66,14 +66,17 @@ class LanguageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
-		$content = htmlentities(file_get_contents( dirname( getcwd() ) . '/resources/lang/sk/translation.php', TRUE ));
+		$file = fopen( dirname( getcwd() ) . '/resources/lang/sk/translation.php', 'r');
+		echo '<pre>'.fread($file,filesize(dirname( getcwd() ) . '/resources/lang/sk/translation.php')).'</pre>';
+		fclose($file);
+		exit;
 		$content = str_replace('\'', '', $content);
 		var_dump($content);
 		$tmp     = explode( '=' , addslashes($content) );
 		$translations = [];
 		$i = 0;
 		echo '<pre>';
-		var_dump( $tmp );
+		print_r( $tmp );
 		echo '</pre>';
 		foreach($tmp as $translation) {
 			if ($i == 0) {
@@ -83,19 +86,20 @@ class LanguageController extends Controller {
 			$tmp2 = explode(',', $translation);
 			if (sizeof($tmp2) == 2) {
 				// Translation is setted
-				$translations[trim($tmp2[0])] = trim($tmp2[1]);
+				/*echo str_replace('>', '',htmlspecialchars_decode($tmp2[0]));*/
+				$translations[trim(str_replace('>', '', htmlspecialchars_decode($tmp2[0])))] = trim($tmp2[1]);
 			} else {
 				// Translation is not setted
 
 			}
-			/*echo '<pre>';
-			print_r( $tmp2 );
-			echo '</pre>';*/
 
 		}
 		echo '<pre>';
 		print_r( $translations );
 		echo '</pre>';
+		/*echo '<pre>';
+		var_dump( $translations );
+		echo '</pre>';*/
 
 		return view( 'administration/languages/language_edit', [
 			'translations' => Translation::all()->toArray(),
