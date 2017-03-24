@@ -66,44 +66,35 @@ class LanguageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
-		$file = fopen( dirname( getcwd() ) . '/resources/lang/sk/translation.php', 'r');
-		echo '<pre>'.fread($file,filesize(dirname( getcwd() ) . '/resources/lang/sk/translation.php')).'</pre>';
-		fclose($file);
-		exit;
-		$content = str_replace('\'', '', $content);
-		var_dump($content);
-		$tmp     = explode( '=' , addslashes($content) );
-		$translations = [];
-		$i = 0;
-		echo '<pre>';
-		print_r( $tmp );
-		echo '</pre>';
-		foreach($tmp as $translation) {
-			if ($i == 0) {
-			    $i++;
-			    continue;
-			}
-			$tmp2 = explode(',', $translation);
-			if (sizeof($tmp2) == 2) {
+		$language = Language::findOrFail($id);
+		$file    = fopen( dirname( getcwd() ) . '/resources/lang/'.$language->language_shortcut.'/translation.php', 'r' );
+		$content = str_replace( [
+			'<?php',
+			'return',
+			'[',
+			'];'
+		], '', fread( $file, filesize( dirname( getcwd() ) . '/resources/lang/'.$language->language_shortcut.'/translation.php' ) ) );
+		fclose( $file );
+		$content = str_replace( '\'', '', $content );
+		$tmp      = explode( ',', addslashes( $content ) );
+		$resource = [];
+		$i        = 0;
+		foreach ( $tmp as $translation ) {
+			$tmp2 = explode( '=>', $translation );
+			if ( sizeof( $tmp2 ) == 2 ) {
 				// Translation is setted
-				/*echo str_replace('>', '',htmlspecialchars_decode($tmp2[0]));*/
-				$translations[trim(str_replace('>', '', htmlspecialchars_decode($tmp2[0])))] = trim($tmp2[1]);
+				$resource[ trim( str_replace( '>', '', htmlspecialchars_decode( $tmp2[0] ) ) ) ] = trim( str_replace( ',', '', $tmp2[1] ) );
 			} else {
-				// Translation is not setted
+				// Translation is not setted TODO
 
 			}
 
 		}
-		echo '<pre>';
-		print_r( $translations );
-		echo '</pre>';
-		/*echo '<pre>';
-		var_dump( $translations );
-		echo '</pre>';*/
 
 		return view( 'administration/languages/language_edit', [
 			'translations' => Translation::all()->toArray(),
-			'language'     => Language::findOrFail( $id )->first()
+			'language'     => Language::findOrFail( $id ),
+			'resource'     => $resource
 		] );
 	}
 
@@ -115,11 +106,12 @@ class LanguageController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public
-	function update(
-		Request $request, $id
-	) {
-		//
+	public function update(Request $request, $id) {
+		Language::update_language($id, $request->title, $request->shortcut, $request->key, $request->value);
+
+		\Session::flash( 'success', "Jazyk bol úspešne upravený." );
+
+		return redirect( 'admin/languages' );
 	}
 
 	/**

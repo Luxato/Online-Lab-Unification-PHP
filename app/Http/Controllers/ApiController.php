@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Apikey;
 use Illuminate\Http\Request;
+use Mail;
 
 class ApiController extends Controller {
 
 	public function index( $apiname, Request $request ) {
+		Mail::send(['text'=>'email/mail'],['name', 'Tester Testovic'], function ($message) {
+			$message->to('lukas@stranovsky.sk')->subject('Test Email');
+			$message->from('robot@stranovsky.sk', 'Robot');
+		});
 		/*if ( Request::isMethod('get') ) {
 			$result = [
 				'error' => TRUE,
@@ -35,6 +40,9 @@ class ApiController extends Controller {
 				if ( $key_user = Apikey::where( 'key', 'acjkasnckjasbcakjsbcajskb' )->with( 'user' )->get()->first() ) {
 					// Key exists let's send email
 					echo $key_user->toJson();
+
+
+
 					$result = [
 						'error' => FALSE,
 						'msg'   => 'Message has been sent'

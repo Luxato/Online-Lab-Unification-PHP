@@ -10,12 +10,6 @@ Upravenie jazyka
 
 
 @section('content')
-    <?php
-            echo '<pre>';
-            print_r( $language );
-            echo '</pre>';
-            ?>
-
 <div class="row form-group">
 	<div class="col-xs-12">
 		<ul class="nav nav-pills nav-justified thumbnail setup-panel">
@@ -38,11 +32,11 @@ Upravenie jazyka
 				<div class="col-lg-6 col-lg-offset-3">
 					<div class="form-group">
 						<input id="title-input" class="form-control" name="title" type="text"
-						       placeholder="Jazyk napr. Slovenčina" required="">
+						       placeholder="Jazyk napr. Slovenčina" value="<?= $language->language_title ?>" required="">
 					</div>
 					<div class="form-group">
 						<input id="url-input" class="form-control" name="shortcut" type="text"
-						       placeholder="Skratka jazyka napr. sk" required="">
+						       placeholder="Skratka jazyka napr. sk" value="<?= $language->language_shortcut ?>" required="">
 					</div>
 					<button id="activate-step-2" class="btn btn-primary btn-sm pull-right">Ďalej</button>
 				</div>
@@ -54,8 +48,9 @@ Upravenie jazyka
 	<div class="col-xs-12">
 		<div class="col-md-12 well">
 			<div class="col-lg-6 col-lg-offset-3">
-				<form name="finalForm" id="finalForm" action="<?= URL::to( '/worker/do_create_language' ); ?>" method="POST">
+				<form name="finalForm" id="finalForm" action="<?= URL::to( '/admin/languages/' . $language->id ); ?>" method="POST">
 					<input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}">
+                    <input name="_method" type="hidden" value="put">
 					<h1 class="text-center">Krok 2</h1>
 					<div class="col-md-6"></div>
 					<div class="col-md-6"></div>
@@ -68,12 +63,12 @@ Upravenie jazyka
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<input name="value[]" type="text" class="form-control">
+								<input name="value[]" type="text" class="form-control" value="<?= isset($resource[$value['field']]) ? $resource[$value['field']] : '' ?>">
 							</div>
 						</div>
 					<?php endforeach; ?>
 					<div class="col-md-6"></div>
-					<button id="sendForm" type="submit" class="btn btn-success btn-sm pull-right">Vytvoriť
+					<button id="sendForm" type="submit" class="btn btn-success btn-sm pull-right">Upraviť
 					</button>
 				</form>
 			</div>
