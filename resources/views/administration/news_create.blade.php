@@ -7,6 +7,8 @@
 @section('custom_css')
     <link rel="stylesheet"
           href="<?= URL::to( '/' ); ?>/assets/administration/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+
 @stop
 
 
@@ -59,8 +61,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Obsah</label>
-                    <textarea id="editor" name="cont" rows="6" cols="80">
-                    </textarea>
+                    <textarea id="editor" name="cont" rows="6" cols="80" >Easy (and free!) You should check out our premium features.</textarea>
                 </div>
             </div>
 
@@ -74,7 +75,9 @@
 @stop
 
 @section('custom_scripts')
-    <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/ckeditor/ckeditor.min.js"></script>
+<script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
+ <script>tinymce.init({ selector:'textarea' });</script>
+<!--     <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/ckeditor/ckeditor.min.js"></script>
     <script>
         CKEDITOR.replace('editor');
         $(function () {
@@ -114,5 +117,5 @@
                 + '">');
             return true;
         }
-    </script>
+    </script> -->
 @stop
