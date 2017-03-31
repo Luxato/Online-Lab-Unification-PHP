@@ -14,4 +14,6 @@
 	'create_api_key' => 'Create API key',
 	'logged_user'    => 'Logged as',
 	'logout'         => 'Logout',
+	'login_google' => 'Login with Google',
+	'ais_login' => 'Use AIS'
 ];

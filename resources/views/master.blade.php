@@ -33,9 +33,9 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="./favicon/ms-icon-144x144.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
     <link href="<?= url('assets/css/style.css') ?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= url('assets/css/switchery.min.css') ?>">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -144,6 +144,10 @@
                                           id="login-nav">
                                         <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
                                         <div class="form-group">
+                                            <label for=""><?= trans('translation.ais_login') ?>: </label>
+                                            <input type="checkbox" class="js-switch">
+                                        </div>
+                                        <div class="form-group">
                                             <label class="sr-only"
                                                    for="exampleInputEmail2"><?= trans( 'translation.email_address' ) ?></label>
                                             <input name="email" type="email" class="form-control"
@@ -169,6 +173,8 @@
                                 <div class="bottom text-center">
                                     <div><?= trans('translation.or') ?></div>
                                     <button type="button" class="btn btn-default" id="showModal" href="#"><?= trans('translation.create_account') ?></button>
+                                    <div><?= trans('translation.or') ?></div>
+                                    <a class="googleLogin" href="#"><span style="position: absolute;top: 0;color: white;right: 30px;"><?= trans('translation.login_google') ?></span><img height="44" src="<?= url('assets/img/google.png') ?>" alt="google_login"></a>
                                 </div>
                             </div>
                         </li>
@@ -291,6 +297,7 @@
 <script src="<?= url('assets/js/particles.min.js') ?>"></script>
 <script src="<?= url('assets/js/particles-animation.js') ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+<script src="<?= url('assets/js/switchery.min.js') ?>"></script>
 @yield('custom_bottom_scripts')
 <script>
     $(window).load(function () {
@@ -312,6 +319,8 @@
         }
     });
     $(document).ready(function () {
+        var elem = document.querySelector('.js-switch');
+        var switchery = new Switchery(elem, {size: 'small'});
         $('.navbar a.dropdown-toggle').on('click', function (e) {
             var $el = $(this);
             var $parent = $(this).offsetParent(".dropdown-menu");
