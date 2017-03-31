@@ -228,7 +228,8 @@
             langSection.fadeOut('slow', function () {
                 langSection.remove();
             });
-            maxLanguages--;
+            maxLanguages++;
+            console.log(maxLanguages);
             $('#addLanguage').removeClass('btn-disabled');
         });
 

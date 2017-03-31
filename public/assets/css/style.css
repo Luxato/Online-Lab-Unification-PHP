@@ -799,6 +799,7 @@ aside ul, .months ul {
     line-height: 28px;
     padding: 0 15px;
     background: #222;
+    cursor: pointer;
 }
 
 .primary_nav_wrap ul li {

@@ -330,6 +330,19 @@
         });
     });
     $(document).ready(function () {
+        $('#generateApiKey').on('click', function(e) {
+            e.preventDefault();
+            $.ajax({
+                method: "post",
+                url: "api/generateApiKey",
+                dataType: "json",
+                data: $('#FormApiKey').serialize(),
+                success: function (response) {
+                  $('#apikey').text(response.key);
+                }
+            });
+        });
+
         var scrollHeight = $(document).height();
         var scrollPosition = $(window).height() + $(window).scrollTop();
         if ((scrollHeight == scrollPosition) && ($(window).scrollTop() != 0)) {
@@ -367,13 +380,17 @@
             </div>
             <div class="modal-body">
                 <strong>Váš api kľúč:</strong>
-                <pre>
-                     <?= isset($user->apikey->key) ? $user->apikey->key : 'Api kľúč je potrebné vygenerovať' ?>
-                </pre>
+                <div id="apikey" class="well">
+                    <?= isset($user->apikey->key) ? $user->apikey->key : 'Api kľúč je potrebné vygenerovať' ?>
+                </div>
+                <form id="FormApiKey" action="" method="POST">
+                    <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
+                    <input name="secret" type="hidden" value="<?= encrypt(Session::get('logged_user_id')) ?>">
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Zavrieť</button>
-                <button type="button" class="btn btn-primary">Generovať</button>
+                <button id="generateApiKey" type="button" class="btn btn-primary">Generovať</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

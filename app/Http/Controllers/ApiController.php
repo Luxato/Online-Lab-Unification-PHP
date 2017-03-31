@@ -3,26 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Apikey;
+use App\User;
 use Illuminate\Http\Request;
-use Mail;
-
+use DateTime;
+use DateTimeZone;
 class ApiController extends Controller {
 
+	public function create_api_key(Request $request) {
+
+	}
+
 	public function index( $apiname, Request $request ) {
-		Mail::send(['text'=>'email/mail'],['name', 'Tester Testovic'], function ($message) {
-			$message->to('lukas@stranovsky.sk')->subject('Test Email');
-			$message->from('robot@stranovsky.sk', 'Robot');
-		});
-		/*if ( Request::isMethod('get') ) {
+		if ( $request->isMethod('get') ) {
 			$result = [
 				'error' => TRUE,
 				'msg'   => 'Method GET not allowed'
 			];
 			echo json_encode( $result );
 			exit;
-		}*/
+		}
 		switch ( $apiname ) {
-			case 'form2mail':
+			case 'generateApiKey':
+				$api = Apikey::where('user_id', decrypt($request->get('secret')))->first();
+				$date = new DateTime(null, new DateTimeZone('Europe/London'));
+				$new_key = md5(date_timestamp_get($date));
+				if(!isset($api)) {
+					$api = new Apikey();
+					$api->user_id = decrypt($request->get('secret'));
+				}
+				$api->key = $new_key;
+				$api->save();
+				$result = [
+					'error' => FALSE,
+					'key'   => $new_key
+				];
+				echo json_encode( $result );
+				exit;
+				break;
+			case 'form2mail':/*
 				// Verify and TODO validate required inputs
 				$required = [ 'apikey', 'from', 'to', 'subject', 'redirectOk', 'redirectFalse' ];
 				foreach ( $required as $input ) {
@@ -58,9 +76,10 @@ class ApiController extends Controller {
 					echo json_encode( $result );
 					exit;
 				}
-				// TODO log what happened
+				// TODO log what happened*/
 				break;
 		}
 	}
 
 }
+

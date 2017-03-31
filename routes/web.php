@@ -33,6 +33,8 @@ Route::resource('users', 'UserController');
 // Resource for api
 Route::match(['get', 'post'], '/api/{apiname}', 'ApiController@index');
 
+Route::get('/admin/create_lang', ['middleware' => 'auth', 'uses' => 'Admin@create_lang']);
+
 Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
 
 Route::get('/admin', ['middleware' => 'auth', 'uses' => 'Admin@index']);
