@@ -57,7 +57,7 @@
     </div>
 </div>
 <?php if(Session::get( 'logged_user_id' )): ?>
-<aside>
+<aside id="nav">
     <div class="container">
         <nav class="primary_nav_wrap">
             {{--<ul>
@@ -300,8 +300,8 @@
 <script src="<?= url('assets/js/switchery.min.js') ?>"></script>
 @yield('custom_bottom_scripts')
 <script>
-    $(window).load(function () {
-        $("#preLoader").fadeOut("slow");
+    $('#nav').ready(function () {
+        $("#preLoader").hide();
     });
     if (window.innerWidth <= 768) {
         $(".navbar-fixed-top").addClass('navbar-mini');
