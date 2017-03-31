@@ -30,5 +30,9 @@ TODO :
 7# https://github.com/dangrossman/bootstrap-daterangepicker
 
 ...
-wysiwyg/ckeditor, jquery nestable 
+wysiwyg/ckeditor, jquery nestable, switchery
 notyjs
+
+#Use Case
+
+![alt tag](http://showcase.stranovsky.sk/github/usecase.png)
