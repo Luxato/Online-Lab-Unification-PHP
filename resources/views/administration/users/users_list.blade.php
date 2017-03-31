@@ -10,9 +10,6 @@
 
 
 @section('content')
-    <a class="admin-sub-options success disabled" disabled=""><i class="fa fa-plus"
-                                                                 aria-hidden="true"></i>
-        Vytvoriť užívateľa</a>
     <table id="example2" class="table table-bordered table-hover">
         <thead>
         <tr>
