@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Administration;
 
 use App\Actuality;
+use App\Category;
 use Session;
 use App\Http\Controllers\Controller;
 
@@ -29,7 +30,7 @@ class ActualitiesController extends Controller {
 	 */
 	public function create() {
 		return view( 'administration/actualities/actualities_create', [
-			'categories' => Actuality::all(),
+			'categories' => Category::all(),
 			'languages'  => Language::all()
 		] );
 	}
@@ -58,7 +59,7 @@ class ActualitiesController extends Controller {
 
 		Session::flash( 'success', "Aktualita bola úspešne vytvorená." );
 
-		return redirect( 'admin/news-categories' );
+		return redirect( 'admin/actualities' );
 	}
 
 	/**
@@ -110,10 +111,12 @@ class ActualitiesController extends Controller {
 		$actuality = Actuality::findOrFail( $id );
 		echo $actuality->thumbnail_path;
 		if ($actuality->delete()) {
-			unlink( dirname( getcwd() ) . 'storage/' . $actuality->thumbnail_path );
-			return TRUE;
+			unlink( dirname( getcwd() ) .'/public/'. $actuality->thumbnail_path );
+			Session::flash( 'success', "Aktualita bola úspešne vymazaná." );
+
+			return redirect( 'admin/actualities' );
 		} else {
-			return FALSE;
+			// THROW ERROR
 		}
 
 

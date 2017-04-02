@@ -15,7 +15,7 @@
 @section('content')
     <br>
     <div class="row">
-        <form id="new-page-form" onsubmit="return validateForm()" action="<?= URL( 'admin/news/' ) ?>" method="POST" enctype="multipart/form-data">
+        <form id="new-page-form" onsubmit="return validateForm()" action="<?= URL( 'admin/actualities/' ) ?>" method="POST" enctype="multipart/form-data">
             <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
             <div id="dateRange"></div>
             <div class="col-md-6">
