@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class News_categorie extends Model {
+class Category extends Model {
+	protected $table = 'news_categories';
 	public $timestamps = false;
 
 

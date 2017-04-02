@@ -1,4 +1,4 @@
-@extends('administration/adminmaster')
+@extends('administration.adminmaster')
 
 @section('title')
     Pridať novú aktualitu
@@ -98,9 +98,8 @@
              '//www.tinymce.com/css/codepen.min.css'
          ]
      });</script>
-<!--     <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/ckeditor/ckeditor.min.js"></script>
+
     <script>
-        CKEDITOR.replace('editor');
         $(function () {
             $('#nav-news').addClass('active');
 
@@ -138,5 +137,5 @@
                 + '">');
             return true;
         }
-    </script> -->
+    </script>
 @stop

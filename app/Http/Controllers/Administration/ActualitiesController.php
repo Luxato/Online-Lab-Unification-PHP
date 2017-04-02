@@ -10,18 +10,16 @@ use App\News_categorie;
 use App\Language;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller {
+class ActualitiesController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-
-		return view( 'administration/news_create', [
-			'categories' => News_categorie::all(),
-			'languages'  => Language::all()
-		] );
+		return view( 'administration/actualities/actualities_list', [
+			'actualities' => Actuality::getAll()
+		]);
 	}
 
 	/**
@@ -30,7 +28,10 @@ class NewsController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
-		//
+		return view( 'administration/actualities/actualities_create', [
+			'categories' => Actuality::all(),
+			'languages'  => Language::all()
+		] );
 	}
 
 	/**
@@ -99,10 +100,23 @@ class NewsController extends Controller {
 	 *
 	 * @param  int $id
 	 *
-	 * @return \Illuminate\Http\Response
+	 * @return bool
 	 */
 	public function destroy( $id ) {
-		//
+		echo "mazem aktualitu s id $id";
+		// TODO vymaz obrazok
+		// Potom jazyk, kategoriu a na koniec aktualitu
+
+		$actuality = Actuality::findOrFail( $id );
+		echo $actuality->thumbnail_path;
+		if ($actuality->delete()) {
+			unlink( dirname( getcwd() ) . 'storage/' . $actuality->thumbnail_path );
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+
+
 	}
 
 	private function uploadFile( $actuality, $file ) {

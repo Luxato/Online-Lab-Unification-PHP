@@ -215,9 +215,9 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">Všetky aktuality</a></li>
+                        <li><a href="<?= url::to( '/admin/actualities' ); ?>">Všetky aktuality</a></li>
                         <li><a href="<?= url::to( '/admin/news-categories' ); ?>">Kategórie</a></li>
-                        <li><a href="<?= url::to( '/admin/news' ); ?>">Pridať novú</a></li>
+                        <li><a href="<?= url::to( '/admin/actualities/create' ); ?>">Pridať novú</a></li>
                     </ul>
                 </li>
 
