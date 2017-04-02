@@ -19,8 +19,8 @@
                 <?php foreach($actualities as $actuality): ?>
                     <div class="actuality category-<?= $actuality->catID ?> col-md-4" style="float: left;margin-bottom: 20px;">
                         <div class="featured-image">
-                            <a href="#">
-                                <img src="<?= $actuality->thumbnail_path ?>" alt="">
+                            <a href="<?= url('aktualita/'. $actuality->id .'') ?>">
+                                <img width="252" height="182" src="<?= $actuality->thumbnail_path ?>" alt="">
                             </a>
                             <div class="featured-misc">
                                 <h2><a href="<?= url('aktualita/'. $actuality->id .'') ?>"><?= $actuality->name ?></a></h2>
@@ -59,6 +59,7 @@
             var actualities = $('.actuality');
             var defaultCat  = $( "#categoryPicker option:selected" )[0].value;
             for (var i in actualities) {
+                if ($(actualities[i]).attr('class') == undefined) continue;
                 var classes = $(actualities[i]).attr('class').split(/\s+/);
                 var hide = true;
                 for (var k in classes) {

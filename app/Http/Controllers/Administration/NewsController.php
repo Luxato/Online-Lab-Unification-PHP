@@ -51,7 +51,7 @@ class NewsController extends Controller {
 			$actuality->to   = $request->endDate;
 		}
 		if ( $filename = $this->uploadFile( $actuality, $request->file( 'thumbnail' ) ) ) {
-			$actuality->thumbnail_path = public_path( 'uploads/') . $filename;
+			$actuality->thumbnail_path = 'uploads/' . $filename;
 		}
 		$actuality->save();
 
