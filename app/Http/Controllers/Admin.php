@@ -15,6 +15,7 @@ class Admin extends Controller {
 	}
 
 	public function navigation() {
+		$this->init_navigation();
 		$data['navigation'] = $this->navigation;
 
 		return view( 'administration/navigation', $data );

@@ -349,7 +349,7 @@
 				<?php $i = 1; foreach($navigation as $value): ?> {{--First level--}}
                 <li class="dd-item dd3-item" data-id="<?= $value->section_id ?>">
                     <div class="dd-handle dd3-handle">Drag</div>
-                    <div class="dd3-content"><?= $value->name ?></div>
+                    <div class="dd3-content"><?= $value->title ?></div>
 					<?php if(! isset( $value->children )): ?>
                 </li>
 				<?php else: ?>
@@ -357,7 +357,7 @@
 					<?php $i ++; foreach($value->children as $sub_link): ?> {{--Second level--}}
                     <li class="dd-item dd3-item" data-id="<?= $sub_link->section_id ?>">
                         <div class="dd-handle dd3-handle">Drag</div>
-                        <div class="dd3-content"><?= $sub_link->name ?></div>
+                        <div class="dd3-content"><?= $sub_link->title ?></div>
 						<?php if(! isset( $sub_link->children )): ?>
                     </li>
 					<?php else: ?>
@@ -365,7 +365,7 @@
 						<?php $i ++; foreach($sub_link->children as $third_level): ?>
                         <li class="dd-item dd3-item" data-id="<?= $third_level->section_id ?>">
                             <div class="dd-handle dd3-handle">Drag</div>
-                            <div class="dd3-content"><?= $third_level->name ?></div>
+                            <div class="dd3-content"><?= $third_level->title ?></div>
                         </li>
 						<?php endforeach; ?>
                     </ol>

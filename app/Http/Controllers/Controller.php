@@ -26,7 +26,7 @@ class Controller extends BaseController {
 		$this->set_app_language();
 	}
 
-	protected function init_navigation($locale) {
+	protected function init_navigation($locale = 'sk') {
 		$nav_links = DB::select( DB::raw( "SELECT * FROM feature_page as f
 		JOIN navigation ON f.page_id = navigation.section_id
 		JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
