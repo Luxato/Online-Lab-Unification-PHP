@@ -45,6 +45,7 @@
     <script>
         var baseUrl = "<?= URL( '/' ) ?>";
     </script>
+    <script src="<?= url('assets/js/jquery.js') ?>"></script>
 </head>
 <body <?= Session::get( 'logged_user_id' ) ? 'class="logged"' : '' ?>>
 <div id="preLoader">
@@ -117,7 +118,7 @@
                                data-toggle="dropdown"> <?= trans( $child_link->title ) ?> </a>
                             <ul class="dropdown-menu">
 								<?php foreach($child_link->children as $sub_child_link): ?>
-                                <li><a href="<?= isset($sub_child_link->content_file) ? $sub_child_link->controller : '#' ?>"><?= $sub_child_link->name ?></a></li>
+                                <li><a href="<?= isset($sub_child_link->content_file) ? $sub_child_link->controller : '#' ?>"><?= $sub_child_link->title ?></a></li>
 								<?php endforeach; ?>
                             </ul>
                         </li>
@@ -291,7 +292,6 @@
     </div><!-- /.modal -->
     <div id="gotoTop" style="display: block;"><i class="fa fa-angle-up" aria-hidden="true"></i></div>
 </footer>
-<script src="<?= url('assets/js/jquery.js') ?>"></script>
 <script src="<?= url('assets/js/bootstrap.min.js') ?>"></script>
 <script src="<?= url('assets/js/parallax.min.js') ?>"></script>
 <script src="<?= url('assets/js/particles.min.js') ?>"></script>
