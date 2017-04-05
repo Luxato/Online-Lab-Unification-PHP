@@ -108,7 +108,7 @@
 				<?php else: ?>
                 <li><a class="dropdown-toggle" data-toggle="dropdown"
                        href="#"><?php echo trans( $nav_link->title ) ?> <b class="caret"></b></a>
-                    <ul class="dropdown-menu multi-level">
+                    <ul class="dropdown-menu multi-level"> 
 						<?php foreach($nav_link->children as $child_link): ?>
 						<?php if(! isset( $child_link->children )): ?>
                         <li><a href="<?= isset($child_link->content_file) ? $child_link->controller : '#' ?>"><?= $child_link->title ?></a></li>
