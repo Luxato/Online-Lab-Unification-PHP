@@ -7,6 +7,7 @@
 @section('custom_css')
     <link rel="stylesheet"
           href="<?= URL::to( '/' ); ?>/assets/administration/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href="<?= url('assets/css/switchery.min.css') ?>">
 @stop
 
 
@@ -15,6 +16,13 @@
     <div class="row">
         <form id="new-page-form" onsubmit="return validateForm()" action="<?= URL( 'admin/pages/' ) ?>" method="POST">
             <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <i data-toggle="tooltip" title="Ak stránka nemá mať žiaden obsah, teda bude v navigácii, ale nebude sa ňu to dať klikať" class="fa fa-question-circle" aria-hidden="true"></i>
+                    <label for="noContent">Stránka bez obsahu</label>
+                    <input id="noContent" name="noContent" type="checkbox" class="js-switch js-check-change">
+                </div>
+            </div>
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nadpis</label>
@@ -71,7 +79,39 @@
 
 @section('custom_scripts')
     <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/ckeditor/ckeditor.min.js"></script>
+    <script src="<?= url('assets/js/switchery.min.js') ?>"></script>
     <script>
+        var elem = document.querySelector('.js-switch');
+        var switchery = new Switchery(elem, {size: 'small'});
+        var changeCheckbox = document.querySelector('.js-switch');
+        var p = 0;
+        changeCheckbox.onchange = function() {
+            p++;
+            if (p % 2 == 1) {
+                $('#new-page-form').parsley().destroy();
+                $('#addLanguage').hide();
+                console.log('test');
+                $('.lang-section').remove();
+                $( ":input" ).each(function(){
+                    $(this).addClass('disabled');
+                });
+                $('#title-input').removeClass('disabled');
+                $('#languageSelection').removeClass('disabled');
+                $(':submit').removeClass('disabled');
+                $('#cke_editor').hide();
+            } else {
+                $('#cke_editor').show();
+                $('#addLanguage').removeClass('btn-disabled');
+                $('#new-page-form').parsley();
+                $('#addLanguage').show();
+                maxLanguages = $('#languageSelection').children('option').length - 2;
+                var i = 0;
+                $( ":input" ).each(function(){
+                    $(this).removeClass('disabled');
+                });
+            }
+        };
+
         function hasDuplicates(array) {
             return (new Set(array)).size !== array.length;
         }

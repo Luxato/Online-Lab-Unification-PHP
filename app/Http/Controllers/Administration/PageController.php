@@ -77,12 +77,16 @@ class PageController extends Controller {
 				$feature->{$column} = $request[ $input ][ $i ];
 			}
 			$language_shortcut     = Language::findOrFail( $request['language'][ $i ] )->language_shortcut;
-			$feature->content_file = $request['url'][ 0 ] . '_' . $language_shortcut;
-			$this->create_page_file( $feature->content_file . '.blade.php', $request['url'][ $i ], $request['cont'][ $i ] );
+
+			if ($request->get('noContent') !== 'on') {
+				$feature->content_file = $request['url'][ 0 ] . '_' . $language_shortcut;
+				$this->create_page_file( $feature->content_file . '.blade.php', $request['url'][ $i ], $request['cont'][ $i ] );
+			}
 			$feature->save();
 			$new_features[] = $feature->id;
 		}
 		$page->feature()->sync( $new_features );
+
 
 		Session::flash( 'success', "Stránka bola úspešne vytvorená." );
 

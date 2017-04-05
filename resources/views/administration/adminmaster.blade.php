@@ -296,11 +296,6 @@
 <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/noty/jquery.noty.packaged.min.js"></script>
 <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/parsley.min.js"></script>
 <script>
-    /*var notification_html = [];
-    notification_html[0] = '<div class="activity-item"> <i class="fa fa-tasks text-warning"></i> <div class="activity"> There are <a href="#">6 new tasks</a> waiting for you. Don\'t forget! <span>About 3 hours ago</span> </div> </div>',
-        notification_html[1] = '<div class="activity-item"> <i class="fa fa-check text-success"></i> <div class="activity"> Mail server was updated. See <a href="#">changelog</a> <span>About 2 hours ago</span> </div> </div>',
-        notification_html[3] = '<div class="activity-item"> <i class="fa fa-check" aria-hidden="true"></i> <div class="activity"> Stránka bola úspečne vytvorená.</div> </div>';
-*/
     function generate(type, text) {
         var n = noty({
             text        : text,
@@ -327,6 +322,6 @@
         generate('success', '<div class="activity-item"> <i class="fa fa-check" aria-hidden="true"></i> <div class="activity">{{ Session::get('success') }}</div> </div>');
     </script>
 @endif
-@yield('custom_scripts');
+@yield('custom_scripts')
 </body>
 </html>

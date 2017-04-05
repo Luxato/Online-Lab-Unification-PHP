@@ -102,7 +102,7 @@
             <ul class="nav navbar-nav">
 				<?php foreach($navigation as $nav_link): ?>
 				<?php if(! isset( $nav_link->children )): ?>
-                <li><a href="<?= $nav_link->controller ?>"><?php echo $nav_link->title ?></a>
+                <li><a href="<?= isset($nav_link->content_file) ? $nav_link->controller : '#' ?>"><?php echo $nav_link->title ?></a>
                 </li>
 				<?php else: ?>
                 <li><a class="dropdown-toggle" data-toggle="dropdown"
@@ -110,14 +110,14 @@
                     <ul class="dropdown-menu multi-level">
 						<?php foreach($nav_link->children as $child_link): ?>
 						<?php if(! isset( $child_link->children )): ?>
-                        <li><a href="<?= $child_link->controller ?>"><?= $child_link->title ?></a></li>
+                        <li><a href="<?= isset($child_link->content_file) ? $child_link->controller : '#' ?>"><?= $child_link->title ?></a></li>
 						<?php else: ?>
                         <li class="dropdown-submenu">
                             <a href="#" class="dropdown-toggle"
                                data-toggle="dropdown"> <?= trans( $child_link->title ) ?> </a>
                             <ul class="dropdown-menu">
 								<?php foreach($child_link->children as $sub_child_link): ?>
-                                <li><a href="<?= $sub_child_link->controller ?>"><?= $sub_child_link->name ?></a></li>
+                                <li><a href="<?= isset($sub_child_link->content_file) ? $sub_child_link->controller : '#' ?>"><?= $sub_child_link->name ?></a></li>
 								<?php endforeach; ?>
                             </ul>
                         </li>
