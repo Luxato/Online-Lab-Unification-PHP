@@ -108,7 +108,7 @@
 				<?php else: ?>
                 <li><a class="dropdown-toggle" data-toggle="dropdown"
                        href="#"><?php echo trans( $nav_link->title ) ?> <b class="caret"></b></a>
-                    <ul class="dropdown-menu multi-level"> 
+                    <ul class="dropdown-menu multi-level">
 						<?php foreach($nav_link->children as $child_link): ?>
 						<?php if(! isset( $child_link->children )): ?>
                         <li><a href="<?= isset($child_link->content_file) ? $child_link->controller : '#' ?>"><?= $child_link->title ?></a></li>
@@ -205,10 +205,12 @@
         </ul>
     </div>
 </div>
-<header>
-    <a class="header-logo" href="index.html"><img src="<?= url('assets/img/logo_svk_full.png') ?>" alt="logo"></a>
-    <div id="particles-js" style="height: 200px;"></div>
-</header>
+    <?php if (Route::getCurrentRoute()->uri() == '/'): ?>
+    <header>
+        <a class="header-logo" href="index.html"><img src="<?= url('assets/img/logo_svk_full.png') ?>" alt="logo"></a>
+        <div id="particles-js" style="height: 200px;"></div>
+    </header>
+    <?php endif; ?>
 
 <div class="breadcrumb-wrapper">
     <ol class="breadcrumb">
