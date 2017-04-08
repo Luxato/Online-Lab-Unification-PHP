@@ -75,10 +75,10 @@ class PageController extends Controller {
 			foreach ( $inputs as $column => $input ) {
 				$feature->{$column} = $request[ $input ][ $i ];
 			}
-			$language_shortcut     = Language::findOrFail( $request['language'][ $i ] )->language_shortcut;
+			$language_shortcut = Language::findOrFail( $request['language'][ $i ] )->language_shortcut;
 
-			if ($request->get('noContent') !== 'on') {
-				$feature->content_file = $request['url'][ 0 ] . '_' . $language_shortcut;
+			if ( $request->get( 'noContent' ) !== 'on' ) {
+				$feature->content_file = $request['url'][0] . '_' . $language_shortcut;
 				$this->create_page_file( $feature->content_file . '.blade.php', $request['url'][ $i ], $request['cont'][ $i ] );
 			}
 			$feature->save();
@@ -105,6 +105,7 @@ class PageController extends Controller {
 @stop';
 		$created_page = fopen( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $file_name, "w" );
 		fwrite( $created_page, $template );
+		chmod( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $file_name, 0777 );
 	}
 
 	/**
@@ -116,7 +117,7 @@ class PageController extends Controller {
 	 */
 	public function edit( $id ) {
 
-		return view( 'administration/pages_edit');
+		return view( 'administration/pages_edit' );
 	}
 
 	/**
@@ -139,14 +140,24 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy( $id ) {
-		$page = Page::findOrFail( $id );
-		if ( $page->language()->sync( [] ) ) {
+		$page      = Page::find( $id );
+		$to_delete = [];
+		foreach ( $page->feature()->get()->toArray() as $feature ) {
+			$to_delete[] = Feature::find( $feature['id'] )->get()->toArray()[0]['content_file'];
+		}
+		if ( $page->feature()->detach() ) {
 			$page->delete();
-			if ( unlink( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $page->content_file ) ) {
-				Session::flash( 'success', "Stránka bola úspešne vymazaná." );
-
-				return redirect( 'admin/pages' );
+			/*foreach ( $to_delete as $feature ) {
+				$tmp_feature = Feature::findOrFail( $feature );
+				var_dump( $tmp_feature->delete() );
+			}*/
+			foreach($to_delete as $content_file) {
+				unlink( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $content_file);
 			}
+
+			Session::flash( 'success', "Stránka bola úspešne zmazaná." );
+
+			return redirect( 'admin/pages' );
 		}
 	}
 }

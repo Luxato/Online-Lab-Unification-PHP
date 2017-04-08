@@ -30,14 +30,14 @@
         <tbody>
 		<?php foreach ( $pages as $page ): $i = 0; ?>
             <tr>
-                <td><?= $page['feature'][0]['title'] ?></td>
+                <td><i class="fa fa-file-text-o" aria-hidden="true"></i> <?= $page['feature'][0]['title'] ?></td>
                 <td>
                     <?php foreach($page['feature'] as $features): $i++; ?>
                         <div <?= sizeof($page['feature']) > 1 ? sizeof($page['feature']) != $i ? 'style="border-bottom: 1px dotted lightgray;padding: 2px 14px;"' : 'style="padding: 2px 14px;"' : '' ?>><span style="width: 64px; display: inline-block;"><?= $features['language'] ?></span> <i class="fa fa-arrow-right" aria-hidden="true"></i> <?= isset($features['controller']) ? '<i><a target="_blank" href="'.URL( $features['controller'] ).'">/'.$features['controller'].'</a></i>' : 'Žiaden obsah' ?></div>
                     <?php endforeach; ?>
                 </td>
                 <td style="vertical-align: middle;text-align: center;"><?= $page['created_at'] ?></td>
-                <td style="vertical-align: middle;"><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <a onclick="deleteModal()"><i
+                <td style="vertical-align: middle;"><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <a onclick="deleteModal('<?= $page['section_id'] ?>', '<?= $page['feature'][0]['title'] ?>')"><i
                                 class="fa fa-trash" aria-hidden="true"></i></a></td>
             </tr>
 		<?php endforeach; ?>
@@ -55,7 +55,7 @@
                         Vymazanie stránky</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Určite chcete vymazať stránku <span id="langVar">:var</span>?</p>
+                    <p>Určite chcete vymazať stránku <span id="langVar">:var</span> a všetky jej súčasti?</p>
                     {!! Form::open(['url' => URL::to( '/admin/pages/' ), 'method' => 'delete', 'id' => 'deleteForm']) !!}
 
                     {!! Form::close() !!}
@@ -82,7 +82,8 @@
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "pageLength": 20
+            "pageLength": 20,
+            "aaSorting" : [[]]
         });
     });
     setTimeout(function () {

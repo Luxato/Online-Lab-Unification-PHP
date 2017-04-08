@@ -9,6 +9,8 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap 3.3.6 -->
+    <link rel="shortcut icon" href="<?= URL::to( '/' ); ?>/assets/administration/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?= URL::to( '/' ); ?>/assets/administration/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -232,7 +234,6 @@
                     </ul>
                 </li>
 
-                <li id="nav-tools"><a class="disabled" href="<?= url::to( '/admin#' ); ?>"><i class="fa fa-cogs" aria-hidden="true"></i> <span>Nástroje</span></a></li>
                 <li id="nav-languages" class="treeview">
                     <a href="#"><i class="fa fa-language" aria-hidden="true"></i> <span>Jazyky</span>
                         <span class="pull-right-container">
