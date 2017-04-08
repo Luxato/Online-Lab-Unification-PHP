@@ -13,7 +13,7 @@ class Contact extends Controller {
 		}
 		app()->setLocale($locale);
 		$data['navigation'] = $this->navigation;
-		$data['section_id'] = $this->section_id;
+		/*$data['section_id'] = $this->section_id;*/
 
 
 		return view( 'contact', $data );

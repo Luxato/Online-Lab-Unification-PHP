@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Page;
 use App\Setting;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -22,7 +23,7 @@ class Controller extends BaseController {
 
 	public function __construct() {
 		//$this->init_locale();
-		$this->init_section();
+		//$this->init_section();
 		$this->set_app_language();
 	}
 
@@ -54,13 +55,13 @@ class Controller extends BaseController {
 	}
 
 	protected function init_section() {
-		$action                = app( 'request' )->route()->getAction();
+		/*$action                = app( 'request' )->route()->getAction();
 		$controller            = class_basename( $action['controller'] );
 		$tmp                   = explode( '@', $controller );
 		$this->controller_name = strtolower( $tmp[0] );
 		$this->section_id      = DB::table( 'navigation' )
 		                           ->where( 'controller', Request::segment(1) )
-		                           ->value( 'section_id' );
+		                           ->value( 'section_id' );*/
 	}
 
 /*	protected function init_locale() {

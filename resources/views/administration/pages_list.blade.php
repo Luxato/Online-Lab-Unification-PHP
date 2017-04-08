@@ -5,7 +5,12 @@
 @stop
 
 @section('custom_css') {{--CSS specified only for this site--}}
-<link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/css/dataTables.bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
+<style>
+    td {
+        border-bottom: 1px solid lightgrey !important;
+    }
+</style>
 @stop
 
 
@@ -16,27 +21,25 @@
     <table id="example2" class="table table-bordered table-hover">
         <thead>
         <tr>
-            <th>Názov</th>
-            <th>Lokalizácia</th>
-            <th>URL</th>
+            <th>Stránka</th>
+            <th>Lokalizácia <i class="fa fa-arrow-right" aria-hidden="true"></i> URL</th>
             <th>Dátum</th>
             <th>Možnosti</th>
         </tr>
         </thead>
         <tbody>
-		<?php foreach ( $pages as $page ): ?>
-        <tr>
-            <td><?= isset($page['feature'][0]['title']) ? $page['feature'][0]['title'] : '' ?></td>
-            <td>
-                <?php foreach($page['feature'] as $value): ?>
-                    <?= $value['language'] ?>
-                <?php endforeach; ?>
-            </td>
-            <td>/<?= $page['controller'] ?></td>
-            <td><?= $page['created_at'] ?></td>
-            <td><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <a onclick="deleteModal(<?= $page['section_id'].',\''. $page['name'].'\'' ?>)"><i
-                            class="fa fa-trash" aria-hidden="true"></i></a></td>
-        </tr>
+		<?php foreach ( $pages as $page ): $i = 0; ?>
+            <tr>
+                <td><?= $page['feature'][0]['title'] ?></td>
+                <td>
+                    <?php foreach($page['feature'] as $features): $i++; ?>
+                        <div <?= sizeof($page['feature']) > 1 ? sizeof($page['feature']) != $i ? 'style="border-bottom: 1px dotted lightgray;padding: 2px 14px;"' : 'style="padding: 2px 14px;"' : '' ?>><span style="width: 64px; display: inline-block;"><?= $features['language'] ?></span> <i class="fa fa-arrow-right" aria-hidden="true"></i> <?= isset($features['controller']) ? '<i><a target="_blank" href="'.URL( $features['controller'] ).'">/'.$features['controller'].'</a></i>' : 'Žiaden obsah' ?></div>
+                    <?php endforeach; ?>
+                </td>
+                <td style="vertical-align: middle;text-align: center;"><?= $page['created_at'] ?></td>
+                <td style="vertical-align: middle;"><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <a onclick="deleteModal()"><i
+                                class="fa fa-trash" aria-hidden="true"></i></a></td>
+            </tr>
 		<?php endforeach; ?>
         </tbody>
     </table>

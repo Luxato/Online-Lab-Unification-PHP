@@ -18,7 +18,7 @@ use App\Language;
 class PageController extends Controller {
 
 	public function __construct() {
-		//$this->middleware( 'auth' );
+		$this->middleware( 'auth' );
 	}
 
 	/**
@@ -30,7 +30,6 @@ class PageController extends Controller {
 		$languages = Language::all()->toArray();
 		$pages     = Page::with( 'feature' )->get()->toArray();
 
-		//TODO this can be done with SQL as well!!!
 		foreach ( $pages as &$page ) {
 			foreach ( $page['feature'] as &$feature ) {
 				foreach ( $languages as $language ) {
@@ -109,17 +108,6 @@ class PageController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int $id
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show( $id ) {
-		//
-	}
-
-	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int $id
@@ -127,7 +115,8 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
-		//
+
+		return view( 'administration/pages_edit');
 	}
 
 	/**

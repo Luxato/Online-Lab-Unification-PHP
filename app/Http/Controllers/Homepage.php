@@ -43,6 +43,9 @@ class Homepage extends Controller {
 		$this->init_navigation($locale);
 
 		$data['navigation'] = $this->navigation;
+		/*echo '<pre>';
+		print_r( $data['navigation'] );
+		echo '</pre>';*/
 		$data['section_id'] = $this->section_id;
 		$data['languages']  = Language::all()->toArray();
 
