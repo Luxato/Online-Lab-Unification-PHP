@@ -74,22 +74,24 @@ class Worker extends Controller {
 					$child_page->order     = $k;
 					$child_page->parent_id = $parent['id'];
 					$child_page->save();
-					if ( ++ $k == sizeof( $parent['children'] ) ) {
+					$k++;
+					/*if ( ++ $k == sizeof( $parent['children'] ) ) {
 						$k = 1;
 						continue;
-					}
+					}*/
 					// Third level.
 					if ( isset( $child['children'] ) ) {
 						foreach ( $child['children'] as $subchild ) {
 							$pages_with_parent[]   = $subchild['id'];
 							$child_page            = Page::find( $subchild['id'] );
-							$child_page->order     = $k;
+							$child_page->order     = $j;
 							$child_page->parent_id = $child['id'];
 							$child_page->save();
-							if ( ++ $j == sizeof( $child['children'] ) ) {
+							$j++;
+							/*if ( ++ $j == sizeof( $child['children'] ) ) {
 								$j = 1;
 								continue;
-							}
+							}*/
 						}
 					}
 				}

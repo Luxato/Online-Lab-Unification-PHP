@@ -31,7 +31,7 @@ class Controller extends BaseController {
 		$nav_links = DB::select( DB::raw( "SELECT * FROM feature_page as f
 		JOIN navigation ON f.page_id = navigation.section_id
 		JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
-		JOIN languages ON features.language_id = languages.id WHERE languages.language_shortcut = '$locale') as sub ON f.feature_id = sub.fid;" ) );
+		JOIN languages ON features.language_id = languages.id WHERE languages.language_shortcut = '$locale') as sub ON f.feature_id = sub.fid  ORDER BY navigation.order, navigation.parent_id;" ) );
 
 		foreach ( $nav_links as $link ) {
 			if ( empty( $link->parent_id ) ) {
