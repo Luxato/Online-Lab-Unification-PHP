@@ -13,6 +13,7 @@
         <form action="<?= URL::to( '/admin/users/' . $user->id ) ?>" method="POST">
             <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}">
             <input name="_method" type="hidden" value="put">
+            <input name="id" type="hidden" value="<?= $user['id'] ?>">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Meno</label>
@@ -20,17 +21,17 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
-                    <input id="title-input" class="form-control" name="name" type="text" required="" value="<?= $user['email'] ?>">
+                    <input id="title-input" class="form-control" name="email" type="email" required="" value="<?= $user['email'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nové Heslo</label>
-                    <input id="title-input" class="form-control" name="name" type="text">
+                    <input id="title-input" class="form-control" name="newPassword" type="password">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="exampleInputEmail1">API kľúč</label>
-                    <input id="title-input" class="form-control" name="name" type="text" value="<?= isset($user->apikey->key) ? $user->apikey->key : '-' ?>">
+                    <input id="title-input" class="form-control" name="apikey" type="text" value="<?= isset($user->apikey->key) ? $user->apikey->key : '' ?>">
                 </div>
             </div>
             <div class="col-md-12">
