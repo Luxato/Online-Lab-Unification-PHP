@@ -5,10 +5,7 @@
 @stop
 
 @section('custom_css')
-    <link rel="stylesheet"
-          href="<?= URL::to( '/' ); ?>/assets/administration/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-
-
+    <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 @stop
 
 

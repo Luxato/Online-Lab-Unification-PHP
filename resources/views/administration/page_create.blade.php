@@ -60,7 +60,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Obsah</label>
-                    <textarea id="editor" name="cont[]" rows="6" cols="80">
+                    <textarea class="editor" id="editor" name="cont[]" rows="6" cols="80">
                     </textarea>
                 </div>
             </div>
@@ -78,9 +78,35 @@
 @stop
 
 @section('custom_scripts')
-    <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/ckeditor/ckeditor.min.js"></script>
+    <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
     <script src="<?= url('assets/js/switchery.min.js') ?>"></script>
     <script>
+        function initEditor(){
+            tinymce.init({
+                selector: '.editor',
+                height: 200,
+                theme: 'modern',
+                plugins: [
+                    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                    'searchreplace wordcount visualblocks visualchars code fullscreen',
+                    'insertdatetime media nonbreaking save table contextmenu directionality',
+                    'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
+                ],
+                toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+                toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
+                image_advtab: true,
+                templates: [
+                    { title: 'Test template 1', content: 'Test 1' },
+                    { title: 'Test template 2', content: 'Test 2' }
+                ],
+                content_css: [
+                    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                    '//www.tinymce.com/css/codepen.min.css'
+                ]
+            });
+        }
+        initEditor();
+
         var elem = document.querySelector('.js-switch');
         var switchery = new Switchery(elem, {size: 'small'});
         var changeCheckbox = document.querySelector('.js-switch');
@@ -137,7 +163,6 @@
                 $('.bs-callout-warning').toggleClass('hidden', ok);
             });
 
-            CKEDITOR.replace('editor');
             $('#nav-navigacia').addClass('active');
             // TODO REMOVE !@#$%$^%&&&&&&&&&*)/*-+
             $('#title-input').on('keyup', function () {
@@ -231,13 +256,13 @@
                 '<div class="col-md-12">' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">Obsah</label>' +
-                '<textarea id="editor' + i + '" name="cont[]" rows="6" cols="80">' +
+                '<textarea class="editor" id="editor' + i + '" name="cont[]" rows="6" cols="80">' +
                 '</textarea>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
             $('#another-lang').append(newLang);
-            CKEDITOR.replace('editor' + i);
+            initEditor();
             $('#langSection' + i).fadeIn('slow');
             var offset = $('#langSection' + i).offset();
             $('html, body').stop().animate({
