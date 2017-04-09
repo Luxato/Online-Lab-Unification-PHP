@@ -22,17 +22,21 @@ class Controller extends BaseController {
 	public $todo = 0;
 
 	public function __construct() {
-		//$this->init_locale();
-		//$this->init_section();
 		$this->set_app_language();
 	}
 
-	protected function init_navigation($locale = 'sk') {
-		$nav_links = DB::select( DB::raw( "SELECT * FROM feature_page as f
-		JOIN navigation ON f.page_id = navigation.section_id
-		JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
-		JOIN languages ON features.language_id = languages.id WHERE languages.language_shortcut = '$locale') as sub ON f.feature_id = sub.fid  ORDER BY navigation.order, navigation.parent_id;" ) );
-
+	protected function init_navigation($locale = NULL) {
+		if ($locale) {
+			$nav_links = DB::select( DB::raw( "SELECT * FROM feature_page as f
+			JOIN navigation ON f.page_id = navigation.section_id
+			JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
+			JOIN languages ON features.language_id = languages.id WHERE languages.language_shortcut = '$locale') as sub ON f.feature_id = sub.fid  ORDER BY navigation.order, navigation.parent_id;" ) );
+		} else {
+			$nav_links = DB::select( DB::raw( "SELECT * FROM feature_page as f
+			JOIN navigation ON f.page_id = navigation.section_id
+			JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
+			JOIN languages ON features.language_id = languages.id) as sub ON f.feature_id = sub.fid  ORDER BY navigation.order, navigation.parent_id;" ) );
+		}
 		foreach ( $nav_links as $link ) {
 			if ( empty( $link->parent_id ) ) {
 				$this->navigation[ $link->section_id ] = $link;

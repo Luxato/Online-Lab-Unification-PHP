@@ -6,10 +6,6 @@
 
 @section('custom_css') {{--CSS specified only for this site--}}
 <style>
-    ol li {
-        cursor: move;
-    }
-
     .cf:after {
         visibility: hidden;
         display: block;

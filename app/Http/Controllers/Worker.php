@@ -41,18 +41,6 @@ class Worker extends Controller {
 		return view( 'administration/languages', $data );
 	}
 
-
-	/*	protected function do_delete_page() {
-			$post_id  = $_POST['pageID'];
-			$language = Page::find( $post_id );
-			if ( $language->delete() ) {
-				$data['status'] = 'delete-success';
-			}
-			$data['pages'] = Page::select_all();
-
-			return view( 'administration/pages_list', $data );
-		}*/
-
 	public function do_navigation_change_order() {
 		// TODO VALIDATION
 		$order_json        = $_POST['orderJSON'];
@@ -74,11 +62,7 @@ class Worker extends Controller {
 					$child_page->order     = $k;
 					$child_page->parent_id = $parent['id'];
 					$child_page->save();
-					$k++;
-					/*if ( ++ $k == sizeof( $parent['children'] ) ) {
-						$k = 1;
-						continue;
-					}*/
+					$k ++;
 					// Third level.
 					if ( isset( $child['children'] ) ) {
 						foreach ( $child['children'] as $subchild ) {
@@ -87,11 +71,7 @@ class Worker extends Controller {
 							$child_page->order     = $j;
 							$child_page->parent_id = $child['id'];
 							$child_page->save();
-							$j++;
-							/*if ( ++ $j == sizeof( $child['children'] ) ) {
-								$j = 1;
-								continue;
-							}*/
+							$j ++;
 						}
 					}
 				}

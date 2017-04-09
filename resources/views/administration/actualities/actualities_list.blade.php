@@ -10,7 +10,7 @@
 
 
 @section('content')
-    <a class="admin-sub-options success" href="<?= URL::to( '/admin/pages/create' ); ?>"><i class="fa fa-plus"
+    <a class="admin-sub-options success" href="<?= URL::to( '/admin/actualities/create' ); ?>"><i class="fa fa-plus"
                                                                                             aria-hidden="true"></i>
         Vytvoriť aktualitu</a>
     <table id="example2" class="table table-bordered table-hover">
