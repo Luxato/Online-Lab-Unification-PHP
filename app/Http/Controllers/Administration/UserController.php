@@ -51,6 +51,9 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy( $id ) {
+		if ($id === 0) { // admin can not be deleted
+			return back();
+		}
 		$user = User::findOrFail( $id );
 		$user->delete();
 		\Session::flash( 'success', "Užívateľ bol úspešne zmazaný." );

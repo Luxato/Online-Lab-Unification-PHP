@@ -10,11 +10,6 @@
 
 
 @section('content')
-    <?php
-/*        echo '<pre>';
-        print_r( $users );
-        echo '</pre>';
-    */?>
     <table id="example2" class="table table-bordered table-hover">
         <thead>
         <tr>
