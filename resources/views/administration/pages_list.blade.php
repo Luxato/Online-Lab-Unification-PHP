@@ -37,7 +37,7 @@
                     <?php endforeach; ?>
                 </td>
                 <td style="vertical-align: middle;text-align: center;"><?= $page['created_at'] ?></td>
-                <td style="vertical-align: middle;"><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <a onclick="deleteModal('<?= $page['section_id'] ?>', '<?= $page['feature'][0]['title'] ?>')"><i
+                <td style="vertical-align: middle;"><a href="<?= url('admin/pages/'. $page["section_id"] . '/edit') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a> | <a onclick="deleteModal('<?= $page['section_id'] ?>', '<?= $page['feature'][0]['title'] ?>')"><i
                                 class="fa fa-trash" aria-hidden="true"></i></a></td>
             </tr>
 		<?php endforeach; ?>

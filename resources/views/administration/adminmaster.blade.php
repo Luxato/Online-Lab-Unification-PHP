@@ -218,21 +218,11 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="<?= url::to( '/admin/actualities' ); ?>">Všetky aktuality</a></li>
-                        <li><a href="<?= url::to( '/admin/news-categories' ); ?>">Kategórie</a></li>
                         <li><a href="<?= url::to( '/admin/actualities/create' ); ?>">Pridať novú</a></li>
                     </ul>
                 </li>
 
-                <li id="nav-users" class="treeview">
-                    <a href="#"><i class="fa fa-users" aria-hidden="true"></i> <span>Užívatelia</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?= url::to( '/admin/users' ); ?>">Všetci užívatelia</a></li>
-                    </ul>
-                </li>
+                <li id="nav-users"><a href="<?= url::to( '/admin/users' ); ?>"><i class="fa fa-users" aria-hidden="true"></i> <span>Užívatelia</span></a></li>
 
                 <li id="nav-languages" class="treeview">
                     <a href="#"><i class="fa fa-language" aria-hidden="true"></i> <span>Jazyky</span>
