@@ -36,3 +36,6 @@ notyjs
 #Use Case
 
 ![alt tag](http://showcase.stranovsky.sk/github/usecase.png)
+
+#Database model
+![alt tag](http://showcase.stranovsky.sk/github/database_model.png)

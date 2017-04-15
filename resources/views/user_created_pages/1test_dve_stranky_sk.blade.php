@@ -7,6 +7,6 @@
 
 @section('content')
     <?php
-        include getcwd ().'/games/odd_even/test.html'; 
+        include getcwd ().'/games/odd_even/test.html';
     ?>
 @stop
