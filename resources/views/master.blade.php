@@ -323,21 +323,24 @@
         var elem = document.querySelector('.js-switch');
         var t = 0;
         var input = $('input[name=email]');
-        elem.onchange = function() {
-            if (t % 2 == 0) {
-                input.attr('type', 'text');
-                input.attr('name', 'aislogin');
-                input.attr('placeholder', 'AIS login');
-                $('#login-nav').attr('action', baseUrl + '/login/ldap');
-            } else {
-                input.attr('type', 'email');
-                input.attr('name', 'email');
-                input.attr('placeholder', 'Email');
-                $('#login-nav').attr('action', baseUrl + '/login/custom');
-            }
-            t++;
-        };
-        var switchery = new Switchery(elem, {size: 'small'});
+        if(elem != null) {
+            elem.onchange = function() {
+                if (t % 2 == 0) {
+                    input.attr('type', 'text');
+                    input.attr('name', 'aislogin');
+                    input.attr('placeholder', 'AIS login');
+                    $('#login-nav').attr('action', baseUrl + '/login/ldap');
+                } else {
+                    input.attr('type', 'email');
+                    input.attr('name', 'email');
+                    input.attr('placeholder', 'Email');
+                    $('#login-nav').attr('action', baseUrl + '/login/custom');
+                }
+                t++;
+            };
+            var switchery = new Switchery(elem, {size: 'small'});
+        }
+
         $('.navbar a.dropdown-toggle').on('click', function (e) {
             var $el = $(this);
             var $parent = $(this).offsetParent(".dropdown-menu");
