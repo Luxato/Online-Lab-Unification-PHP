@@ -61,7 +61,9 @@ Route::post('/login/custom', [
 	'uses' => 'LoginController@login',
 	'as'   =>  'login.custom'
 ] );
-
+Route::post('/login/ldap', [
+	'uses' => 'LoginController@login_ldap'
+] );
 $this->get('/login/logout', 'LoginController@logout');
 
 // Password Reset Routes...
