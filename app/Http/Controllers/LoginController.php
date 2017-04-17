@@ -32,37 +32,41 @@ class LoginController extends Controller {
 	}
 
 	public function login_ldap(Request $request) {
-		if(TRUE){
-			$adServer = "ldap.stuba.sk";
+		$adServer = "ldap.stuba.sk";
+		$dn  = 'ou=People, DC=stuba, DC=sk';
+		$username = $request->get('aislogin');
+		$password = $request->get('password');
+		$ldaprdn  = "uid=$username, $dn";
 
-			$dn  = 'ou=People, DC=stuba, DC=sk';
-			$username = $request->get('aislogin');
-			$password = $request->get('password');
-			$ldaprdn  = "uid=$username, $dn";
+		$ldapconn = ldap_connect($adServer);
+		ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
 
-			$ldapconn = ldap_connect($adServer);
-			ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
-
-			$bind = ldap_bind($ldapconn, $ldaprdn, $password);
-			if ($bind){
-
-				$results=ldap_search($ldapconn,$dn,"uid=$username",array("givenname","sn","mail","cn","uisid","uid"));
-				$info=ldap_get_entries($ldapconn,$results);
-				$i=0;
-				$aisUdaje = array("Meno"=>$info[$i]['givenname'][0],
-				                  "Priezvisko"=>$info[$i]['sn'][0],
-				                  "Používateľské meno"=>$info[$i]['uid'][0],
-				                  "Id"=>$info[$i]['uisid'][0],
-				                  "Email"=>$info[$i]['mail'][0]);
-				var_dump($aisUdaje);
-				//$_SESSION['login'] = $info[$i]['uid'][0];
-				//$_SESSION['ldapData'] = $aisUdaje;
-				echo "Success";
-				$_SESSION['meno']=$info[$i]['givenname'][0];
-				//header("Location: succes_log.php");
-			} else {
-				echo "Chyba pripojenia na server!";
-			}
+		$bind = ldap_bind($ldapconn, $ldaprdn, $password);
+		if ($bind){
+			$results=ldap_search($ldapconn,$dn,"uid=$username",array("givenname","sn","mail","cn","uisid","uid"));
+			$info=ldap_get_entries($ldapconn,$results);
+			$i=0;
+			$aisUdaje = array("Meno"=>$info[$i]['givenname'][0],
+			                  "Priezvisko"=>$info[$i]['sn'][0],
+			                  "Používateľské meno"=>$info[$i]['uid'][0],
+			                  "Id"=>$info[$i]['uisid'][0],
+			                  "Email"=>$info[$i]['mail'][0]);
+			var_dump($aisUdaje);
+			//$_SESSION['login'] = $info[$i]['uid'][0];
+			//$_SESSION['ldapData'] = $aisUdaje;
+			$user = new User();
+			$user->name = $info[$i]['uid'][0];
+			$user->email = $info[$i]['mail'][0];
+			$user->type = 'ldap';
+			echo '<pre>';
+			print_r( $user );
+			echo '</pre>';
+			/*$_SESSION['meno']=$info[$i]['givenname'][0];*/
+			/*Session::set( 'logged_user_id', $user->id );
+			Session::set( 'logged_email', $user->email );*/
+			//header("Location: succes_log.php");
+		} else {
+			echo "chyba pripojenia na server";
 		}
 	}
 

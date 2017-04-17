@@ -12,59 +12,62 @@
 */
 
 // TODO AUTH ADMIN LOGIN
-Route::post('admin/page_create/', 'Admin@do_page_create');
+Route::post( 'admin/page_create/', 'Admin@do_page_create' );
 
 // Resource for pages
-Route::resource('admin/pages', 'Administration\PageController');
+Route::resource( 'admin/pages', 'Administration\PageController' );
 // Resource for news
-Route::resource('admin/actualities', 'Administration\ActualitiesController');
+Route::resource( 'admin/actualities', 'Administration\ActualitiesController' );
 // Resource for users
-Route::resource('admin/users', 'Administration\UserController');
+Route::resource( 'admin/users', 'Administration\UserController' );
 // Resource for News-Categories
-Route::resource('admin/news-categories', 'Administration\NewsCategoriesController');
+Route::resource( 'admin/news-categories', 'Administration\NewsCategoriesController' );
 // Resource for settings
-Route::resource('admin/settings', 'Administration\SettingsController');
+Route::resource( 'admin/settings', 'Administration\SettingsController' );
 // Resource for languages
-Route::resource('admin/languages', 'Administration\LanguageController');
+Route::resource( 'admin/languages', 'Administration\LanguageController' );
 
 // FRONT reources
 // Resource for users
-Route::resource('users', 'UserController');
+Route::resource( 'users', 'UserController' );
 // Resource for api
-Route::match(['get', 'post'], '/api/{apiname}', 'ApiController@index');
+Route::match( [ 'get', 'post' ], '/api/{apiname}', 'ApiController@index' );
 
-Route::get('/admin/create_lang', ['middleware' => 'auth', 'uses' => 'Admin@create_lang']);
+Route::get( '/admin/create_lang', [ 'middleware' => 'auth', 'uses' => 'Admin@create_lang' ] );
 
-Route::get('/', ['uses' => 'Homepage@index', 'as' => 'home']);
+Route::get( '/', [ 'uses' => 'Homepage@index', 'as' => 'home' ] );
 
-Route::get('/admin', ['middleware' => 'auth', 'uses' => 'Admin@index']);
-Route::get('/admin/navigation', ['middleware' => 'auth', 'uses' => 'Admin@navigation']);
+Route::get( '/admin', [ 'middleware' => 'auth', 'uses' => 'Admin@index' ] );
+Route::get( '/admin/navigation', [ 'middleware' => 'auth', 'uses' => 'Admin@navigation' ] );
 
-Route::post('/worker/do_create_language', ['middleware' => 'auth', 'uses' => 'Worker@do_create_language']);
-Route::post('/worker/do_delete_language', ['middleware' => 'auth', 'uses' => 'Worker@do_delete_language']);
+Route::post( '/worker/do_create_language', [ 'middleware' => 'auth', 'uses' => 'Worker@do_create_language' ] );
+Route::post( '/worker/do_delete_language', [ 'middleware' => 'auth', 'uses' => 'Worker@do_delete_language' ] );
 
-Route::post('/worker/do_navigation_change_order', ['middleware' => 'auth', 'uses' => 'Worker@do_navigation_change_order']);
+Route::post( '/worker/do_navigation_change_order', [
+	'middleware' => 'auth',
+	'uses'       => 'Worker@do_navigation_change_order'
+] );
 
 /*Route::group(['middleware' => ['web']], function () {
 	Route::auth();
 });*/
 
-// Authentication Routes...
-$this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
-$this->post('login', 'Auth\LoginController@login');
-$this->post('logout', 'Auth\LoginController@logout')->name('logout');
+// Administration authentication Routes...
+$this->get( 'login', 'Auth\LoginController@showLoginForm' )->name( 'login' );
+$this->post( 'login', 'Auth\LoginController@login' );
+$this->post( 'logout', 'Auth\LoginController@logout' )->name( 'logout' );
 
-// Registration Routes...
-$this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-$this->post('register', 'Auth\RegisterController@register');
-Route::post('/login/custom', [
+// User authentification Routes...
+$this->get( 'register', 'Auth\RegisterController@showRegistrationForm' )->name( 'register' );
+$this->post( 'register', 'Auth\RegisterController@register' );
+Route::post( '/login/custom', [
 	'uses' => 'LoginController@login',
-	'as'   =>  'login.custom'
+	'as'   => 'login.custom'
 ] );
-Route::post('/login/ldap', [
+Route::post( '/login/ldap', [
 	'uses' => 'LoginController@login_ldap'
 ] );
-$this->get('/login/logout', 'LoginController@logout');
+$this->get( '/login/logout', 'LoginController@logout' );
 
 // Password Reset Routes...
 /*$this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
@@ -73,8 +76,8 @@ $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');*/
 
 /*Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);*/
-Route::get('aktualita/{slug}', ['uses' => 'Homepage@aktuality']);
-Route::get('{slug}', ['uses' => 'Homepage@index', 'as' => 'page']);
-Route::get('setlang/{lang}', 'Homepage@set_language');
+Route::get( 'aktualita/{slug}', [ 'uses' => 'Homepage@aktuality' ] );
+Route::get( '{slug}', [ 'uses' => 'Homepage@index', 'as' => 'page' ] );
+Route::get( 'setlang/{lang}', 'Homepage@set_language' );
 
-Route::get('/home', 'HomeController@index');
+Route::get( '/home', 'HomeController@index' );
