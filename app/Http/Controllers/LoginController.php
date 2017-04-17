@@ -45,26 +45,14 @@ class LoginController extends Controller {
 		if ($bind){
 			$results=ldap_search($ldapconn,$dn,"uid=$username",array("givenname","sn","mail","cn","uisid","uid"));
 			$info=ldap_get_entries($ldapconn,$results);
-			$i=0;
-			$aisUdaje = array("Meno"=>$info[$i]['givenname'][0],
-			                  "Priezvisko"=>$info[$i]['sn'][0],
-			                  "Používateľské meno"=>$info[$i]['uid'][0],
-			                  "Id"=>$info[$i]['uisid'][0],
-			                  "Email"=>$info[$i]['mail'][0]);
-			var_dump($aisUdaje);
-			//$_SESSION['login'] = $info[$i]['uid'][0];
-			//$_SESSION['ldapData'] = $aisUdaje;
-			$user = new User();
-			$user->name = $info[$i]['uid'][0];
-			$user->email = $info[$i]['mail'][0];
+			$user = User::firstOrNew(['name' => $info[0]['uid'][0], 'type' => 'ldap']);
+			$user->name = $info[0]['uid'][0];
+			$user->email = $info[0]['mail'][0];
 			$user->type = 'ldap';
-			echo '<pre>';
-			print_r( $user );
-			echo '</pre>';
-			/*$_SESSION['meno']=$info[$i]['givenname'][0];*/
-			/*Session::set( 'logged_user_id', $user->id );
-			Session::set( 'logged_email', $user->email );*/
-			//header("Location: succes_log.php");
+			$user->save();
+			Session::set( 'logged_user_id', $user->id );
+			Session::set( 'logged_email', $user->email );
+			return back();
 		} else {
 			echo "chyba pripojenia na server";
 		}
