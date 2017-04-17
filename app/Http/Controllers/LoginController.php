@@ -41,7 +41,7 @@ class LoginController extends Controller {
 		$ldapconn = ldap_connect($adServer);
 		ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
 
-		$bind = ldap_bind($ldapconn, $ldaprdn, $password);
+		$bind = @ldap_bind($ldapconn, $ldaprdn, $password);
 		if ($bind){
 			$results=ldap_search($ldapconn,$dn,"uid=$username",array("givenname","sn","mail","cn","uisid","uid"));
 			$info=ldap_get_entries($ldapconn,$results);
@@ -54,7 +54,7 @@ class LoginController extends Controller {
 			Session::set( 'logged_email', $user->email );
 			return back();
 		} else {
-			echo "chyba pripojenia na server";
+			echo "chyba pripojenia na server alebo zle heslo";
 		}
 	}
 
