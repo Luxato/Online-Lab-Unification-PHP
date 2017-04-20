@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Autor suboru: Katarina Zakova -->
+<!-- Posledna aktualizacia: marec 2015 -->
+<anagramy>
+	<uloha>
+		<zadanie>minul obra</zadanie>
+		<napoveda>slovenský spisovateľ</napoveda>
+                <riesenie>Milo Urban</riesenie>
+	</uloha>
+	<uloha>
+		<zadanie>oh no money</zadanie>
+		<napoveda>svadobná cesta, angl.</napoveda>
+                <riesenie>honeymoon</riesenie>       
+	</uloha> 
+	<uloha>
+		<zadanie>mal na hrnci obal</zadanie>
+		<napoveda>bývalý americký prezident</napoveda>
+                <riesenie>Abraham Lincoln</riesenie>       
+	</uloha>
+	<uloha>
+		<zadanie>Marii plnil WC</zadanie>
+		<napoveda>anglický šľachtic</napoveda>
+                <riesenie>princ William</riesenie>       
+	</uloha>
+	<uloha>
+		<zadanie>Anna žije krásne</zadanie>
+		<napoveda>kvetina</napoveda>
+                <riesenie>snežienka jarná</riesenie>       
+	</uloha>
+	<uloha>
+		<zadanie>dietne plesnivý</zadanie>
+		<napoveda>.dog{ visibility: hidden }</napoveda>
+                <riesenie>neviditelný pes</riesenie>       
+	</uloha> 
+	<uloha>
+		<zadanie>neskrýva sloj</zadanie>
+		<napoveda>zemepisná oblasť</napoveda>
+                <riesenie>Slovenský raj</riesenie>       
+	</uloha>
+	<uloha>
+		<zadanie>geolog</zadanie>
+		<napoveda>vyhľadávač</napoveda>
+                <riesenie>Google</riesenie>       
+	</uloha>  
+	<uloha>
+		<zadanie>koka a aké lsd</zadanie>
+		<napoveda>nápoj</napoveda>
+                <riesenie>sladké kakao</riesenie>       
+	</uloha>
+	<uloha>
+		<zadanie>ospalý Tito</zadanie>
+		<napoveda>slovenský politik</napoveda>
+                <riesenie>opitý Slota</riesenie>       
+	</uloha>     
+	<uloha>
+		<zadanie>skon lesov</zadanie>
+		<napoveda>majstri sveta 2015</napoveda>
+                <riesenie>Slovensko</riesenie>       
+	</uloha>
+</anagramy>

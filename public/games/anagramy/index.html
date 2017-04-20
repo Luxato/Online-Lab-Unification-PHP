@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Anagramy</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/anagramyPrint.css" media="print">
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="css/style.css"/>
+        <script type="text/javascript" src="libs/d3.min.js"></script>
+        <script type="text/javascript" src="libs/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="scripts/anagramy.js"></script>
+        <script type="text/javascript" src="scripts/breadcrumbs.js"></script>
+	<link type="text/css" rel="stylesheet" href="css/anagramy.css" />
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+</head>
+<body onload="init()">
+<div class="body_div_simi">
+ <div id="uvod">
+    <h1 class="nadpisH1"><span class="cervena">Anagramy</span></h1>
+   
+    <h3 class="nadpisH3">Ciel hry:</h3>
+    <p>Správne vylúštite dané anagramy potiahnutím písmen na ich novú pozíciu v lište pod nimi.</p>
+    <h3 class="nadpisH3">Pravidlá hry:</h3>
+    <ul>
+      <li>Vyriešenie slova: +30b</li>
+      <li>Použitie nápovedy: -3b</li>
+      <li>Použitie reset tlačidla: -5b</li>
+      <li>Zobrazenie výsledku: 0b za slovo po vyriešení</li>
+    </ul>
+    <button class="btn_my" type="button" onclick="contentRender();"><p style="position:relative;bottom: 10px;right: 7px;">Start</p></button>
+	 
+    <br>   
+  </div>
+  </div>
+    <div class="container" style="display:none;">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="game">
+                    <div class="containerLetters" id="draggablePile"></div>
+                    <div class="clear"></div>
+                    <div class="containerLetters" id="droppablePile"></div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div class="note" id="score">Score: 0</div>
+                        </div>
+                         <div class="buttonPanel col-xs-6">
+				
+					
+                            <button id="buttonReset" style="position:absolute; left:0px;">RESET</button>
+						
+                            <div class="clear"></div>
+							 <div style="position:absolute; left:250px;top:15px">
+                            <button class="backButton" id="back"  >&lt;</button>
+                            <button class="forwardButton" id="forward">&GT;</button>
+							</div>
+                            <div class="clear"></div>
+                            <button id="buttonSolution"style="position:absolute; left:490px;">Riešenie</button>
+                            
+                          
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="note" id="help">Zobraz nápovedu</div>
+                            <div class="note" id="solution"></div>
+                        </div>
+                    </div>
+                    <div class="topLayer" id="end">
+                        <div class="note" id="endNote">     
+                        </div>
+                        <div class="clear"></div>
+                        <button id="newGame">Znova</button>
+                    </div>         
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</body>
+<script>
+function contentRender()
+{
+ $(".container").css("display","block");
+ $("#uvod").css("display","none");
+}
+</script>
+</html>

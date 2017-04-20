@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Autor suboru: Jakub Jahic -->
+<krizovky>
+	<krizovka>
+		<tajnicka>prázdniny</tajnicka>
+		<slovo>
+      <napoveda>Robí sa po každom diktáte, písomne si v nej opravíte chyby.</napoveda>
+      <riesenie>oprava</riesenie>
+    </slovo>
+		<slovo>
+      <napoveda>V slovenčine platí zákon o rytmickom...</napoveda>
+      <riesenie>krátení</riesenie>
+    </slovo>
+		<slovo>
+      <napoveda>Známa kniha, ktorú napísal Lewis Carrol - Alica v krajine...</napoveda>
+      <riesenie>zázrakov</riesenie>
+    </slovo>
+		<slovo>
+      <napoveda>Rozprávanie sa člení na tieto časti: úvod, jadro a ...</napoveda>
+      <riesenie>záver</riesenie>
+    </slovo>
+		<slovo>
+      <napoveda>Kone ju majú na kopyte...</napoveda>
+      <riesenie>podkovu</riesenie>
+    </slovo>
+		<slovo>
+      <napoveda>Školská pomôcka, ukladajú sa do nej písacie potreby.</napoveda>
+      <riesenie>peračník</riesenie>
+    </slovo>
+		<slovo>
+      <napoveda>Každý žiak si ju nosí do školy, aby nebol hladný.</napoveda>
+      <riesenie>desiata</riesenie>
+    </slovo>
+		<slovo>
+      <napoveda>Nachádzajú sa v nich dôležité informácie, novinky.</napoveda>
+      <riesenie>noviny</riesenie>
+    </slovo>
+		<slovo>
+      <napoveda>V centre Košíc sa nachádza kostol s menom Dóm sv. ...</napoveda>
+      <riesenie>Alžbety</riesenie>
+    </slovo>       
+	</krizovka>
+</krizovky>

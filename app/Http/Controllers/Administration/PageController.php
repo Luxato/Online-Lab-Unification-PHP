@@ -119,12 +119,11 @@ class PageController extends Controller {
 	public function edit( $id ) {
 		$page      = Page::with( 'feature' )->findOrFail( $id )->toArray();
 		$languages = Language::all()->toArray();
-
 		foreach ( $page['feature'] as &$features ) {
 			try {
 				$fileName = $features['content_file'] . '.blade.php';
-				if ( ! file_exists( $fileName ) ) {
-					break;
+				if ( ! file_exists( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $fileName ) ) {
+					continue;
 				}
 				$file = fopen( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $fileName, 'r' );
 
@@ -132,7 +131,8 @@ class PageController extends Controller {
 					'<?php',
 					'return',
 					'[',
-					'];'
+					'];',
+					'?>'
 				], '', fread( $file, filesize( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $features['content_file'] . '.blade.php' ) ) );
 				fclose( $file );
 				$pos                 = strpos( $content, "@section('content')" );

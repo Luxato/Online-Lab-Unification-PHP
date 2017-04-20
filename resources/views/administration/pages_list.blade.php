@@ -77,13 +77,14 @@
         $('#nav-navigacia').addClass('active');
         $('#example2').DataTable({
             "paging": true,
+            "bSort": false,
             "lengthChange": false,
             "searching": false,
             "ordering": true,
             "info": true,
+            "sort": true,
             "autoWidth": false,
-            "pageLength": 20,
-            "aaSorting" : [[]]
+            "pageLength": 20
         });
     });
     setTimeout(function () {

@@ -5,8 +5,9 @@
 @stop
 
 @section('custom_css')
-    <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-    <link rel="stylesheet" href="<?= url('assets/css/switchery.min.css') ?>">
+    <link rel="stylesheet"
+          href="<?= URL::to( '/' ); ?>/assets/administration/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href="<?= url( 'assets/css/switchery.min.css' ) ?>">
 @stop
 
 
@@ -16,7 +17,9 @@
             <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
             <div class="col-lg-12">
                 <div class="form-group">
-                    <i data-toggle="tooltip" title="Ak stránka nemá mať žiaden obsah, teda bude v navigácii, ale nebude sa ňu to dať klikať" class="fa fa-question-circle" aria-hidden="true"></i>
+                    <i data-toggle="tooltip"
+                       title="Ak stránka nemá mať žiaden obsah, teda bude v navigácii, ale nebude sa ňu to dať klikať"
+                       class="fa fa-question-circle" aria-hidden="true"></i>
                     <label for="noContent">Stránka bez obsahu</label>
                     <input id="noContent" name="noContent" type="checkbox" class="js-switch js-check-change">
                 </div>
@@ -29,7 +32,8 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">URL</label>
-                    <input id="url-input" class="form-control" name="url[]" type="text" placeholder="URL" required="" value="<?= $page['feature'][0]['controller'] ?>">
+                    <input id="url-input" class="form-control" name="url[]" type="text" placeholder="URL" required=""
+                           value="<?= $page['feature'][0]['controller'] ?>">
                 </div>
                 <div class="form-group">
                     <label>Lokalizácia</label>
@@ -58,18 +62,72 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Obsah</label>
                     <textarea class="editor" id="editor" name="cont[]" rows="6" cols="80">
-                        <?=  isset($page['feature'][0]['content']) ? htmlspecialchars($page['feature'][0]['content']) : '' ?>
+                        <?=  isset( $page['feature'][0]['content'] ) ? htmlspecialchars( $page['feature'][0]['content'] ) : '' ?>
                     </textarea>
                 </div>
             </div>
 
-            <div id="another-lang"></div>
+            <div id="another-lang">
+                <?php $i = 0; foreach($page['feature'] as $feature): ?>
+                    <?php
+                        if ($i == 0) {
+                            $i++;
+                            continue;
+                        }
+                    ?>
+                    <div id="langSection<?= $i ?>" class="lang-section">
+                        <hr>
+                        <h2>Ďalšia jazyková mutácia</h2>
+                        <div class="cancelLang"><i class="fa fa-times" aria-hidden="true"></i></div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nadpis</label>
+                                <input class="form-control" name="name[]" type="text" placeholder="Zadajte nadpis sem" required="" value="<?= $feature['title'] ?>">
+                                </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">URL</label>
+                                <input class="form-control" name="url[]" type="text" placeholder="URL" required="" value="<?= $feature['controller'] ?>">
+                                </div>
+                            <div class="form-group">
+                                <label>Lokalizácia</label>
+                                <select id="-langSelection" name="language[]" class="form-control" required="">
+                                    <?php foreach($languages as $value): ?>
+                                    <option value="<?= $value['id']  ?>" <?= $feature['language_id'] == $value['id'] ? 'selected' : '' ?>><?= $value['language_title'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                </div>
+                            </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">SEO nadpis</label>
+                                <input class="form-control disabled" type="text" placeholder="SEO nadpis">
+                                </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">SEO popis</label>
+                                <textarea class="form-control disabled" rows="3" placeholder="SEO popis"></textarea>
+                                </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Kľúčové slová</label>
+                                <input class="form-control disabled" type="text" placeholder="Kľúčové slová oddelené čiarkou">
+                                </div>
+                            </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Obsah</label>
+                                <textarea class="editor" id="editor <?= $i ?>" name="cont[]" rows="6" cols="80">
+                                    <?= $feature['content'] ?>
+                                </textarea>
+                                </div>
+                            </div>
+                        </div>
+                <?php endforeach; ?>
+            </div>
 
             <div class="col-md-12">
                 <button id="addLanguage" class="btn btn-info btn-lg"
                         style="width: 49%; float: left; margin-right: 10px;">Pridať jazykovú mutáciu
                 </button>
-                <button type="submit" class="btn btn-success btn-lg" style="width: 49%;">Vytvoriť</button>
+                <button type="submit" class="btn btn-success btn-lg" style="width: 49%;">Upraviť</button>
             </div>
         </form>
     </div>
@@ -77,9 +135,9 @@
 
 @section('custom_scripts')
     <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
-    <script src="<?= url('assets/js/switchery.min.js') ?>"></script>
+    <script src="<?= url( 'assets/js/switchery.min.js' ) ?>"></script>
     <script>
-        function initEditor(){
+        function initEditor() {
             tinymce.init({
                 selector: '.editor',
                 height: 200,
@@ -94,8 +152,8 @@
                 toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
                 image_advtab: true,
                 templates: [
-                    { title: 'Test template 1', content: 'Test 1' },
-                    { title: 'Test template 2', content: 'Test 2' }
+                    {title: 'Test template 1', content: 'Test 1'},
+                    {title: 'Test template 2', content: 'Test 2'}
                 ],
                 content_css: [
                     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
@@ -109,14 +167,14 @@
         var switchery = new Switchery(elem, {size: 'small'});
         var changeCheckbox = document.querySelector('.js-switch');
         var p = 0;
-        changeCheckbox.onchange = function() {
+        changeCheckbox.onchange = function () {
             p++;
             if (p % 2 == 1) {
                 $('#new-page-form').parsley().destroy();
                 $('#addLanguage').hide();
                 console.log('test');
                 $('.lang-section').remove();
-                $( ":input" ).each(function(){
+                $(":input").each(function () {
                     $(this).addClass('disabled');
                 });
                 $('#title-input').removeClass('disabled');
@@ -130,7 +188,7 @@
                 $('#addLanguage').show();
                 maxLanguages = $('#languageSelection').children('option').length - 2;
                 var i = 0;
-                $( ":input" ).each(function(){
+                $(":input").each(function () {
                     $(this).removeClass('disabled');
                 });
             }
@@ -155,7 +213,7 @@
         }
 
         $(function () {
-            $('#new-page-form').parsley().on('field:validated', function() {
+            $('#new-page-form').parsley().on('field:validated', function () {
                 var ok = $('.parsley-error').length === 0;
                 $('.bs-callout-info').toggleClass('hidden', !ok);
                 $('.bs-callout-warning').toggleClass('hidden', ok);
@@ -195,8 +253,13 @@
             return convertText;
         }
 
-        var i = 0;
+        var i = <?= sizeof($page['feature']) ?>;
         var maxLanguages = $('#languageSelection').children('option').length - 2;
+        console.log(i);
+        console.log(maxLanguages);
+        if($('#languageSelection').children('option').length == i) {
+            $('#addLanguage').addClass('btn-disabled');
+        }
         $('#addLanguage').on('click', function (e) {
             e.preventDefault();
             if (maxLanguages <= 0) {
@@ -279,14 +342,14 @@
             });
 
             //Reinitialize validator
-            $('#new-page-form').parsley().on('field:validated', function() {
+            $('#new-page-form').parsley().on('field:validated', function () {
                 var ok = $('.parsley-error').length === 0;
                 $('.bs-callout-info').toggleClass('hidden', !ok);
                 $('.bs-callout-warning').toggleClass('hidden', ok);
             });
         }
 
-        $(document).on('click', 'div.cancelLang', function() {
+        $(document).on('click', 'div.cancelLang', function () {
             var langSection = $(this).closest('div.lang-section');
             langSection.fadeOut('slow', function () {
                 langSection.remove();

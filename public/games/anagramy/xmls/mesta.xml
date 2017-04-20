@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Autor suboru: Katarina Zakova -->
+<!-- Posledna aktualizacia: marec 2015 -->
+<map>
+	<city>
+		<type>sk</type>
+		<name>Martin</name>
+		<latitude>49.065</latitude>  
+		<longitude>18.921944</longitude>      
+	</city>
+	<city>
+		<type>sk</type>
+		<name>Banská Štiavnica</name>
+		<latitude>48.458056</latitude>  
+		<longitude>18.896389</longitude>      
+	</city>
+	<city>
+		<type>eu</type>
+		<name>Madrid</name>
+		<latitude>40.383333</latitude>  
+		<longitude>-3.716667</longitude>      
+	</city>
+	<city>
+		<type>eu</type>
+		<name>Rome, Roma, Rím</name>
+		<latitude>41.9</latitude>  
+		<longitude>12.5</longitude>      
+	</city>   
+	<city>
+		<type>eu</type>
+		<name>Londýn, London</name>
+		<latitude>51.507222</latitude>  
+		<longitude>-0.1275</longitude>      
+	</city> 
+
+	<city>
+
+	<type>eu</type>
+		<name>Zurich</name>
+		<latitude>47.330186</latitude>
+		<longitude>8.558350</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Rožňava</name>
+		<latitude>48.655448</latitude>
+		<longitude>20.529327</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Nové Zámky</name>
+		<latitude>47.985712</latitude>
+		<longitude>18.163834</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Nové Mesto nad Váhom</name>
+		<latitude>48.749552</latitude>
+		<longitude>17.839737</longitude>
+	</city>
+
+
+	<city>
+		<type>sk</type>
+		<name>Bardejov</name>
+		<latitude>49.290802</latitude>
+		<longitude>21.279831</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Bzince Pod Javorinou</name>
+		<latitude>48.787315</latitude>
+		<longitude>17.770566</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Námestovo</name>
+		<latitude>49.408460</latitude>
+		<longitude>19.483223</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Liptovský Mikuláš</name>
+		<latitude>49.082131</latitude>
+		<longitude>19.607506</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Trebišov</name>
+		<latitude>48.622187</latitude>
+		<longitude>21.723061</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Snina</name>
+		<latitude>48.987807</latitude>
+		<longitude>22.152128</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Prešov</name>
+		<latitude>48.999451</latitude>
+		<longitude>21.242237</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Spišská Nová Ves</name>
+		<latitude>48.943743</latitude>
+		<longitude>20.565634</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Lúčenec</name>
+		<latitude>48.330620</latitude>
+		<longitude>19.668360</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Komárno</name>
+		<latitude>47.761195</latitude>
+		<longitude>18.128471</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Skalica</name>
+		<latitude>48.844017</latitude>
+		<longitude>17.225018</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Trenčín</name>
+		<latitude>48.896042</latitude>
+		<longitude>18.037148</longitude>
+	</city>
+
+	<city>
+		<type>sk</type>
+		<name>Púchov</name>
+		<latitude>49.124296</latitude>
+		<longitude>18.326011</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Warszawa, Varšava</name>
+		<latitude>52.240205</latitude>
+		<longitude>21.009979</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Zagreb</name>
+		<latitude>45.810794</latitude>
+		<longitude>15.978584</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Venezia</name>
+		<latitude>45.430744</latitude>
+		<longitude>12.312927</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Amsterdam</name>
+		<latitude>52.383563</latitude>
+		<longitude>4.897156</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Rotterdam</name>
+		<latitude>51.920026</latitude>
+		<longitude>4.478989</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Oslo</name>
+		<latitude>59.923022</latitude>
+		<longitude>10.752869</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Stockholm</name>
+		<latitude>59.328636</latitude>
+		<longitude>18.069763</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Helsinki, Helsingfors</name>
+		<latitude>60.213557</latitude>
+		<longitude>24.925232</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Riga</name>
+		<latitude>56.947221</latitude>
+		<longitude>24.087524</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Minsk</name>
+		<latitude>53.887345</latitude>
+		<longitude>27.548218</longitude>
+	</city>
+
+
+	<city>
+		<type>eu</type>
+		<name>Kyjev, Kyiv</name>
+		<latitude>50.462750</latitude>
+		<longitude>30.531006</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Sevastopol</name>
+		<latitude>44.658885</latitude>
+		<longitude>33.497314</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Bukurešť, Bucuresti</name>
+		<latitude>44.439663</latitude>
+		<longitude>26.114502</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Sarajevo</name>
+		<latitude>43.863743</latitude>
+		<longitude>18.421326</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Paríž, Paris</name>
+		<latitude>48.831278</latitude>
+		<longitude>2.367554</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Lyon</name>
+		<latitude>45.747402</latitude>
+		<longitude>4.839478</longitude>
+	</city>
+
+	<city>
+		<type>eu</type>
+		<name>Viedeň, Wien</name>
+		<latitude>48.205456</latitude>
+		<longitude>16.364136</longitude>
+	</city>
+	<city>
+		<type>eu</type>
+		<name>Plzeň</name>
+		<latitude>49.734244</latitude>
+		<longitude>13.364868</longitude>
+	</city>
+</map>

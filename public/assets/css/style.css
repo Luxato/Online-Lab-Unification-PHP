@@ -856,3 +856,16 @@ aside ul, .months ul {
 .googleLogin {
     position: relative;
 }
+
+iframe:focus {
+    outline: none;
+}
+
+iframe[seamless] {
+    display: block;
+}
+
+iframe {
+    width: 100%;
+    height: 500px;
+}
