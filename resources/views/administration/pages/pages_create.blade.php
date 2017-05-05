@@ -78,34 +78,22 @@
 @stop
 
 @section('custom_scripts')
-    <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
     <script src="<?= url('assets/js/switchery.min.js') ?>"></script>
+    <!-- include summernote css/js-->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
     <script>
         function initEditor(){
-            tinymce.init({
-                selector: '.editor',
-                height: 200,
-                theme: 'modern',
-                plugins: [
-                    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                    'searchreplace wordcount visualblocks visualchars code fullscreen',
-                    'insertdatetime media nonbreaking save table contextmenu directionality',
-                    'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
-                ],
-                toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-                toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
-                image_advtab: true,
-                templates: [
-                    { title: 'Test template 1', content: 'Test 1' },
-                    { title: 'Test template 2', content: 'Test 2' }
-                ],
-                content_css: [
-                    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                    '//www.tinymce.com/css/codepen.min.css'
-                ]
+            $('.editor').summernote({
+                height: 150,   //set editable area's height
+                codemirror: { // codemirror options
+                    theme: 'monokai'
+                }
             });
         }
-        initEditor();
+        $(function(){
+            initEditor();
+        });
 
         var elem = document.querySelector('.js-switch');
         var switchery = new Switchery(elem, {size: 'small'});
