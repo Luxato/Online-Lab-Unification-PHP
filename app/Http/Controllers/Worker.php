@@ -77,6 +77,6 @@ class Worker extends Controller {
 			$page->save();
 		}
 
-		return redirect( 'admin/navigation' )->with( 'message', 'Navigácia bola upravená.' );
+		return back();
 	}
 }

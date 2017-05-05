@@ -103,8 +103,66 @@
             <ul class="nav navbar-nav">
 				<?php foreach($navigation as $nav_link): ?>
 				<?php if(! isset( $nav_link->children )): ?>
-                <li><a href="<?= isset($nav_link->content_file) ? $nav_link->controller : '#' ?>"><?php echo $nav_link->title ?></a>
-                </li>
+
+                    {{--Aktuality--}}
+                    <?php if($nav_link->controller == 'aktuality'): ?>
+                    <li><a href="aktuality"><?= trans( 'translation.actualities' ) ?></a></li>
+					<?php elseif($nav_link->controller == 'cuslogin'): ?>
+					<?php if(! Session::get( 'logged_user_id' )): ?>
+                    {{--Logged users can not see theese--}}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"
+                           data-toggle="dropdown"><b><?= trans( 'translation.login' ) ?></b> <span class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form id="login-nav" class="form" role="form" method="post" action="<?= URL( '/login/custom' ) ?>">
+                                            <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
+                                            <div class="form-group">
+                                                <label for=""><?= trans('translation.ais_login') ?>: </label>
+                                                <input type="checkbox" class="js-switch">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only"
+                                                       for="exampleInputEmail2"><?= trans( 'translation.email_address' ) ?></label>
+                                                <input name="email" type="email" class="form-control"
+                                                       id="exampleInputEmail2"
+                                                       placeholder="<?= trans( 'translation.email_address' ) ?>"
+                                                       required="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only"
+                                                       for="exampleInputPassword2"><?= trans( 'translation.password' ) ?></label>
+                                                <input name="password" type="password" class="form-control"
+                                                       id="exampleInputPassword2"
+                                                       placeholder="<?= trans( 'translation.password' ) ?>" required="">
+                                                <div class="help-block text-right"><a href=""><?= trans('translation.lost_password') ?></a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit"
+                                                        class="btn btn-primary btn-block"><?= trans( 'translation.sign_in' )  ?></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="bottom text-center">
+                                        <div><?= trans('translation.or') ?></div>
+                                        <button type="button" class="btn btn-default" id="showModal" href="#"><?= trans('translation.create_account') ?></button>
+                                        <div><?= trans('translation.or') ?></div>
+                                        <a class="googleLogin" href="#"><span style="position: absolute;top: 0;color: white;right: 30px;"><?= trans('translation.login_google') ?></span><img height="44" src="<?= url('assets/img/google.png') ?>" alt="google_login"></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+					<?php else: ?>
+
+                <?php endif; ?>
+                    <?php else: ?>
+                    <li><a href="<?= isset($nav_link->content_file) ? $nav_link->controller : '#' ?>"><?php echo $nav_link->title ?></a>
+                    </li>
+                    <?php endif; ?>
 				<?php else: ?>
                 <li><a class="dropdown-toggle" data-toggle="dropdown"
                        href="#"><?php echo trans( $nav_link->title ) ?> <b class="caret"></b></a>
@@ -129,60 +187,6 @@
                 </li>
 				<?php endif; ?>
 				<?php endforeach; ?>
-
-                <li><a href="aktuality"><?= trans( 'translation.actualities' ) ?></a></li>
-
-				<?php if(! Session::get( 'logged_user_id' )): ?>
-                {{--Logged users can not see theese--}}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle"
-                       data-toggle="dropdown"><b><?= trans( 'translation.login' ) ?></b> <span class="caret"></span></a>
-                    <ul id="login-dp" class="dropdown-menu">
-                        <li>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <form id="login-nav" class="form" role="form" method="post" action="<?= URL( '/login/custom' ) ?>">
-                                        <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
-                                        <div class="form-group">
-                                            <label for=""><?= trans('translation.ais_login') ?>: </label>
-                                            <input type="checkbox" class="js-switch">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only"
-                                                   for="exampleInputEmail2"><?= trans( 'translation.email_address' ) ?></label>
-                                            <input name="email" type="email" class="form-control"
-                                                   id="exampleInputEmail2"
-                                                   placeholder="<?= trans( 'translation.email_address' ) ?>"
-                                                   required="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only"
-                                                   for="exampleInputPassword2"><?= trans( 'translation.password' ) ?></label>
-                                            <input name="password" type="password" class="form-control"
-                                                   id="exampleInputPassword2"
-                                                   placeholder="<?= trans( 'translation.password' ) ?>" required="">
-                                            <div class="help-block text-right"><a href=""><?= trans('translation.lost_password') ?></a>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit"
-                                                    class="btn btn-primary btn-block"><?= trans( 'translation.sign_in' )  ?></button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="bottom text-center">
-                                    <div><?= trans('translation.or') ?></div>
-                                    <button type="button" class="btn btn-default" id="showModal" href="#"><?= trans('translation.create_account') ?></button>
-                                    <div><?= trans('translation.or') ?></div>
-                                    <a class="googleLogin" href="#"><span style="position: absolute;top: 0;color: white;right: 30px;"><?= trans('translation.login_google') ?></span><img height="44" src="<?= url('assets/img/google.png') ?>" alt="google_login"></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-				<?php else: ?>
-
-                <?php endif; ?>
 
             </ul>
         </div><!--/.nav-collapse -->

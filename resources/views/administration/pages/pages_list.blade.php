@@ -29,6 +29,11 @@
         </thead>
         <tbody>
 		<?php foreach ( $pages as $page ): $i = 0; ?>
+            <?php
+                if ($page['feature'][0]['title'] == 'Aktuality' || $page['feature'][0]['title'] == 'Prihlásenie') {
+                    continue;
+                }
+            ?>
             <tr>
                 <td><i class="fa fa-file-text-o" aria-hidden="true"></i> <?= $page['feature'][0]['title'] ?></td>
                 <td>

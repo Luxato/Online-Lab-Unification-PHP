@@ -257,20 +257,22 @@
         <section class="content">
             <?php
 	        $errors = [];
-	        if (!is_writable(dirname(getcwd()) . '/resource')) {
-		        $errors[] = dirname(getcwd()) . '/resource';
-	        } else if(is_writable(dirname(getcwd()) . '/public')) {
+	        if (!is_writable(dirname(getcwd()) . '/resources')) {
+		        $errors[] = dirname(getcwd()) . '/resources';
+	        }
+	        if (is_writable(dirname(getcwd()) . '/public')) {
                 $errors[] = dirname(getcwd()) . '/public';
             }
 	        ?>
             <?php if(sizeof($errors) > 0): ?>
                 <style>
-                    td a {
+                    /*TODO odkomentovat*/
+                    /*td a {
                         color: gray !important;
                         opacity: 0.5!important;
                         pointer-events: none !important;
                         cursor: not-allowed !important;
-                    }
+                    }*/
                 </style>
                 <div class="alert alert-danger">
                     <h2 style="margin: 0;">VAROVANIE!!!</h2>
