@@ -26,7 +26,7 @@ class LoginController extends Controller {
 			}
 		} else {
 			// Authentificaiton failed
-			// TODO flash message on bad login
+			// TODO flash message on wrong login
 			echo "autentifikacia sa nepodarila";
 		}
 	}
