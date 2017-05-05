@@ -264,9 +264,17 @@
             }
 	        ?>
             <?php if(sizeof($errors) > 0): ?>
+                <style>
+                    td a {
+                        color: gray !important;
+                        opacity: 0.5!important;
+                        pointer-events: none !important;
+                        cursor: not-allowed !important;
+                    }
+                </style>
                 <div class="alert alert-danger">
                     <h2 style="margin: 0;">VAROVANIE!!!</h2>
-                    <strong>Pre bezchybný chod aplikácie opravte prosím nasledujúce:</strong><br>
+                    <strong>Funkcionalita je vypnutá. Pre bezchybný chod aplikácie opravte prosím nasledujúce:</strong><br>
                     <?php foreach($errors as $key => $value): ?>
                         <?= $key + 1 . '. Nastavte rekurzívny chmod 7 pre adresár ' . $value ?>
                         <br>
