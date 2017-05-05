@@ -32,9 +32,9 @@
             <tr>
                 <td><i class="fa fa-file-text-o" aria-hidden="true"></i> <?= $page['feature'][0]['title'] ?></td>
                 <td>
-                    <?php foreach($page['feature'] as $features): $i++; ?>
-                        <div <?= sizeof($page['feature']) > 1 ? sizeof($page['feature']) != $i ? 'style="border-bottom: 1px dotted lightgray;padding: 2px 14px;"' : 'style="padding: 2px 14px;"' : '' ?>><span style="width: 64px; display: inline-block;"><?= $features['language'] ?></span> <i class="fa fa-arrow-right" aria-hidden="true"></i> <?= isset($features['controller']) ? '<i><a target="_blank" href="'.URL( $features['controller'] ).'">/'.$features['controller'].'</a></i>' : 'Žiaden obsah' ?></div>
-                    <?php endforeach; ?>
+		            <?php foreach($page['feature'] as $features): $i++; ?>
+                    <div <?= sizeof($page['feature']) > 1 ? sizeof($page['feature']) != $i ? 'style="border-bottom: 1px dotted lightgray;padding: 2px 14px;"' : 'style="padding: 2px 14px;"' : '' ?>><span style="width: 64px; display: inline-block;"><?= $features['language'] ?></span> <i class="fa fa-arrow-right" aria-hidden="true"></i> <?= isset($features['controller']) ? '<i><a target="_blank" href="'.URL( $features['controller'] ).'">/'.$features['controller'].'</a></i>' : 'Žiaden obsah' ?></div>
+		            <?php endforeach; ?>
                 </td>
                 <td style="vertical-align: middle;text-align: center;"><?= $page['created_at'] ?></td>
                 <td style="vertical-align: middle;"><a href="<?= url('admin/pages/'. $page["section_id"] . '/edit') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a> | <a onclick="deleteModal('<?= $page['section_id'] ?>', '<?= $page['feature'][0]['title'] ?>')"><i

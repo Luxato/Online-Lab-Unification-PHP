@@ -190,7 +190,6 @@
     </header>
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
-
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
             <!-- Sidebar Menu -->
@@ -241,7 +240,6 @@
         </section>
         <!-- /.sidebar -->
     </aside>
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -257,6 +255,24 @@
 
         <!-- Main content -->
         <section class="content">
+            <?php
+	        $errors = [];
+	        if (!is_writable(dirname(getcwd()) . '\resource')) {
+		        $errors[] = dirname(getcwd()) . '\resource';
+	        } else if(is_writable(dirname(getcwd()) . '\public')) {
+                $errors[] = dirname(getcwd()) . '\public';
+            }
+	        ?>
+            <?php if(sizeof($errors) > 0): ?>
+                <div class="alert alert-danger">
+                    <h2 style="margin: 0;">VAROVANIE!!!</h2>
+                    <strong>Pre bezchybný chod aplikácie opravte prosím nasledujúce:</strong><br>
+                    <?php foreach($errors as $key => $value): ?>
+                        <?= $key + 1 . '. Aplikácia potrebuje právo zapisovať a editovať adresár ' . $value ?>
+                        <br>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
 
             <!-- Your Page Content Here -->
             <div class="box box-info">
