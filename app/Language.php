@@ -32,6 +32,22 @@ class Language extends Model {
 			}
 			$template .= "];";
 			fwrite( $myfile, $template );
+			// Now create connection between actualities and new language
+			$feature = new Feature();
+			$feature->title = "Aktuality na pevno";
+			$feature->controller = "aktuality";
+			$feature->language_id = $language->id;
+			$feature->save();
+			$id = $feature->id;
+			\DB::insert(\DB::raw("INSERT INTO feature_page (feature_id, page_id) VALUES ($id, 52);"));
+			// Now create connection between login and new language
+			$feature = new Feature();
+			$feature->title = "Login na pevno";
+			$feature->controller = "cuslogin";
+			$feature->language_id = $language->id;
+			$feature->save();
+			$id = $feature->id;
+			\DB::insert(\DB::raw("INSERT INTO feature_page (feature_id, page_id) VALUES ($id, 53);"));
 		}
 	}
 

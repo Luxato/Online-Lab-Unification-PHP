@@ -10,21 +10,7 @@
 
 
 @section('content')
-	<?php if(isset( $status ) && $status == 'create-success'): ?>
-    <div id="msgSucces" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-        Jazyk bol úspešne pridaný.
-    </div>
-	<?php endif; ?>
-	<?php if(isset( $status ) && $status == 'delete-success'): ?>
-    <div id="msgSucces" class="alert alert-success fade in alert-dismissable" style="margin-top:18px;">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-        Jazyk bol úspešne vymazaný.
-    </div>
-	<?php endif; ?>
-
-
-    <a class="admin-sub-options success" href="<?= URL::to( '/admin/create_lang' ); ?>"><i class="fa fa-plus"
+    <a class="admin-sub-options success" href="<?= URL::to( 'admin/languages/create' ); ?>"><i class="fa fa-plus"
                                                                                            aria-hidden="true"></i>
         Vytvoriť jazyk</a>
     <table id="example2" class="table table-bordered table-hover">
