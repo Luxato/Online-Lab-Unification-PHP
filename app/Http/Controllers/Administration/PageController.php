@@ -41,7 +41,35 @@ class PageController extends Controller {
 			}
 		}
 
-		return view( 'administration/pages_list', [ 'pages' => $pages ] );
+		return view( 'administration/pages/pages_list', [ 'pages' => $pages ] );
+	}
+
+	/**
+	 * Method for reodering navigation.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function reorder() {
+		$this->init_navigation();
+		$data['navigation'] = $this->navigation;
+		$ids = [];
+		foreach ($data['navigation'] as $key1 => $page) {
+			$ids[] = $page->page_id;
+			if (isset($page->children)) {
+				foreach($page->children as $key2 => $subpage) {
+					$ids[] = $subpage->page_id;
+					if (isset($subpage->children)) {
+						foreach($subpage->children as $key3 => $subsubpage) {
+							if (in_array($subsubpage->page_id, $ids)) {
+								unset($data['navigation'][$key1]->children[$key2]->children[$key3]);
+							}
+							$ids[] = $subsubpage->page_id;
+						}
+					}
+				}
+			}
+		}
+		return view( 'administration/pages/navigation_reorder', $data );
 	}
 
 	/**
@@ -50,7 +78,7 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
-		return view( 'administration/page_create', [
+		return view( 'administration/pages/pages_create', [
 			'languages' => Language::all()
 		] );
 	}

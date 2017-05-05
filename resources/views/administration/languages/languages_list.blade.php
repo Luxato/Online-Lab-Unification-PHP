@@ -1,4 +1,4 @@
-@extends('administration/adminmaster')
+@extends('administration.adminmaster')
 
 @section('title')
     Jazyky
@@ -59,7 +59,7 @@
                 </div>
                 <div class="modal-body">
                     <p>Určite chcete vymazať jazyk <span id="langVar">:var</span>?</p>
-                    <form id="deleteForm" action="<?= URL::to( '/worker/do_delete_language' ); ?>" method="POST"
+                    <form id="deleteForm" action="<?= URL::to( '/' ); ?>" method="POST"
                           style="display: none;">
 
                     </form>

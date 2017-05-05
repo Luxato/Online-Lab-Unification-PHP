@@ -17,7 +17,7 @@ class LanguageController extends Controller {
 	public function index() {
 		$data['languages'] = Language::all();
 
-		return view( 'administration/languages', $data );
+		return view( 'administration/languages/languages_list', $data );
 	}
 
 	/**
@@ -26,7 +26,7 @@ class LanguageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
-		return view( 'administration/create_language', [
+		return view( 'administration/languages/languages_create', [
 			'translations' => Translation::all()->toArray()
 		] );
 
@@ -121,10 +121,12 @@ class LanguageController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public
-	function destroy(
-		$id
-	) {
-		//
+	public function destroy($id) {
+		$language    = Language::findOrFail( $id );
+		if ( $language->delete() ) {
+			$data['status'] = 'delete-success';
+		}
+
+		return back();
 	}
 }

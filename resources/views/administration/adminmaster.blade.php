@@ -204,7 +204,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="<?= url::to( '/admin/pages' ); ?>">Všetky stránky</a></li>
-                        <li><a href="<?= url::to( '/admin/navigation' ); ?>">Usporiadanie navigácie</a></li>
+                        <li><a href="<?= url::to( '/admin/navigation-reorder' ); ?>">Usporiadanie navigácie</a></li>
                         <li><a href="<?= url::to( '/admin/pages/create' ); ?>">Pridať novú</a></li>
                     </ul>
                 </li>
@@ -257,10 +257,10 @@
         <section class="content">
             <?php
 	        $errors = [];
-	        if (!is_writable(dirname(getcwd()) . '\resource')) {
-		        $errors[] = dirname(getcwd()) . '\resource';
-	        } else if(is_writable(dirname(getcwd()) . '\public')) {
-                $errors[] = dirname(getcwd()) . '\public';
+	        if (!is_writable(dirname(getcwd()) . '/resource')) {
+		        $errors[] = dirname(getcwd()) . '/resource';
+	        } else if(is_writable(dirname(getcwd()) . '/public')) {
+                $errors[] = dirname(getcwd()) . '/public';
             }
 	        ?>
             <?php if(sizeof($errors) > 0): ?>
@@ -268,7 +268,7 @@
                     <h2 style="margin: 0;">VAROVANIE!!!</h2>
                     <strong>Pre bezchybný chod aplikácie opravte prosím nasledujúce:</strong><br>
                     <?php foreach($errors as $key => $value): ?>
-                        <?= $key + 1 . '. Aplikácia potrebuje právo zapisovať a editovať adresár ' . $value ?>
+                        <?= $key + 1 . '. Nastavte rekurzívny chmod 7 pre adresár ' . $value ?>
                         <br>
                     <?php endforeach; ?>
                 </div>

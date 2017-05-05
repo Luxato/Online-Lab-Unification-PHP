@@ -38,10 +38,9 @@ Route::get( '/admin/create_lang', [ 'middleware' => 'auth', 'uses' => 'Admin@cre
 Route::get( '/', [ 'uses' => 'Homepage@index', 'as' => 'home' ] );
 
 Route::get( '/admin', [ 'middleware' => 'auth', 'uses' => 'Admin@index' ] );
-Route::get( '/admin/navigation', [ 'middleware' => 'auth', 'uses' => 'Admin@navigation' ] );
+Route::get( '/admin/navigation-reorder', 'Administration\PageController@reorder' );
 
 Route::post( '/worker/do_create_language', [ 'middleware' => 'auth', 'uses' => 'Worker@do_create_language' ] );
-Route::post( '/worker/do_delete_language', [ 'middleware' => 'auth', 'uses' => 'Worker@do_delete_language' ] );
 
 Route::post( '/worker/do_navigation_change_order', [
 	'middleware' => 'auth',
@@ -49,7 +48,6 @@ Route::post( '/worker/do_navigation_change_order', [
 ] );
 
 /*Route::group(['middleware' => ['web']], function () {
-	Route::auth();
 });*/
 
 // Administration authentication Routes...
@@ -69,15 +67,6 @@ Route::post( '/login/ldap', [
 ] );
 $this->get( '/login/logout', 'LoginController@logout' );
 
-// Password Reset Routes...
-/*$this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
-$this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-$this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
-$this->post('password/reset', 'Auth\ResetPasswordController@reset');*/
-
-/*Route::get('{lang}', ['uses' => 'Homepage@index', 'as' => 'en']);*/
 Route::get( 'aktualita/{slug}', [ 'uses' => 'Homepage@aktuality' ] );
-Route::get( '{slug}', [ 'uses' => 'Homepage@index', 'as' => 'page' ] );
+Route::get( '{slug}', 'Homepage@index' );
 Route::get( 'setlang/{lang}', 'Homepage@set_language' );
-
-Route::get( '/home', 'HomeController@index' );

@@ -14,10 +14,8 @@ class Worker extends Controller {
 	// TODO backend validation
 	// TODO move to own controller LanguageController
 	protected function do_create_language() {
-
 		$title    = $_POST['title'];
 		$shortcut = $_POST['shortcut'];
-
 		$keys   = $_POST['key'];
 		$values = $_POST['value'];
 
@@ -30,16 +28,6 @@ class Worker extends Controller {
 		return redirect( 'admin/languages' );
 	}
 
-	protected function do_delete_language() {
-		$language_id = $_POST['languageID'];
-		$language    = Language::find( $language_id );
-		if ( $language->delete() ) {
-			$data['status'] = 'delete-success';
-		}
-		$data['languages'] = Language::select_all();
-
-		return view( 'administration/languages', $data );
-	}
 
 	public function do_navigation_change_order() {
 		// TODO VALIDATION

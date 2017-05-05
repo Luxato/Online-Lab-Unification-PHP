@@ -1,4 +1,4 @@
-@extends('administration/adminmaster')
+@extends('administration.adminmaster')
 
 @section('title')
     Pridať novú stránku
