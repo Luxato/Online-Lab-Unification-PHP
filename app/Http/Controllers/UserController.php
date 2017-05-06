@@ -17,14 +17,23 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store( Request $request ) {
-		//TODO register new user with type user
+		// First check for duplicates.
+		$user = User::where( 'email', $request->email )->first();
+		if (isset($user)) {
+			// We have a duplicate here.
+			Session::flash( 'warning', 'duplicated_email' );
+		    return back();
+		}
 		$user        = new User();
 		$user->name  = $request['username'];
 		$user->email = $request['email'];
 		$user->password = Hash::make(trim($request['password']));
+		$user->type = 'user';
 		$user->save();
 		Session::set( 'logged_user_id', $user->id );
 		Session::set( 'logged_email', $user->email );
+
+		Session::flash( 'success', "account_created" );
 
 		return back();
 	}

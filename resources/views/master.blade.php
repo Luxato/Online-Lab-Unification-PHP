@@ -34,8 +34,8 @@
     <meta name="msapplication-TileImage" content="./favicon/ms-icon-144x144.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
-    <link href="<?= url('assets/css/style.css') ?>" rel="stylesheet">
     <link rel="stylesheet" href="<?= url('assets/css/switchery.min.css') ?>">
+    <link href="<?= url('assets/css/style.css') ?>" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -303,6 +303,7 @@
 <script src="<?= url('assets/js/particles-animation.js') ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 <script src="<?= url('assets/js/switchery.min.js') ?>"></script>
+<script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/noty/jquery.noty.packaged.min.js"></script>
 @yield('custom_bottom_scripts')
 <script>
     $('#nav').ready(function () {
@@ -402,8 +403,39 @@
             });
         });
     });
+    function generate(type, text) {
+        var n = noty({
+            text        : text,
+            type        : type,
+            dismissQueue: true,
+            progressBar : true,
+            timeout     : 5000,
+            layout      : 'topRight',
+            closeWith   : ['click'],
+            theme       : 'relax',
+            maxVisible  : 10,
+            animation   : {
+                open  : 'animated bounceInLeft',
+                close : 'animated bounceOutRight',
+                easing: 'swing',
+                speed : 500
+            }
+        });
+        return n;
+    }
 </script>
+@if (Session::has('success'))
+    <script>
+        generate('success', '<div class="activity-item"> <i class="fa fa-check" aria-hidden="true"></i> <div class="activity"><?= trans('translation.' . Session::get('success')) ?></div> </div>');
+    </script>
+@elseif (Session::has('warning'))
+    <script>
+        generate('warning', '<div class="activity-item"> <i class="fa fa-check" aria-hidden="true"></i> <div class="activity"><?= trans('translation.' . Session::get('warning')) ?></div> </div>');
+    </script>
+@endif
+
 {{--Only logged users can see this--}}
+<?php if(Session::get( 'logged_user_id' )): ?>
 <div id="apiModal" class="modal fade" tabindex="-2" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -428,5 +460,6 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<?php endif; ?>
 </body>
 </html>
