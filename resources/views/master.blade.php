@@ -230,11 +230,8 @@
 <footer>
     <div class="container" style="height: 100%;">
         <div class="row" style="height: 100%;">
-            <div class="col-md-3">
-                <ul>
-                    <li><a href="#">3D Model segway vozidla</a></li>
-                    <li><a href="#">3D Model hydraulickej sústavy</a></li>
-                </ul>
+            <div class="col-md-12 text-center">
+	            <?= date('Y') ?> © <a href="http://www.fei.stuba.sk/">STU FEI</a> <small>- Ako bakalársku prácu vytvoril Lukáš Stranovský</small>
             </div>
         </div>
     </div>

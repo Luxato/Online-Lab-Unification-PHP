@@ -175,8 +175,10 @@ header .header-logo {
 }
 
 footer {
-    height: 150px;
+    color: #cacaca;
+    height: 40px;
     background: #1d1d1d;
+    line-height: 40px;
 }
 
 footer a {

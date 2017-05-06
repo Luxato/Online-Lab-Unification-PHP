@@ -175,7 +175,7 @@
                                     <a class="btn btn-default btn-flat" href="{{ url('/logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        Logout
+                                        Odhlásiť
                                     </a>
                                 </div>
                             </li>

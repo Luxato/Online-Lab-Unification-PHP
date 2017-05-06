@@ -1,1 +1,0 @@
-<?php return ['login' => 'Loodzin',];
