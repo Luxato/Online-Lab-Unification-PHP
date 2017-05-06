@@ -481,15 +481,19 @@ footer {
         background-color: inherit;
         border-top: 0 none;
     }
-
-}
-@media (max-width: 768px) {
     .translation-flags li a {
         font-size: 17px;
+        line-height: 22px;
     }
     footer {
         font-size: 60% !important;
         height: 60px;
+    }
+    header .header-logo {
+        width: 330px;
+    }
+    header img {
+        width: 330px;
     }
 }
 @media (min-width: 768px) {
