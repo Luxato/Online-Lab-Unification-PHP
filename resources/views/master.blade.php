@@ -231,7 +231,7 @@
     <div class="container" style="height: 100%;">
         <div class="row" style="height: 100%;">
             <div class="col-md-12 text-center">
-	            <?= date('Y') ?> © <a href="http://www.fei.stuba.sk/">STU FEI</a> <small>- Ako bakalársku prácu vytvoril Lukáš Stranovský</small>
+	            <?= date('Y') ?> © <a target="_blank" href="http://www.fei.stuba.sk/">STU FEI</a> <small>- Ako bakalársku prácu vytvoril Lukáš Stranovský</small>
             </div>
         </div>
     </div>
