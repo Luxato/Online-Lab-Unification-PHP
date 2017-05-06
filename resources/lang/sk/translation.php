@@ -16,5 +16,5 @@
 	'ais_login' => 'Použiť AIS',
 	'duplicated_email' => 'Pre tento email už účet existuje.',
 	           'account_created' => 'Účet bol úspešne vytvorený.',
-				'blank_page' => 'Na tejto stránke sa ešte nič nenachádza ┏༼ ◉ ╭╮ ◉༽┓'
+				'blank_page' => 'Na tejto stránke sa ešte nič nenachádza <br> ┏༼ ◉ ╭╮ ◉༽┓'
 ];
