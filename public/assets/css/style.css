@@ -196,24 +196,6 @@ footer p {
     text-align: center;
 }
 
-footer ul {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-}
-
-/*footer ul li {
-    display: inline;
-}*/
-
-footer i {
-    color: lightgray;
-}
-
-footer .fa {
-    font-size: 35px;
-}
-
 ::-webkit-scrollbar {
     width: 12px;
 }
@@ -679,26 +661,6 @@ code {
     100% {
         opacity: 1;
     }
-}
-
-.footer-header {
-    font-size: 19px;
-    color: whitesmoke;
-    padding: 5px 0 10px 0;
-}
-
-.footer-right {
-    text-align: center;
-    line-height: 150px;
-}
-
-.footer-right li {
-    display: inline;
-    margin-right: 5px;
-}
-
-.footer-right .fa {
-    color: #fff;
 }
 
 aside {

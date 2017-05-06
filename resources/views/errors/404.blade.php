@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>503 | Service unvailable</title>
+    <title>404 | Stránka neexistuje</title>
     <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
@@ -53,7 +53,7 @@
 <div class="container">
     <a href="<?= url( '/' ) ?>"><img src="<?= url( 'assets/img/logo.png' ) ?>" alt="IOlab"></a>
     <div class="content">
-        <div class="title"><strong>503</strong> - Service unvailable.</div>
+        <div class="title"><strong>404</strong> - Stránka neexistuje.</div>
         <h1>Agrrr... Zase si všetko pokazil!</h1>
         <img style="float: right;" width="200" src="<?= url( 'assets/img/404_monster.png' ) ?>" alt="404 monster">
     </div>

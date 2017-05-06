@@ -11,10 +11,10 @@
                'create'         => 'Vytvoriť',
                'close'          => 'Zavrieť',
                'or'             => 'Alebo',
-               'lost_password'  => 'Zabudli ste heslo?',
                'logout'         => 'Odhlásiť sa',
 	'login_google' => 'Login with google',
 	'ais_login' => 'Použiť AIS',
 	'duplicated_email' => 'Pre tento email už účet existuje.',
-	           'account_created' => 'Účet bol úspešne vytvorený.'
+	           'account_created' => 'Účet bol úspešne vytvorený.',
+				'blank_page' => 'Na tejto stránke sa ešte nič nenachádza ┏༼ ◉ ╭╮ ◉༽┓'
 ];

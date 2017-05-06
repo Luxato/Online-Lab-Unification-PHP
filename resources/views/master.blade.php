@@ -137,8 +137,6 @@
                                                 <input name="password" type="password" class="form-control"
                                                        id="exampleInputPassword2"
                                                        placeholder="<?= trans( 'translation.password' ) ?>" required="">
-                                                <div class="help-block text-right"><a href=""><?= trans('translation.lost_password') ?></a>
-                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit"
@@ -232,25 +230,11 @@
 <footer>
     <div class="container" style="height: 100%;">
         <div class="row" style="height: 100%;">
-            <div class="col-md-3" style="border-right: 2px solid #f0f0f0; height: 100%;">
-                <div class="footer-header">Web služby</div>
+            <div class="col-md-3">
                 <ul>
                     <li><a href="#">3D Model segway vozidla</a></li>
                     <li><a href="#">3D Model hydraulickej sústavy</a></li>
                 </ul>
-            </div>
-            <div class="col-md-9">
-                <div class="footer-right">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                            <a target="_blank" href="https://github.com/Luxato/Online-Lab-Unification-PHP"><i
-                                        class="fa fa-github-square" aria-hidden="true"></i></a>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>

@@ -5,5 +5,5 @@
 @stop
 
 @section('content')
-    <h1 style="text-align: center;">Na tuto stranku sme este nic nepridali :(.</h1>
+    <h1 style="text-align: center;"><?= trans('translation.blank_page') ?></h1>
 @stop

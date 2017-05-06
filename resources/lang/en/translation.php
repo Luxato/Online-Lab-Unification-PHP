@@ -10,12 +10,12 @@
 	'create'         => 'Create',
 	'close'          => 'Close',
 	'or'             => 'Or',
-	'lost_password'  => 'Lost password?',
 	'create_api_key' => 'Create API key',
 	'logged_user'    => 'Logged as',
 	'logout'         => 'Logout',
 	'login_google' => 'Login with Google',
 	'ais_login' => 'Use AIS',
 	'duplicated_email' => 'Account is already signed for this email.',
-	'account_created' => 'Account was succesfuly created.'
+	'account_created' => 'Account was succesfuly created.',
+	'blank_page' => 'Nothing found on this page ┏༼ ◉ ╭╮ ◉༽┓'
 ];
