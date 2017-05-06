@@ -405,7 +405,7 @@ footer {
 
 .navbar-fixed-top .navbar-nav > li > a,
 .translation-flags li a {
-    line-height: 48px;
+    line-height: 34px;
 }
 
 #login-dp {
@@ -490,10 +490,10 @@ footer {
         height: 60px;
     }
     header .header-logo {
-        width: 330px;
+        width: 290px;
     }
     header img {
-        width: 330px;
+        width: 290px;
     }
 }
 @media (min-width: 768px) {
