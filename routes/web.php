@@ -23,7 +23,8 @@ Route::resource( 'admin/users', 'Administration\UserController' );
 // Resource for News-Categories
 Route::resource( 'admin/news-categories', 'Administration\NewsCategoriesController' );
 // Resource for settings
-Route::resource( 'admin/settings', 'Administration\SettingsController' );
+Route::get( '/admin/settings', [ 'uses' => 'Administration\SettingsController@index' ] );
+Route::post( 'admin/settings/', 'Administration\SettingsController@update' );
 // Resource for languages
 Route::resource( 'admin/languages', 'Administration\LanguageController' );
 

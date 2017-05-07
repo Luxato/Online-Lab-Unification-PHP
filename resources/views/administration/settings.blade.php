@@ -23,14 +23,14 @@
     <div class="col-md-12">
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="home">
-                <form name="finalForm" id="finalForm" action="" method="POST">
+                <form name="finalForm" id="finalForm" action="<?= URL( 'admin/settings/' ) ?>" method="POST">
                     <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
                     <div class="col-md-6">
                         <br>
                         <label for="exampleInputEmail1">Defaultný jazyk stránky</label>
-                        <select id="languageSelection" name="language[]" class="form-control" required="">
+                        <select id="languageSelection" name="language" class="form-control" required="">
                             <?php foreach($languages as $language): ?>
-                            <option <?= $default_lang == $language->language_shortcut ? 'selected' : '' ?> value="<?= $language->id ?>"><?= $language->language_title ?></option>
+                            <option <?= $default_lang == $language->language_shortcut ? 'selected' : '' ?> value="<?= $language->language_shortcut ?>"><?= $language->language_title ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -48,7 +48,7 @@
     </div>
 
     <div class="col-md-10">
-        <button id="sendForm" type="submit" class="btn btn-success btn-sm pull-right" >Upraviť
+        <button id="sendForm" type="submit" class="btn btn-success btn-sm pull-right" >Uložiť
         </button>
     </div>
 @stop
@@ -56,14 +56,17 @@
 @section('custom_scripts') {{--JS specified only for this site--}}
 
 <script>
+    $(function(){
+    	$('#sendForm').on('click', function(){
+    	    $('#finalForm').submit();
+        });
+    });
     $('#nav-settings').addClass('active');
     $('#myTabs a').click(function (e) {
-        e.preventDefault()
+        e.preventDefault();
         $(this).tab('show')
     });
-    /*$('#myTabs a[href="#profile"]').tab('show'); // Select tab by name*/
     $('#myTabs a:first').tab('show'); // Select first tab
     $('#myTabs a:last').tab('show'); // Select last tab
-    /*$('#myTabs li:eq(2) a').tab('show'); // Select third tab (0-indexed)*/
 </script>
 @stop
