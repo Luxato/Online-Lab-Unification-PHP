@@ -17,5 +17,5 @@
 	'ais_login' => 'Use AIS',
 	'duplicated_email' => 'Account is already signed for this email.',
 	'account_created' => 'Account was succesfuly created.',
-	'blank_page' => 'Nothing found on this page ┏༼ ◉ ╭╮ ◉༽┓'
+	'blank_page' => 'Nothing found on this page <br> ┏༼ ◉ ╭╮ ◉༽┓'
 ];

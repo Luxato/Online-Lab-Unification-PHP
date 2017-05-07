@@ -364,7 +364,7 @@ footer p {
 .breadcrumb {
     font-family: 'Roboto', sans-serif;
     background-color: transparent;
-    /*width: 1170px;*/
+    max-width: 1170px;
     margin: 0 auto;
 }
 
