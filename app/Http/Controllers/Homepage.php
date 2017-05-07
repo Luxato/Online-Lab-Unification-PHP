@@ -13,34 +13,23 @@ use App\Page;
 
 class Homepage extends Controller {
 
-	//public $navigation = [];
-
-	/*public function index(Request $request, $locale = NULL) {
-		// Set up language
-		if (empty($locale)) {
-		    $locale = config('app.fallback_locale');
-		}
-		app()->setLocale($locale);
-		$data['navigation'] = $this->navigation;
-		$data['section_id'] = $this->section_id;
-
-		return view( 'welcome', $data );
-	}*/
 
 	public function index( Request $request, $slug = NULL ) {
 
 		if ( \Session::has( 'applocale' ) ) {
 			$locale = \Session::get( 'applocale' );
+		} elseif ( isset( $this->default_language ) ) {
+			$locale = $this->default_language;
 		} else {
 			$locale = \Config::get( 'app.locale' );
 		}
 		\App::setlocale( $locale );
 
 		if ( \Session::has( 'logged_user_id' ) ) {
-			$data['user'] = User::findOrFail(\Session::get( 'logged_user_id' ));
+			$data['user'] = User::findOrFail( \Session::get( 'logged_user_id' ) );
 		}
 
-		$this->init_navigation($locale);
+		$this->init_navigation( $locale );
 
 		$data['navigation'] = $this->navigation;
 		/*echo '<pre>';

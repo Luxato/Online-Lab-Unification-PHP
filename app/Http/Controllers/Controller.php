@@ -80,10 +80,7 @@ class Controller extends BaseController {
 		echo "jazyk je $locale";
 	}*/
 	public function set_app_language() {
-		$this->default_language = Setting::all()[3]->setting_value;
+		$this->default_language = Setting::all()[1]->setting_value;
 	}
 
-	public function get_default_lang() {
-		return $this->default_language;
-	}
 }

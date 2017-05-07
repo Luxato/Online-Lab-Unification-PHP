@@ -108,7 +108,7 @@ class PageController extends Controller {
 
 			if ( $request->get( 'noContent' ) !== 'on' ) {
 				$feature->content_file = $request['url'][0] . '_' . $language_shortcut;
-				$this->create_page_file( $feature->content_file . '.blade.php', $request['url'][ $i ], $request['cont'][ $i ] );
+				$this->create_page_file( $feature->content_file . '.blade.php', $request['name'][ $i ], $request['cont'][ $i ] );
 			}
 			$feature->save();
 			$new_features[] = $feature->id;
@@ -130,7 +130,7 @@ class PageController extends Controller {
 @stop
 
 @section(\'content\')
-    ' . $content . '
+    ' . htmlspecialchars_decode(htmlspecialchars($content)) . '
 @stop';
 		$created_page = fopen( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $file_name, "w" );
 		fwrite( $created_page, $template );
@@ -155,13 +155,8 @@ class PageController extends Controller {
 				}
 				$file = fopen( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $fileName, 'r' );
 
-				$content = str_replace( [
-					'<?php',
-					'return',
-					'[',
-					'];',
-					'?>'
-				], '', fread( $file, filesize( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $features['content_file'] . '.blade.php' ) ) );
+				$content = str_replace( [], '', fread( $file, filesize( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $features['content_file'] . '.blade.php' ) ) );
+				$content = htmlspecialchars($content);
 				fclose( $file );
 				$pos                 = strpos( $content, "@section('content')" );
 				$content             = substr( $content, $pos + 19, strlen( $content ) );
@@ -200,17 +195,21 @@ class PageController extends Controller {
 	public function destroy( $id ) {
 		$page      = Page::findOrFail( $id );
 		$to_delete = [];
+		$i = 0;
 		foreach ( $page->feature()->get()->toArray() as $feature ) {
-			$to_delete[] = Feature::find( $feature['id'] )->get()->toArray()[0]['content_file'];
+			$feature_to_delete[] = Feature::find( $feature['pivot']['feature_id']);
+			$to_delete[] = $feature_to_delete[$i]['content_file'];
+			$i++;
 		}
 		if ( $page->feature()->detach() ) {
 			$page->delete();
-			/*foreach ( $to_delete as $feature ) {
-				$tmp_feature = Feature::findOrFail( $feature );
-				var_dump( $tmp_feature->delete() );
-			}*/
+			// Delete features
+			foreach ( $feature_to_delete as $feature ) {
+				$feature->delete();
+			}
+			// Delete files
 			foreach ( $to_delete as $content_file ) {
-				unlink( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $content_file );
+				//unlink( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $content_file . 'blade.php' );
 			}
 
 			Session::flash( 'success', "Stránka bola úspešne zmazaná." );

@@ -61,7 +61,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Obsah</label>
                     <textarea class="editor" id="editor" name="cont[]" rows="6" cols="80">
-                        <?=  isset( $page['feature'][0]['content'] ) ? htmlspecialchars( $page['feature'][0]['content'] ) : '' ?>
+                        <?=  isset( $page['feature'][0]['content'] ) ? htmlspecialchars_decode( $page['feature'][0]['content'] ) : '' ?>
                     </textarea>
                 </div>
             </div>

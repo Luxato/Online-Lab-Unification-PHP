@@ -85,7 +85,7 @@
     <script>
         function initEditor(){
             $('.editor').summernote({
-                height: 150,   //set editable area's height
+                height: 300,   //set editable area's height
                 codemirror: { // codemirror options
                     theme: 'monokai'
                 }

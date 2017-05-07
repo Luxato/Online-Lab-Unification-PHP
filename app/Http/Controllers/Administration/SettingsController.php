@@ -16,7 +16,7 @@ class SettingsController extends Controller {
 	public function index() {
 		return view( 'administration/settings', [
 			'settings' => Setting::all(),
-			'default_lang' => $this->get_default_lang(),
+			'default_lang' => $this->default_language,
 			'languages' => \App\Language::all()
 		]);
 	}
