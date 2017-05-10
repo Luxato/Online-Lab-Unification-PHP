@@ -161,7 +161,7 @@ class PageController extends Controller {
 				$pos                 = strpos( $content, "@section('content')" );
 				$content             = substr( $content, $pos + 19, strlen( $content ) );
 				$pos                 = strpos( $content, "@stop" );
-				$features['content'] = substr( $content, 0, $pos );
+				$features['content'] = 'blablabla';
 			} catch( Exception $e ) {
 
 			}
@@ -182,7 +182,45 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, $id ) {
-		//
+		$inputs = [
+			'title'       => 'name',
+			'controller'  => 'url',
+			'language_id' => 'language',
+			'content_file' => 'file'
+		];
+		$page = Page::findOrFail( $id );
+		$to_delete = [];
+		$i = 0;
+		foreach ( $page->feature()->get()->toArray() as $feature ) {
+			$feature_to_delete[] = Feature::find( $feature['pivot']['feature_id']);
+			$to_delete[] = $feature_to_delete[$i]['content_file'];
+			$i++;
+		}
+		if ( $page->feature()->detach() ) {
+			// Delete old features
+			foreach ( $feature_to_delete as $feature ) {
+				$feature->delete();
+			}
+			// TODO Delete files -> Just rename
+			// Create new features
+			for ( $i = 0; $i < sizeof( $request['name'] ); $i ++ ) {
+				$feature = new Feature();
+				foreach ( $inputs as $column => $input ) {
+					$feature->{$column} = $request[ $input ][ $i ];
+				}
+				$language_shortcut = Language::findOrFail( $request['language'][ $i ] )->language_shortcut;
+
+				if ( $request->get( 'noContent' ) !== 'on' ) {
+					$feature->content_file = $request['url'][0] . '_' . $language_shortcut;
+				//	$this->create_page_file( $feature->content_file . '.blade.php', $request['name'][ $i ], $request['cont'][ $i ] );
+				}
+				$feature->save();
+				$new_features[] = $feature->id;
+			}
+			Session::flash( 'success', "Stránka bola úspešne upravená." );
+
+			return redirect( 'admin/pages' );
+		}
 	}
 
 	/**
@@ -207,7 +245,7 @@ class PageController extends Controller {
 			foreach ( $feature_to_delete as $feature ) {
 				$feature->delete();
 			}
-			// Delete files
+			// TODO Delete files
 			foreach ( $to_delete as $content_file ) {
 				//unlink( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $content_file . 'blade.php' );
 			}

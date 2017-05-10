@@ -12,8 +12,11 @@
 
 @section('content')
     <div class="row">
-        <form id="new-page-form" onsubmit="return validateForm()" action="<?= URL( 'admin/pages/' ) ?>" method="POST">
+        <form id="new-page-form" onsubmit="return validateForm()" action="<?= URL( 'admin/pages/' . $page['section_id'] ) ?>" method="POST">
+            <input name="_method" type="hidden" value="put">
             <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
+            <input name="file[]" type="hidden" value="<?= $page['feature'][0]['content_file'] ?>">
+            <input name="controller[]" type="hidden" value="<?= $page['feature'][0]['controller'] ?>">
             <div class="col-lg-12">
                 <div class="form-group">
                     <i data-toggle="tooltip"
@@ -58,14 +61,11 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Obsah</label>
-                    <textarea class="editor" id="editor" name="cont[]" rows="6" cols="80">
-                        <?=  isset( $page['feature'][0]['content'] ) ? htmlspecialchars_decode( $page['feature'][0]['content'] ) : '' ?>
-                    </textarea>
+                <label>Pre editovanie obsahu upravte súbor</label>
+                <div class="well">
+                    <?= dirname( getcwd() ) . '/resources/views/user_created_pages/' . '<strong>' .$page['feature'][0]['content_file'] ?>.blade.php </strong>
                 </div>
             </div>
-
             <div id="another-lang">
                 <?php $i = 0; foreach($page['feature'] as $feature): ?>
                     <?php
@@ -75,6 +75,8 @@
                         }
                     ?>
                     <div id="langSection<?= $i ?>" class="lang-section">
+                        <input name="file[]" type="hidden" value="<?= $feature['content_file'] ?>">
+                        <input name="controller[]" type="hidden" value="<?= $feature['controller'] ?>">
                         <hr>
                         <h2>Ďalšia jazyková mutácia</h2>
                         <div class="cancelLang"><i class="fa fa-times" aria-hidden="true"></i></div>
@@ -111,12 +113,9 @@
                                 </div>
                             </div>
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Obsah</label>
-                                <textarea class="editor" id="editor <?= $i ?>" name="cont[]" rows="6" cols="80">
-                                    <?= $feature['content'] ?>
-                                </textarea>
-                                </div>
+                            <label>Pre editovanie obsahu upravte súbor</label>
+                            <div class="well">
+		                        <?= dirname( getcwd() ) . '/resources/views/user_created_pages/' . $feature['content_file'] ?>.blade.php
                             </div>
                         </div>
                 <?php endforeach; ?>
@@ -136,7 +135,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
     <script src="<?= url( 'assets/js/switchery.min.js' ) ?>"></script>
     <script>
-        function initEditor(){
+        /*function initEditor(){
             $('.editor').summernote({
                 height: 150,   //set editable area's height
                 codemirror: { // codemirror options
@@ -146,7 +145,7 @@
         }
         $(function(){
             initEditor();
-        });
+        });*/
 
         var elem = document.querySelector('.js-switch');
         var switchery = new Switchery(elem, {size: 'small'});

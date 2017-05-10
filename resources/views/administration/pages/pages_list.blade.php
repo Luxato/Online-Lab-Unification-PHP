@@ -15,8 +15,7 @@
 
 
 @section('content')
-    <a class="admin-sub-options success" href="<?= URL::to( '/admin/pages/create' ); ?>"><i class="fa fa-plus"
-                                                                                           aria-hidden="true"></i>
+    <a class="admin-sub-options success" href="<?= URL::to( '/admin/pages/create' ); ?>"><i class="fa fa-plus" aria-hidden="true"></i>
         Vytvoriť stránku</a>
     <table id="example2" class="table table-bordered table-hover">
         <thead>
@@ -30,7 +29,7 @@
         <tbody>
 		<?php foreach ( $pages as $page ): $i = 0; ?>
             <?php
-                if ($page['feature'][0]['title'] == 'Aktuality' || $page['feature'][0]['title'] == 'Prihlásenie') {
+                if ($page['feature'][0]['title'] == 'Aktuality' || $page['feature'][0]['title'] == 'Autentifikácia') {
                     continue;
                 }
             ?>
