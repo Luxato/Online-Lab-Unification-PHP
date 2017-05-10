@@ -1,10 +1,11 @@
-
 @extends('master')
 
 @section('title')
-	anagramy
+    Anagramy
 @stop
 
 @section('content')
-    <iframe style="min-height: 100%" frameborder="0" scrolling="no" allowfullscreen src="http://147.175.105.140:8033/~stranovsky/public/games/anagramy/"></iframe>
+    <div class="embed-responsive embed-responsive-4by3">
+        <iframe class="embed-responsive-item" src="http://147.175.105.140:8033/~stranovsky/public/games/anagramy/"></iframe>
+    </div>
 @stop

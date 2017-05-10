@@ -32,9 +32,6 @@ class Homepage extends Controller {
 		$this->init_navigation( $locale );
 
 		$data['navigation'] = $this->navigation;
-		/*echo '<pre>';
-		print_r( $data['navigation'] );
-		echo '</pre>';*/
 		$data['section_id'] = $this->section_id;
 		$data['languages']  = Language::all()->toArray();
 
@@ -60,7 +57,6 @@ class Homepage extends Controller {
 			return view( 'aktuality', $data );
 		}
 		if ( ! isset( $slug ) ) {
-			// TODO change this to dynamic
 			$blade = 'default';
 		} else {
 			foreach ( $this->navigation as $link ) {

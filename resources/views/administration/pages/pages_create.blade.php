@@ -157,11 +157,11 @@
                 var title = $(this).val();
                 title = title.toLowerCase();
                 title = title.trim();
-                title = title.replace(/ /g, "_");
+                title = title.replace(/ /g, "-");
                 for (var i = 0, max = title.length; i < max - 1; i++) {
                     if (title[i] == '_' && title[i + 1]) {
                         console.log('true');
-                        title = title.replace("__", "_");
+                        title = title.replace("__", "-");
                     }
                 }
                 title = diaConvert(title);
