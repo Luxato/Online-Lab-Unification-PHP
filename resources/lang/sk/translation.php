@@ -16,5 +16,8 @@
 	'ais_login' => 'Použiť AIS',
 	'duplicated_email' => 'Pre tento email už účet existuje.',
 	           'account_created' => 'Účet bol úspešne vytvorený.',
-				'blank_page' => 'Na tejto stránke sa ešte nič nenachádza <br> ┏༼ ◉ ╭╮ ◉༽┓'
+				'blank_page' => 'Na tejto stránke sa ešte nič nenachádza <br> ┏༼ ◉ ╭╮ ◉༽┓',
+	'wrong_details' => 'Nesprávne prihlasovacie údaje.',
+	'connection_error' => 'Chyba pripojenia na server. Skúste neskôr alebo kontaktujte administrátora.',
+	'successful_logout' => 'Úspešne ste sa odhlásili.'
 ];

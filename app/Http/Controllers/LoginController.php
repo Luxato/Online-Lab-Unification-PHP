@@ -26,8 +26,9 @@ class LoginController extends Controller {
 			}
 		} else {
 			// Authentificaiton failed
-			// TODO flash message on wrong login
-			echo "autentifikacia sa nepodarila";
+			Session::flash( 'warning', 'wrong_details' );
+
+			return back();
 		}
 	}
 
@@ -54,7 +55,8 @@ class LoginController extends Controller {
 			Session::set( 'logged_email', $user->email );
 			return back();
 		} else {
-			echo "chyba pripojenia na server alebo zle heslo";
+			Session::flash( 'warning', 'connection_error' );
+			return back();
 		}
 	}
 
@@ -66,6 +68,7 @@ class LoginController extends Controller {
 		Session::flush( 'logged_email' );
 		Auth::logout();
 
+		Session::flash( 'success', 'successful_logout' );
 		return back();
 	}
 

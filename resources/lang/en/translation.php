@@ -17,5 +17,8 @@
 	'ais_login' => 'Use AIS',
 	'duplicated_email' => 'Account is already signed for this email.',
 	'account_created' => 'Account was succesfuly created.',
-	'blank_page' => 'Nothing found on this page <br> ┏༼ ◉ ╭╮ ◉༽┓'
+	'blank_page' => 'Nothing found on this page <br> ┏༼ ◉ ╭╮ ◉༽┓',
+	'wrong_details' => 'Wrong details. Am sorry.',
+	'connection_error' => 'Connection error. Try again in a minute or contact administrator.',
+	'successful_logout' => 'You successfully logged out.'
 ];
