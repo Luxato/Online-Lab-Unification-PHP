@@ -5,7 +5,6 @@
 @stop
 
 @section('custom_css') {{--CSS specified only for this site--}}
-<link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/css/dataTables.bootstrap.css">
 @stop
 
 
@@ -25,25 +24,48 @@
                     <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
                     <div class="col-md-6">
                         <br>
-                        <label for="languageSelection">Defaultný jazyk stránky</label>
+                        <h2>Defaultný jazyk stránky</h2>
+                        <p>Nastavenie hlavného jazyka stránky.</p>
                         <select id="languageSelection" name="language" class="form-control" required="">
                             <?php foreach($languages as $language): ?>
                             <option <?= $default_lang == $language->language_shortcut ? 'selected' : '' ?> value="<?= $language->language_shortcut ?>"><?= $language->language_title ?></option>
                             <?php endforeach; ?>
                         </select>
                         <br>
-                        <label for="languageSelection">Landing pages</label>
+                        <h2>Landing pages</h2>
+                        <p>Pre každú jazykovú mutáciu je možné nastaviť pristávaciu stránku.</p>
+                        <table class="table table-hover">
+                            <thead>
+                                <th>Lokalizácia</th>
+                                <th>Landing page</th>
+                            </thead>
+                            <tbody>
+                                 <?php foreach($languages as $language): ?>
+                                    <tr>
+                                        <td><?= $language->language_title ?></td>
+                                        <td>
+                                            <select name="landing_pages[]" class="form-control">
+                                                <?php foreach($pages as $page): ?>
+                                                    <?php if(isset($page->language_shortcut)): ?>
+                                                        <?php if($language->language_shortcut == $page->language_shortcut): ?>
+                                                        <option value="<?= $language->language_shortcut . '_' . $page->section_id ?>" <?= $default_pages[$language->language_shortcut] == $page->section_id ? 'selected' : '' ?>>
+                                                            <?= $page->title ?></option>
+                                                        <?php endif; ?>
+                                                    <?php else: ?>
+                                                    <option value="<?= $language->language_shortcut . '_' . $page->section_id ?>" <?= $default_pages[$language->language_shortcut] == $page->section_id ? 'selected' : '' ?>>
+                                                        <?= $page->title ?></option>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </select></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
-                    {{--<div class="col-md-6">
-                        <div class="form-group">
-                            <input name="" type="text" class="form-control">
-                        </div>
-                    </div>--}}
                 </form>
             </div>
             <div role="tabpanel" class="tab-pane fade in" id="profile">..asc</div>
         </div>
-
     </div>
     </div>
 

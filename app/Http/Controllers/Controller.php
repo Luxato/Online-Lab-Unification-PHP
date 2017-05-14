@@ -25,13 +25,20 @@ class Controller extends BaseController {
 		$this->set_app_language();
 	}
 
-	protected function init_navigation($locale = NULL) {
+	protected function init_navigation($locale = NULL, $without_content_pages = FALSE) {
 		if ($locale) {
 			$nav_links = DB::select( DB::raw( "SELECT * FROM feature_page as f
 			JOIN navigation ON f.page_id = navigation.section_id
 			JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
 			JOIN languages ON features.language_id = languages.id WHERE languages.language_shortcut = '$locale') as sub ON f.feature_id = sub.fid  ORDER BY navigation.order, navigation.parent_id;" ) );
-		} else {
+		} else if($without_content_pages) {
+			$nav_links = DB::select( DB::raw( "SELECT * FROM feature_page as f
+			JOIN navigation ON f.page_id = navigation.section_id
+			JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
+			JOIN languages ON features.language_id = languages.id WHERE features.content_file != 'NULL') as sub ON f.feature_id = sub.fid  ORDER BY navigation.order, navigation.parent_id;" ) );
+			$this->navigation = $nav_links;
+		}
+		else {
 			$nav_links = DB::select( DB::raw( "SELECT * FROM feature_page as f
 			JOIN navigation ON f.page_id = navigation.section_id
 			JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
