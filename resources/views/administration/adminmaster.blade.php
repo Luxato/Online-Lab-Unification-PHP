@@ -267,12 +267,12 @@
             <?php if(sizeof($errors) > 0): ?>
                 <style>
                     /*TODO odkomentovat*/
-                    td a {
+                    /*td a {
                         color: gray !important;
                         opacity: 0.5!important;
                         pointer-events: none !important;
                         cursor: not-allowed !important;
-                    }
+                    }*/
                 </style>
                 <div class="alert alert-danger">
                     <h2 style="margin: 0;">VAROVANIE!!!</h2>
