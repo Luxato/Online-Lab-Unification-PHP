@@ -16,8 +16,9 @@ class Controller extends BaseController {
 
 	public $navigation = FALSE;
 	public $section_id = FALSE;
-	public $controller_name = FALSE;
+	//public $controller_name = FALSE;
 	public $default_language = FALSE;
+	public $landing_page = FALSE;
 
 	public $todo = 0;
 
@@ -25,20 +26,19 @@ class Controller extends BaseController {
 		$this->set_app_language();
 	}
 
-	protected function init_navigation($locale = NULL, $without_content_pages = FALSE) {
-		if ($locale) {
+	protected function init_navigation( $locale = NULL, $without_content_pages = FALSE ) {
+		if ( $locale ) {
 			$nav_links = DB::select( DB::raw( "SELECT * FROM feature_page as f
 			JOIN navigation ON f.page_id = navigation.section_id
 			JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
 			JOIN languages ON features.language_id = languages.id WHERE languages.language_shortcut = '$locale') as sub ON f.feature_id = sub.fid  ORDER BY navigation.order, navigation.parent_id;" ) );
-		} else if($without_content_pages) {
-			$nav_links = DB::select( DB::raw( "SELECT * FROM feature_page as f
+		} else if ( $without_content_pages ) {
+			$nav_links        = DB::select( DB::raw( "SELECT * FROM feature_page as f
 			JOIN navigation ON f.page_id = navigation.section_id
 			JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
 			JOIN languages ON features.language_id = languages.id WHERE features.content_file != 'NULL') as sub ON f.feature_id = sub.fid  ORDER BY navigation.order, navigation.parent_id;" ) );
 			$this->navigation = $nav_links;
-		}
-		else {
+		} else {
 			$nav_links = DB::select( DB::raw( "SELECT * FROM feature_page as f
 			JOIN navigation ON f.page_id = navigation.section_id
 			JOIN (SELECT features.id as fid, features.title, features.content_file, features.controller, languages.language_shortcut FROM features
@@ -75,19 +75,20 @@ class Controller extends BaseController {
 		                           ->value( 'section_id' );*/
 	}
 
-/*	protected function init_locale() {
-		if ( \Session::has( 'applocale' ) ) {
-			$locale = \Session::get( 'applocale' );
-		} else {
-			$locale = \Config::get( 'app.fallback_locale' );
-		}
+	/*	protected function init_locale() {
+			if ( \Session::has( 'applocale' ) ) {
+				$locale = \Session::get( 'applocale' );
+			} else {
+				$locale = \Config::get( 'app.fallback_locale' );
+			}
 
-		\App::setlocale( $locale );
-		$this->language = $locale;
-		echo "jazyk je $locale";
-	}*/
+			\App::setlocale( $locale );
+			$this->language = $locale;
+			echo "jazyk je $locale";
+		}*/
 	public function set_app_language() {
-		$this->default_language = Setting::all()[1]->setting_value;
+		$settings               = Setting::all();
+		$this->default_language = $settings[0]->setting_value;
 	}
 
 }

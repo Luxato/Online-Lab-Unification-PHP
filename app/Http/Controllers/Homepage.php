@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actuality;
 use App\Language;
 use App\News_categorie;
+use App\Setting;
 use App\User;
 use Illuminate\Http\Request;
 use DB;
@@ -15,7 +16,7 @@ class Homepage extends Controller {
 
 
 	public function index( Request $request, $slug = NULL ) {
-
+		// Retrieve applocale.
 		if ( \Session::has( 'applocale' ) ) {
 			$locale = \Session::get( 'applocale' );
 		} elseif ( isset( $this->default_language ) ) {
@@ -25,6 +26,12 @@ class Homepage extends Controller {
 		}
 		\App::setlocale( $locale );
 
+		// Retrieve landing page.
+		$landing_pages      = Setting::all()[1]->setting_value;
+		$landing_pages = (array) json_decode( $landing_pages );
+		if (isset($landing_pages[ $locale ])) {
+			$this->landing_page = $landing_pages[ $locale ];
+		}
 		if ( \Session::has( 'logged_user_id' ) ) {
 			$data['user'] = User::findOrFail( \Session::get( 'logged_user_id' ) );
 		}
@@ -38,7 +45,6 @@ class Homepage extends Controller {
 		if ( $slug === 'aktuality' ) {
 			$data['actualities'] = Actuality::getAll();
 			$data['categories']  = [];
-			$uniqueCat           = TRUE;
 			foreach ( $data['actualities'] as $actuality ) {
 				$uniqueCat = TRUE;
 				foreach ( $data['categories'] as $category ) {
@@ -58,6 +64,42 @@ class Homepage extends Controller {
 		}
 		if ( ! isset( $slug ) ) {
 			$blade = 'default';
+			if ($this->landing_page == '00') {
+			    // Aktuality
+				$data['actualities'] = Actuality::getAll();
+				$data['categories']  = [];
+				foreach ( $data['actualities'] as $actuality ) {
+					$uniqueCat = TRUE;
+					foreach ( $data['categories'] as $category ) {
+						if ( $category['id'] == $actuality->catID ) {
+							$uniqueCat = FALSE;
+						}
+					}
+					if ( $uniqueCat ) {
+						$data['categories'][] = [
+							'id'   => $actuality->catID,
+							'name' => $actuality->catname
+						];
+					}
+				}
+
+				$blade = 'aktuality';
+			} else if ($this->landing_page == '01') {
+				// Default
+				//$blade = 'default';
+			} else {
+				if ($this->landing_page) {
+					$page = Page::find($this->landing_page)->feature;
+					$languages = Language::all();
+					foreach ($page as $section) {
+						foreach ($languages as $language) {
+							if ($section->language_id == $language->id) {
+								$blade = 'user_created_pages/' . $section->content_file;
+							}
+						}
+					}
+				}
+			}
 		} else {
 			foreach ( $this->navigation as $link ) {
 				if ( $link->controller == trim( $slug ) ) {
