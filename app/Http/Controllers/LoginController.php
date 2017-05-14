@@ -55,7 +55,7 @@ class LoginController extends Controller {
 			Session::set( 'logged_email', $user->email );
 			return back();
 		} else {
-			Session::flash( 'warning', 'connection_error' );
+			Session::flash( 'warning', 'wrong_details' );
 			return back();
 		}
 	}
@@ -67,8 +67,8 @@ class LoginController extends Controller {
 		Session::flush( 'logged_user_id' );
 		Session::flush( 'logged_email' );
 		Auth::logout();
-
 		Session::flash( 'success', 'successful_logout' );
+
 		return back();
 	}
 
