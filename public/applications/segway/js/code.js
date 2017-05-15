@@ -218,7 +218,7 @@ function pocitaj(){
 
         }
 		console.log($( "#segwayInputs" ).serialize());
-	    $.post("model.php",$( "#segwayInputs" ).serialize(), function (data) {
+	    $.post(path + "model.php",$( "#segwayInputs" ).serialize(), function (data) {
 	    	$("#loadingGif").hide();
 	    	//console.log(data);
 	        if(data==false){
@@ -329,7 +329,7 @@ function init() {
     var loader = new THREE.ColladaLoader(manager);
     loader.options.convertUpAxis = true;
 
-    loader.load('objects/segway.dae', function (collada) {
+    loader.load(path + 'objects/segway.dae', function (collada) {
         model = collada.scene;
         model.getObjectByName("Segway").rotation.z = degreeToRad(70);
         model.position.setY(1); //oprava polohy aby nebol segway zemou

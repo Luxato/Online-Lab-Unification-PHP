@@ -1,24 +1,24 @@
 <!-- saved from url=(0100)http://www.iolab.sk/11-subjects/26-tar1/28-teoria/32-modelovanie-systemov/33-vseobecne-o-modelovani/ -->
-<link href="/ioLAB_files/css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="./ioLAB_files/style.css">
-<script src="./ioLAB_files/fullscreen.js"></script>
+<link href="<?= $path ?>ioLAB_files/css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="<?= $path ?>ioLAB_files/style.css">
+<script src="<?= $path ?>ioLAB_files/fullscreen.js"></script>
 <!-- maxima -->
-<script type="text/javascript" src="./ioLAB_files/jquery-1.6.2.js"></script>
-<script type="text/javascript" src="./ioLAB_files/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="./ioLAB_files/shCore.css" type="text/css">
-<link rel="stylesheet" href="./ioLAB_files/shThemeDefault.css" type="text/css">
-<script type="text/javascript" src="./ioLAB_files/shCore.js"></script>
-<script type="text/javascript" src="./ioLAB_files/shBrushJScript.js"></script>
+<script type="text/javascript" src="<?= $path ?>ioLAB_files/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="<?= $path ?>ioLAB_files/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="<?= $path ?>ioLAB_files/shCore.css" type="text/css">
+<link rel="stylesheet" href="<?= $path ?>ioLAB_files/shThemeDefault.css" type="text/css">
+<script type="text/javascript" src="<?= $path ?>ioLAB_files/shCore.js"></script>
+<script type="text/javascript" src="<?= $path ?>ioLAB_files/shBrushJScript.js"></script>
 
-<script type="text/javascript" src="./ioLAB_files/jquery.jqplot.min.js"></script>
-<link rel="stylesheet" type="text/css" href="./ioLAB_files/jquery.jqplot.css">
+<script type="text/javascript" src="<?= $path ?>ioLAB_files/jquery.jqplot.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?= $path ?>ioLAB_files/jquery.jqplot.css">
 
-<script type="text/javascript" src="./ioLAB_files/script.js"></script>
-<script type="text/javascript" src="./ioLAB_files/ajaxupload.js"></script>
-<script type="text/javascript" src="./ioLAB_files/excanvas.js"></script>
-<script type="text/javascript" src="./ioLAB_files/jquery.flot.js"></script>
+<script type="text/javascript" src="<?= $path ?>ioLAB_files/script.js"></script>
+<script type="text/javascript" src="<?= $path ?>ioLAB_files/ajaxupload.js"></script>
+<script type="text/javascript" src="<?= $path ?>ioLAB_files/excanvas.js"></script>
+<script type="text/javascript" src="<?= $path ?>ioLAB_files/jquery.flot.js"></script>
 
-<script type="text/javascript" src="./ioLAB_files/MathJax.js">
+<script type="text/javascript" src="<?= $path ?>ioLAB_files/MathJax.js">
     MathJax.Hub.Config({
         extensions: ["tex2jax.js"],
         jax: ["input/TeX","output/HTML-CSS"],
@@ -32,8 +32,8 @@
 <!-- -->
 
 <!-- prihlásenie -->
-<script src="./ioLAB_files/jquery.min.js"></script>
-<script src="./ioLAB_files/jquery.form.js"></script>
+<script src="<?= $path ?>ioLAB_files/jquery.min.js"></script>
+<script src="<?= $path ?>ioLAB_files/jquery.form.js"></script>
 <!--	<script type="text/javascript" src="/prihlasenie/js/bootstrap.js"></script>
 20150823 -->
 
@@ -42,7 +42,7 @@
   <script type="text/javascript" src="/websupport/js/syntaxhighlighter/shBrushJScript.js"></script>
 20150823   -->
 
-<script type="text/javascript" src="./ioLAB_files/main.js"></script>
+<script type="text/javascript" src="<?= $path ?>ioLAB_files/main.js"></script>
 <style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
     #MathJax_About.MathJax_MousePost {outline: none}
     .MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
@@ -77,106 +77,102 @@
 <div id="wrapper">
     <div id="container">
         <div id="content" style="min-height: 550px;">
-            <script type="text/javascript" src="js/jQuery.js"></script>
-            <script type="text/javascript" src="js/googleGraphs.js"></script>
+            <script type="text/javascript" src="<?= $path ?>js/jQuery.js"></script>
+            <script type="text/javascript" src="<?= $path ?>js/googleGraphs.js"></script>
             <style>
-                #segwayInputs{
-                    padding-bottom: 10px;
+                .pidAll {
+                    float: right;
                 }
-                #segwayInputs > div{
-                    width: 45%;
-                }
-                #segwayInputs > div> div{
-                    width: 100%;
-                    padding-right: 10px;
-                }
-                #segwayInputs input[type="text"], #segwayInputs input[type="number"]{
-                    width: 100%;
-                }
-                #segwayInputs  div{
-                    display: inline-block;
-                }
-                #segwayInputs > button{
-                    float: none;
-                    margin-top: 20px;
-                }
-                #resetButton, #grafBan, #segwayInputs > button{
-                    width: 155px;
-                }
-                #resetButton{
+                #graf {
                     display: none;
                 }
-                .pidAll{
-                    float:right;
+                #graf div {
+                    position: relative !important;
                 }
-                #graf{
-                    display: none;
-                }
-                #loadingGif{
+
+                #loadingGif {
                     display: none;
                     position: absolute;
                     bottom: 0%;
                     right: 0%;
                 }
-                #webGLWindow{
+
+                #webGLWindow {
                     position: relative;
                     width: 100%;
                     height: 500px
                 }
-
-
+                body {
+                    padding-top: 80px;
+                }
+                footer {
+                    display: none;
+                }
             </style>
-            <div id="webGLWindow">
-                <div id="webGL" style="position: absolute; width: 100%; height: 100%"></div>
-                <img id="loadingGif" src="loading.gif" alt="loading gif">
-            </div>
+            <div class="col-sm-12 mockup">
+                <div class="row">
+                    <div class="col-md-3">
+                        <form id="segwayInputs">
+                            <div class="form-group">
+                                <label for="timeInput">Trvanie animácie:</label>
+                                <input class="form-control" name="time" value="5" id="timeInput" type="text" placeholder="Zadaj čas v sekundách"
+                                       onchange="checkTimeInput(this.value)">
+                            </div>
+                            <input name="angle" id="angleInput" hidden>
+                            <div class="form-group">
+                                <label for="degreeInput">Počiatočný uhol v stupňoch:</label>
+                                <input class="form-control" name="degree" value="30" id="degreeInput" type="text" placeholder="Zadaj uhol v stupňoch"
+                                       onchange="checkDegreeInput(this.value)">
+                            </div>
+                            <div class="form-group">
+                                <label for="usr">Počiatočná rýchlosť vozidla v m/s:</label>
+                                <input class="form-control" name="speed" value="5" id="speedInput" type="text" placeholder="Zadaj rýchlosť"
+                                       onchange="checkSpeedInput(this.value)">
+                            </div>
+                            <label for="usr">Použiť PID regulátor:</label>
+                            <div class="radio">
+                                <label><input id="pidYes" name="pid" type="radio" value="SegwayPID.mo" checked onclick="showPid()">Áno</label>
+                            </div>
 
-            <div id="graf" style="height: 250px;"></div>
-            <form id="segwayInputs" >
-                <div>
-                    <label for="timeInput">Trvanie animácie:</label>
-                    <input name="time" value="5" id="timeInput" type="text" placeholder="Zadaj čas v sekundách" onchange="checkTimeInput(this.value)"><br>
-
-                    <label for="degreeInput">Počiatočný uhol v stupňoch:</label>
-                    <input name="degree" value="30" id="degreeInput" type="text" placeholder="Zadaj uhol v stupňoch" onchange="checkDegreeInput(this.value)"><br>
-
-                    <label for="speedInput">Počiatočná rýchlosť vozidla v m/s:</label>
-                    <input name="speed" value="5" id="speedInput" type="text" placeholder="Zadaj rýchlosť" onchange="checkSpeedInput(this.value)"><br>
-
-                    <input name="angle" id="angleInput" hidden>
-                </div>
-                <div class="pidAll">
-                    <label for="pid">Použiť PID regulátor?</label>
-
-                    <input id="pidYes" name="pid" type="radio" value="SegwayPID.mo" checked onclick="showPid()">
-                    <label for="pidYes">áno</label>
-
-                    <input id="pidNo" name="pid" type="radio" value="SegwayOnly.mo" onclick="hidePid()">
-                    <label for="pidNo">nie</label>
-                    <div id="pidPart">
-                        <label for="pInput">P: </label>
-                        <input name="p" type="text" value="18" id="pInput" onchange="checkPInput(this.value)"><br>
-                        <label for="iInput">I: </label>
-                        <input name="i" type="text" value="20" id="iInput" onchange="checkIInput(this.value)"><br>
-                        <label for="dInput">D: </label>
-                        <input name="d" type="text" value="0.1" id="dInput" onchange="checkDInput(this.value)"><br>
+                            <input id="pidNo" name="pid" type="radio" value="SegwayOnly.mo" onclick="hidePid()">
+                            <label for="pidNo">nie</label>
+                            <div id="pidPart">
+                                <label for="pInput">P: </label>
+                                <input class="form-control" name="p" type="text" value="18" id="pInput" onchange="checkPInput(this.value)"><br>
+                                <label for="iInput">I: </label>
+                                <input class="form-control" name="i" type="text" value="20" id="iInput" onchange="checkIInput(this.value)"><br>
+                                <label for="dInput">D: </label>
+                                <input class="form-control" name="d" type="text" value="0.1" id="dInput" onchange="checkDInput(this.value)"><br>
+                            </div>
+                            <button type="submit" id="submitButton" style="display: inline-block;margin: 10px 0;width: 105px;" class="btn btn-success btn-md">Generovať</button>
+                            <button type="button" id="grafBan" onclick="grafOnOff()" class="btn btn-success btn-md">Skryť Graf</button>
+                        </form>
+                    </div>
+                    <div class="col-md-9">
+                        <div id="webGLWindow">
+                            <div id="webGL" style="position: absolute; width: 100%; height: 100%"></div>
+                            <img id="loadingGif" src="<?= $path ?>loading.gif" alt="loading gif">
+                        </div>
                     </div>
                 </div>
-                <button type="submit" id="submitButton">Odoslať</button>
-            </form>
-            <button type="button" id="resetButton" onclick="reset()" >Reset</button>
-            <button type="button" id="grafBan" onclick="grafOnOff()" >Skryť Graf</button>
+                <div id="graf" style="height: 250px;"></div>
+            </div>
+            <button class="btn btn-success btn-md" type="button" id="resetButton" onclick="reset()" >Reset</button>
 
-            <script src="js/three/three.min.js"></script>
-            <script src="js/three/Animation.js"></script>
-            <script src="js/three/AnimationHandler.js"></script>
-            <script src="js/three/KeyFrameAnimation.js"></script>
+            <script src="<?= $path ?>js/three/three.min.js"></script>
+            <script src="<?= $path ?>js/three/Animation.js"></script>
+            <script src="<?= $path ?>js/three/AnimationHandler.js"></script>
+            <script src="<?= $path ?>js/three/KeyFrameAnimation.js"></script>
 
-            <script src="js/three/ColladaLoader.js"></script>
-            <script src="js/three/OrbitControls.js"></script>
-            <script src="js/three/Detector.js"></script>
-            <script src="js/three/stats.min.js"></script>
-            <script src="js/code.js"></script>
+            <script src="<?= $path ?>js/three/ColladaLoader.js"></script>
+            <script src="<?= $path ?>js/three/OrbitControls.js"></script>
+            <script src="<?= $path ?>js/three/Detector.js"></script>
+            <script src="<?= $path ?>js/three/stats.min.js"></script>
+            <script>
+                var path = "<?= $path ?>";
+                $('#resetButton').hide();
+            </script>
+            <script src="<?= $path ?>js/code.js"></script>
         </div>
     </div>
     <div id="containter_clear"></div>
