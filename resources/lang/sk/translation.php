@@ -19,5 +19,7 @@
 				'blank_page' => 'Na tejto stránke sa ešte nič nenachádza <br> ┏༼ ◉ ╭╮ ◉༽┓',
 	'wrong_details' => 'Nesprávne prihlasovacie údaje.',
 	'connection_error' => 'Chyba pripojenia na server. Skúste neskôr alebo kontaktujte administrátora.',
-	'successful_logout' => 'Úspešne ste sa odhlásili.'
+	'successful_logout' => 'Úspešne ste sa odhlásili.',
+	'all_actualities' => 'Všetky aktuality',
+	'empty_actualities' => 'Žiadne dostupné aktuality.'
 ];

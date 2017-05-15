@@ -20,5 +20,7 @@
 	'blank_page' => 'Nothing found on this page <br> ┏༼ ◉ ╭╮ ◉༽┓',
 	'wrong_details' => 'Wrong details. Am sorry.',
 	'connection_error' => 'Connection error. Try again in a minute or contact administrator.',
-	'successful_logout' => 'You successfully logged out.'
+	'successful_logout' => 'You successfully logged out.',
+	'all_actualities' => 'All actualities',
+	'empty_actualities' => 'No available actualities at this time.'
 ];
