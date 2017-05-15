@@ -949,14 +949,22 @@
 	  
 	  loader.load( 'objekty/stena.obj','objekty/stena.mtl', function ( event ) {
 		var object = event;
-		object.name="sustava";
+		
 		object.traverse( function ( child ) {
 		  if ( child instanceof THREE.Mesh ) {
+			var textura=THREE.ImageUtils.loadTexture('textury/brushed_aluminium_texture512_2.jpg');
+			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
+			textura.repeat.set(5,5);
+			child.material.map = textura;
+			//child.material.bumpMap = textura;
+			child.material.bumpScale= 0.001;
 			child.castShadow = true;
 			child.receiveShadow = true;
 
 		  }
 		} );
+		
+		object.name="sustava";
 		object.scale = new THREE.Vector3( 25, 25, 25 );
 		object.position.y += korekcia_vysky;
 		//object.position.y -= 2.5;
@@ -2064,7 +2072,7 @@
 			}
 		}
 		data=form();
-		xmlhttp2.open("POST","http://147.175.105.140:8033/~stranovsky/public/applications/kralik/vypocet_dr.php",true);
+		xmlhttp2.open("POST","vypocet_dr.php",true);
 		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		//document.getElementById("testovacie_pole").innerHTML=data;
 		xmlhttp2.send(data);

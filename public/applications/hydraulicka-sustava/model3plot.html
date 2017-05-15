@@ -15,6 +15,7 @@
   <script src="kniznice/OBJMTLLoader.js"></script>
   <script src="kniznice/ImageUtils.js"></script>
   <script src="kniznice/jquery.min.js"></script>
+  <script src="kniznice/jquery.flot.js"></script>
    <script src="kniznice/FresnelShader.js"></script>
 </head>
 <body>
@@ -65,7 +66,7 @@
 	var windowHalfY = window.innerHeight / 2;
 	var korekcia_vysky=-0.8;
 	var valec_3;
-	var tiene=true;
+	var tiene=false;
 	var valec_1=null;
 	var valec_2=null;
 	var valec_3=null;
@@ -90,8 +91,8 @@
 	  
 	  // This is the scene we will add all objects to.
 	  scene = new THREE.Scene();
-	  scene2 = new THREE.Scene();
-	  scene3 = new THREE.Scene();
+	  //scene2 = new THREE.Scene();
+	  //scene3 = new THREE.Scene();
 	  //scene.height=300;
 	  
 	  var rura=true;
@@ -305,7 +306,7 @@
 			spotlight.angle=Math.PI/2;
 			scene.add( spotlight );
 			
-		var spotlight2=new THREE.SpotLight( 0xffffcc,5);
+		/*var spotlight2=new THREE.SpotLight( 0xffffcc,5);
 			
 			spotlight2.position.set( -6, 8, -20 );
 			spotlight2.target.position.set(20,0,-5);
@@ -315,7 +316,7 @@
 			
 		var light = new THREE.PointLight( 0xffffff, 1, 0 );
 		light.position.set( -40, 10,0  );
-		scene.add( light );
+		scene.add( light );*/
 			
 	  /*var directionalLight2 = new THREE.DirectionalLight( 0xffffff,1 );
 			directionalLight2.position.set( 2, 20, -11 );
@@ -578,21 +579,21 @@
 		scene.add( object );
 	  });
 	  
-	 /* loader.load( 'objekty2/nadrz_inv.obj','objekty2/nadrz_inv.mtl', function ( event ) {
-		var object = event;
+	//  loader.load( 'objekty2/nadrz_inv.obj','objekty2/nadrz_inv.mtl', function ( event ) {
+	//	var object = event;
 	//	object.traverse( function ( child ) {
 	//	  if ( child instanceof THREE.Mesh ) {
 	//		child.material = sklo;
 	//	  }
 	//	} );
-		object.scale = new THREE.Vector3( 25, 25, 25 );
+	//	object.scale = new THREE.Vector3( 25, 25, 25 );
 		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
 		//object.castShadow = true;
-		object.position.y += korekcia_vysky;
-	    object.castShadow = true;
-	    object.receiveShadow = true;
-		scene.add( object );
-	  });*/
+	//	object.position.y += korekcia_vysky;
+	//    object.castShadow = true;
+	   // object.receiveShadow = true;
+		//scene.add( object );
+	  //});
 	  
 	  loader.load( 'objekty2/noha.obj','objekty2/noha.mtl', function ( event ) {
 		var object = event;
@@ -867,7 +868,8 @@
 		valec_1.position.y += korekcia_vysky+0.03;
 		//CubeCamera.position=valec_1.position;
 		//CubeCamera.position.y+=10;
-		scene2.add( valec_1 );
+		//scene2.add( valec_1 );
+		scene.add( valec_1 );
 	  });
 	  
 	  
@@ -887,7 +889,8 @@
 		//valec_2.position.x += 2;
 		CubeCamera2.position=valec_2.position;
 		CubeCamera2.position.y+=1.5;
-		scene2.add( valec_2 );
+		//scene2.add( valec_2 );
+		scene.add( valec_2 );
 	  });
 	  
 	  
@@ -909,7 +912,8 @@
 		valec_3.receiveShadow = true;
 		CubeCamera3.position=valec_3.position;
 		CubeCamera3.position.y+=0.5;
-		scene2.add( valec_3 );
+		//scene2.add( valec_3 );
+		scene.add( valec_3 );
 	  });
 		// drawRefractingObject: function() {
 
@@ -1013,7 +1017,7 @@
 	  if(valec_2 != null)valec_2.visible=true;
 	  if(valec_3 != null)valec_3.visible=true;
 	  if(typeof nadrzka2 !== 'undefined') nadrzka2.visible=true;
-	  renderer.render( scene2, camera );
+	 // renderer.render( scene2, camera );
 	  //renderer.clearDepth();
 	  renderer.render( scene, camera );
 	  //renderer.render( scene, Cubecamera );
@@ -1070,7 +1074,7 @@
 			}
 		}
 		data=form();
-		xmlhttp2.open("POST","http://147.175.105.140:8033/~stranovsky/public/applications/kralik/vypocet_dr.php",true);
+		xmlhttp2.open("POST","vypocet_dr.php",true);
 		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		document.getElementById("testovacie_pole").innerHTML=data;
 		xmlhttp2.send(data);
@@ -1118,6 +1122,15 @@
 	}
 	function animation(pole,objekt1,objekt2,objekt3)
 	{
+		graf=[];
+	    var options = {
+			series: {
+				lines: { show: true },
+				points: { show: true }
+			}
+		};
+	    //plot = $("#placeholder").plot(graf, options).data("plot");
+		plot=$.plot($("#placeholder"), [graf] );
 		control2=setInterval(function(){animTimer(pole,objekt1,objekt2,objekt3)},40);
 		j=0;
 	}
@@ -1129,6 +1142,11 @@
 			objekt1.scale.y=(pole[1][j]/30);
 			objekt2.scale.y=(pole[2][j]/30);
 			objekt3.scale.y=(pole[3][j]/30);
+			
+			graf.push([pole[0][j],pole[1][j]]);
+			plot.setData([graf]);
+			plot.setupGrid();
+			plot.draw();
 		}
 		else clearInterval(control2);
 		j++;
@@ -1169,6 +1187,8 @@
                 </div> -->
 
 	</div>
+	
+	<<div id="placeholder" style="width:600px;height:300px;border-style:solid;border-color:white;border-width:3px;position:absolute;bottom:10px;right:10px;z-index:3"> </div>
   
         
    

@@ -15,7 +15,6 @@
   <script src="kniznice/OBJMTLLoader.js"></script>
   <script src="kniznice/ImageUtils.js"></script>
   <script src="kniznice/jquery.min.js"></script>
-  <script src="kniznice/jquery.flot.js"></script>
    <script src="kniznice/FresnelShader.js"></script>
 </head>
 <body>
@@ -66,7 +65,7 @@
 	var windowHalfY = window.innerHeight / 2;
 	var korekcia_vysky=-0.8;
 	var valec_3;
-	var tiene=false;
+	var tiene=true;
 	var valec_1=null;
 	var valec_2=null;
 	var valec_3=null;
@@ -83,7 +82,7 @@
 	  renderer.autoClear = false;
 	  
 	    
-	  renderer.shadowMapEnabled = false;
+	  renderer.shadowMapEnabled = true;
 	 // renderer.shadowMapAutoUpdate = true;
 	  //renderer.clearTarget( light.shadowMap );
 	  renderer.shadowMapType = THREE.PCFSoftShadowMap;
@@ -91,8 +90,8 @@
 	  
 	  // This is the scene we will add all objects to.
 	  scene = new THREE.Scene();
-	  //scene2 = new THREE.Scene();
-	  //scene3 = new THREE.Scene();
+	  scene2 = new THREE.Scene();
+	  scene3 = new THREE.Scene();
 	  //scene.height=300;
 	  
 	  var rura=true;
@@ -157,16 +156,6 @@
 						 reflectivity:0.5 
 						 });
 						 
-	  var stena = new THREE.MeshLambertMaterial( { 
-						 color: 0xaaaaaa, 
-						 //transparent:true,
-						 //envMap: CubeCamera3.renderTarget, 
-						// refractionRatio: 1.1 ,
-						 //specular: 0xffffff,
-						 //opacity:0.1,
-						 //reflectivity:0.5 
-						 });
-						 
 	  var texture = THREE.ImageUtils.loadTexture("voda.jpg");//, {}, function() {renderer.render(scene);});
 	  
 	 // var valecMaterial = new THREE.MeshBasicMaterial( { 
@@ -178,49 +167,10 @@
 						 //opacity:1,
 						 //reflectivity:0.05 
 						 //});
-			
-	  var urls = [
-		  'skybox/posx.jpg',
-		  'skybox/negx.jpg',
-		  'skybox/posy.jpg',
-		  'skybox/negy.jpg',
-		  'skybox/posz.jpg',
-		  'skybox/negz.jpg'
-		],
-
-		// wrap it up into the object that we need
-	  cubemap = THREE.ImageUtils.loadTextureCube(urls);
-
-		// set the format, likely RGB unless you've gone crazy
-	  cubemap.format = THREE.RGBFormat;
-		
-	  var shader = THREE.ShaderLib['cube']; // init cube shader from built-in lib
-		shader.uniforms['tCube'].value = cubemap; // apply textures to shader
-
-		// create shader material
-		var skyBoxMaterial = new THREE.ShaderMaterial( {
-		  fragmentShader: shader.fragmentShader,
-		  vertexShader: shader.vertexShader,
-		  uniforms: shader.uniforms,
-		  depthWrite: false,
-		  side: THREE.BackSide
-		});
-
-		// create skybox mesh
-		var skybox = new THREE.Mesh(
-		  new THREE.CubeGeometry(1000, 1000, 1000),
-		  skyBoxMaterial
-		);
-
-		scene.add(skybox);	
-		
+						 
 	  var valecMaterial = new THREE.MeshPhongMaterial( {map: THREE.ImageUtils.loadTexture('voda.jpg') } );
-	  var sky = new THREE.MeshLambertMaterial( {
-						color:0xffffff,
-						envMap:cubemap
-						} );
-	 /* var skybox = new THREE.Mesh( new THREE.CubeGeometry( 1000, 1000, 1000 ), cubemap );	
-	  scene.add(skybox);*/
+	  var sky = new THREE.MeshBasicMaterial( {color:0x90b8e0 } );
+						 
 	  var material_gray = new THREE.MeshLambertMaterial( { 
 						 color: 0x050505, 
 						 reflectivity:0.97 
@@ -263,15 +213,18 @@
 	  scene.add( ambient );*/
 	  
 
-	 /* var directionalLight = new THREE.DirectionalLight( 0xffffee,2);
+	  var directionalLight = new THREE.DirectionalLight( 0xffffee,4);
 			directionalLight.position.set( -20, 20, -24 );
 			//directionalLight.target.position.set( 2, 0, 11 );
 			//directionalLight.angle=Math.PI;
 			//directionalLight.onlyShadow=true;
 			//directionalLight.exponent=0.1;
 			directionalLight.shadowCameraLeft=-40;
+
 			directionalLight.shadowCameraRight=50;
+
 			directionalLight.shadowCameraTop=50;
+
 			directionalLight.shadowCameraBottom=-30;
 			
 			directionalLight.shadowBias = 0.01;
@@ -283,39 +236,27 @@
 			directionalLight.shadowMapWidth = 512; // default is 512
 			directionalLight.shadowMapWidth = 512; // default is 512
 			directionalLight.shadowMapHeight = 512; // default is 512
-			scene.add( directionalLight );*/
+			scene.add( directionalLight );
 			
 			
-		/*var directionalLight2 = new THREE.DirectionalLight( 0xffffee,0.1);
+		var directionalLight2 = new THREE.DirectionalLight( 0xffffee,1);
 			directionalLight2.position.set( 20, -40, 24 );
 			
 			//directionalLight2.castShadow = true;
 			//directionalLight2.shadowDarkness = 0.9;
-			scene.add( directionalLight2 );*/
+			scene.add( directionalLight2 );
 			
-		var spotlight=new THREE.SpotLight( 0xffffcc,5);
+		/*var spotlight=new THREE.SpotLight( 0xffffee,0.2);
+			spotlight.position.set( -14, 10, -14 );
+			spotlight.castShadow = true;
+			spotlight.shadowCameraNear = 1;
+			spotlight.shadowCameraFar = 100;
+			spotlight.shadowDarkness = 0.4;
+			spotlight.shadowCameraVisible = true;
+			scene.add( spotlight );*/
 			
-			spotlight.position.set( -6, 8, 20 );
-			spotlight.target.position.set(20,0,9);
-			//spotlight.castShadow = true;
-			spotlight.distance=100;
-			//spotlight.shadowCameraNear = 1;
-			//spotlight.shadowCameraFar = 70;
-			//spotlight.shadowDarkness = 0.4;
-			//spotlight.shadowCameraVisible = true;
-			spotlight.angle=Math.PI/2;
-			scene.add( spotlight );
-			
-		/*var spotlight2=new THREE.SpotLight( 0xffffcc,5);
-			
-			spotlight2.position.set( -6, 8, -20 );
-			spotlight2.target.position.set(20,0,-5);
-			spotlight2.distance=100;
-			spotlight2.angle=Math.PI/2;
-			scene.add( spotlight2 );
-			
-		var light = new THREE.PointLight( 0xffffff, 1, 0 );
-		light.position.set( -40, 10,0  );
+		/*var light = new THREE.PointLight( 0xffffff, 1, 0 );
+		light.position.set( 2, 200, -110 );
 		scene.add( light );*/
 			
 	  /*var directionalLight2 = new THREE.DirectionalLight( 0xffffff,1 );
@@ -326,7 +267,7 @@
 			directionalLight3.position.set( 10, 10, -3 );
 			scene2.add( directionalLight3 );*/
 			
-	  var hemLight = new THREE.HemisphereLight(0xbbbbaa, 0x606055, 1);
+	  var hemLight = new THREE.HemisphereLight(0xffffee, 0xffffee, 1);
 			scene.add(hemLight);
 	
 	  /*var ambLight = new THREE.AmbientLight(0x040404);
@@ -440,38 +381,34 @@
 	  });
 	  
 	  
-	  loader.load( 'objekty2/komnata.obj','objekty2/komnata.mtl', function ( event ) {
+	  loader.load( 'objekty2/miestnost3.obj','objekty2/miestnost3.mtl', function ( event ) {
 		var object = event;
 		var s=0;
 		object.traverse( function ( child ) {
-		//child.material=stena;
-		
 		  if ( child instanceof THREE.Mesh && s==4) {
-			var textura=THREE.ImageUtils.loadTexture('textury/wood_roof1024.jpg');
+			var textura=THREE.ImageUtils.loadTexture('textury/wood-flooring1024.jpg');
 			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
-			textura.repeat.set(6,6);
-			
+			textura.repeat.set(3,3);
 			child.material.map = textura;
 			child.material.wrapAround=true;
 			//child.material.bumpMap = textura;
 			//child.material.bumpScale= 0.05;
-			child.castShadow = true;
 			child.receiveShadow = true;
 		  }
 		  
 		  if ( child instanceof THREE.Mesh && s==3) {
-			var textura=THREE.ImageUtils.loadTexture('textury/castle_wall1024.jpg');
+			var textura=THREE.ImageUtils.loadTexture('textury/white_paint_stucco.jpg');
 			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
-			textura.repeat.set(1,1);
+			textura.repeat.set(10,10);
 			child.material.map = textura;
 			child.material.bumpMap = textura;
-			child.material.bumpScale= 0.05;
-			//child.material.wrapAround=true;
+			child.material.bumpScale= 0.02;
+			child.material.wrapAround=true;
 			child.castShadow = true;
 			child.receiveShadow = true;
 		  }
 		  
-		 /* if ( child instanceof THREE.Mesh && s==5) {
+		  if ( child instanceof THREE.Mesh && s==5) {
 			var textura=THREE.ImageUtils.loadTexture('textury/white_paint_stucco.jpg');
 			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
 			textura.repeat.set(10,10);
@@ -483,51 +420,7 @@
 			child.material.wrapAround=true;
 			child.castShadow = true;
 			child.receiveShadow = true;
-		  }*/
-		  s=s+1;
-		  
-		} );
-		s=0;
-		object.scale = new THREE.Vector3( 25, 25, 25 );
-		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
-		//object.castShadow = true;
-		object.position.y += korekcia_vysky;
-		scene.add( object );
-	  });
-	  
-	  
-	  
-	  loader.load( 'objekty2/strecha.obj','objekty2/strecha.mtl', function ( event ) {
-		var object = event;
-		var s=0;
-		object.traverse( function ( child ) {
-		//child.material=stena;
-		
-		  if ( child instanceof THREE.Mesh && s==3) {
-			var textura=THREE.ImageUtils.loadTexture('textury/wood_roof1024.jpg');
-			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
-			textura.repeat.set(6,6);
-			
-			child.material.map = textura;
-			child.material.wrapAround=true;
-			//child.material.bumpMap = textura;
-			//child.material.bumpScale= 0.05;
-			child.castShadow = true;
-			child.receiveShadow = true;
 		  }
-		  
-		  if ( child instanceof THREE.Mesh && s>3) {
-			var textura=THREE.ImageUtils.loadTexture('textury/roof texture 1.jpg');
-			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
-			textura.repeat.set(4,4);
-			child.material.map = textura;
-			child.material.bumpMap = textura;
-			child.material.bumpScale= 0.05;
-			//child.material.wrapAround=true;
-			child.castShadow = true;
-			child.receiveShadow = true;
-		  }
-		  
 		  s=s+1;
 		  
 		} );
@@ -579,21 +472,21 @@
 		scene.add( object );
 	  });
 	  
-	//  loader.load( 'objekty2/nadrz_inv.obj','objekty2/nadrz_inv.mtl', function ( event ) {
-	//	var object = event;
+	  loader.load( 'objekty2/nadrz_inv.obj','objekty2/nadrz_inv.mtl', function ( event ) {
+		var object = event;
 	//	object.traverse( function ( child ) {
 	//	  if ( child instanceof THREE.Mesh ) {
 	//		child.material = sklo;
 	//	  }
 	//	} );
-	//	object.scale = new THREE.Vector3( 25, 25, 25 );
+		object.scale = new THREE.Vector3( 25, 25, 25 );
 		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
 		//object.castShadow = true;
-	//	object.position.y += korekcia_vysky;
-	//    object.castShadow = true;
-	   // object.receiveShadow = true;
-		//scene.add( object );
-	  //});
+		object.position.y += korekcia_vysky;
+	    object.castShadow = true;
+	    object.receiveShadow = true;
+		scene.add( object );
+	  });
 	  
 	  loader.load( 'objekty2/noha.obj','objekty2/noha.mtl', function ( event ) {
 		var object = event;
@@ -675,7 +568,7 @@
 	  
 	  //PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  
 	  
-	   loader.load( 'objekty2/plc_low.obj','objekty2/plc_low.mtl', function ( event ) {
+	   loader.load( 'objekty2/plc.obj','objekty2/plc.mtl', function ( event ) {
 		var object = event;
 		object.scale = new THREE.Vector3( 25, 25, 25 );
 		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
@@ -695,7 +588,7 @@
 	  
 	  
 	  
-	  loader.load( 'objekty2/plc_low.obj','objekty2/plc_low.mtl', function ( event ) {
+	  loader.load( 'objekty2/plc.obj','objekty2/plc.mtl', function ( event ) {
 		var object = event;
 		object.scale = new THREE.Vector3( 25, 25, 25 );
 		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
@@ -714,7 +607,7 @@
 	  
 	  
 	  
-	   loader.load( 'objekty2/plc_low_inv.obj','objekty2/plc_low_inv.mtl', function ( event ) {
+	   loader.load( 'objekty2/plc_inv.obj','objekty2/plc_inv.mtl', function ( event ) {
 		var object = event;
 		object.scale = new THREE.Vector3( 25, 25, 25 );
 		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
@@ -731,7 +624,7 @@
 	  
 	  
 	  
-	  loader.load( 'objekty2/plc_low.obj','objekty2/plc_low.mtl', function ( event ) {
+	  loader.load( 'objekty2/plc.obj','objekty2/plc.mtl', function ( event ) {
 		var object = event;
 		object.scale = new THREE.Vector3( 25, 25, 25 );
 		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
@@ -750,7 +643,7 @@
 	  
 	  
 	  
-	   loader.load( 'objekty2/plc_low.obj','objekty2/plc_low.mtl', function ( event ) {
+	   loader.load( 'objekty2/plc.obj','objekty2/plc.mtl', function ( event ) {
 		var object = event;
 		object.scale = new THREE.Vector3( 25, 25, 25 );
 		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
@@ -772,7 +665,7 @@
 	  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	  
 	  
-	   loader.load( 'objekty2/pumpa_low.obj','objekty2/pumpa_low.mtl', function ( event ) {
+	   loader.load( 'objekty2/pumpa.obj','objekty2/pumpa.mtl', function ( event ) {
 		var object = event;
 		object.scale = new THREE.Vector3( 25, 25, 25 );
 		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
@@ -835,7 +728,7 @@
 	  });
 	  
 	  
-	 /* loader2.load( 'objekty2/obloha.obj', function ( event ) {
+	  loader2.load( 'objekty2/obloha.obj', function ( event ) {
 		var object = event;
 		object.traverse( function ( child ) {
 		  if ( child instanceof THREE.Mesh ) {
@@ -845,11 +738,11 @@
 		object.scale = new THREE.Vector3( 25, 25, 25 );
 		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
 		//object.position.z += 2.09376;
-		object.position.y += korekcia_vysky+50;
+		object.position.y += korekcia_vysky;
 		//object.castShadow = true;
 	    //object.receiveShadow = false;
 		scene.add( object );
-	  });*/
+	  });
 	   
 	  
 	  
@@ -868,8 +761,7 @@
 		valec_1.position.y += korekcia_vysky+0.03;
 		//CubeCamera.position=valec_1.position;
 		//CubeCamera.position.y+=10;
-		//scene2.add( valec_1 );
-		scene.add( valec_1 );
+		scene2.add( valec_1 );
 	  });
 	  
 	  
@@ -889,8 +781,7 @@
 		//valec_2.position.x += 2;
 		CubeCamera2.position=valec_2.position;
 		CubeCamera2.position.y+=1.5;
-		//scene2.add( valec_2 );
-		scene.add( valec_2 );
+		scene2.add( valec_2 );
 	  });
 	  
 	  
@@ -912,8 +803,7 @@
 		valec_3.receiveShadow = true;
 		CubeCamera3.position=valec_3.position;
 		CubeCamera3.position.y+=0.5;
-		//scene2.add( valec_3 );
-		scene.add( valec_3 );
+		scene2.add( valec_3 );
 	  });
 		// drawRefractingObject: function() {
 
@@ -1017,7 +907,7 @@
 	  if(valec_2 != null)valec_2.visible=true;
 	  if(valec_3 != null)valec_3.visible=true;
 	  if(typeof nadrzka2 !== 'undefined') nadrzka2.visible=true;
-	 // renderer.render( scene2, camera );
+	  renderer.render( scene2, camera );
 	  //renderer.clearDepth();
 	  renderer.render( scene, camera );
 	  //renderer.render( scene, Cubecamera );
@@ -1074,7 +964,7 @@
 			}
 		}
 		data=form();
-		xmlhttp2.open("POST","http://147.175.105.140:8033/~stranovsky/public/applications/kralik/vypocet_dr.php",true);
+		xmlhttp2.open("POST","vypocet_dr.php",true);
 		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		document.getElementById("testovacie_pole").innerHTML=data;
 		xmlhttp2.send(data);
@@ -1122,15 +1012,6 @@
 	}
 	function animation(pole,objekt1,objekt2,objekt3)
 	{
-		graf=[];
-	    var options = {
-			series: {
-				lines: { show: true },
-				points: { show: true }
-			}
-		};
-	    //plot = $("#placeholder").plot(graf, options).data("plot");
-		plot=$.plot($("#placeholder"), [graf] );
 		control2=setInterval(function(){animTimer(pole,objekt1,objekt2,objekt3)},40);
 		j=0;
 	}
@@ -1142,11 +1023,6 @@
 			objekt1.scale.y=(pole[1][j]/30);
 			objekt2.scale.y=(pole[2][j]/30);
 			objekt3.scale.y=(pole[3][j]/30);
-			
-			graf.push([pole[0][j],pole[1][j]]);
-			plot.setData([graf]);
-			plot.setupGrid();
-			plot.draw();
 		}
 		else clearInterval(control2);
 		j++;
@@ -1168,7 +1044,7 @@
                 <p><label class="field">Prierez valca 1:</label><input class="textbox" id="F1" name="F1" value="0.00785" type="number" ></p>
                 <p><label class="field">Prierez valca 2:</label><input class="textbox" id="F2" name="F2" value="0.00785" type="number" ></p>
 				<p><label class="field">Prierez valca 3:</label><input class="textbox" id="F3" name="F3" value="0.00785" type="number" ></p>-->
-				<p><label class="field">Počiatočná hladina valca 1:</label><input class="textbox" id="h1" name="h1" value="20" type="number" ></p>
+				<p><label class="field">Počiatočná hladina valca 1:</label><input class="textbox" id="h1" name="h1" value="5" type="number" ></p>
                 <p><label class="field">Počiatočná hladina valca 2:</label><input class="textbox" id="h2" name="h2" value="5" type="number" ></p>
 				<p><label class="field">Počiatočná hladina valca 3:</label><input class="textbox" id="h3" name="h3" value="5" type="number" ></p>
                 <p><label class="field">Simulačný čas:</label><input class="textbox" id="st" name="st" value="20" type="number" ></p>
@@ -1177,7 +1053,7 @@
                 <p><label class="field">P:</label><input class="textbox" id="P" name="P" value="35" type="number" min="0" max="500" step="0.01"></p>
                 <p><label class="field">Ti:</label><input class="textbox" id="Ti" name="Ti" value="1.5" type="number" min="0" max="500" step="0.01"></p>
                 <p><label class="field">Td:</label><input class="textbox" id="Td" name="Td" value="1" type="number" min="0" max="500" step="0.01"></p>
-                <p><label class="field">Požadovaná hladina 1:</label><input class="textbox" id="ref" name="ref" value="5" type="number" min="0" max="28" step="0.01"></p>
+                <p><label class="field">Požadovaná hladina 1:</label><input class="textbox" id="ref" name="ref" value="10" type="number" min="0" max="28" step="0.01"></p>
 				<button type="button" onclick=ajax2() >Simulácia</button>
             <!--    <div class="Con">
                 <p><label class="field">P:</label><input class="textbox" id="P" name="P" value="35" type="number" min="0" max="500" step="0.01"></p>
@@ -1187,8 +1063,6 @@
                 </div> -->
 
 	</div>
-	
-	<<div id="placeholder" style="width:600px;height:300px;border-style:solid;border-color:white;border-width:3px;position:absolute;bottom:10px;right:10px;z-index:3"> </div>
   
         
    

@@ -287,7 +287,7 @@
 			scene.add( spotlight2 );*/
 	
 			
-	  var hemLight = new THREE.HemisphereLight(0xbbbbaa, 0x606055, 1);
+	  var hemLight = new THREE.HemisphereLight(0xffffef, 0x909080, 1);
 			scene.add(hemLight);
 			
 			
@@ -963,7 +963,7 @@
 			}
 		}
 		data=form();
-		xmlhttp2.open("POST","http://147.175.105.140:8033/~stranovsky/public/applications/kralik/vypocet_dr.php",true);
+		xmlhttp2.open("POST","vypocet_dr.php",true);
 		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		//document.getElementById("testovacie_pole").innerHTML=data;
 		xmlhttp2.send(data);

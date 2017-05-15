@@ -1,5 +1,6 @@
 <?php
-exit;
+	$path = './models/';
+
 	function replaceStringWithTag($tag, $content, $fileContent){
 		$newTag = '#' . $tag . '#';
 		$replaced = str_replace($newTag, $content, $fileContent);
@@ -7,14 +8,15 @@ exit;
 	}
 
 	function replaceTagInFile($file, $data){
-		$fileContent = file_get_contents($file);
+		global $path;
+		$fileContent = file_get_contents($path . $file);
 
 		foreach($data as $key => $tag){
 			$fileContent = replaceStringWithTag($key, $data[$key], $fileContent);
 
 		}    
         $fileToSave = explode('.', $file);
-		$handle = fopen("models/" . $fileToSave[0] . '.mo', "w");
+		$handle = fopen($path . $fileToSave[0] . '.mo', "w");
 		fwrite($handle, $fileContent);
 		fclose($handle);
 	}
@@ -22,11 +24,12 @@ exit;
 	$type = 'Hydraulika';
 	
 	//if (isset($_REQUEST['checked'])&&$_REQUEST['checked']){
-	if ($_REQUEST['checked']){
+	if (isset($_REQUEST['checked'])){
 	$type .= 'PID';
 	}
 	
-	if ($_REQUEST['riad']=='1'){
+	//if ($_REQUEST['riad']=='1'){
+	if (TRUE){
 	$type .= 'q1';
 	}
 	else if ($_REQUEST['riad']=='2'){
@@ -37,13 +40,27 @@ exit;
 	}
 		
 	replaceTagInFile($type . '.mo', $_REQUEST);
-		
-    require_once 'func.php';
+
+function data2array($request,$response)
+{ $arr=json_decode($request, true);
+	$no = count($arr[params][outputVariables]);
+	foreach ($response->result[0] as &$value)
+	{ $outputArray[0][] = $value->x;
+		$outputArray[1][] = $value->y;
+	}
+	if ($no > 1)
+	{ for ($x=2; $x<=$no; $x++)
+	{ foreach ($response->result[$x-1] as &$value)
+	{ $outputArray[$x][] = $value->y;
+	}
+	}
+	}
+	return $outputArray;
+}
 	
   	$url = 'http://147.175.105.140:8008/json-rpc/server.php';
 	$modelName = $type . '.mo';
-	$file_name_with_full_path = realpath(dirname(__FILE__).'/models/' .$modelName);
-  
+	$file_name_with_full_path = realpath(dirname(__FILE__).'./models/' .$modelName);
 
 	$request = '{
   					"jsonrpc": "2.0", 
@@ -60,6 +77,7 @@ exit;
   					},
   					"id": 1
   				}';
+echo "$file_name_with_full_path";
   	// send request    
   	$ch = curl_init();
   	curl_setopt($ch, CURLOPT_URL, $url);
@@ -70,7 +88,8 @@ exit;
   	curl_close ($ch);
   
   	$response = json_decode($response);
-	
+	var_dump($response);
+	exit;
     $outputArray=data2array($request,$response);
 	$outputArray=json_encode($outputArray);
 	

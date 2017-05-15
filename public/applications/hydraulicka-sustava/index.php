@@ -1,24 +1,18 @@
-<!DOCTYPE html>
+<script>
+    var path = "<?= $path ?>";
+</script>
+  <script src="<?= $path ?>kniznice/three.js"></script>
+  <script src="<?= $path ?>kniznice/TrackballControls.js"></script>
+  <script src="<?= $path ?>kniznice/OrbitControls.js"></script>
+  <script src="<?= $path ?>kniznice/OBJLoader.js"></script>
+  <script src="<?= $path ?>kniznice/Detector.js"></script>
+  <script src="<?= $path ?>kniznice/MTLLoader.js"></script>
+  <script src="<?= $path ?>kniznice/OBJMTLLoader.js"></script>
+  <script src="<?= $path ?>kniznice/ImageUtils.js"></script>
+  <script src="<?= $path ?>kniznice/jquery.min.js"></script>
+  <script src="<?= $path ?>kniznice/jquery.flot.js"></script>
+   <script src="<?= $path ?>kniznice/FresnelShader.js"></script>
 
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Pragma" content="no-cache"> 
-  <meta http-equiv="expires" content="0">
-  <title>WebGL 3D model viewer using three.js</title>
-  <script src="kniznice/three.js"></script>
-  <script src="kniznice/TrackballControls.js"></script>
-  <script src="kniznice/OrbitControls.js"></script>
-  <script src="kniznice/OBJLoader.js"></script>
-  <script src="kniznice/Detector.js"></script>
-  <script src="kniznice/MTLLoader.js"></script>
-  <script src="kniznice/OBJMTLLoader.js"></script>
-  <script src="kniznice/ImageUtils.js"></script>
-  <script src="kniznice/jquery.min.js"></script>
-  <script src="kniznice/jquery.flot.js"></script>
-   <script src="kniznice/FresnelShader.js"></script>
-</head>
-<body>
 	<style>
 	#container{
 		height:500px;
@@ -201,16 +195,16 @@
 						 color: 0xaaaaaa, 
 						 });
 						 
-	  var texture = THREE.ImageUtils.loadTexture("voda.jpg");//, {}, function() {renderer.render(scene);});
+	  var texture = THREE.ImageUtils.loadTexture(path + "voda.jpg");//, {}, function() {renderer.render(scene);});
 	  
 			
 	  var urls = [
-		  'skybox/posx.jpg',
-		  'skybox/negx.jpg',
-		  'skybox/posy.jpg',
-		  'skybox/negy.jpg',
-		  'skybox/posz.jpg',
-		  'skybox/negz.jpg'
+		  path +'skybox/posx.jpg',
+		  path +'skybox/negx.jpg',
+		  path +'skybox/posy.jpg',
+		  path +'skybox/negy.jpg',
+		  path +'skybox/posz.jpg',
+		  path +'skybox/negz.jpg'
 		],
 
 		// wrap it up into the object that we need
@@ -239,7 +233,7 @@
 		skybox.name="obloha";
 		//scene.add(skybox);	
 		
-	  var valecMaterial = new THREE.MeshPhongMaterial( {map: THREE.ImageUtils.loadTexture('voda.jpg') } );
+	  var valecMaterial = new THREE.MeshPhongMaterial( {map: THREE.ImageUtils.loadTexture(path+'voda.jpg') } );
 	  var sky = new THREE.MeshLambertMaterial( {
 						color:0xffffff,
 						envMap:cubemap
@@ -344,7 +338,7 @@
 	
 	var fresnelUniforms = 
 	{
-		"texture": { type: "t", value: THREE.ImageUtils.loadTexture( "voda.jpg" ) },
+		"texture": { type: "t", value: THREE.ImageUtils.loadTexture( path + "voda.jpg" ) },
 		"mRefractionRatio": { type: "f", value: 1.3 },
 		"mFresnelBias": 	{ type: "f", value: 0.5 },
 		"mFresnelPower": 	{ type: "f", value: 2 },
@@ -362,7 +356,7 @@
 	}   );
 	 
 	//customMaterial.map    = THREE.ImageUtils.loadTexture('voda.jpg');
-	customMaterial.bumpMap = THREE.ImageUtils.loadTexture('7718-bump11smart.png');
+	customMaterial.bumpMap = THREE.ImageUtils.loadTexture(path + '7718-bump11smart.png');
 	
 
 	 
@@ -450,11 +444,11 @@
 		  }
 		  
 		  
-		  loader.load( 'objekty2/zaklad.obj','objekty2/zaklad.mtl', function ( event ) {
+		  loader.load( path+'objekty2/zaklad.obj',path+'objekty2/zaklad.mtl', function ( event ) {
 			var object = event;
 			object.traverse( function ( child ) {
 			  if ( child instanceof THREE.Mesh ) {
-				var textura=THREE.ImageUtils.loadTexture('textury/brushed_aluminium_texture512_2.jpg');
+				var textura=THREE.ImageUtils.loadTexture(path+'textury/brushed_aluminium_texture512_2.jpg');
 				textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
 				textura.repeat.set(5,5);
 				child.material.map = textura;
@@ -473,7 +467,7 @@
 		  
 		  
 		  
-		   loader.load( 'objekty2/nadrz.obj','objekty2/nadrz.mtl', function ( event ) {
+		   loader.load( path+'objekty2/nadrz.obj',path+'objekty2/nadrz.mtl', function ( event ) {
 			var object = event;
 			//object.traverse( function ( child ) {
 			 // if ( child instanceof THREE.Mesh ) {
@@ -490,7 +484,7 @@
 			scene.add( object );
 		  });
 		  
-		//  loader.load( 'objekty2/nadrz_inv.obj','objekty2/nadrz_inv.mtl', function ( event ) {
+		//  loader.load( path+'objekty2/nadrz_inv.obj',path+'objekty2/nadrz_inv.mtl', function ( event ) {
 		//	var object = event;
 		//	object.traverse( function ( child ) {
 		//	  if ( child instanceof THREE.Mesh ) {
@@ -506,7 +500,7 @@
 			//scene.add( object );
 		  //});
 		  
-		  loader.load( 'objekty2/noha.obj','objekty2/noha.mtl', function ( event ) {
+		  loader.load( path+'objekty2/noha.obj',path+'objekty2/noha.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.scale = new THREE.Vector3( 25, 25, 25 );
@@ -519,7 +513,7 @@
 			scene.add( object );
 		  });
 		  
-		  loader.load( 'objekty2/noha.obj','objekty2/noha.mtl', function ( event ) {
+		  loader.load( path+'objekty2/noha.obj',path+'objekty2/noha.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.scale = new THREE.Vector3( 25, 25, 25 );
@@ -532,13 +526,13 @@
 			scene.add( object );
 		  });
 		  
-		  loader.load( 'objekty2/valec.obj','objekty2/valec.mtl', function ( event ) {
+		  loader.load( path+'objekty2/valec.obj',path+'objekty2/valec.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.traverse( function ( child ) {
 			  if ( child instanceof THREE.Mesh ) {
-					var textura=THREE.ImageUtils.loadTexture('textury/odmerka.jpg');
-					var textura2=THREE.ImageUtils.loadTexture('textury/odmerka_alpha2.jpg');
+					var textura=THREE.ImageUtils.loadTexture(path+'textury/odmerka.jpg');
+					var textura2=THREE.ImageUtils.loadTexture(path+'textury/odmerka_alpha2.jpg');
 					child.material=popisMaterial;
 					child.material.map = textura;
 					child.material.alphaMap = textura2;
@@ -557,13 +551,13 @@
 		  
 		  
 		  
-		  loader.load( 'objekty2/valec.obj','objekty2/valec.mtl', function ( event ) {
+		  loader.load( path+'objekty2/valec.obj',path+'objekty2/valec.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.traverse( function ( child ) {
 			  if ( child instanceof THREE.Mesh ) {
-					var textura=THREE.ImageUtils.loadTexture('textury/odmerka.jpg');
-					var textura2=THREE.ImageUtils.loadTexture('textury/odmerka_alpha2.jpg');
+					var textura=THREE.ImageUtils.loadTexture(path+'textury/odmerka.jpg');
+					var textura2=THREE.ImageUtils.loadTexture(path+'textury/odmerka_alpha2.jpg');
 					child.material=popisMaterial;
 					child.material.map = textura;
 					child.material.alphaMap = textura2;
@@ -586,13 +580,13 @@
 		  
 
 		  
-		  loader.load( 'objekty2/valec.obj','objekty2/valec.mtl', function ( event ) {
+		  loader.load( path+'objekty2/valec.obj',path+'objekty2/valec.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.traverse( function ( child ) {
 			  if ( child instanceof THREE.Mesh ) {
-					var textura=THREE.ImageUtils.loadTexture('textury/odmerka.jpg');
-					var textura2=THREE.ImageUtils.loadTexture('textury/odmerka_alpha2.jpg');
+					var textura=THREE.ImageUtils.loadTexture(path+'textury/odmerka.jpg');
+					var textura2=THREE.ImageUtils.loadTexture(path+'textury/odmerka_alpha2.jpg');
 					child.material=popisMaterial;
 					child.material.map = textura;
 					child.material.alphaMap = textura2;
@@ -611,7 +605,7 @@
 		  
 		  
 		  
-		   loader.load( 'objekty2/hadicky.obj','objekty2/hadicky.mtl', function ( event ) {
+		   loader.load( path+'objekty2/hadicky.obj',path+'objekty2/hadicky.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.scale = new THREE.Vector3( 25, 25, 25 );
@@ -626,7 +620,7 @@
 		  
 		  //PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  PLC  
 		  
-		   loader.load( 'objekty2/plc_low.obj','objekty2/plc_low.mtl', function ( event ) {
+		   loader.load( path+'objekty2/plc_low.obj',path+'objekty2/plc_low.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.scale = new THREE.Vector3( 25, 25, 25 );
@@ -645,7 +639,7 @@
 		  
 		  
 		  
-		  loader.load( 'objekty2/plc_low.obj','objekty2/plc_low.mtl', function ( event ) {
+		  loader.load( path+'objekty2/plc_low.obj',path+'objekty2/plc_low.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.scale = new THREE.Vector3( 25, 25, 25 );
@@ -663,7 +657,7 @@
 		  
 		  
 		  
-		   loader.load( 'objekty2/plc_inv.obj','objekty2/plc_inv.mtl', function ( event ) {
+		   loader.load( path+'objekty2/plc_inv.obj',path+'objekty2/plc_inv.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.scale = new THREE.Vector3( 25, 25, 25 );
@@ -679,7 +673,7 @@
 		  
 		  
 		  
-		  loader.load( 'objekty2/plc_low.obj','objekty2/plc_low.mtl', function ( event ) {
+		  loader.load( path+'objekty2/plc_low.obj',path+'objekty2/plc_low.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.scale = new THREE.Vector3( 25, 25, 25 );
@@ -697,7 +691,7 @@
 		  
 		  
 		  
-		   loader.load( 'objekty2/plc_low.obj','objekty2/plc_low.mtl', function ( event ) {
+		   loader.load( path+'objekty2/plc_low.obj',path+'objekty2/plc_low.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.scale = new THREE.Vector3( 25, 25, 25 );
@@ -719,9 +713,8 @@
 		  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		  
 		  
-		   loader.load( 'objekty2/pumpa_low.obj','objekty2/pumpa_low.mtl', function ( event ) {
+		   loader.load( path+'objekty2/pumpa_low.obj',path+'objekty2/pumpa_low.mtl', function ( event ) {
 			var object = event;
-
 			object.name="sustava";
 			object.scale = new THREE.Vector3( 25, 25, 25 );
 			//object.position.set(0.22609+0.18, -0.75982, 0.55816);
@@ -734,7 +727,7 @@
 		  
 		  
 		  
-		  loader.load( 'objekty2/uchytka.obj','objekty2/uchytka.mtl', function ( event ) {
+		  loader.load( path+'objekty2/uchytka.obj',path+'objekty2/uchytka.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.scale = new THREE.Vector3( 25, 25, 25 );
@@ -751,7 +744,7 @@
 		  
 		  
 		  
-		  loader.load( 'objekty2/uchytka.obj','objekty2/uchytka.mtl', function ( event ) {
+		  loader.load( path+'objekty2/uchytka.obj',path+'objekty2/uchytka.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.scale = new THREE.Vector3( 25, 25, 25 );
@@ -766,7 +759,7 @@
 		  
 		  
 		  
-		  loader.load( 'objekty2/uchytka.obj','objekty2/uchytka.mtl', function ( event ) {
+		  loader.load( path+'objekty2/uchytka.obj',path+'objekty2/uchytka.mtl', function ( event ) {
 			var object = event;
 			object.name="sustava";
 			object.scale = new THREE.Vector3( 25, 25, 25 );
@@ -780,7 +773,7 @@
 		  });
 		  
 		  
-		 /* loader2.load( 'objekty2/obloha.obj', function ( event ) {
+		 /* loader2.load( path+'objekty2/obloha.obj', function ( event ) {
 			var object = event;
 			object.traverse( function ( child ) {
 			  if ( child instanceof THREE.Mesh ) {
@@ -802,7 +795,7 @@
 		  
 		  
 		  //VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  VODA  
-		  loader2.load( 'objekty2/voda.obj', function ( event ) {
+		  loader2.load( path+'objekty2/voda.obj', function ( event ) {
 			valec_1 = event;
 			valec_1.name="sustava";
 			valec_1.traverse( function ( child ) {
@@ -821,7 +814,7 @@
 		  
 		  
 		  
-		  loader2.load( 'objekty2/voda.obj', function ( event ) {
+		  loader2.load( path+'objekty2/voda.obj', function ( event ) {
 			valec_2 = event;
 			valec_2.name="sustava";
 			valec_2.traverse( function ( child ) {
@@ -840,7 +833,7 @@
 		  });
 		  
 		  
-		  loader2.load( 'objekty2/voda.obj', function ( event ) {
+		  loader2.load( path+'objekty2/voda.obj', function ( event ) {
 			valec_3 = event;
 			valec_3.name="sustava";
 			valec_3.traverse( function ( child ) {
@@ -1660,7 +1653,7 @@
 	  });
 	  
 	  
-	 /* loader2.load( 'objekty2/obloha.obj', function ( event ) {
+	 /* loader2.load( path+'objekty2/obloha.obj', function ( event ) {
 		var object = event;
 		object.traverse( function ( child ) {
 		  if ( child instanceof THREE.Mesh ) {
@@ -1785,11 +1778,11 @@
 			  directionalLight2.intensity=0;
 			  
 			  scene.add(skybox);
-			  loader.load( 'objekty2/stol.obj','objekty2/stol.mtl', function ( event ) {
+			  loader.load( path+'objekty2/stol.obj',path+'objekty2/stol.mtl', function ( event ) {
 				var object = event;
 				object.traverse( function ( child ) {
 				  if ( child instanceof THREE.Mesh ) {
-					var textura=THREE.ImageUtils.loadTexture('textury/wood-texture1024.jpg');
+					var textura=THREE.ImageUtils.loadTexture(path+'textury/wood-texture1024.jpg');
 					textura.wrapS=textura.wrapT=THREE.MirroredRepeatWrapping; 
 					textura.repeat.set(2,-2);
 					//textura.offset.set( 1, 0);
@@ -1808,14 +1801,14 @@
 			  });
 			  
 			  
-			  loader.load( 'objekty2/komnata.obj','objekty2/komnata.mtl', function ( event ) {
+			  loader.load( path+'objekty2/komnata.obj',path+'objekty2/komnata.mtl', function ( event ) {
 				var object = event;
 				var s=0;
 				object.traverse( function ( child ) {
 				//child.material=stena;
 				
 				  if ( child instanceof THREE.Mesh && s==4) {
-					var textura=THREE.ImageUtils.loadTexture('textury/wood_roof1024.jpg');
+					var textura=THREE.ImageUtils.loadTexture(path+'textury/wood_roof1024.jpg');
 					textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
 					textura.repeat.set(6,6);
 					
@@ -1828,8 +1821,8 @@
 				  }
 				  
 				  if ( child instanceof THREE.Mesh && s==3) {
-					var textura=THREE.ImageUtils.loadTexture('textury/castle_wall1024.jpg');
-					var textura2=THREE.ImageUtils.loadTexture('textury/castle_wall1024bump.jpg');
+					var textura=THREE.ImageUtils.loadTexture(path+'textury/castle_wall1024.jpg');
+					var textura2=THREE.ImageUtils.loadTexture(path+'textury/castle_wall1024bump.jpg');
 					textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
 					textura.repeat.set(1,1);
 					textura2.wrapS=textura2.wrapT=THREE.RepeatWrapping; 
@@ -1869,14 +1862,14 @@
 			  
 			  
 			  
-			  loader.load( 'objekty2/strecha.obj','objekty2/strecha.mtl', function ( event ) {
+			  loader.load( path+'objekty2/strecha.obj',path+'objekty2/strecha.mtl', function ( event ) {
 				var object = event;
 				var s=0;
 				object.traverse( function ( child ) {
 				//child.material=stena;
 				
 				  if ( child instanceof THREE.Mesh && s==3) {
-					var textura=THREE.ImageUtils.loadTexture('textury/wood_roof1024.jpg');
+					var textura=THREE.ImageUtils.loadTexture(path+'textury/wood_roof1024.jpg');
 					textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
 					textura.repeat.set(6,6);
 					
@@ -1889,7 +1882,7 @@
 				  }
 				  
 				  if ( child instanceof THREE.Mesh && s>3) {
-					var textura=THREE.ImageUtils.loadTexture('textury/roof texture 1.jpg');
+					var textura=THREE.ImageUtils.loadTexture(path+'textury/roof texture 1.jpg');
 					textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
 					textura.repeat.set(4,4);
 					child.material.map = textura;
@@ -1930,11 +1923,11 @@
 			directionalLight2.intensity=1;
 			scene.add(skybox);
 			
-			loader.load( 'objekty2/stol.obj','objekty2/stol.mtl', function ( event ) {
+			loader.load( path+'objekty2/stol.obj',path+'objekty2/stol.mtl', function ( event ) {
 				var object = event;
 				object.traverse( function ( child ) {
 				  if ( child instanceof THREE.Mesh ) {
-					var textura=THREE.ImageUtils.loadTexture('textury/wood-texture1024.jpg');
+					var textura=THREE.ImageUtils.loadTexture(path+'textury/wood-texture1024.jpg');
 					textura.wrapS=textura.wrapT=THREE.MirroredRepeatWrapping; 
 					textura.repeat.set(2,-2);
 					//textura.offset.set( 1, 0);
@@ -1953,12 +1946,12 @@
 			});
 		  
 		  
-			  loader.load( 'objekty2/miestnost3.obj','objekty2/miestnost3.mtl', function ( event ) {
+			  loader.load( path+'objekty2/miestnost3.obj',path+'objekty2/miestnost3.mtl', function ( event ) {
 				var object = event;
 				var s=0;
 				object.traverse( function ( child ) {
 				  if ( child instanceof THREE.Mesh && s==4) {
-					var textura=THREE.ImageUtils.loadTexture('textury/wood-flooring1024.jpg');
+					var textura=THREE.ImageUtils.loadTexture(path+'textury/wood-flooring1024.jpg');
 					textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
 					textura.repeat.set(3,3);
 					child.material.map = textura;
@@ -1969,7 +1962,7 @@
 				  }
 				  
 				  if ( child instanceof THREE.Mesh && s==3) {
-					var textura=THREE.ImageUtils.loadTexture('textury/white_paint_stucco.jpg');
+					var textura=THREE.ImageUtils.loadTexture(path+'textury/white_paint_stucco.jpg');
 					textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
 					textura.repeat.set(10,10);
 					child.material.map = textura;
@@ -1981,7 +1974,7 @@
 				  }
 				  
 				  if ( child instanceof THREE.Mesh && s==5) {
-					var textura=THREE.ImageUtils.loadTexture('textury/white_paint_stucco.jpg');
+					var textura=THREE.ImageUtils.loadTexture(path+'textury/white_paint_stucco.jpg');
 					textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
 					textura.repeat.set(10,10);
 					child.material.map = textura;
@@ -2065,7 +2058,9 @@
 			}
 		}
 		data=form();
-		xmlhttp2.open("POST","http://localhost:8000/applications/kralik/vypocet_dr.php",true);
+		console.log("odosielam");
+		console.log(data);
+		xmlhttp2.open("POST",path+"vypocet_dr.php",true);
 		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		//document.getElementById("testovacie_pole").innerHTML=data;
 		xmlhttp2.send(data);
@@ -2173,18 +2168,18 @@
 	<div id="vys">
 	                
                 <!--<p><label class="field">Parameter:</label><input class="textbox" id="p" name="p" value="1" step="0.01"></p>-->
-                <p><label class="field">Density:</label><input class="textbox" id="ro" name="ro" value="1" type="number" min="0" max="30" step="0.1"></p>
+                <p><label class="field">Hustota:</label><input class="textbox" id="ro" name="ro" value="1" type="number" min="0" max="30" step="0.1"></p>
                 <!--<p><label class="field">Hydraulický odpor 1:</label><input class="textbox" id="R1" name="R1" value="8000" type="number" ></p>
                 <p><label class="field">Hydraulický odpor 2:</label><input class="textbox" id="R2" name="R2" value="8000" type="number" ></p>
 				<p><label class="field">Hydraulický odpor 3:</label><input class="textbox" id="R3" name="R3" value="8000" type="number" ></p>
                 <p><label class="field">Prierez valca 1:</label><input class="textbox" id="F1" name="F1" value="0.00785" type="number" ></p>
                 <p><label class="field">Prierez valca 2:</label><input class="textbox" id="F2" name="F2" value="0.00785" type="number" ></p>
 				<p><label class="field">Prierez valca 3:</label><input class="textbox" id="F3" name="F3" value="0.00785" type="number" ></p>-->
-				<p><label class="field">Initial level in tank 1:</label><input class="textbox" id="h1" name="h1" value="15" type="number" size="10" onchange="vypocet()" min="0" max="30" step="0.1"></p>
-                <p><label class="field">Initial level in tank 2:</label><input class="textbox" id="h2" name="h2" value="15" type="number" onchange="vypocet()" min="0" max="30" step="0.1"></p>
-				<p><label class="field">Initial level in tank 3:</label><input class="textbox" id="h3" name="h3" value="15" type="number" onchange="vypocet()" min="0" max="30" step="0.1"></p>
-                <p><label class="field">Simulation time:</label><input class="textbox" id="st" name="st" value="20" type="number" ></p>
-                <p><label class="field">Number of samples:</label><input class="textbox" id="nv" name="nv" value="200" type="number" ></p>
+				<p><label class="field">Počiatočná hladina valca 1:</label><input class="textbox" id="h1" name="h1" value="15" type="number" size="10" onchange="vypocet()" min="0" max="30" step="0.1"></p>
+                <p><label class="field">Počiatočná hladina valca 2:</label><input class="textbox" id="h2" name="h2" value="15" type="number" onchange="vypocet()" min="0" max="30" step="0.1"></p>
+				<p><label class="field">Počiatočná hladina valca 3:</label><input class="textbox" id="h3" name="h3" value="15" type="number" onchange="vypocet()" min="0" max="30" step="0.1"></p>
+                <p><label class="field">Simulačný čas:</label><input class="textbox" id="st" name="st" value="20" type="number" ></p>
+                <p><label class="field">Počet hodnôt:</label><input class="textbox" id="nv" name="nv" value="200" type="number" ></p>
 				<label class="field">With/Without Controller:</label><input type="checkbox" class="check_selector "id="checkbox" name="ifController">
                 
 				<div id="nonpid"><p><label class="field">Prítok 1:</label><input class="textbox" id="q1" name="q1" value="0" type="number" ></p>
@@ -2194,13 +2189,13 @@
 				<div id="pid"><p><label class="field">P:</label><input class="textbox" id="P" name="P" value="35" type="number" min="0" max="500" step="0.01"></p>
                 <p><label class="field">Ti:</label><input class="textbox" id="Ti" name="Ti" value="1.5" type="number" min="0" max="500" step="0.01"></p>
                 <p><label class="field">Td:</label><input class="textbox" id="Td" name="Td" value="1" type="number" min="0" max="500" step="0.01"></p>
-				<div id="riadeny"><p>Controlled tank:</p></div>
-				<div id="volba"><input type="radio" name="vyber" id="val1" checked="checked">left<br>
-				<input type="radio" name="vyber" id="val2">middle<br>
-				<input type="radio" name="vyber" id="val3">right</div>
-                <p><label class="field">Required level value:</label><input class="textbox" id="ref" name="ref" value="5" type="number" min="0" max="28" step="0.1"></p></div>
+				<div id="riadeny"><p>Riadený valec:</p></div>
+				<div id="volba"><input type="radio" name="vyber" id="val1" checked="checked">ľavý<br>
+				<input type="radio" name="vyber" id="val2">stredný<br>
+				<input type="radio" name="vyber" id="val3">pravý</div>
+                <p><label class="field">Požadovaná hladina:</label><input class="textbox" id="ref" name="ref" value="5" type="number" min="0" max="28" step="0.1"></p></div>
 				
-				<p><button type="button" onclick=ajax2() >Start simulation</button></p>
+				<p><button type="button" onclick=ajax2() >Simulácia</button></p>
 				
 				
             <!--    <div class="Con">
@@ -2229,6 +2224,3 @@
 	<div id="testovacie_pole">
 	
 	</div>
-	
-</body>
-</html>

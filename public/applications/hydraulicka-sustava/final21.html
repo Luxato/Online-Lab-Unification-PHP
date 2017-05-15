@@ -149,7 +149,7 @@
 	  renderer.autoClear = false;
 	  
 	    
-	  renderer.shadowMapEnabled = false;
+	  renderer.shadowMapEnabled = true;
 	 // renderer.shadowMapAutoUpdate = true;
 	  //renderer.clearTarget( light.shadowMap );
 	  renderer.shadowMapType = THREE.PCFSoftShadowMap;
@@ -222,7 +222,7 @@
 		  new THREE.CubeGeometry(1000, 1000, 1000),
 		  skyBoxMaterial
 		);
-
+		//skybox.rotation.y+=Math.PI / 3;
 		scene.add(skybox);	
 		
 	  var valecMaterial = new THREE.MeshPhongMaterial( {map: THREE.ImageUtils.loadTexture('voda.jpg') } );
@@ -265,18 +265,38 @@
 	  // all the shading into my texture. You propably want something darker.
 	  
 			
-		var spotlight=new THREE.SpotLight( 0xf2f7ff,7);
+		var directionalLight = new THREE.DirectionalLight( 0xffffee,4);
+			directionalLight.position.set( -20, 20, -24 );
+			//directionalLight.target.position.set( 2, 0, 11 );
+			//directionalLight.angle=Math.PI;
+			//directionalLight.onlyShadow=true;
+			//directionalLight.exponent=0.1;
+			directionalLight.shadowCameraLeft=-40;
+
+			directionalLight.shadowCameraRight=50;
+
+			directionalLight.shadowCameraTop=50;
+
+			directionalLight.shadowCameraBottom=-30;
 			
-			spotlight.position.set( -6, 8, 20 );
-			spotlight.target.position.set(20,0,9);
-			//spotlight.castShadow = true;
-			spotlight.distance=100;
-			//spotlight.shadowCameraNear = 1;
-			//spotlight.shadowCameraFar = 70;
-			//spotlight.shadowDarkness = 0.4;
-			//spotlight.shadowCameraVisible = true;
-			spotlight.angle=Math.PI/2;
-			scene.add( spotlight );
+			directionalLight.shadowBias = 0.01;
+			directionalLight.castShadow = true;
+			directionalLight.shadowDarkness = 0.6;
+			//directionalLight.shadowCameraVisible = true;
+			directionalLight.shadowCameraNear = 1;
+			directionalLight.shadowCameraFar = 100;
+			directionalLight.shadowMapWidth = 512; // default is 512
+			directionalLight.shadowMapWidth = 512; // default is 512
+			directionalLight.shadowMapHeight = 512; // default is 512
+			scene.add( directionalLight );
+			
+			
+		var directionalLight2 = new THREE.DirectionalLight( 0xffffee,1);
+			directionalLight2.position.set( 20, -40, 24 );
+			
+			//directionalLight2.castShadow = true;
+			//directionalLight2.shadowDarkness = 0.9;
+			scene.add( directionalLight2 );
 			
 		/*var spotlight2=new THREE.SpotLight( 0xffffff,2);
 			
@@ -287,7 +307,7 @@
 			scene.add( spotlight2 );*/
 	
 			
-	  var hemLight = new THREE.HemisphereLight(0xffffef, 0x909080, 1);
+	  var hemLight = new THREE.HemisphereLight(0xffffee, 0xffffee, 0.5);
 			scene.add(hemLight);
 			
 			
@@ -356,41 +376,34 @@
 	  });
 	  
 	  
-	  loader.load( 'objekty2/komnata.obj','objekty2/komnata.mtl', function ( event ) {
+	  loader.load( 'objekty2/miestnost3.obj','objekty2/miestnost3.mtl', function ( event ) {
 		var object = event;
 		var s=0;
 		object.traverse( function ( child ) {
-		//child.material=stena;
-		
 		  if ( child instanceof THREE.Mesh && s==4) {
-			var textura=THREE.ImageUtils.loadTexture('textury/wood_roof1024.jpg');
+			var textura=THREE.ImageUtils.loadTexture('textury/wood-flooring1024.jpg');
 			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
-			textura.repeat.set(6,6);
-			
+			textura.repeat.set(3,3);
 			child.material.map = textura;
 			child.material.wrapAround=true;
-			child.material.bumpMap = textura;
-			child.material.bumpScale= 0.1;
-			child.castShadow = true;
+			//child.material.bumpMap = textura;
+			//child.material.bumpScale= 0.05;
 			child.receiveShadow = true;
 		  }
 		  
 		  if ( child instanceof THREE.Mesh && s==3) {
-			var textura=THREE.ImageUtils.loadTexture('textury/castle_wall1024.jpg');
-			var textura2=THREE.ImageUtils.loadTexture('textury/castle_wall1024bump.jpg');
+			var textura=THREE.ImageUtils.loadTexture('textury/white_paint_stucco.jpg');
 			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
-			textura.repeat.set(1,1);
-			textura2.wrapS=textura2.wrapT=THREE.RepeatWrapping; 
-			textura2.repeat.set(1,1);
+			textura.repeat.set(10,10);
 			child.material.map = textura;
 			child.material.bumpMap = textura;
-			child.material.bumpScale= 0.05;
-			//child.material.wrapAround=true;
+			child.material.bumpScale= 0.02;
+			child.material.wrapAround=true;
 			child.castShadow = true;
 			child.receiveShadow = true;
 		  }
 		  
-		 /* if ( child instanceof THREE.Mesh && s==5) {
+		  if ( child instanceof THREE.Mesh && s==5) {
 			var textura=THREE.ImageUtils.loadTexture('textury/white_paint_stucco.jpg');
 			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
 			textura.repeat.set(10,10);
@@ -402,51 +415,7 @@
 			child.material.wrapAround=true;
 			child.castShadow = true;
 			child.receiveShadow = true;
-		  }*/
-		  s=s+1;
-		  
-		} );
-		s=0;
-		object.scale = new THREE.Vector3( 25, 25, 25 );
-		//object.position.set(0.22609+0.18, -0.75982, 0.55816);
-		//object.castShadow = true;
-		object.position.y += korekcia_vysky;
-		scene.add( object );
-	  });
-	  
-	  
-	  
-	  loader.load( 'objekty2/strecha.obj','objekty2/strecha.mtl', function ( event ) {
-		var object = event;
-		var s=0;
-		object.traverse( function ( child ) {
-		//child.material=stena;
-		
-		  if ( child instanceof THREE.Mesh && s==3) {
-			var textura=THREE.ImageUtils.loadTexture('textury/wood_roof1024.jpg');
-			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
-			textura.repeat.set(6,6);
-			
-			child.material.map = textura;
-			child.material.wrapAround=true;
-			child.material.bumpMap = textura;
-			child.material.bumpScale= 0.05;
-			child.castShadow = true;
-			child.receiveShadow = true;
 		  }
-		  
-		  if ( child instanceof THREE.Mesh && s>3) {
-			var textura=THREE.ImageUtils.loadTexture('textury/roof texture 1.jpg');
-			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
-			textura.repeat.set(4,4);
-			child.material.map = textura;
-			child.material.bumpMap = textura;
-			child.material.bumpScale= 0.4;
-			//child.material.wrapAround=true;
-			child.castShadow = true;
-			child.receiveShadow = true;
-		  }
-		  
 		  s=s+1;
 		  
 		} );
@@ -963,7 +932,7 @@
 			}
 		}
 		data=form();
-		xmlhttp2.open("POST","http://147.175.105.140:8033/~stranovsky/public/applications/kralik/vypocet_dr.php",true);
+		xmlhttp2.open("POST","vypocet_dr.php",true);
 		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		//document.getElementById("testovacie_pole").innerHTML=data;
 		xmlhttp2.send(data);

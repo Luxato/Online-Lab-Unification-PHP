@@ -721,6 +721,7 @@
 		  
 		   loader.load( 'objekty2/pumpa_low.obj','objekty2/pumpa_low.mtl', function ( event ) {
 			var object = event;
+
 			object.name="sustava";
 			object.scale = new THREE.Vector3( 25, 25, 25 );
 			//object.position.set(0.22609+0.18, -0.75982, 0.55816);
@@ -949,22 +950,14 @@
 	  
 	  loader.load( 'objekty/stena.obj','objekty/stena.mtl', function ( event ) {
 		var object = event;
-		
+		object.name="sustava";
 		object.traverse( function ( child ) {
 		  if ( child instanceof THREE.Mesh ) {
-			var textura=THREE.ImageUtils.loadTexture('textury/brushed_aluminium_texture512_2.jpg');
-			textura.wrapS=textura.wrapT=THREE.RepeatWrapping; 
-			textura.repeat.set(5,5);
-			child.material.map = textura;
-			//child.material.bumpMap = textura;
-			child.material.bumpScale= 0.001;
 			child.castShadow = true;
 			child.receiveShadow = true;
 
 		  }
 		} );
-		
-		object.name="sustava";
 		object.scale = new THREE.Vector3( 25, 25, 25 );
 		object.position.y += korekcia_vysky;
 		//object.position.y -= 2.5;
@@ -2072,7 +2065,7 @@
 			}
 		}
 		data=form();
-		xmlhttp2.open("POST","http://147.175.105.140:8033/~stranovsky/public/applications/kralik/vypocet_dr.php",true);
+		xmlhttp2.open("POST","vypocet_dr.php",true);
 		xmlhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		//document.getElementById("testovacie_pole").innerHTML=data;
 		xmlhttp2.send(data);
@@ -2180,18 +2173,18 @@
 	<div id="vys">
 	                
                 <!--<p><label class="field">Parameter:</label><input class="textbox" id="p" name="p" value="1" step="0.01"></p>-->
-                <p><label class="field">Hustota:</label><input class="textbox" id="ro" name="ro" value="1" type="number" min="0" max="30" step="0.1"></p>
+                <p><label class="field">Density:</label><input class="textbox" id="ro" name="ro" value="1" type="number" min="0" max="30" step="0.1"></p>
                 <!--<p><label class="field">Hydraulický odpor 1:</label><input class="textbox" id="R1" name="R1" value="8000" type="number" ></p>
                 <p><label class="field">Hydraulický odpor 2:</label><input class="textbox" id="R2" name="R2" value="8000" type="number" ></p>
 				<p><label class="field">Hydraulický odpor 3:</label><input class="textbox" id="R3" name="R3" value="8000" type="number" ></p>
                 <p><label class="field">Prierez valca 1:</label><input class="textbox" id="F1" name="F1" value="0.00785" type="number" ></p>
                 <p><label class="field">Prierez valca 2:</label><input class="textbox" id="F2" name="F2" value="0.00785" type="number" ></p>
 				<p><label class="field">Prierez valca 3:</label><input class="textbox" id="F3" name="F3" value="0.00785" type="number" ></p>-->
-				<p><label class="field">Počiatočná hladina valca 1:</label><input class="textbox" id="h1" name="h1" value="15" type="number" size="10" onchange="vypocet()" min="0" max="30" step="0.1"></p>
-                <p><label class="field">Počiatočná hladina valca 2:</label><input class="textbox" id="h2" name="h2" value="15" type="number" onchange="vypocet()" min="0" max="30" step="0.1"></p>
-				<p><label class="field">Počiatočná hladina valca 3:</label><input class="textbox" id="h3" name="h3" value="15" type="number" onchange="vypocet()" min="0" max="30" step="0.1"></p>
-                <p><label class="field">Simulačný čas:</label><input class="textbox" id="st" name="st" value="20" type="number" ></p>
-                <p><label class="field">Počet hodnôt:</label><input class="textbox" id="nv" name="nv" value="200" type="number" ></p>
+				<p><label class="field">Initial level in tank 1:</label><input class="textbox" id="h1" name="h1" value="15" type="number" size="10" onchange="vypocet()" min="0" max="30" step="0.1"></p>
+                <p><label class="field">Initial level in tank 2:</label><input class="textbox" id="h2" name="h2" value="15" type="number" onchange="vypocet()" min="0" max="30" step="0.1"></p>
+				<p><label class="field">Initial level in tank 3:</label><input class="textbox" id="h3" name="h3" value="15" type="number" onchange="vypocet()" min="0" max="30" step="0.1"></p>
+                <p><label class="field">Simulation time:</label><input class="textbox" id="st" name="st" value="20" type="number" ></p>
+                <p><label class="field">Number of samples:</label><input class="textbox" id="nv" name="nv" value="200" type="number" ></p>
 				<label class="field">With/Without Controller:</label><input type="checkbox" class="check_selector "id="checkbox" name="ifController">
                 
 				<div id="nonpid"><p><label class="field">Prítok 1:</label><input class="textbox" id="q1" name="q1" value="0" type="number" ></p>
@@ -2201,13 +2194,13 @@
 				<div id="pid"><p><label class="field">P:</label><input class="textbox" id="P" name="P" value="35" type="number" min="0" max="500" step="0.01"></p>
                 <p><label class="field">Ti:</label><input class="textbox" id="Ti" name="Ti" value="1.5" type="number" min="0" max="500" step="0.01"></p>
                 <p><label class="field">Td:</label><input class="textbox" id="Td" name="Td" value="1" type="number" min="0" max="500" step="0.01"></p>
-				<div id="riadeny"><p>Riadený valec:</p></div>
-				<div id="volba"><input type="radio" name="vyber" id="val1" checked="checked">ľavý<br>
-				<input type="radio" name="vyber" id="val2">stredný<br>
-				<input type="radio" name="vyber" id="val3">pravý</div>
-                <p><label class="field">Požadovaná hladina:</label><input class="textbox" id="ref" name="ref" value="5" type="number" min="0" max="28" step="0.1"></p></div>
+				<div id="riadeny"><p>Controlled tank:</p></div>
+				<div id="volba"><input type="radio" name="vyber" id="val1" checked="checked">left<br>
+				<input type="radio" name="vyber" id="val2">middle<br>
+				<input type="radio" name="vyber" id="val3">right</div>
+                <p><label class="field">Required level value:</label><input class="textbox" id="ref" name="ref" value="5" type="number" min="0" max="28" step="0.1"></p></div>
 				
-				<p><button type="button" onclick=ajax2() >Simulácia</button></p>
+				<p><button type="button" onclick=ajax2() >Start simulation</button></p>
 				
 				
             <!--    <div class="Con">
