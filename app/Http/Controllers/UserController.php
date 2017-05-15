@@ -17,6 +17,11 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store( Request $request ) {
+		$this->validate($request, [
+			'email' => 'required|email|unique:users',
+			'username' => 'required|min:6',
+			'password' => 'required|min:6'
+		]);
 		// First check for duplicates.
 		$user = User::where( 'email', $request->email )->first();
 		if (isset($user)) {
