@@ -27,7 +27,7 @@
             <td><?= $page->language_title ?></td>
             <td><?= $page->language_shortcut ?></td>
             <td><a href="languages/<?= $page->id ?>/edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
-                <a class="<?= $page->id === 0 ? 'disabled' : '' ?>" onclick="deleteModal(<?= $page->id.',\''. $page->language_title.'\'' ?>)"><i class="fa fa-trash <?= $page->id === 0 ? 'disabled' : '' ?>" aria-hidden="true"></i></a></td>
+                <a class="<?= $page->id == 0 ? 'disabled' : '' ?>" onclick="deleteModal(<?= $page->id.',\''. $page->language_title.'\'' ?>)"><i class="fa fa-trash <?= $page->id === 0 ? 'disabled' : '' ?>" aria-hidden="true"></i></a></td>
         </tr>
 		<?php endforeach; ?>
         </tbody>
@@ -44,11 +44,10 @@
                         Vymazanie jazyka</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Určite chcete vymazať jazyk <span id="langVar">:var</span>?</p>
-                    <form id="deleteForm" action="<?= URL::to( '/' ); ?>" method="POST"
-                          style="display: none;">
+                    <p>Určite chcete vymazať jazyk <span id="langVar">:var</span> a všetky jeho súčasti?</p>
+                    {!! Form::open(['url' => URL::to( '/admin/languages/' ), 'method' => 'delete', 'id' => 'deleteForm']) !!}
 
-                    </form>
+                    {!! Form::close() !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Zavrieť</button>
@@ -104,11 +103,13 @@
             $(this).remove();
         })
     });
-
+    var action = $('#deleteForm').attr('action');
     function deleteModal(id, name) {
-        $('#deleteForm').html('<input id="title-input" class="form-control" name="languageID" type="text" value="' + id + '">' +
+        $('#deleteForm').html('<input name="_method" type="hidden" value="DELETE">' +
+            '<input id="title-input" class="form-control" name="languageID" type="hidden" value="' + id + '">' +
             '<input name="_token" type="hidden" id="_token" value="' + window.Laravel.csrfToken + '" />');
         $('#langVar').html("<strong>'" + name + "'</strong>");
+        $('#deleteForm').attr('action', action + '/' + id);
         $('#deleteModal').modal('show');
     }
 

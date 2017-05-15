@@ -208,7 +208,7 @@
 </div>
     <?php if (Route::getCurrentRoute()->uri() == '/'): ?>
     <header>
-        <a class="header-logo" href="index.html"><img src="<?= url('assets/img/logo_svk_full.png') ?>" alt="logo"></a>
+        <a class="header-logo" href="#"><img src="<?= url('assets/img/logo_svk_full.png') ?>" alt="logo"></a>
         <div id="particles-js" style="height: 200px;"></div>
     </header>
     <?php endif; ?>

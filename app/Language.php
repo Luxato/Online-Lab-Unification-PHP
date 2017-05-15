@@ -34,20 +34,20 @@ class Language extends Model {
 			fwrite( $myfile, $template );
 			// Now create connection between actualities and new language
 			$feature = new Feature();
-			$feature->title = "Aktuality na pevno";
+			$feature->title = "Aktuality";
 			$feature->controller = "aktuality";
 			$feature->language_id = $language->id;
 			$feature->save();
 			$id = $feature->id;
-			\DB::insert(\DB::raw("INSERT INTO feature_page (feature_id, page_id) VALUES ($id, 52);"));
+			\DB::insert(\DB::raw("INSERT INTO feature_page (feature_id, page_id) VALUES ($id, 54);"));
 			// Now create connection between login and new language
 			$feature = new Feature();
-			$feature->title = "Login na pevno";
+			$feature->title = "Login";
 			$feature->controller = "cuslogin";
 			$feature->language_id = $language->id;
 			$feature->save();
 			$id = $feature->id;
-			\DB::insert(\DB::raw("INSERT INTO feature_page (feature_id, page_id) VALUES ($id, 53);"));
+			\DB::insert(\DB::raw("INSERT INTO feature_page (feature_id, page_id) VALUES ($id, 55);"));
 		}
 	}
 

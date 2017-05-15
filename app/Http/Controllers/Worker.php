@@ -20,10 +20,7 @@ class Worker extends Controller {
 		$values = $_POST['value'];
 
 		Language::_create( $title, $shortcut, $keys, $values );
-
-		$data['status'] = 'create-success';
-
-		//$data['languages'] = Language::all();
+		 \Session::flash( 'success', "Jazyk bol úspešne vytvorený." );
 
 		return redirect( 'admin/languages' );
 	}

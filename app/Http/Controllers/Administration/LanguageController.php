@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Administration;
 
 use App\Http\Controllers\Controller;
 use App\Language;
+use App\Page;
 use App\Translation;
 use File;
 use Illuminate\Http\Request;
@@ -41,19 +42,6 @@ class LanguageController extends Controller {
 	 */
 	public function store(
 		Request $request
-	) {
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int $id
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show(
-		$id
 	) {
 		//
 	}
@@ -122,11 +110,41 @@ class LanguageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id) {
-		$language    = Language::findOrFail( $id );
-		if ( $language->delete() ) {
-			$data['status'] = 'delete-success';
+		// Delete respective pages, thier features and actualities.
+		foreach ( Page::with('feature')->get() as $page ) {
+			$files_to_unlink = [];
+			foreach ($page->feature as $feature) {
+				if ($feature->language_id == $id) {
+					if (isset($feature->content_file)) $files_to_unlink[] = $feature->content_file;
+					// Detach feature.
+					$page->feature()->detach($feature->id);
+					// Delete feature.
+					$feature->delete();
+					foreach ( $files_to_unlink as $content_file ) {
+						unlink( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $content_file . '.blade.php' );
+					}
+				}
+			}
+			// If it was the last feature, remove page as well.
+			if (sizeof($page->feature) == 0) {
+			    $page->delete();
+			}
 		}
-
+		// TODO
+		// Delete actualities
+		// Unlink thumbnails
+		exit;
+		$language    = Language::findOrFail( $id );
+		// Delete directory
+		$files = glob(dirname( getcwd() ) . '/resources/lang/' . $language->language_shortcut);
+		foreach($files as $file){ // iterate files
+			if(is_file($file))
+				unlink($file); // delete file
+		}
+		// Delete lang
+		if ( $language->delete() ) {
+			\Session::flash( 'success', "Jazyk a všetky jeho súčasti boli úspešne zmazané." );
+		}
 		return back();
 	}
 }

@@ -252,9 +252,8 @@ class PageController extends Controller {
 			foreach ( $feature_to_delete as $feature ) {
 				$feature->delete();
 			}
-			// TODO Delete files
 			foreach ( $to_delete as $content_file ) {
-				//unlink( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $content_file . 'blade.php' );
+				unlink( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $content_file . '.blade.php' );
 			}
 
 			Session::flash( 'success', "Stránka bola úspešne zmazaná." );
