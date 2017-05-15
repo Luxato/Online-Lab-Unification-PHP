@@ -28,17 +28,18 @@
 	$type .= 'PID';
 	}
 	
-	//if ($_REQUEST['riad']=='1'){
-	if (TRUE){
-	$type .= 'q1';
+	if (isset($_REQUEST['riad'])) {
+		if ($_REQUEST['riad']=='1'){
+		$type .= 'q1';
+		}
+		else if ($_REQUEST['riad']=='2'){
+		$type .= 'q2';
+		}
+		else if ($_REQUEST['riad']=='3'){
+		$type .= 'q3';
+		}
 	}
-	else if ($_REQUEST['riad']=='2'){
-	$type .= 'q2';
-	}
-	else if ($_REQUEST['riad']=='3'){
-	$type .= 'q3';
-	}
-		
+
 	replaceTagInFile($type . '.mo', $_REQUEST);
 
 function data2array($request,$response)
@@ -88,12 +89,9 @@ echo "$file_name_with_full_path";
   	curl_close ($ch);
   
   	$response = json_decode($response);
-	var_dump($response);
-	exit;
     $outputArray=data2array($request,$response);
 	$outputArray=json_encode($outputArray);
-	
-	//var_dump($outputArray);
+
 	echo $outputArray;
                      
     ?>
