@@ -30,7 +30,7 @@
             <td><?= $actuality->catname ?></td>
             <td><?= $actuality->language_title ?></td>
             <td><?= $actuality->created_at ?></td>
-            <td><i class="fa fa-pencil disabled" aria-hidden="true"></i> | <a onclick="deleteModal(<?= $actuality->id ?>, '<?= $actuality->name ?>')"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+            <td><a href="<?= url('admin/actualities/'. $actuality->id . '/edit') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a> | <a onclick="deleteModal(<?= $actuality->id ?>, '<?= $actuality->name ?>')"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
         </tr>
 		<?php endforeach; ?>
         </tbody>

@@ -43,10 +43,6 @@ class ActualitiesController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store( Request $request ) {
-		echo '<pre>';
-		print_r( $request->all() );
-		echo '</pre>';
-		exit;
 		$actuality           = new Actuality();
 		$actuality->name     = $request->name;
 		$actuality->content  = $request->cont;
@@ -63,10 +59,10 @@ class ActualitiesController extends Controller {
 			$actuality->category = $request->category;
 		}
 
-		if ( $request->infinity !== 'on' ) {
+		/*if ( $request->infinity !== 'on' ) {
 			$actuality->from = $request->startDate;
 			$actuality->to   = $request->endDate;
-		}
+		}*/
 		if ( $filename = $this->uploadFile( $actuality, $request->file( 'thumbnail' ) ) ) {
 			$actuality->thumbnail_path = 'uploads/' . $filename;
 		} else {
@@ -80,17 +76,6 @@ class ActualitiesController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int $id
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show( $id ) {
-		//
-	}
-
-	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int $id
@@ -98,7 +83,14 @@ class ActualitiesController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
-		//
+
+
+
+		return view( 'administration/actualities/actualities_edit', [
+			'categories' => Category::all(),
+			'languages'  => Language::all(),
+			'actuality'  => Actuality::findOrFail($id)
+		] );
 	}
 
 	/**
@@ -110,7 +102,35 @@ class ActualitiesController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, $id ) {
-		//
+		$actuality           = Actuality::findOrFail($id);
+		$actuality->name     = $request->name;
+		$actuality->content  = $request->cont;
+		$actuality->language = $request->language;
+
+		// Create category
+		if ($request->category == 'new') {
+			// If we have to create new category
+			$category = new Category();
+			$category->name = $request->newCategory;
+			$category->save();
+			$actuality->category = $category->id;
+		} else {
+			$actuality->category = $request->category;
+		}
+
+		/*if ( $request->infinity !== 'on' ) {
+			$actuality->from = $request->startDate;
+			$actuality->to   = $request->endDate;
+		}*/
+		if ( $filename = $this->uploadFile( $actuality, $request->file( 'thumbnail' ) ) ) {
+			$actuality->thumbnail_path = 'uploads/' . $filename;
+		}
+
+		$actuality->save();
+
+		Session::flash( 'success', "Aktualita bola úspešne upravená." );
+
+		return redirect( 'admin/actualities' );
 	}
 
 	/**
