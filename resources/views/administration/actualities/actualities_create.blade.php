@@ -48,12 +48,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Kategória</label>
+                    <label for="categorySelection">Kategória</label>
                     <select id="categorySelection" name="category" class="form-control" required="">
+                        <option value="new" selected>Vytvoriť novú</option>
 						<?php foreach($categories as $category): ?>
                         <option value="<?= $category->id ?>"><?= $category->name ?></option>
 						<?php endforeach; ?>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label>alebo vytvoriť novú</label>
+                    <input id="newCategory" name="newCategory" class="form-control" type="text" value="">
                 </div>
             </div>
             <div class="col-md-12">
@@ -90,6 +95,13 @@
 
     <script>
         $(function () {
+            $('#categorySelection').change(function () {
+               if ($( "#categorySelection option:selected" ).val() == 'new') {
+                   $('#newCategory').attr('readonly', false);
+               } else {
+                   $('#newCategory').attr('readonly', true);
+               }
+            });
             $('#nav-news').addClass('active');
 
             var start = moment().subtract(29, 'days');

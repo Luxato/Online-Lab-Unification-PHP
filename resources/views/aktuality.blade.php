@@ -7,30 +7,12 @@
 @section('content')
     <style>
         @media screen and (min-width: 1200px) {
-            [class*="col-"] {
+            .actualities [class*="col-"] {
                 float: none;
                 display: table-cell;
                 vertical-align: top;
             }
         }
-        /*@media screen and (max-width: 997px) {
-            .actualities {
-                display: flex;
-            }
-            .order-1 {
-                order: 1;
-            }
-            .order-2 {
-                order: 2;
-            }
-        }*/
-       /* @media screen and (max-width: 997px) and (min-width: 777px) {
-            [class*="col-"] {
-                float: none;
-                display: table-cell;
-                vertical-align: top;
-            }
-        }*/
     </style>
     <h1><?= trans( 'translation.actualities' ) ?></h1>
     <div class="container">

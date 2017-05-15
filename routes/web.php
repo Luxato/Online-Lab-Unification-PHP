@@ -21,7 +21,7 @@ Route::resource( 'admin/actualities', 'Administration\ActualitiesController' );
 // Resource for users
 Route::resource( 'admin/users', 'Administration\UserController' );
 // Resource for News-Categories
-Route::resource( 'admin/news-categories', 'Administration\NewsCategoriesController' );
+Route::resource( 'admin/news-categories', 'Administration\CategoriesController' );
 // Resource for settings
 Route::get( '/admin/settings', [ 'uses' => 'Administration\SettingsController@index' ] );
 Route::post( 'admin/settings/', 'Administration\SettingsController@update' );

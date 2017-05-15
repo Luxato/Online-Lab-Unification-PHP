@@ -43,17 +43,34 @@ class ActualitiesController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store( Request $request ) {
+		echo '<pre>';
+		print_r( $request->all() );
+		echo '</pre>';
+		exit;
 		$actuality           = new Actuality();
 		$actuality->name     = $request->name;
 		$actuality->content  = $request->cont;
 		$actuality->language = $request->language[0];
-		$actuality->category = $request->category;
+
+		// Create category
+		if ($request->category == 'new') {
+			// If we have to create new category
+			$category = new Category();
+			$category->name = $request->newCategory;
+			$category->save();
+			$actuality->category = $category->id;
+		} else {
+			$actuality->category = $request->category;
+		}
+
 		if ( $request->infinity !== 'on' ) {
 			$actuality->from = $request->startDate;
 			$actuality->to   = $request->endDate;
 		}
 		if ( $filename = $this->uploadFile( $actuality, $request->file( 'thumbnail' ) ) ) {
 			$actuality->thumbnail_path = 'uploads/' . $filename;
+		} else {
+			$actuality->thumbnail_path = 'uploads/default.jpg';
 		}
 		$actuality->save();
 

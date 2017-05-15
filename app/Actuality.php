@@ -31,7 +31,7 @@ class Actuality extends Model {
 	public static function getActuality($id) {
 		return DB::select( DB::raw( "SELECT a.id, a.name, a.content, a.thumbnail_path, a.created_at, l.language_title ,l.language_shortcut, c.id as catID ,c.name as catname FROM actualities as a
 									JOIN languages as l ON a.language = l.id
-									JOIN news_categories as c ON a.category = c.id
+									JOIN categories as c ON a.category = c.id
 									WHERE a.id = $id" ) );
 	}
 

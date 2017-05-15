@@ -75,6 +75,7 @@ p {
         line-height: 30px;
         font-size: 20px;
     }
+
     .translation-flags {
         list-style-type: none;
         width: 200px;
@@ -461,9 +462,11 @@ footer {
     color: #fff;
     background-color: #59b5fa;
 }
+
 .navbar-collapse.collapse {
     margin-left: 0;
 }
+
 .navbar-nav > li > .dropdown-menu, .dropdown-submenu > .dropdown-menu {
     border-radius: 0;
 }
@@ -623,8 +626,10 @@ code {
 
 .featured-misc {
     position: absolute;
-    bottom: 20px;
-    margin: 0 0 0 10px;
+    bottom: 1px;
+    background: rgba(0,0,0,0.5);
+    width: 95%;
+    padding: 6px;
 }
 
 .featured-misc a {
@@ -633,10 +638,6 @@ code {
 
 .featured-misc a:hover {
     text-decoration: none;
-}
-
-.featured-image img {
-    width: 100%;
 }
 
 .featured-image {
