@@ -6,16 +6,50 @@
 
 @section('content')
     <style>
-        [class*="col-"] {
-            float: none;
-            display: table-cell;
-            vertical-align: top;
+        @media screen and (min-width: 1200px) {
+            [class*="col-"] {
+                float: none;
+                display: table-cell;
+                vertical-align: top;
+            }
         }
+        /*@media screen and (max-width: 997px) {
+            .actualities {
+                display: flex;
+            }
+            .order-1 {
+                order: 1;
+            }
+            .order-2 {
+                order: 2;
+            }
+        }*/
+       /* @media screen and (max-width: 997px) and (min-width: 777px) {
+            [class*="col-"] {
+                float: none;
+                display: table-cell;
+                vertical-align: top;
+            }
+        }*/
     </style>
     <h1><?= trans( 'translation.actualities' ) ?></h1>
     <div class="container">
-        <div class="row" style="display: table;">
-            <div class="col-md-9">
+        <div class="row actualities">
+            <div class="col-xs-12 col-lg-2 widget order-1">
+                <select id="categoryPicker" class="selectpicker" data-style="btn-warning">
+			        <?php foreach($categories as $category): ?>
+                    <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+			        <?php endforeach; ?>
+                </select>
+                <h2 style="margin-top: 10px; margin-bottom:0;"><?= trans( 'translation.archive' ) ?></h2>
+                <div class="months">
+                    <ul>
+                        <li><a class="disabled" href="#">Januar 2017</a></li>
+                        <li><a class="disabled" href="#">Februar 2017</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-12 col-lg-10 order-2">
                 <?php foreach($actualities as $actuality): ?>
                     <div class="actuality category-<?= $actuality->catID ?> col-md-4" style="float: left;margin-bottom: 20px;">
                         <div class="featured-image">
@@ -29,20 +63,6 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
-            </div>
-            <div class="col-md-2 widget">
-                <select id="categoryPicker" class="selectpicker" data-style="btn-warning">
-                    <?php foreach($categories as $category): ?>
-                        <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <h2 style="margin-top: 10px; margin-bottom:0;"><?= trans( 'translation.archive' ) ?></h2>
-                <div class="months">
-                    <ul>
-                        <li><a class="disabled" href="#">Januar 2017</a></li>
-                        <li><a class="disabled" href="#">Februar 2017</a></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>

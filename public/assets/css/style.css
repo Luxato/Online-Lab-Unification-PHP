@@ -737,9 +737,6 @@ aside ul, .months ul {
 
 .widget {
     height: 100%;
-    width: 100%;
-    border-left: 2px solid black;
-    display: inline-block;
 }
 
 .months ul {
