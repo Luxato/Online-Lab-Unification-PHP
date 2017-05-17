@@ -40,19 +40,19 @@
                                 <th>Landing page</th>
                             </thead>
                             <tbody>
-                                 <?php foreach($languages as $language): ?>
+                                 <?php foreach($languages as $language):?>
                                     <tr>
                                         <td><?= $language->language_title ?></td>
                                         <td>
                                             <select name="landing_pages[]" class="form-control">
-                                                <?php foreach($pages as $page): ?>
+                                                <?php foreach($pages as $page):?>
                                                     <?php if(isset($page->language_shortcut)): ?>
                                                         <?php if($language->language_shortcut == $page->language_shortcut): ?>
-                                                        <option value="<?= $language->language_shortcut . '_' . $page->section_id ?>" <?= $default_pages[$language->language_shortcut] == $page->section_id ? 'selected' : '' ?>>
+                                                        <option value="<?= $language->language_shortcut . '_' . $page->section_id ?>" <?= isset($default_pages[$language->language_shortcut]) ? $default_pages[$language->language_shortcut] == $page->section_id ? 'selected' : '' : '' ?>>
                                                             <?= $page->title ?></option>
                                                         <?php endif; ?>
                                                     <?php else: ?>
-                                                    <option value="<?= $language->language_shortcut . '_' . $page->section_id ?>" <?= $default_pages[$language->language_shortcut] == $page->section_id ? 'selected' : '' ?>>
+                                                    <option value="<?= $language->language_shortcut . '_' . $page->section_id ?>" <?= isset($default_pages[$language->language_shortcut]) ? $default_pages[$language->language_shortcut] == $page->section_id ? 'selected' : '' : '' ?>>
                                                         <?= $page->title ?></option>
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
