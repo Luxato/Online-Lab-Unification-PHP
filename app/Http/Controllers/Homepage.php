@@ -145,7 +145,17 @@ class Homepage extends Controller {
 	public function aktuality( $id ) {
 		$actualities = DB::select( DB::raw( "SELECT * FROM actualities
 									WHERE id = '$id'" ) );
+		// Retrieve applocale.
+		if ( \Session::has( 'applocale' ) ) {
+			$locale = \Session::get( 'applocale' );
+		} elseif ( isset( $this->default_language ) ) {
+			$locale = $this->default_language;
+		} else {
+			$locale = \Config::get( 'app.locale' );
+		}
+		\App::setlocale( $locale );
 
+		$this->init_navigation( $locale );
 		return view( 'aktualita', [
 			'actualities' => $actualities[0],
 			'navigation'  => $this->navigation,
