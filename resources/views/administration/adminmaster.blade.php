@@ -333,6 +333,13 @@
         return n;
     }
 </script>
+<?php if(count($errors) > 0): ?>
+<?php foreach($errors->all() as $error): ?>
+<script>
+    generate('warning', '<div class="activity-item"> <i class="fa fa-check" aria-hidden="true"></i> <div class="activity">{{$error}}</div> </div>');
+</script>
+<?php endforeach; ?>
+<?php endif; ?>
 @if (Session::has('success'))
     <script>
         generate('success', '<div class="activity-item"> <i class="fa fa-check" aria-hidden="true"></i> <div class="activity">{{ Session::get('success') }}</div> </div>');

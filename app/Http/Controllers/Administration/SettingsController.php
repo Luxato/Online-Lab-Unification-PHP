@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Administration;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Language;
 use App\Setting;
-use Illuminate\Http\Request;
+use App\User;
+use \Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class SettingsController extends Controller {
 	/**
@@ -41,6 +43,17 @@ class SettingsController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request ) {
+		if (strlen($request->get('password')) > 5) {
+			$this->validate($request, [
+				'password' => 'required|confirmed|min:6'
+			]);
+			$user = User::where( [
+				'name' => 'Administrator',
+				'type' => 'administrator'
+			] )->first();
+			$user->password = bcrypt($request->get('password'));
+			$user->save();
+		}
 		$settings = Setting::all();
 
 		$default_language                = $settings[0];

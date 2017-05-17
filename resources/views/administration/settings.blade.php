@@ -24,6 +24,16 @@
                     <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
                     <div class="col-md-6">
                         <br>
+                        <h2>Zmena hesla administrátora</h2>
+                        <div class="form-group">
+                            <label>Nové heslo</label>
+                            <input name="password" type="password" class="form-control" placeholder="Nové heslo">
+                        </div>
+                        <div class="form-group">
+                            <label>Nové heslo znovu</label>
+                            <input name="password_confirmation" type="password" class="form-control" placeholder="Nové heslo znovu">
+                        </div>
+                        <br>
                         <h2>Defaultný jazyk stránky</h2>
                         <p>Nastavenie hlavného jazyka stránky.</p>
                         <select id="languageSelection" name="language" class="form-control" required="">
