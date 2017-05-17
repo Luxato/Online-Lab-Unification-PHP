@@ -5,7 +5,7 @@
 @stop
 
 @section('custom_css') {{--CSS specified only for this site--}}
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dataTables.min.css">
 <style>
     td {
         border-bottom: 1px solid lightgrey !important;

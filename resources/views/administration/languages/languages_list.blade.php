@@ -5,7 +5,7 @@
 @stop
 
 @section('custom_css') {{--CSS specified only for this site--}}
-<link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/css/dataTables.bootstrap.css">
+<link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dataTables.min.css">
 @stop
 
 
