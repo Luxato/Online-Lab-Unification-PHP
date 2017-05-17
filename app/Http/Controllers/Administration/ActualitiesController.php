@@ -12,6 +12,11 @@ use App\Language;
 use Illuminate\Http\Request;
 
 class ActualitiesController extends Controller {
+
+	public function __construct() {
+		$this->middleware( 'auth' );
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *

@@ -11,9 +11,7 @@
 |
 */
 
-// TODO AUTH ADMIN LOGIN
 Route::post( 'admin/page_create/', 'Admin@do_page_create' );
-
 // Resource for pages
 Route::resource( 'admin/pages', 'Administration\PageController' );
 // Resource for news
