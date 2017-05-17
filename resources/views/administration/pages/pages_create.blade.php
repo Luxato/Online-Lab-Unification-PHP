@@ -45,16 +45,12 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">SEO nadpis</label>
-                    <input class="form-control disabled" type="text" placeholder="SEO nadpis">
-                </div>
-                <div class="form-group">
                     <label for="exampleInputEmail1">SEO popis</label>
-                    <textarea class="form-control disabled" rows="3" placeholder="SEO popis"></textarea>
+                    <textarea name="seo_description[]" class="form-control" rows="3" placeholder="SEO popis"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Kľúčové slová</label>
-                    <input class="form-control disabled" type="text" placeholder="Kľúčové slová oddelené čiarkou">
+                    <input name="keywords[]" class="form-control" type="text" placeholder="Kľúčové slová oddelené čiarkou">
                 </div>
             </div>
             <div class="col-md-12">
@@ -228,16 +224,12 @@
                 '</div>' +
                 '<div class="col-md-6">' +
                 '<div class="form-group">' +
-                '<label for="exampleInputEmail1">SEO nadpis</label>' +
-                '<input class="form-control disabled" type="text" placeholder="SEO nadpis">' +
-                '</div>' +
-                '<div class="form-group">' +
                 '<label for="exampleInputEmail1">SEO popis</label>' +
-                '<textarea class="form-control disabled" rows="3" placeholder="SEO popis"></textarea>' +
+                '<textarea name="seo_description[]" class="form-control" rows="3" placeholder="SEO popis"></textarea>' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">Kľúčové slová</label>' +
-                '<input class="form-control disabled" type="text" placeholder="Kľúčové slová oddelené čiarkou">' +
+                '<input name="keyboards[]" class="form-control" type="text" placeholder="Kľúčové slová oddelené čiarkou">' +
                 '</div>' +
                 '</div>' +
                 '<div class="col-md-12">' +

@@ -52,16 +52,16 @@ class PageController extends Controller {
 	public function reorder() {
 		$this->init_navigation();
 		$data['navigation'] = $this->navigation;
-		$ids = [];
-		foreach ($data['navigation'] as $key1 => $page) {
+		$ids                = [];
+		foreach ( $data['navigation'] as $key1 => $page ) {
 			$ids[] = $page->page_id;
-			if (isset($page->children)) {
-				foreach($page->children as $key2 => $subpage) {
+			if ( isset( $page->children ) ) {
+				foreach ( $page->children as $key2 => $subpage ) {
 					$ids[] = $subpage->page_id;
-					if (isset($subpage->children)) {
-						foreach($subpage->children as $key3 => $subsubpage) {
-							if (in_array($subsubpage->page_id, $ids)) {
-								unset($data['navigation'][$key1]->children[$key2]->children[$key3]);
+					if ( isset( $subpage->children ) ) {
+						foreach ( $subpage->children as $key3 => $subsubpage ) {
+							if ( in_array( $subsubpage->page_id, $ids ) ) {
+								unset( $data['navigation'][ $key1 ]->children[ $key2 ]->children[ $key3 ] );
 							}
 							$ids[] = $subsubpage->page_id;
 						}
@@ -69,6 +69,7 @@ class PageController extends Controller {
 				}
 			}
 		}
+
 		return view( 'administration/pages/navigation_reorder', $data );
 	}
 
@@ -92,9 +93,11 @@ class PageController extends Controller {
 	 */
 	public function store( Request $request ) {
 		$inputs = [
-			'title'       => 'name',
-			'controller'  => 'url',
-			'language_id' => 'language'
+			'title'           => 'name',
+			'controller'      => 'url',
+			'language_id'     => 'language',
+			'seo_description' => 'seo_description',
+			'keywords'        => 'keywords'
 		];
 		$page   = new Page;
 		$page->save();
@@ -108,7 +111,7 @@ class PageController extends Controller {
 
 			if ( $request->get( 'noContent' ) !== 'on' ) {
 				$feature->content_file = $request['url'][0] . '_' . $language_shortcut;
-				$this->create_page_file( $feature->content_file . '.blade.php', $request['name'][ $i ], $request['cont'][ $i ] );
+				$this->create_page_file( $feature->content_file . '.blade.php', $request['name'][ $i ], $request['cont'][ $i ], $request['seo_description'][ $i ], $request['keywords'][ $i ] );
 			}
 			$feature->save();
 			$new_features[] = $feature->id;
@@ -121,7 +124,7 @@ class PageController extends Controller {
 		return redirect( 'admin/pages' );
 	}
 
-	public function create_page_file( $file_name, $title, $content ) {
+	public function create_page_file( $file_name, $title, $content, $description, $keywords ) {
 		$template     = '
 @extends(\'master\')
 
@@ -129,8 +132,14 @@ class PageController extends Controller {
 	' . $title . '
 @stop
 
+@section(\'title\')' . $description . '
+@stop
+
+@section(\'title\')' . $keywords . '
+@stop
+
 @section(\'content\')
-    ' . htmlspecialchars_decode(htmlspecialchars($content)) . '
+    ' . htmlspecialchars_decode( htmlspecialchars( $content ) ) . '
 @stop';
 		$created_page = fopen( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $file_name, "w" );
 		fwrite( $created_page, $template );
@@ -156,7 +165,7 @@ class PageController extends Controller {
 				$file = fopen( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $fileName, 'r' );
 
 				$content = str_replace( [], '', fread( $file, filesize( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $features['content_file'] . '.blade.php' ) ) );
-				$content = htmlspecialchars($content);
+				$content = htmlspecialchars( $content );
 				fclose( $file );
 				$pos                 = strpos( $content, "@section('content')" );
 				$content             = substr( $content, $pos + 19, strlen( $content ) );
@@ -187,19 +196,21 @@ class PageController extends Controller {
 	 */
 	public function update( Request $request, $id ) {
 		// Define allowed inputs
-		$inputs = [
-			'title'       => 'name',
-			'controller'  => 'url',
-			'language_id' => 'language',
-			'content_file' => 'file'
+		$inputs    = [
+			'title'           => 'name',
+			'controller'      => 'url',
+			'language_id'     => 'language',
+			'content_file'    => 'file',
+			'seo_description' => 'seo_description',
+			'keywords'        => 'keywords'
 		];
-		$page = Page::findOrFail( $id );
+		$page      = Page::findOrFail( $id );
 		$to_delete = [];
-		$i = 0;
+		$i         = 0;
 		foreach ( $page->feature()->get()->toArray() as $feature ) {
-			$feature_to_delete[] = Feature::find( $feature['pivot']['feature_id']);
-			$to_delete[] = $feature_to_delete[$i]['content_file'];
-			$i++;
+			$feature_to_delete[] = Feature::find( $feature['pivot']['feature_id'] );
+			$to_delete[]         = $feature_to_delete[ $i ]['content_file'];
+			$i ++;
 		}
 		if ( $page->feature()->detach() ) {
 			// Delete old features
@@ -215,14 +226,14 @@ class PageController extends Controller {
 				if ( $request->get( 'noContent' ) !== 'on' ) {
 					$feature->content_file = $request['url'][0] . '_' . $language_shortcut;
 					// Rename old files to new names.
-					rename (
-						dirname( getcwd() ) . '/resources/views/user_created_pages/' . $to_delete[$i] . '.blade.php' ,
+					rename(
+						dirname( getcwd() ) . '/resources/views/user_created_pages/' . $to_delete[ $i ] . '.blade.php',
 						dirname( getcwd() ) . '/resources/views/user_created_pages/' . $feature->content_file . '.blade.php'
 					);
 				}
 				$feature->save();
 				$new_features[] = $feature->id;
-				$page->feature()->attach($feature->id);
+				$page->feature()->attach( $feature->id );
 			}
 			Session::flash( 'success', "Stránka bola úspešne upravená." );
 
@@ -240,11 +251,11 @@ class PageController extends Controller {
 	public function destroy( $id ) {
 		$page      = Page::findOrFail( $id );
 		$to_delete = [];
-		$i = 0;
+		$i         = 0;
 		foreach ( $page->feature()->get()->toArray() as $feature ) {
-			$feature_to_delete[] = Feature::find( $feature['pivot']['feature_id']);
-			$to_delete[] = $feature_to_delete[$i]['content_file'];
-			$i++;
+			$feature_to_delete[] = Feature::find( $feature['pivot']['feature_id'] );
+			$to_delete[]         = $feature_to_delete[ $i ]['content_file'];
+			$i ++;
 		}
 		if ( $page->feature()->detach() ) {
 			$page->delete();
