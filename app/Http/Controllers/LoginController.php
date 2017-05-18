@@ -11,7 +11,7 @@ class LoginController extends Controller {
 
 	public function login( Request $request ) {
 		$this->validate( $request, [
-			'email'    => 'required|email|unique:users',
+			'email'    => 'required|email',
 			'password' => 'required|min:6'
 		] );
 		if ( Auth::attempt( [
@@ -84,6 +84,5 @@ class LoginController extends Controller {
 
 		return back();
 	}
-
 
 }

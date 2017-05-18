@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-
+use Auth;
 class UserController extends Controller {
 
 	/**
@@ -43,48 +43,24 @@ class UserController extends Controller {
 		return back();
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int $id
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show( $id ) {
-		//
-	}
+	public function editProfile(Request $request) {
+		if ($request->get('password') !== $request->get('password_confirmation')) {
+			Session::flash( 'warning', 'password_do_not_match' );
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int $id
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit( $id ) {
-		//
-	}
+			return back();
+		}
+		$this->validate($request, [
+			'password' => 'required|min:6|confirmed'
+		]);
+		$user = User::where('id', decrypt($request->get('secret')))->first();
+		$user->password = Hash::make($request->get('password'));
+		$user->save();
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  int                      $id
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update( Request $request, $id ) {
-		//
-	}
+		Session::flush( 'logged_user_id' );
+		Session::flush( 'logged_email' );
+		Auth::logout();
+		Session::flash( 'success', 'successful_password_change' );
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int $id
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy( $id ) {
-		//
+		return back();
 	}
 }

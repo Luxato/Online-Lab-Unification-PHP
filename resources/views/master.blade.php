@@ -80,6 +80,7 @@
                     <li><a href="#"><?= trans('translation.logged_user') ?>: <?= $user->name ?> <i class="fa fa-angle-down"
                                                                                                   aria-hidden="true"></i></a>
                         <ul>
+                            <li><a data-toggle="modal" data-target="#userProfile"><i class="fa fa-user" aria-hidden="true"></i> <?= trans('translation.profile') ?></a></li>
                             <li><a href="<?= url('login/logout') ?>"><i class="fa fa-sign-out" aria-hidden="true"></i> <?= trans('translation.logout') ?></a></li>
                         </ul>
                     </li>
@@ -265,7 +266,7 @@
                                             <label for="password_repeat">Repeat password <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
                                             <input name="password_repeat" type="password" class="form-control" id="password_repeat">
                                         </div>
-                                        <i class="fa fa-asterisk required" aria-hidden="true"></i> - Povinná položka
+                                        <i class="fa fa-asterisk required" aria-hidden="true"></i> - <?= trans('translation.mandatory_field') ?>
                                     </div>
                                 </div>
                             </div>
@@ -355,7 +356,7 @@
                 dataType: "json",
                 data: $('#FormApiKey').serialize(),
                 success: function (response) {
-                  $('#apikey').text(response.key);
+                    $('#apikey').text(response.key);
                 }
             });
         });
@@ -426,6 +427,36 @@
 
 {{--Only logged users can see this--}}
 <?php if(Session::get( 'logged_user_id' )): ?>
+<div id="userProfile" class="modal fade" tabindex="-2" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><?= trans('translation.edit_profile') ?></h4>
+            </div>
+                <form action="/user/profile" method="POST">
+                    <div class="modal-body">
+                            <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
+                            <input name="secret" type="hidden" value="<?= encrypt(Session::get('logged_user_id')) ?>">
+                            <div class="form-group">
+                                <label for="email"><?= trans('translation.password') ?>: <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                <input name="password" type="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><?= trans('translation.password_repeat') ?>: <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                <input name="password_confirmation" type="password" class="form-control">
+                            </div>
+                            <i class="fa fa-asterisk required" aria-hidden="true"></i> - <?= trans('translation.mandatory_field') ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><?= trans('translation.close') ?></button>
+                        <button id="editProfile" type="submit" class="btn btn-success"><?= trans('translation.edit') ?></button>
+                    </div>
+                </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <div id="apiModal" class="modal fade" tabindex="-2" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -444,8 +475,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Zavrieť</button>
-                <button id="generateApiKey" type="button" class="btn btn-primary">Generovať</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?= trans('translation.close') ?></button>
+                <button id="generateApiKey" type="button" class="btn btn-primary"><?= trans('translation.generate') ?></button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

@@ -40,44 +40,6 @@ class ApiController extends Controller {
 				echo json_encode( $result );
 				exit;
 				break;
-			case 'form2mail':/*
-				// Verify and TODO validate required inputs
-				$required = [ 'apikey', 'from', 'to', 'subject', 'redirectOk', 'redirectFalse' ];
-				foreach ( $required as $input ) {
-					if ( ! $request->has( $input ) ) {
-						$result = [
-							'error' => TRUE,
-							'msg'   => 'Missing required field ' . $input
-						];
-						//echo json_encode( $result );
-						//exit;
-					}
-
-				}
-				// Verify token
-				if ( $key_user = Apikey::where( 'key', 'acjkasnckjasbcakjsbcajskb' )->with( 'user' )->get()->first() ) {
-					// Key exists let's send email
-					echo $key_user->toJson();
-
-
-
-					$result = [
-						'error' => FALSE,
-						'msg'   => 'Message has been sent'
-					];
-					echo json_encode( $result );
-					exit;
-				} else {
-					// Key does not exist
-					$result = [
-						'error' => TRUE,
-						'msg'   => 'API key does not exists'
-					];
-					echo json_encode( $result );
-					exit;
-				}
-				// TODO log what happened*/
-				break;
 		}
 	}
 

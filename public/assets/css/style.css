@@ -439,6 +439,10 @@ footer {
     width: 49%;
 }
 
+form {
+    color: #555;
+}
+
 #login-dp .form-group {
     margin-bottom: 10px;
 }
@@ -719,7 +723,11 @@ aside a {
 aside a:hover {
     text-decoration: none;
     background: #333;
-    color: #EF8646;
+    color: #EF8646 !important;
+}
+
+aside a:active, aside a:focus {
+    color: white;
 }
 
 aside ul, .months ul {

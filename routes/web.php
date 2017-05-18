@@ -10,8 +10,8 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-
-Route::post( 'admin/page_create/', 'Admin@do_page_create' );
+// ADMIN resources
+//Route::post( 'admin/page_create/', 'Admin@do_page_create' );
 // Resource for pages
 Route::resource( 'admin/pages', 'Administration\PageController' );
 // Resource for news
@@ -65,6 +65,7 @@ Route::post( '/login/ldap', [
 	'uses' => 'LoginController@login_ldap'
 ] );
 $this->get( '/login/logout', 'LoginController@logout' );
+$this->post( '/user/profile', 'UserController@editProfile' );
 
 Route::get( 'aktualita/{slug}', [ 'uses' => 'Homepage@aktuality' ] );
 Route::get( '{slug}', 'Homepage@index' );
