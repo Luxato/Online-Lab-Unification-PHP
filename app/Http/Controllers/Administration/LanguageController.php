@@ -146,10 +146,10 @@ class LanguageController extends Controller {
 			if(is_file($file))
 				unlink($file); // delete file
 		}
-		// Delete lang
-		if ( $language->delete() ) {
-			\Session::flash( 'success', "Jazyk a všetky jeho súčasti boli úspešne zmazané." );
-		}
-		return back();
-	}
+// Delete lang
+if ( $language->delete() ) {
+	\Session::flash( 'success', "Jazyk a všetky jeho súčasti boli úspešne zmazané." );
+}
+return back();
+}
 }

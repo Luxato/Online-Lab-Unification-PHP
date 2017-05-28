@@ -259,11 +259,11 @@
                                             <input name="email" type="email" class="form-control" id="email">
                                         </div>
                                         <div class="form-group">
-                                            <label for="passoword">Password <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                            <label for="passoword"><?= trans('translation.password') ?> <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
                                             <input name="password" type="password" class="form-control" id="passoword">
                                         </div>
                                         <div class="form-group">
-                                            <label for="password_repeat">Repeat password <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                            <label for="password_repeat"><?= trans('translation.password_repeat') ?> <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
                                             <input name="password_repeat" type="password" class="form-control" id="password_repeat">
                                         </div>
                                         <i class="fa fa-asterisk required" aria-hidden="true"></i> - <?= trans('translation.mandatory_field') ?>
@@ -272,7 +272,7 @@
                             </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><?= trans('translation.close') ?></button>
                         <button type="submit" class="btn btn-success"><?= trans('translation.create') ?></button>
                     </div>
                 </form>

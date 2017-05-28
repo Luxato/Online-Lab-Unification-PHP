@@ -2,7 +2,7 @@
 @extends('master')
 
 @section('title')
-	3D model segway vozidla
+	3D model seagway vozidla
 @stop
 
 @section('seo_description')3D model segway vozidla
