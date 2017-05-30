@@ -99,8 +99,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand logo" href="<?= URL::to( '/' ); ?>"><img src="<?= url('assets/img/logo.png') ?>" alt="logo"
-                                                                            width="37px"></a>
+            <a class="navbar-brand logo" href="<?= URL::to( '/' ); ?>"><img src="<?= url('assets/img/logo.png') ?>" alt="logo" width="37px">
+            </a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -209,7 +209,11 @@
 </div>
     <?php if (Route::getCurrentRoute()->uri() == '/'): ?>
     <header>
-        <a class="header-logo" href="#"><img src="<?= url('assets/img/logo_svk_full.png') ?>" alt="logo"></a>
+        <a class="header-logo" href="#"><img style="display: inline-block;" class="img img-responsive" src="<?= url('assets/img/logo_svk_full.png') ?>" alt="logo">
+            <div class="header-text">
+                Interaktívne Online Laboratórium
+            </div>
+        </a>
         <div id="particles-js" style="height: 200px;"></div>
     </header>
     <?php endif; ?>

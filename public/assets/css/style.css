@@ -488,6 +488,20 @@ form {
     padding: 0 0;
 }
 
+.header-text {
+    display: inline-block;
+    font-size: 28px;
+    text-transform: uppercase;
+    color: #918877;
+    font-family: 'Raleway', sans-serif;
+    position: relative;
+    top: 43px;
+    width: 250px;
+}
+a.header-logo:hover {
+    text-decoration: none;
+}
+
 @media (max-width: 768px) {
     #login-dp {
         background-color: inherit;
@@ -510,7 +524,18 @@ form {
     }
 
     header .header-logo {
-        width: 290px;
+        width: inherit;
+    }
+
+    header .header-logo img {
+        display: none !important;
+    }
+
+    .header-text {
+        display: block;
+        margin: 0 auto;
+        float: none;
+        margin-top: -25px;
     }
 
     header img {
@@ -631,7 +656,7 @@ code {
 .featured-misc {
     position: absolute;
     bottom: 1px;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     width: 95%;
     padding: 6px;
 }
