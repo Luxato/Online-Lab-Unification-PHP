@@ -130,7 +130,7 @@
                                                 <label class="sr-only"
                                                        for="exampleInputEmail2"><?= trans( 'translation.email_address' ) ?></label>
                                                 <input name="email" type="email" class="form-control"
-                                                       id="exampleInputEmail2"
+                                                       id="email"
                                                        placeholder="<?= trans( 'translation.email_address' ) ?>"
                                                        required="">
                                             </div>
@@ -150,8 +150,6 @@
                                     <div class="bottom text-center">
                                         <div><?= trans('translation.or') ?></div>
                                         <button type="button" class="btn btn-default" id="showModal" href="#"><?= trans('translation.create_account') ?></button>
-                                        <div><?= trans('translation.or') ?></div>
-                                        <a class="googleLogin" href="#"><span style="position: absolute;top: 0;color: white;right: 30px;"><?= trans('translation.login_google') ?></span><img height="44" src="<?= url('assets/img/google.png') ?>" alt="google_login"></a>
                                     </div>
                                 </div>
                             </li>
@@ -223,7 +221,7 @@
     </ol>
 </div>
 
-<div class="container">
+<div class="container" style="padding-bottom: 25px;">
     <div class="row">
         <div class="col-sm-12">
             @yield('content')
@@ -256,7 +254,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
-                                            <input name="email" type="email" class="form-control" id="email">
+                                            <input name="_email" type="email" class="form-control" id="email">
                                         </div>
                                         <div class="form-group">
                                             <label for="passoword"><?= trans('translation.password') ?> <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
