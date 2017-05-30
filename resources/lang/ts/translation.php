@@ -1,0 +1,1 @@
+<?php return ['login' => 'askjbckjas','sign_in' => 'ascvasv','email_address' => 'asvasv','password' => 'vasv',];
