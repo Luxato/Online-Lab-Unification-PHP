@@ -224,7 +224,7 @@
         }
 
         var i = <?= sizeof($page['feature']) ?>;
-        var maxLanguages = $('#languageSelection').children('option').length - 2;
+        var maxLanguages = $('#languageSelection').children('option').length - 1;
         console.log(i);
         console.log(maxLanguages);
         if($('#languageSelection').children('option').length == i) {
@@ -258,11 +258,11 @@
                 '<div class="col-lg-6">' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">Nadpis</label>' +
-                '<input class="form-control" name="name[]" type="text" placeholder="Zadajte nadpis sem" required="">' +
+                '<input class="form-control title" name="name[]" type="text" placeholder="Zadajte nadpis sem" required="">' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">URL</label>' +
-                '<input class="form-control" name="url[]" type="text" placeholder="URL" required="">' +
+                '<input class="form-control url" name="url[]" type="text" placeholder="URL" required="">' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label>Lokalizácia</label>' +
@@ -298,6 +298,25 @@
 
             selectBoxes.push({
                 'id': '#langSection' + '' + i
+            });
+
+            $("body").on("click", "input.title", function(){
+                var input = $(this).closest('form').find('input.url');
+                $(this).on('keyup', function () {
+                    var title = $(this).val();
+                    title = title.toLowerCase();
+                    title = title.trim();
+                    title = title.replace(/[^a-zA-Z ]/g, "");
+                    title = title.replace(/ /g, "-");
+                    for (var i = 0, max = title.length; i < max - 1; i++) {
+                        if (title[i] == '_' && title[i + 1]) {
+                            console.log('true');
+                            title = title.replace("__", "-");
+                        }
+                    }
+                    title = diaConvert(title);
+                    input.val(title);
+                });
             });
 
             $('#languageSelection option').each(function (index) {

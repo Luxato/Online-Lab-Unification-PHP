@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Administration;
 
+use App\Actuality;
 use App\Http\Controllers\Controller;
 use App\Language;
 use App\Page;
@@ -59,16 +60,16 @@ class LanguageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
-		$language = Language::findOrFail($id);
-		$file    = fopen( dirname( getcwd() ) . '/resources/lang/'.$language->language_shortcut.'/translation.php', 'r' );
-		$content = str_replace( [
+		$language = Language::findOrFail( $id );
+		$file     = fopen( dirname( getcwd() ) . '/resources/lang/' . $language->language_shortcut . '/translation.php', 'r' );
+		$content  = str_replace( [
 			'<?php',
 			'return',
 			'[',
 			'];'
-		], '', fread( $file, filesize( dirname( getcwd() ) . '/resources/lang/'.$language->language_shortcut.'/translation.php' ) ) );
+		], '', fread( $file, filesize( dirname( getcwd() ) . '/resources/lang/' . $language->language_shortcut . '/translation.php' ) ) );
 		fclose( $file );
-		$content = str_replace( '\'', '', $content );
+		$content  = str_replace( '\'', '', $content );
 		$tmp      = explode( ',', addslashes( $content ) );
 		$resource = [];
 		$i        = 0;
@@ -99,8 +100,8 @@ class LanguageController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id) {
-		Language::update_language($id, $request->title, $request->shortcut, $request->key, $request->value);
+	public function update( Request $request, $id ) {
+		Language::update_language( $id, $request->title, $request->shortcut, $request->key, $request->value );
 
 		\Session::flash( 'success', "Jazyk bol úspešne upravený." );
 
@@ -114,15 +115,17 @@ class LanguageController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id) {
+	public function destroy( $id ) {
 		// Delete respective pages, thier features and actualities.
-		foreach ( Page::with('feature')->get() as $page ) {
+		foreach ( Page::with( 'feature' )->get() as $page ) {
 			$files_to_unlink = [];
-			foreach ($page->feature as $feature) {
-				if ($feature->language_id == $id) {
-					if (isset($feature->content_file)) $files_to_unlink[] = $feature->content_file;
+			foreach ( $page->feature as $feature ) {
+				if ( $feature->language_id == $id ) {
+					if ( isset( $feature->content_file ) ) {
+						$files_to_unlink[] = $feature->content_file;
+					}
 					// Detach feature.
-					$page->feature()->detach($feature->id);
+					$page->feature()->detach( $feature->id );
 					// Delete feature.
 					$feature->delete();
 					foreach ( $files_to_unlink as $content_file ) {
@@ -131,25 +134,32 @@ class LanguageController extends Controller {
 				}
 			}
 			// If it was the last feature, remove page as well.
-			if (sizeof($page->feature) == 0) {
-			    $page->delete();
+			if ( sizeof( $page->feature ) == 0 ) {
+				$page->delete();
 			}
 		}
-		// TODO
-		// Delete actualities
-		// Unlink thumbnails
-		exit;
-		$language    = Language::findOrFail( $id );
-		// Delete directory
-		$files = glob(dirname( getcwd() ) . '/resources/lang/' . $language->language_shortcut);
-		foreach($files as $file){ // iterate files
-			if(is_file($file))
-				unlink($file); // delete file
+		// Unlink actualities thumbnails
+		foreach ( Actuality::where( 'language', $id ) as $actuality ) {
+			if ( $actuality->thumbnail_path == 'uploads/default.jpg' ) {
+				continue;
+			}
+			if ( ! file_exists( dirname( getcwd() ) . '/public/' . $actuality->thumbnail_path ) ) {
+				unlink( dirname( getcwd() ) . '/public/' . $actuality->thumbnail_path );
+			}
 		}
-// Delete lang
-if ( $language->delete() ) {
-	\Session::flash( 'success', "Jazyk a všetky jeho súčasti boli úspešne zmazané." );
-}
-return back();
-}
+		$language = Language::findOrFail( $id );
+		// Delete directory
+		$files = glob( dirname( getcwd() ) . '/resources/lang/' . $language->language_shortcut );
+		foreach ( $files as $file ) { // iterate files
+			if ( is_file( $file ) ) {
+				unlink( $file );
+			} // delete file
+		}
+		// Delete lang
+		if ( $language->delete() ) {
+			\Session::flash( 'success', "Jazyk a všetky jeho súčasti boli úspešne zmazané." );
+		}
+
+		return back();
+	}
 }

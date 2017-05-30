@@ -1,7 +1,7 @@
 
 @extends('master')
 
-@section('title') test 5 @stop
+@section('title') ascascascsa @stop
 
 @section('seo_description') @stop
 
