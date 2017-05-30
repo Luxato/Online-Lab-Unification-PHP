@@ -25,7 +25,7 @@ class ActualitiesController extends Controller {
 	public function index() {
 		return view( 'administration/actualities/actualities_list', [
 			'actualities' => Actuality::getAll_admin()
-		]);
+		] );
 	}
 
 	/**
@@ -54,9 +54,9 @@ class ActualitiesController extends Controller {
 		$actuality->language = $request->language[0];
 
 		// Create category
-		if ($request->category == 'new') {
+		if ( $request->category == 'new' ) {
 			// If we have to create new category
-			$category = new Category();
+			$category       = new Category();
 			$category->name = $request->newCategory;
 			$category->save();
 			$actuality->category = $category->id;
@@ -90,11 +90,10 @@ class ActualitiesController extends Controller {
 	public function edit( $id ) {
 
 
-
 		return view( 'administration/actualities/actualities_edit', [
 			'categories' => Category::all(),
 			'languages'  => Language::all(),
-			'actuality'  => Actuality::findOrFail($id)
+			'actuality'  => Actuality::findOrFail( $id )
 		] );
 	}
 
@@ -107,15 +106,15 @@ class ActualitiesController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, $id ) {
-		$actuality           = Actuality::findOrFail($id);
+		$actuality           = Actuality::findOrFail( $id );
 		$actuality->name     = $request->name;
 		$actuality->content  = $request->cont;
 		$actuality->language = $request->language;
 
 		// Create category
-		if ($request->category == 'new') {
+		if ( $request->category == 'new' ) {
 			// If we have to create new category
-			$category = new Category();
+			$category       = new Category();
 			$category->name = $request->newCategory;
 			$category->save();
 			$actuality->category = $category->id;
@@ -123,10 +122,6 @@ class ActualitiesController extends Controller {
 			$actuality->category = $request->category;
 		}
 
-		/*if ( $request->infinity !== 'on' ) {
-			$actuality->from = $request->startDate;
-			$actuality->to   = $request->endDate;
-		}*/
 		if ( $filename = $this->uploadFile( $actuality, $request->file( 'thumbnail' ) ) ) {
 			$actuality->thumbnail_path = 'uploads/' . $filename;
 		}
@@ -146,22 +141,27 @@ class ActualitiesController extends Controller {
 	 * @return bool
 	 */
 	public function destroy( $id ) {
-		echo "mazem aktualitu s id $id";
-		// TODO vymaz obrazok
-		// Potom jazyk, kategoriu a na koniec aktualitu
+		$actuality   = Actuality::findOrFail( $id );
+		$actualities = Actuality::where( 'category', $actuality->category )->get();
+		$category = Category::find($actuality->category);
+		$delete_category = FALSE;
+		if (sizeof($actualities) == 1) {
+			$delete_category = TRUE;
+		}
+		if ( $actuality->delete() ) {
+			if ( $actuality->thumbnail_path != 'uploads/default.jpg' ) {
+				if ( file_exists( dirname( getcwd() ) . '/public/' . $actuality->thumbnail_path ) ) {
+					unlink( dirname( getcwd() ) . '/public/' . $actuality->thumbnail_path );
+				}
+			}
+			if ($delete_category) {
+				$category->delete();
+			}
 
-		$actuality = Actuality::findOrFail( $id );
-		echo $actuality->thumbnail_path;
-		if ($actuality->delete()) {
-			unlink( dirname( getcwd() ) .'/public/'. $actuality->thumbnail_path );
 			Session::flash( 'success', "Aktualita bola úspešne vymazaná." );
 
 			return redirect( 'admin/actualities' );
-		} else {
-			// THROW ERROR
 		}
-
-
 	}
 
 	private function uploadFile( $actuality, $file ) {

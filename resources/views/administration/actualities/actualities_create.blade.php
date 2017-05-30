@@ -37,16 +37,6 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group" style="height: 59px;">
-                    <label for="exampleInputEmail1">Do kedy je aktualita aktuálna</label>
-                    <br>
-                    <input id="infinityCheckbox" type="checkbox" name="infinity" value="on" checked> Navždy
-                    <div id="reportrange" class="disabled pull-right"
-                         style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-                        <span></span> <b class="caret"></b>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label for="categorySelection">Kategória</label>
                     <select id="categorySelection" name="category" class="form-control" required="">
@@ -104,25 +94,9 @@
             });
             $('#nav-news').addClass('active');
 
-            var start = moment().subtract(29, 'days');
-            var end = moment();
-
             function cb(start, end) {
                 $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
             }
-
-            $('#reportrange').daterangepicker({
-                startDate: start,
-                endDate: end,
-                ranges: {
-                    'Dnes': [moment(), moment()],
-                    'Tento mesiac': [moment().startOf('month'), moment().endOf('month')]
-                }
-            }, cb);
-            cb(start, end);
-            $('#infinityCheckbox').on('change', function(){
-                $('#reportrange').toggleClass('disabled');
-            });
         });
 
 

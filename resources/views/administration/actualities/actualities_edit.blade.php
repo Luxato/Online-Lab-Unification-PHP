@@ -91,6 +91,7 @@ Pridať novú aktualitu
 
 <script>
     $(function () {
+        $('#newCategory').attr('readonly', true);
         $('#categorySelection').change(function () {
             if ($( "#categorySelection option:selected" ).val() == 'new') {
                 $('#newCategory').attr('readonly', false);
