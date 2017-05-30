@@ -29,6 +29,9 @@
         <tbody>
 		<?php foreach ( $pages as $page ): $i = 0; ?>
             <?php
+                if (!isset($page['feature'][0])) {
+                    continue;
+                }
                 if ($page['feature'][0]['title'] == 'Aktuality' || $page['feature'][0]['title'] == 'Autentifikácia') {
                     continue;
                 }
@@ -88,7 +91,8 @@
             "info": true,
             "sort": true,
             "autoWidth": false,
-            "pageLength": 20
+            "pageLength": 40,
+            "order": [[ 2, "desc" ]]
         });
     });
     setTimeout(function () {

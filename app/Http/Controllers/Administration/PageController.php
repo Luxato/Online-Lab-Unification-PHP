@@ -95,9 +95,7 @@ class PageController extends Controller {
 		$inputs = [
 			'title'           => 'name',
 			'controller'      => 'url',
-			'language_id'     => 'language',
-			'seo_description' => 'seo_description',
-			'keywords'        => 'keywords'
+			'language_id'     => 'language'
 		];
 		$page   = new Page;
 		$page->save();
@@ -128,15 +126,11 @@ class PageController extends Controller {
 		$template     = '
 @extends(\'master\')
 
-@section(\'title\')
-	' . $title . '
-@stop
+@section(\'title\') ' . $title . ' @stop
 
-@section(\'title\')' . $description . '
-@stop
+@section(\'seo_description\')' . $description . ' @stop
 
-@section(\'title\')' . $keywords . '
-@stop
+@section(\'keywords\')' . $keywords . ' @stop
 
 @section(\'content\')
     ' . htmlspecialchars_decode( htmlspecialchars( $content ) ) . '
@@ -200,9 +194,7 @@ class PageController extends Controller {
 			'title'           => 'name',
 			'controller'      => 'url',
 			'language_id'     => 'language',
-			'content_file'    => 'file',
-			'seo_description' => 'seo_description',
-			'keywords'        => 'keywords'
+			'content_file'    => 'file'
 		];
 		$page      = Page::findOrFail( $id );
 		$to_delete = [];
@@ -264,7 +256,9 @@ class PageController extends Controller {
 				$feature->delete();
 			}
 			foreach ( $to_delete as $content_file ) {
-				unlink( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $content_file . '.blade.php' );
+				if ( file_exists( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $content_file . '.blade.php' ) && $content_file ) {
+					unlink( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $content_file . '.blade.php' );
+				}
 			}
 
 			Session::flash( 'success', "Stránka bola úspešne zmazaná." );
