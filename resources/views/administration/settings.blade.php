@@ -62,7 +62,7 @@
                                                             <?= $page->title ?></option>
                                                         <?php endif; ?>
                                                     <?php else: ?>
-                                                    <option value="<?= $language->language_shortcut . '_' . $page->section_id ?>" <?= isset($default_pages[$language->language_shortcut]) ? $default_pages[$language->language_shortcut] == $page->section_id ? 'selected' : '' : '' ?>>
+                                                    <option value="<?= $language->language_shortcut . '_' . $page->section_id ?>" <?= isset($default_pages[$language->language_shortcut]) ? $default_pages[$language->language_shortcut] == $page->section_id ? 'selected' : '' : 'selected' ?>>
                                                         <?= $page->title ?></option>
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>

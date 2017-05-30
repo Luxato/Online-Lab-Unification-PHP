@@ -148,13 +148,13 @@ class LanguageController extends Controller {
 			}
 		}
 		$language = Language::findOrFail( $id );
-		// Delete directory
-		$files = glob( dirname( getcwd() ) . '/resources/lang/' . $language->language_shortcut );
-		foreach ( $files as $file ) { // iterate files
-			if ( is_file( $file ) ) {
-				unlink( $file );
-			} // delete file
+		// Delete directory and file
+		$directory = dirname( getcwd() ) . '/resources/lang/' . $language->language_shortcut;
+		if ( is_file( $directory . '/translation.php' ) ) {
+			unlink( $directory . '/translation.php' );
+			rmdir($directory);
 		}
+		exit;
 		// Delete lang
 		if ( $language->delete() ) {
 			\Session::flash( 'success', "Jazyk a všetky jeho súčasti boli úspešne zmazané." );
