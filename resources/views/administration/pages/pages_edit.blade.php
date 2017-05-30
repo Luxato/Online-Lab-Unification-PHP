@@ -277,7 +277,7 @@
                 '</div>' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">Kľúčové slová</label>' +
-                '<input name="keyboards[]" class="form-control" type="text" placeholder="Kľúčové slová oddelené čiarkou">' +
+                '<input name="keywords[]" class="form-control" type="text" placeholder="Kľúčové slová oddelené čiarkou">' +
                 '</div>' +
                 '</div>' +
                 '<div class="col-md-12">' +

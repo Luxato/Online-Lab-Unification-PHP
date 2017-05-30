@@ -92,6 +92,9 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\RESPONSE
 	 */
 	public function store( Request $request ) {
+		echo '<pre>';
+		print_r( $request->all() );
+		echo '</pre>';
 		$inputs = [
 			'title'           => 'name',
 			'controller'      => 'url',
