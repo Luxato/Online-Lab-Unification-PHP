@@ -74,7 +74,8 @@
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "pageLength": 20
+            "pageLength": 20,
+            "order": [[ 3, "desc" ]]
         });
     });
     setTimeout(function () {

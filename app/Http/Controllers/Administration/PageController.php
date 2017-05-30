@@ -156,15 +156,6 @@ class PageController extends Controller {
 				if ( ! file_exists( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $fileName ) ) {
 					continue;
 				}
-				$file = fopen( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $fileName, 'r' );
-
-				$content = str_replace( [], '', fread( $file, filesize( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $features['content_file'] . '.blade.php' ) ) );
-				$content = htmlspecialchars( $content );
-				fclose( $file );
-				$pos                 = strpos( $content, "@section('content')" );
-				$content             = substr( $content, $pos + 19, strlen( $content ) );
-				$pos                 = strpos( $content, "@stop" );
-				$features['content'] = 'blablabla';
 			} catch( Exception $e ) {
 
 			}
@@ -193,8 +184,7 @@ class PageController extends Controller {
 		$inputs    = [
 			'title'           => 'name',
 			'controller'      => 'url',
-			'language_id'     => 'language',
-			'content_file'    => 'file'
+			'language_id'     => 'language'
 		];
 		$page      = Page::findOrFail( $id );
 		$to_delete = [];
@@ -217,7 +207,7 @@ class PageController extends Controller {
 				$language_shortcut = Language::findOrFail( $request['language'][ $i ] )->language_shortcut;
 				if ( $request->get( 'noContent' ) !== 'on' ) {
 					$feature->content_file = $request['url'][0] . '_' . $language_shortcut;
-					// Rename old files to new names.
+					// Rename old files to new names.s
 					rename(
 						dirname( getcwd() ) . '/resources/views/user_created_pages/' . $to_delete[ $i ] . '.blade.php',
 						dirname( getcwd() ) . '/resources/views/user_created_pages/' . $feature->content_file . '.blade.php'

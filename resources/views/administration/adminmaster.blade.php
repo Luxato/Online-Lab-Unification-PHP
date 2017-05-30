@@ -171,7 +171,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-right">
-                                    <a class="btn btn-default btn-flat" href="{{ url('/logout') }}"
+                                    <a class="btn btn-default btn-md" href="{{ url('/logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         Odhlásiť

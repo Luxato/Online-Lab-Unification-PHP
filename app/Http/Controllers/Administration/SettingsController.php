@@ -48,7 +48,8 @@ class SettingsController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request ) {
-		if (strlen($request->get('password')) > 5) {
+		$password_change = FALSE;
+		if (strlen($request->get('password')) > 6) {
 			$this->validate($request, [
 				'password' => 'required|confirmed|min:6'
 			]);
@@ -58,6 +59,7 @@ class SettingsController extends Controller {
 			] )->first();
 			$user->password = bcrypt($request->get('password'));
 			$user->save();
+			$password_change = TRUE;
 		}
 		$settings = Setting::all();
 
@@ -73,6 +75,14 @@ class SettingsController extends Controller {
 		$pages                = $settings[1];
 		$pages->setting_value = json_encode( $landing_pages );
 		$pages->save();
+
+		if ($password_change) {
+			Session::flush( 'logged_user_id' );
+			Session::flush( 'logged_email' );
+			\Auth::logout();
+			Session::flash( 'success', 'successful_logout' );
+			redirect('/login');
+		}
 
 		\Session::flash( 'success', "Nastavenia boli aktualizované." );
 

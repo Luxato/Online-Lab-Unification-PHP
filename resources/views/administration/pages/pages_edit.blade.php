@@ -28,6 +28,11 @@
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
+                    <label for="exampleInputEmail1">Nadpis</label>
+                    <input id="title-input" class="form-control" name="name[]" type="text"
+                           placeholder="Zadajte nadpis sem" required="" value="<?= $page['feature'][0]['title'] ?>">
+                </div>
+                <div class="form-group">
                     <label for="exampleInputEmail1">URL</label>
                     <input id="url-input" class="form-control" name="url[]" type="text" placeholder="URL" required=""
                            value="<?= $page['feature'][0]['controller'] ?>">
@@ -39,16 +44,6 @@
                         <option value="<?= $value['id']  ?>" <?= $page['feature'][0]['language_id'] == $value['id'] ? 'selected' : '' ?>><?= $value['language_title'] ?></option>
 						<?php endforeach; ?>
                     </select>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">SEO popis</label>
-                    <textarea name="seo_description[]" class="form-control" rows="3" placeholder="SEO popis"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Kľúčové slová</label>
-                    <input name="keywords[]" class="form-control" type="text" placeholder="Kľúčové slová oddelené čiarkou">
                 </div>
             </div>
             <div class="col-md-12">
@@ -92,15 +87,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">SEO nadpis</label>
-                                <input class="form-control disabled" type="text" placeholder="SEO nadpis">
+                                <input class="form-control" type="text" placeholder="SEO nadpis">
                                 </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">SEO popis</label>
-                                <textarea class="form-control disabled" rows="3" placeholder="SEO popis"></textarea>
+                                <textarea class="form-control" rows="3" placeholder="SEO popis"></textarea>
                                 </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Kľúčové slová</label>
-                                <input class="form-control disabled" type="text" placeholder="Kľúčové slová oddelené čiarkou">
+                                <input class="form-control" type="text" placeholder="Kľúčové slová oddelené čiarkou">
                                 </div>
                             </div>
                         <div class="col-md-12">
@@ -126,7 +121,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
     <script src="<?= url( 'assets/js/switchery.min.js' ) ?>"></script>
     <script>
-        /*function initEditor(){
+        function initEditor(){
             $('.editor').summernote({
                 height: 150,   //set editable area's height
                 codemirror: { // codemirror options
@@ -136,7 +131,7 @@
         }
         $(function(){
             initEditor();
-        });*/
+        });
 
         var elem = document.querySelector('.js-switch');
         var switchery = new Switchery(elem, {size: 'small'});
@@ -278,11 +273,11 @@
                 '<div class="col-md-6">' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">SEO popis</label>' +
-                '<textarea name="seo_description[]" class="form-control disabled" rows="3" placeholder="SEO popis"></textarea>' +
+                '<textarea name="seo_description[]" class="form-control" rows="3" placeholder="SEO popis"></textarea>' +
                 '</div>' +
                 '<div class="form-group">' +
                 '<label for="exampleInputEmail1">Kľúčové slová</label>' +
-                '<input name="keyboards[]" class="form-control disabled" type="text" placeholder="Kľúčové slová oddelené čiarkou">' +
+                '<input name="keyboards[]" class="form-control" type="text" placeholder="Kľúčové slová oddelené čiarkou">' +
                 '</div>' +
                 '</div>' +
                 '<div class="col-md-12">' +

@@ -46,9 +46,6 @@ Route::post( '/worker/do_navigation_change_order', [
 	'uses'       => 'Worker@do_navigation_change_order'
 ] );
 
-/*Route::group(['middleware' => ['web']], function () {
-});*/
-
 // Administration authentication Routes...
 $this->get( 'login', 'Auth\LoginController@showLoginForm' )->name( 'login' );
 $this->post( 'login', 'Auth\LoginController@login' );

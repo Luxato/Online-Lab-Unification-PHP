@@ -147,12 +147,12 @@
             });
 
             $('#nav-navigacia').addClass('active');
-            // TODO REMOVE !@#$%$^%&&&&&&&&&*)/*-+
             $('#title-input').on('keyup', function () {
                 var title = $(this).val();
                 title = title.toLowerCase();
                 title = title.trim();
                 title = title.replace(/ /g, "-");
+                title = title.replace(/[^a-zA-Z ]/g, "");
                 for (var i = 0, max = title.length; i < max - 1; i++) {
                     if (title[i] == '_' && title[i + 1]) {
                         console.log('true');
@@ -274,6 +274,7 @@
                 title = title.toLowerCase();
                 title = title.trim();
                 title = title.replace(/ /g, "-");
+                title = title.replace(/[^a-zA-Z ]/g, "");
                 for (var i = 0, max = title.length; i < max - 1; i++) {
                     if (title[i] == '_' && title[i + 1]) {
                         console.log('true');

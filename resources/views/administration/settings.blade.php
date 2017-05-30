@@ -20,18 +20,18 @@
     <div class="col-md-12">
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="home">
-                <form name="finalForm" id="finalForm" action="<?= URL( 'admin/settings/' ) ?>" method="POST">
+                <form name="finalForm" id="finalForm" action="<?= URL( 'admin/settings/' ) ?>" method="POST" data-parsley-validate="">
                     <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
                     <div class="col-md-6">
                         <br>
                         <h2>Zmena hesla administrátora</h2>
                         <div class="form-group">
                             <label>Nové heslo</label>
-                            <input name="password" type="password" class="form-control" placeholder="Nové heslo">
+                            <input name="password" type="password" class="form-control" placeholder="Nové heslo" data-parsley-minlength="6">
                         </div>
                         <div class="form-group">
                             <label>Nové heslo znovu</label>
-                            <input name="password_confirmation" type="password" class="form-control" placeholder="Nové heslo znovu">
+                            <input name="password_confirmation" type="password" class="form-control" placeholder="Nové heslo znovu" data-parsley-minlength="6">
                         </div>
                         <br>
                         <h2>Defaultný jazyk stránky</h2>
@@ -75,19 +75,26 @@
                 </form>
             </div>
             <div role="tabpanel" class="tab-pane fade in" id="profile">..asc</div>
+            <div class="col-md-12">
+                <button id="sendForm" type="submit" class="btn btn-success btn-md pull-right" >Uložiť
+                </button>
+            </div>
         </div>
     </div>
     </div>
 
-    <div class="col-md-10">
-        <button id="sendForm" type="submit" class="btn btn-success btn-sm pull-right" >Uložiť
-        </button>
-    </div>
 @stop
 
 @section('custom_scripts') {{--JS specified only for this site--}}
 
 <script>
+    $(function () {
+        $('#finalForm').parsley().on('field:validated', function() {
+            var ok = $('.parsley-error').length === 0;
+            $('.bs-callout-info').toggleClass('hidden', !ok);
+            $('.bs-callout-warning').toggleClass('hidden', ok);
+        })
+    });
     $(function(){
     	$('#sendForm').on('click', function(){
     	    $('#finalForm').submit();

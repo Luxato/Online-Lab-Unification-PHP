@@ -7,7 +7,6 @@ use DB;
 class Actuality extends Model {
 	protected $table = 'actualities';
 
-
 	public function language() {
 		return $this->hasOne('App\Language');
 	}
@@ -26,6 +25,12 @@ class Actuality extends Model {
 									JOIN languages as l ON a.language = l.id
 									JOIN categories as c ON a.category = c.id
 									WHERE l.language_shortcut = '$locale'" ) );
+	}
+
+	public static function getAll_admin() {
+		return DB::select( DB::raw( "SELECT a.id, a.name, a.content, a.thumbnail_path, a.created_at, l.language_title ,l.language_shortcut, c.id as catID ,c.name as catname FROM actualities as a
+									JOIN languages as l ON a.language = l.id
+									JOIN categories as c ON a.category = c.id" ) );
 	}
 
 	public static function getActuality($id) {

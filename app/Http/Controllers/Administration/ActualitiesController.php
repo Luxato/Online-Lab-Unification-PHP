@@ -24,7 +24,7 @@ class ActualitiesController extends Controller {
 	 */
 	public function index() {
 		return view( 'administration/actualities/actualities_list', [
-			'actualities' => Actuality::getAll()
+			'actualities' => Actuality::getAll_admin()
 		]);
 	}
 
