@@ -1,4 +1,5 @@
 <?php return [
+	'app_name'             => 'Interaktívne Online Laboratórium',
 	'login'             => 'Prihlásenie',
 	'sign_in'           => 'Prihlásiť sa',
 	'email_address'     => 'Email',

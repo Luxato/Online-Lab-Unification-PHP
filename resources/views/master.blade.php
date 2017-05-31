@@ -211,7 +211,7 @@
     <header>
         <a class="header-logo" href="#"><img style="display: inline-block;" class="img img-responsive" src="<?= url('assets/img/logo_svk_full.png') ?>" alt="logo">
             <div class="header-text">
-                Interaktívne Online Laboratórium
+                <?= trans('translation.app_name') ?>
             </div>
         </a>
         <div id="particles-js" style="height: 200px;"></div>

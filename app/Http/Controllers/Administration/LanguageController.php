@@ -154,7 +154,6 @@ class LanguageController extends Controller {
 			unlink( $directory . '/translation.php' );
 			rmdir($directory);
 		}
-		exit;
 		// Delete lang
 		if ( $language->delete() ) {
 			\Session::flash( 'success', "Jazyk a všetky jeho súčasti boli úspešne zmazané." );
