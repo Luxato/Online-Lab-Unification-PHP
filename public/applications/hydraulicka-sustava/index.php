@@ -60,7 +60,7 @@
 		position:fixed;
 		top:400px;
 		left:100px;
-		color:white;
+		color: black;
 		}
 
 	#pid{
@@ -80,13 +80,13 @@
 		}
 
 	#placeholder{
-		width:400px;
-		height:200px;
-		position:absolute;
-		/*bottom:20px;
-		left:50px;*/
+        width: 400px;
+        height: 200px;
+        position: relative;
         right: 0;
-		z-index:3
+        z-index: 3;
+        display: none;
+        margin: 35px;
 	}
 	canvas {
         margin: 0 auto;
@@ -104,8 +104,8 @@
 	//var container;
 	var camera,CubeCamera, scene, renderer;
 	var mouseX = 0, mouseY = 0;
-	var dimx=window.innerWidth /2;
-	var dimy=window.innerHeight / 2;
+	var dimx=window.innerWidth / 1.2;
+	var dimy=window.innerHeight / 1.5;
 
 	var windowHalfX = window.innerWidth / 2;
 	var windowHalfY = window.innerHeight / 2;
@@ -2017,7 +2017,7 @@
 		}
 		xmlhttp2.onreadystatechange=function()
 		{
-			if (xmlhttp2.readyState==1) document.getElementById("testovacie_pole").innerHTML+="Loading";
+			if (xmlhttp2.readyState==1) document.getElementById("testovacie_pole").innerHTML+="Loading...";
 			if (xmlhttp2.readyState==4 && xmlhttp2.status==200)
 			{
 				var string2=xmlhttp2.responseText;
@@ -2111,6 +2111,7 @@
 		};
 	    //plot = $("#placeholder").plot(graf, options).data("plot");
 		plot=$.plot($("#placeholder"), [{label:"h1",data:graf},{label:"h2",data:graf2},{label:"h3",data:graf3}] ,options);
+        $("#placeholder").css('display', 'inline-block');
 		//plot.setupGrid();
 		control2=setInterval(function(){animTimer(pole,objekt1,objekt2,objekt3)},40);
 		j=0;

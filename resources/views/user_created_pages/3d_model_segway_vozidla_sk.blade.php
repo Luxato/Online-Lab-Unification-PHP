@@ -1,8 +1,7 @@
-
 @extends('master')
 
 @section('title')
-	3D model seagway vozidla
+    3D model seagway vozidla
 @stop
 
 @section('seo_description')3D model segway vozidla
@@ -12,8 +11,8 @@
 @stop
 
 @section('content')
-				<?php
-                    $path = './applications/segway/';
-                    include $path . 'content.php';
-				?>
+	<?php
+	$path = './applications/segway/';
+	include $path . 'content.php';
+	?>
 @stop

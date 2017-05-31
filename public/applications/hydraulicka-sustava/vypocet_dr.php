@@ -44,7 +44,7 @@
 
 function data2array($request,$response)
 { $arr=json_decode($request, true);
-	$no = count($arr[params][outputVariables]);
+	$no = count($arr['params']['outputVariables']);
 	foreach ($response->result[0] as &$value)
 	{ $outputArray[0][] = $value->x;
 		$outputArray[1][] = $value->y;
@@ -78,12 +78,11 @@ function data2array($request,$response)
   					},
   					"id": 1
   				}';
-echo "$file_name_with_full_path";
-  	// send request    
+  	// send request
   	$ch = curl_init();
   	curl_setopt($ch, CURLOPT_URL, $url);
   	curl_setopt($ch, CURLOPT_POST,1);
-  	curl_setopt($ch, CURLOPT_POSTFIELDS, array("jsonrpc" => $request, "filename" => "@".$file_name_with_full_path));
+  	curl_setopt($ch, CURLOPT_POSTFIELDS, array("jsonrpc" => $request, "filename" => new CurlFile($file_name_with_full_path)));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
   	$response = curl_exec($ch);
   	curl_close ($ch);
