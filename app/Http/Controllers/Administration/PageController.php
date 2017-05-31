@@ -92,13 +92,10 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\RESPONSE
 	 */
 	public function store( Request $request ) {
-		echo '<pre>';
-		print_r( $request->all() );
-		echo '</pre>';
 		$inputs = [
-			'title'           => 'name',
-			'controller'      => 'url',
-			'language_id'     => 'language'
+			'title'       => 'name',
+			'controller'  => 'url',
+			'language_id' => 'language'
 		];
 		$page   = new Page;
 		$page->save();
@@ -183,25 +180,37 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, $id ) {
+		echo '<pre>';
+		print_r( $request->all() );
+		echo '</pre>';
 		// Define allowed inputs
-		$inputs    = [
-			'title'           => 'name',
-			'controller'      => 'url',
-			'language_id'     => 'language'
+		$inputs          = [
+			'title'       => 'name',
+			'controller'  => 'url',
+			'language_id' => 'language'
 		];
-		$page      = Page::findOrFail( $id );
-		$to_delete = [];
-		$i         = 0;
+		$page            = Page::findOrFail( $id );
+		$to_rename       = [];
+		$files_to_delete = [];
+		$i               = 0;
 		foreach ( $page->feature()->get()->toArray() as $feature ) {
 			$feature_to_delete[] = Feature::find( $feature['pivot']['feature_id'] );
-			$to_delete[]         = $feature_to_delete[ $i ]['content_file'];
+			$files_to_delete[]   = $feature_to_delete[ $i ]['content_file'];
+			if ( $i != $request->get( 'originalSize' ) ) { // If we created new localization
+				$to_rename[] = $feature_to_delete[ $i ]['content_file'];
+			}
 			$i ++;
 		}
+		echo '<pre>';
+		print_r( $to_rename );
+		echo '</pre>';
+		//exit;
 		if ( $page->feature()->detach() ) {
 			// Delete old features
 			foreach ( $feature_to_delete as $feature ) {
 				$feature->delete();
 			}
+			$l = 0;
 			for ( $i = 0; $i < sizeof( $request['name'] ); $i ++ ) {
 				$feature = new Feature();
 				foreach ( $inputs as $column => $input ) {
@@ -210,15 +219,31 @@ class PageController extends Controller {
 				$language_shortcut = Language::findOrFail( $request['language'][ $i ] )->language_shortcut;
 				if ( $request->get( 'noContent' ) !== 'on' ) {
 					$feature->content_file = $request['url'][0] . '_' . $language_shortcut;
-					// Rename old files to new names.s
-					rename(
-						dirname( getcwd() ) . '/resources/views/user_created_pages/' . $to_delete[ $i ] . '.blade.php',
-						dirname( getcwd() ) . '/resources/views/user_created_pages/' . $feature->content_file . '.blade.php'
-					);
+					if ( isset( $to_rename[ $i ] ) ) {
+						if ( ( $key = array_search( $to_rename[ $i ], $files_to_delete ) ) !== FALSE ) {
+							unset( $files_to_delete[ $key ] );
+						}
+						// Rename old files to new names
+						rename(
+							dirname( getcwd() ) . '/resources/views/user_created_pages/' . $to_rename[ $i ] . '.blade.php',
+							dirname( getcwd() ) . '/resources/views/user_created_pages/' . $feature->content_file . '.blade.php'
+						);
+					} else {
+						// Create file
+						$this->create_page_file( $feature->content_file . '.blade.php', $feature->title, $request['cont'][ $l ], $request['seo_description'][ $l ], $request['keywords'][ $l ] );
+						$l ++;
+					}
+				} else {
+					$feature->controller = NULL;
 				}
 				$feature->save();
 				$new_features[] = $feature->id;
 				$page->feature()->attach( $feature->id );
+			}
+			foreach ( $files_to_delete as $file ) {
+				if ( file_exists( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $file . '.blade.php' ) && $file ) {
+					unlink( dirname( getcwd() ) . '/resources/views/user_created_pages/' . $file . '.blade.php' );
+				}
 			}
 			Session::flash( 'success', "Stránka bola úspešne upravená." );
 

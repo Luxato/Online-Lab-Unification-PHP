@@ -87,15 +87,7 @@ INSERT INTO `features` (`id`, `language_id`, `title`, `content_file`, `controlle
 (62,	0,	'Algebra API',	'algebra-api_sk',	'algebra-api'),
 (63,	0,	'Stavový priestor',	'stavovy-priestor_sk',	'stavovy-priestor'),
 (98,	0,	'3D model hydraulickej sústavy',	'3d_model_hydraulickej_sustavy_sk',	'3d_model_hydraulickej_sustavy'),
-(99,	0,	'3D Model segway vozidla',	'3d_model_segway_vozidla_sk',	'3d_model_segway_vozidla'),
-(158,	9,	'Aktuality',	NULL,	'aktuality'),
-(159,	9,	'Login',	NULL,	'cuslogin'),
-(165,	0,	'aj slovenska aj anglicka',	'aj-slovenska-aj-anglicka_sk',	'aj-slovenska-aj-anglicka'),
-(166,	0,	'aj slovenska aj anglicka',	'aj-slovenska-aj-anglicka_sk',	'aj-slovenska-aj-anglicka'),
-(167,	0,	'aj slovenska aj anglicka',	'aj-slovenska-aj-anglicka_sk',	'aj-slovenska-aj-anglicka'),
-(168,	0,	'aj slovenska aj anglicka',	'aj-slovenska-aj-anglicka_sk',	'aj-slovenska-aj-anglicka'),
-(171,	10,	'Aktuality',	NULL,	'aktuality'),
-(172,	10,	'Login',	NULL,	'cuslogin');
+(99,	0,	'3D Model segway vozidla',	'3d_model_segway_vozidla_sk',	'3d_model_segway_vozidla');
 
 DROP TABLE IF EXISTS `feature_page`;
 CREATE TABLE `feature_page` (
@@ -132,11 +124,7 @@ INSERT INTO `feature_page` (`id`, `feature_id`, `page_id`) VALUES
 (63,	62,	65),
 (64,	63,	66),
 (97,	98,	76),
-(98,	99,	75),
-(148,	158,	54),
-(149,	159,	55),
-(157,	171,	54),
-(158,	172,	55);
+(98,	99,	75);
 
 DROP TABLE IF EXISTS `languages`;
 CREATE TABLE `languages` (
@@ -150,9 +138,7 @@ CREATE TABLE `languages` (
 
 INSERT INTO `languages` (`id`, `language_title`, `language_shortcut`, `updated_at`, `created_at`) VALUES
 (0,	'Slovenčina',	'sk',	'2017-03-23 23:40:40',	'0000-00-00 00:00:00'),
-(1,	'English',	'en',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
-(9,	'Na zmazanie',	'zm',	'2017-05-30 17:04:22',	'2017-05-30 17:04:22'),
-(10,	'testovaci jazyk',	'ts',	'2017-05-30 19:28:38',	'2017-05-30 19:28:38');
+(1,	'English',	'en',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00');
 
 DELIMITER ;;
 
@@ -206,12 +192,7 @@ INSERT INTO `navigation` (`section_id`, `order`, `parent_id`, `updated_at`, `cre
 (65,	7,	9,	'2017-05-30 19:24:13',	'2017-05-10 08:03:53'),
 (66,	6,	9,	'2017-05-30 19:24:13',	'2017-05-10 08:09:18'),
 (75,	3,	9,	'2017-05-30 19:24:13',	'2017-05-14 21:09:09'),
-(76,	2,	9,	'2017-05-30 19:24:13',	'2017-05-15 14:37:38'),
-(112,	1,	NULL,	'2017-05-30 16:55:27',	'2017-05-30 16:55:27'),
-(116,	1,	NULL,	'2017-05-30 19:13:24',	'2017-05-30 19:13:24'),
-(117,	1,	NULL,	'2017-05-30 19:15:45',	'2017-05-30 19:15:45'),
-(118,	1,	NULL,	'2017-05-30 19:15:59',	'2017-05-30 19:15:59'),
-(119,	1,	NULL,	'2017-05-30 19:17:34',	'2017-05-30 19:17:34');
+(76,	2,	9,	'2017-05-30 19:24:13',	'2017-05-15 14:37:38');
 
 DROP TABLE IF EXISTS `settings`;
 CREATE TABLE `settings` (
@@ -224,7 +205,7 @@ CREATE TABLE `settings` (
 
 INSERT INTO `settings` (`id`, `setting_name`, `setting_value`, `updated_at`) VALUES
 (1,	'default_language',	'sk',	'2017-05-14 13:23:36'),
-(2,	'landing_page',	'{\"sk\":\"00\",\"en\":\"00\",\"zm\":\"00\"}',	'2017-05-30 19:27:49');
+(2,	'landing_page',	'{\"sk\":\"00\",\"en\":\"39\"}',	'2017-05-30 21:09:20');
 
 DROP TABLE IF EXISTS `translations`;
 CREATE TABLE `translations` (
@@ -234,6 +215,7 @@ CREATE TABLE `translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `translations` (`id`, `field`) VALUES
+(0,	'app_name'),
 (1,	'login'),
 (2,	'sign_in'),
 (3,	'email_address'),
@@ -289,4 +271,4 @@ DELETE FROM apikeys WHERE id = user_id;;
 
 DELIMITER ;
 
--- 2017-05-30 21:41:47
+-- 2017-05-31 22:38:16

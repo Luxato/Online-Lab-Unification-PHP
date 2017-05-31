@@ -12,8 +12,10 @@
 
 @section('content')
     <div class="row">
-        <form id="new-page-form" onsubmit="return validateForm()" action="<?= URL( 'admin/pages/' . $page['section_id'] ) ?>" method="POST">
+        <form id="new-page-form" onsubmit="return validateForm()"
+              action="<?= URL( 'admin/pages/' . $page['section_id'] ) ?>" method="POST">
             <input name="_method" type="hidden" value="put">
+            <input name="originalSize" type="hidden" value="<?= sizeof( $page['feature'] ) ?>">
             <input name="_token" type="hidden" id="_token" value="{{ csrf_token() }}"/>
             <input name="file[]" type="hidden" value="<?= $page['feature'][0]['content_file'] ?>">
             <input name="controller[]" type="hidden" value="<?= $page['feature'][0]['controller'] ?>">
@@ -23,7 +25,7 @@
                        title="Ak stránka nemá mať žiaden obsah, teda bude v navigácii, ale nebude sa ňu to dať klikať"
                        class="fa fa-question-circle" aria-hidden="true"></i>
                     <label for="noContent">Stránka bez obsahu</label>
-                    <input id="noContent" name="noContent" type="checkbox" class="js-switch js-check-change">
+                    <input id="noContent" name="noContent" type="checkbox" class="js-switch js-check-change" <?= !isset($page['feature'][0]['content_file']) ? 'checked' : '' ?>>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -46,65 +48,62 @@
                     </select>
                 </div>
             </div>
+            <div id="_content">
+            </div>
             <div class="col-md-12">
-                <label>Pre editovanie obsahu upravte súbor</label>
-                <div class="well">
-                    <?= dirname( getcwd() ) . '/resources/views/user_created_pages/' . '<strong>' .$page['feature'][0]['content_file'] ?>.blade.php </strong>
-                </div>
+                <?php if(isset($page['feature'][0]['content_file'])): ?>
+                    <label>Pre editovanie obsahu upravte súbor</label>
+                    <div class="well">
+                        <?= dirname( getcwd() ) . '/resources/views/user_created_pages/' . '<strong>' . $page['feature'][0]['content_file'] ?>
+                        .blade.php </strong>
+                    </div>
+                <?php endif; ?>
             </div>
             <div id="another-lang">
-                <?php $i = 0; foreach($page['feature'] as $feature): ?>
-                    <?php
-                        if ($i == 0) {
-                            $i++;
-                            continue;
-                        }
-                    ?>
-                    <div id="langSection<?= $i ?>" class="lang-section">
-                        <input name="file[]" type="hidden" value="<?= $feature['content_file'] ?>">
-                        <input name="controller[]" type="hidden" value="<?= $feature['controller'] ?>">
-                        <hr>
-                        <h2>Ďalšia jazyková mutácia</h2>
-                        <div class="cancelLang"><i class="fa fa-times" aria-hidden="true"></i></div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nadpis</label>
-                                <input class="form-control" name="name[]" type="text" placeholder="Zadajte nadpis sem" required="" value="<?= $feature['title'] ?>">
-                                </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">URL</label>
-                                <input class="form-control" name="url[]" type="text" placeholder="URL" required="" value="<?= $feature['controller'] ?>">
-                                </div>
-                            <div class="form-group">
-                                <label>Lokalizácia</label>
-                                <select id="-langSelection" name="language[]" class="form-control" required="">
-                                    <?php foreach($languages as $value): ?>
-                                    <option value="<?= $value['id']  ?>" <?= $feature['language_id'] == $value['id'] ? 'selected' : '' ?>><?= $value['language_title'] ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                </div>
-                            </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">SEO nadpis</label>
-                                <input class="form-control" type="text" placeholder="SEO nadpis">
-                                </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">SEO popis</label>
-                                <textarea class="form-control" rows="3" placeholder="SEO popis"></textarea>
-                                </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Kľúčové slová</label>
-                                <input class="form-control" type="text" placeholder="Kľúčové slová oddelené čiarkou">
-                                </div>
-                            </div>
-                        <div class="col-md-12">
-                            <label>Pre editovanie obsahu upravte súbor</label>
-                            <div class="well">
-		                        <?= dirname( getcwd() ) . '/resources/views/user_created_pages/' . $feature['content_file'] ?>.blade.php
-                            </div>
+				<?php $i = 0; foreach($page['feature'] as $feature): ?>
+				<?php
+				if ( $i == 0 ) {
+					$i ++;
+					continue;
+				}
+				?>
+                <div id="langSection<?= $i ?>" class="lang-section">
+                    <input name="file[]" type="hidden" value="<?= $feature['content_file'] ?>">
+                    <input name="controller[]" type="hidden" value="<?= $feature['controller'] ?>">
+                    <hr>
+                    <h2>Ďalšia jazyková mutácia</h2>
+                    <div class="cancelLang"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nadpis</label>
+                            <input class="form-control" name="name[]" type="text" placeholder="Zadajte nadpis sem"
+                                   required="" value="<?= $feature['title'] ?>">
                         </div>
-                <?php endforeach; ?>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">URL</label>
+                            <input class="form-control" name="url[]" type="text" placeholder="URL" required=""
+                                   value="<?= $feature['controller'] ?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Lokalizácia</label>
+                            <select id="-langSelection" name="language[]" class="form-control" required="">
+								<?php foreach($languages as $value): ?>
+                                <option value="<?= $value['id']  ?>" <?= $feature['language_id'] == $value['id'] ? 'selected' : '' ?>><?= $value['language_title'] ?></option>
+								<?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-12">
+                        <label>Pre editovanie obsahu upravte súbor</label>
+                            <div class="well">
+                                <?= dirname( getcwd() ) . '/resources/views/user_created_pages/' . $feature['content_file'] ?>
+                                .blade.php
+                            </div>
+                    </div>
+                </div>
+					<?php endforeach; ?>
             </div>
 
             <div class="col-md-12">
@@ -121,7 +120,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
     <script src="<?= url( 'assets/js/switchery.min.js' ) ?>"></script>
     <script>
-        function initEditor(){
+        function initEditor() {
             $('.editor').summernote({
                 height: 150,   //set editable area's height
                 codemirror: { // codemirror options
@@ -129,7 +128,11 @@
                 }
             });
         }
-        $(function(){
+        $(function () {
+            var addLocalisation = <?= isset($page['feature'][0]['content_file']) ? 'true' : 'false' ?>;
+            if (!addLocalisation) {
+                $('#addLanguage').hide();
+            }
             initEditor();
         });
 
@@ -138,11 +141,54 @@
         var changeCheckbox = document.querySelector('.js-switch');
         var p = 0;
         changeCheckbox.onchange = function () {
-            p++;
+            if(changeCheckbox.checked) {
+                $('#new-page-form').parsley().destroy();
+                $('#addLanguage').hide();
+                $('.lang-section').remove();
+                $(":input").each(function () {
+                    $(this).addClass('disabled');
+                });
+                $('#title-input').removeClass('disabled');
+                $('#languageSelection').removeClass('disabled');
+                $(':submit').removeClass('disabled');
+                $('#cke_editor').hide();
+                $('#_content').empty();
+            } else {
+                $('#_content').empty();
+                $('#_content').append('<div class="col-md-6">'+
+                    '<div class="form-group">'+
+                    '<label for="exampleInputEmail1">SEO popis</label>'+
+                    '<textarea name="seo_description[]" class="form-control" rows="3" placeholder="SEO popis"></textarea>'+
+                    '</div>'+
+                    '<div class="form-group">'+
+                    '<label for="exampleInputEmail1">Kľúčové slová</label>'+
+                    '<input name="keywords[]" class="form-control" type="text" placeholder="Kľúčové slová oddelené čiarkou">'+
+                    '</div>'+
+                    '</div>'+
+                    '<div class="col-md-12">'+
+                    '<div class="form-group">'+
+                    '<label for="exampleInputEmail1">Obsah</label>'+
+                    '<textarea class="editor" id="editor" name="cont[]" rows="6" cols="80">'+
+                    '</textarea>'+
+                    '</div>'+
+                    '</div>');
+                initEditor();
+
+                $('#cke_editor').show();
+                $('#addLanguage').removeClass('btn-disabled');
+                $('#new-page-form').parsley();
+                $('#addLanguage').show();
+                maxLanguages = $('#languageSelection').children('option').length - 2;
+                var i = 0;
+                $(":input").each(function () {
+                    $(this).removeClass('disabled');
+                });
+            }
+
+            /*p++;
             if (p % 2 == 1) {
                 $('#new-page-form').parsley().destroy();
                 $('#addLanguage').hide();
-                console.log('test');
                 $('.lang-section').remove();
                 $(":input").each(function () {
                     $(this).addClass('disabled');
@@ -161,7 +207,7 @@
                 $(":input").each(function () {
                     $(this).removeClass('disabled');
                 });
-            }
+            }*/
         };
 
         function hasDuplicates(array) {
@@ -223,11 +269,11 @@
             return convertText;
         }
 
-        var i = <?= sizeof($page['feature']) ?>;
+        var i = <?= sizeof( $page['feature'] ) ?>;
         var maxLanguages = $('#languageSelection').children('option').length - 1;
         console.log(i);
         console.log(maxLanguages);
-        if($('#languageSelection').children('option').length == i) {
+        if ($('#languageSelection').children('option').length == i) {
             $('#addLanguage').addClass('btn-disabled');
         }
         $('#addLanguage').on('click', function (e) {
@@ -287,6 +333,7 @@
                 '</textarea>' +
                 '</div>' +
                 '</div>' +
+                '</div>' +
                 '</div>';
             $('#another-lang').append(newLang);
             initEditor();
@@ -300,7 +347,7 @@
                 'id': '#langSection' + '' + i
             });
 
-            $("body").on("click", "input.title", function(){
+            $("body").on("click", "input.title", function () {
                 var input = $(this).closest('form').find('input.url');
                 $(this).on('keyup', function () {
                     var title = $(this).val();
