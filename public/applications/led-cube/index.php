@@ -107,7 +107,7 @@
                             </div>
                         </div>
                         -->
-                        
+
                     </div>
                     <div id="kocka" style="width: 100%;"></div>
                     <div id="buttons">
