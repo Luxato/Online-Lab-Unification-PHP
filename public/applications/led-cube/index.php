@@ -1,13 +1,9 @@
-<html>
-    <head>
-        <title>LED cube</title>
-        <meta charset="UTF-8">
+
         <link rel="stylesheet" type="text/css" href="<?= $path ?>css/css.css">
-        <script src="<?= $path ?>libs/three.js"></script>
-        <script src="<?= $path ?>libs/jspdf/dist/jspdf.debug.js"></script>
-        <script src="<?= $path ?>libs/jspdf/libs/html2canvas/dist/html2canvas.js"></script>
-        <script src="<?= $path ?>libs/FileSaver.min.js"></script>
-        <script src="<?= $path ?>libs/jquery-2.1.4.js"></script>
+        <script src="<?= $path ?>../common_assets/three/three.min.js"></script>
+        <script src="<?= $path ?>../common_assets/jspdf/dist/jspdf.debug.js"></script>
+        <script src="<?= $path ?>../common_assets/jspdf/libs/html2canvas/dist/html2canvas.js"></script>
+        <script src="<?= $path ?>../common_assets/FileSaver.min.js"></script>
         <script src="<?= $path ?>libs/ace-builds/ace.js" type="text/javascript" charset="utf-8"></script>
         <script src="<?= $path ?>script.js"></script>
         <style>
@@ -19,8 +15,6 @@
                 height: 200px;
             }
         </style>
-    </head>
-    <body>
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -166,5 +160,3 @@ off(1:5,1:5,1,2); // dane ledky sa zhasnu 2 sek po predchadzajucej funkcii
             </div>
         </div>
     </div>
-    </body>
-</html>

@@ -26858,10 +26858,10 @@ THREE.Curve.Utils = {
 
 		// To check if my formulas are correct
 
-		var h00 = 6 * t * t - 6 * t; 	// derived from 2t^3 − 3t^2 + 1
-		var h10 = 3 * t * t - 4 * t + 1; // t^3 − 2t^2 + t
-		var h01 = - 6 * t * t + 6 * t; 	// − 2t3 + 3t2
-		var h11 = 3 * t * t - 2 * t;	// t3 − t2
+		var h00 = 6 * t * t - 6 * t; 	// derived from 2t^3 âˆ’ 3t^2 + 1
+		var h10 = 3 * t * t - 4 * t + 1; // t^3 âˆ’ 2t^2 + t
+		var h01 = - 6 * t * t + 6 * t; 	// âˆ’ 2t3 + 3t2
+		var h11 = 3 * t * t - 2 * t;	// t3 âˆ’ t2
 
 		return h00 + h10 + h01 + h11;
 
@@ -35839,4 +35839,3 @@ THREE.ShaderFlares = {
 	}
 
 };
-

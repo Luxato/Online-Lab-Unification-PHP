@@ -1,17 +1,16 @@
 <script>
     var path = "<?= $path ?>";
 </script>
-  <script src="<?= $path ?>kniznice/three.js"></script>
-  <script src="<?= $path ?>kniznice/TrackballControls.js"></script>
-  <script src="<?= $path ?>kniznice/OrbitControls.js"></script>
-  <script src="<?= $path ?>kniznice/OBJLoader.js"></script>
-  <script src="<?= $path ?>kniznice/Detector.js"></script>
-  <script src="<?= $path ?>kniznice/MTLLoader.js"></script>
-  <script src="<?= $path ?>kniznice/OBJMTLLoader.js"></script>
-  <script src="<?= $path ?>kniznice/ImageUtils.js"></script>
-  <script src="<?= $path ?>kniznice/jquery.min.js"></script>
-  <script src="<?= $path ?>kniznice/jquery.flot.js"></script>
-   <script src="<?= $path ?>kniznice/FresnelShader.js"></script>
+  <script src="<?= $path ?>../common_assets/three/three.kralik.js"></script>
+  <script src="<?= $path ?>../common_assets/TrackballControls.js"></script>
+  <script src="<?= $path ?>../common_assets/OrbitControls.js"></script>
+  <script src="<?= $path ?>../common_assets/OBJLoader.js"></script>
+  <script src="<?= $path ?>../common_assets/Detector.js"></script>
+  <script src="<?= $path ?>../common_assets/MTLLoader.js"></script>
+  <script src="<?= $path ?>../common_assets/OBJMTLLoader.js"></script>
+
+  <script src="<?= $path ?>../common_assets/jquery.flot0.8.3.js"></script>
+   <script src="<?= $path ?>../common_assets/FresnelShader.js"></script>
 
 	<style>
 	#container{
