@@ -102,7 +102,7 @@
 
                     {{--Aktuality--}}
                     <?php if($nav_link->controller == 'aktuality'): ?>
-                    <li><a href="aktuality"><?= trans( 'translation.actualities' ) ?></a></li>
+                    <li><a href="<?= URL('aktuality') ?>"><?= trans( 'translation.actualities' ) ?></a></li>
 					<?php elseif($nav_link->controller == 'cuslogin'): ?>
 					<?php if(! Session::get( 'logged_user_id' )): ?>
                     {{--Logged users can not see theese--}}
@@ -152,7 +152,7 @@
 
                 <?php endif; ?>
                     <?php else: ?>
-                    <li><a href="<?= isset($nav_link->content_file) ? $nav_link->controller : '#' ?>"><?php echo $nav_link->title ?></a>
+                    <li><a href="<?= isset($nav_link->content_file) ? URL($nav_link->controller) : '#' ?>"><?php echo $nav_link->title ?></a>
                     </li>
                     <?php endif; ?>
 				<?php else: ?>
@@ -161,14 +161,14 @@
                     <ul class="dropdown-menu multi-level">
 						<?php foreach($nav_link->children as $child_link): ?>
 						<?php if(! isset( $child_link->children )): ?>
-                        <li><a href="<?= isset($child_link->content_file) ? $child_link->controller : '#' ?>"><?= $child_link->title ?></a></li>
+                        <li><a href="<?= isset($child_link->content_file) ? URL($child_link->controller) : '#' ?>"><?= $child_link->title ?></a></li>
 						<?php else: ?>
                         <li class="dropdown-submenu">
                             <a href="#" class="dropdown-toggle"
                                data-toggle="dropdown"> <?= trans( $child_link->title ) ?> </a>
                             <ul class="dropdown-menu">
 								<?php foreach($child_link->children as $sub_child_link): ?>
-                                <li><a href="<?= isset($sub_child_link->content_file) ? $sub_child_link->controller : '#' ?>"><?= $sub_child_link->title ?></a></li>
+                                <li><a href="<?= isset($sub_child_link->content_file) ? URL($sub_child_link->controller) : '#' ?>"><?= $sub_child_link->title ?></a></li>
 								<?php endforeach; ?>
                             </ul>
                         </li>
