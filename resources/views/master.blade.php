@@ -68,6 +68,9 @@
             </ul>
         </nav>
         <div class="user-panel logout pull-right">
+            <div id="topnavBars">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>
             <nav class="primary_nav_wrap">
                 <ul>
                     <li><a href="#"><?= trans('translation.logged_user') ?>: <?= $user->name ?> <i class="fa fa-angle-down"
@@ -304,6 +307,9 @@
         }
     });
     $(document).ready(function () {
+        $('#topnavBars').on('click', function() {
+            $(this).next().stop().fadeToggle();
+        });
         var elem = document.querySelector('.js-switch');
         var t = 0;
         var input = $('input[name=email]');
@@ -460,7 +466,7 @@
                 <h4 class="modal-title"><?= trans('translation.create_api_key') ?></h4>
             </div>
             <div class="modal-body">
-                <strong>Váš api kľúč:</strong>
+                <strong><?= trans('translation.your_api_key') ?>:</strong>
                 <div id="apikey" class="well">
                     <?= isset($user->apikey->key) ? $user->apikey->key : 'Api kľúč je potrebné vygenerovať' ?>
                 </div>

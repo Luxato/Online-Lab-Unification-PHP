@@ -70,7 +70,29 @@ p {
     font-weight: 700;
 }
 
+#topnavBars {
+    color: white;
+    font-size: 19px;
+    border: 1px dotted gray;
+    padding: 0 7px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+}
+
 @media (max-width: 767px) {
+    .user-panel .primary_nav_wrap {
+        display: none;
+        position: absolute;
+        right: 0;
+    }
+    #topnavBars {
+        display: inline-block;
+    }
+    .primary_nav_wrap ul li {
+        display: block !important;
+    }
+
     .dropdown-toggle {
         line-height: 30px;
         font-size: 20px;
