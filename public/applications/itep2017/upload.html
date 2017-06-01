@@ -1,0 +1,72 @@
+<!DOCTYPE html>           
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ITEP2017</title>
+    <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css">
+    <script src="js/jquery-1.11.1.min.js"></script>
+
+    <script>  
+//    $(document).ready(function () {
+//     var formObj = $('#simulationForm').serializeObject();
+    /*
+$('#fileToUpload').on('change', prepareUpload);
+
+    function prepareUpload(event) {
+        var files = event.target.files;
+    }
+
+                // Catch the form submit and upload the files
+                function uploadFiles(event)
+                {
+                  event.stopPropagation(); // Stop stuff happening
+                    event.preventDefault(); // Totally stop stuff happening
+                
+                // START A LOADING SPINNER HERE
+                
+                // Create a formdata object and add the files
+                var data = new FormData();
+                $.each(files, function(key, value)
+                {
+                    data.append(key, value);
+                });      console.log(data);
+                   }
+   
+var data = new FormData();
+$.each(files, function(key, value)
+{
+    data.append(key, value);
+});      console.log(data);
+*/  
+
+//console.log(formObj);  
+//console.log(Object.keys(formObj)); 
+//});   
+
+
+$(document).ready(function () {
+$('#simulationForm').submit(function () {
+var formObj = $('#simulationForm').serializeObject();
+console.log(formObj);  
+console.log(Object.keys(formObj)); 
+});
+});
+
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+
+  
+</script>
