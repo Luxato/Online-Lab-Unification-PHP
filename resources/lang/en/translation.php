@@ -1,6 +1,8 @@
 <?php return [
 	'app_name'             => 'Interactive online laboratory',
 	'login'             => 'Login',
+	'loading'             => 'One moment...',
+	'home'             => 'Home',
 	'sign_in'           => 'Sign in',
 	'email_address'     => 'Email address',
 	'password'          => 'password',

@@ -56,20 +56,13 @@
         <div style="width: 50px; height: 50px; margin: 0 auto">
             <div class="kp-loading2"></div>
         </div>
-        <h3 style="margin-top: 20px; font-weight: bold">One moment...</h3>
+        <h3 style="margin-top: 20px; font-weight: bold"><?= trans('translation.loading') ?></h3>
     </div>
 </div>
 <?php if(Session::get( 'logged_user_id' )): ?>
 <aside id="nav">
     <div class="container">
         <nav class="primary_nav_wrap">
-            {{--<ul>
-                <li><a href="#">API kľúče <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                    <ul>
-                        <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Vytvoriť API kľúč</a></li>
-                    </ul>
-                </li>
-            </ul>--}}
             <ul>
                 <li><a data-toggle="modal" data-target="#apiModal"><i class="fa fa-plus" aria-hidden="true"></i> <?= trans('translation.create_api_key') ?></a></li>
             </ul>
@@ -220,12 +213,12 @@
 
 <div class="breadcrumb-wrapper">
     <ol class="breadcrumb">
-        <li><a href="<?= URL( '/' ) ?>">Home</a></li>
+        <li><a href="<?= URL( '/' ) ?>"><?= trans('translation.home') ?></a></li>
         <li class="active">@yield('title')</li>
     </ol>
 </div>
 
-<div class="container" style="padding-bottom: 25px;">
+<div class="container" style="margin-bottom: 45px;">
     <div class="row">
         <div class="col-sm-12">
             @yield('content')

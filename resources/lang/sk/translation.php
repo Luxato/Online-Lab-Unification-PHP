@@ -1,6 +1,8 @@
 <?php return [
 	'app_name'             => 'Interaktívne Online Laboratórium',
 	'login'             => 'Prihlásenie',
+	'loading'             => 'Načítavam',
+	'home'             => 'Domov',
 	'sign_in'           => 'Prihlásiť sa',
 	'email_address'     => 'Email',
 	'password'          => 'Heslo',

@@ -147,11 +147,10 @@
             });
 
             $('#nav-navigacia').addClass('active');
-            $('#title-input').on('keyup', function () {
+            $('#title-input').on('keyup change blur', function () {
                 var title = $(this).val();
                 title = title.toLowerCase();
                 title = title.trim();
-                title = title.replace(/[^a-zA-Z ]/g, "");
                 title = title.replace(/ /g, "-");
                 for (var i = 0, max = title.length; i < max - 1; i++) {
                     if (title[i] == '_' && title[i + 1]) {
@@ -268,11 +267,10 @@
 
         $("body").on("click", "input.title", function(){
             var input = $(this).closest('form').find('input.url');
-            $(this).on('keyup', function () {
+            $(this).on('keyup change blur', function () {
                 var title = $(this).val();
                 title = title.toLowerCase();
                 title = title.trim();
-                title = title.replace(/[^a-zA-Z ]/g, "");
                 title = title.replace(/ /g, "-");
                 for (var i = 0, max = title.length; i < max - 1; i++) {
                     if (title[i] == '_' && title[i + 1]) {

@@ -1,0 +1,46 @@
+/* 
+    Document   : style
+    Created on : Oct 27, 2013, 7:43:09 PM
+    Author     : jakubhoblik
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+fieldset{
+	width: 500px;
+}
+legend{
+	font-size: 20px;
+}
+
+label.field{
+	text-align: left;
+	width: 300px;
+	float: left;
+}
+
+input.textbox{
+	float: left;
+	width: 120px;
+	text-align: right;
+
+}
+
+fieldset p{
+	clear: both;
+	height: 10px;
+	padding-left: 15px;
+}
+
+#animacia{
+    float: left;
+    position:relative;
+    top:7px;
+}
+#chartdiv{
+	float: left;
+}
+#content-holder{
+	width: 850px;
+	height: 650px;
+}

@@ -1,12 +1,15 @@
 
 @extends('master')
 
-@section('title')
-	Teleso medzi stenami
-@stop
+@section('title') Teleso medzi stenami @stop
+
+@section('seo_description') @stop
+
+@section('keywords') @stop
 
 @section('content')
-    <div style="max-width: 1170px;" class="embed-responsive embed-responsive-4by3">
-        <iframe class="embed-responsive-item" src="http://147.175.105.140:8003/~hoblik/telesoMedziStenami/TelesoMedziStenami.php"></iframe>
-    </div>
+	<?php
+	$path = './applications/teleso-medzi-stenami/';
+	include $path . 'TelesoMedziStenami.php';
+	?>
 @stop
