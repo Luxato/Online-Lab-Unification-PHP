@@ -70,7 +70,9 @@ class PageController extends Controller {
 			}
 		}
 
-		return view( 'administration/pages/navigation_reorder', $data );
+		Session::flash( 'success', "Navigácia bola úspešne upravená." );
+
+		return back();
 	}
 
 	/**

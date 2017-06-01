@@ -65,27 +65,6 @@ class Controller extends BaseController {
 
 	}
 
-	protected function init_section() {
-		/*$action                = app( 'request' )->route()->getAction();
-		$controller            = class_basename( $action['controller'] );
-		$tmp                   = explode( '@', $controller );
-		$this->controller_name = strtolower( $tmp[0] );
-		$this->section_id      = DB::table( 'navigation' )
-		                           ->where( 'controller', Request::segment(1) )
-		                           ->value( 'section_id' );*/
-	}
-
-	/*	protected function init_locale() {
-			if ( \Session::has( 'applocale' ) ) {
-				$locale = \Session::get( 'applocale' );
-			} else {
-				$locale = \Config::get( 'app.fallback_locale' );
-			}
-
-			\App::setlocale( $locale );
-			$this->language = $locale;
-			echo "jazyk je $locale";
-		}*/
 	public function set_app_language() {
 		$settings               = Setting::all();
 		$this->default_language = $settings[0]->setting_value;

@@ -1,0 +1,8 @@
+nilt(f, s, t) :=
+block([polyfactor:true,ratprint:false,ft,res],
+  if not listp(f) then f:[f],
+  res:map(lambda([ff],
+    ft:ilt(float(num(ff)/allroots(float(denom(ff)))),s,t),
+    ev(ft,float,expand)),xthru(f)),
+    if length(res)=1 then res[1] else res
+)$

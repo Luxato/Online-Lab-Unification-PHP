@@ -62,8 +62,8 @@ Route::post( '/login/ldap', [
 	'uses' => 'LoginController@login_ldap'
 ] );
 $this->get( '/login/logout', 'LoginController@logout' );
-$this->post( '/user/profile', 'UserController@editProfile' );
+	$this->post( '/user/profile', 'UserController@editProfile' );
 
 Route::get( 'aktualita/{slug}', [ 'uses' => 'Homepage@aktuality' ] );
-Route::get( '{slug}', 'Homepage@index' );
 Route::get( 'setlang/{lang}', 'Homepage@set_language' );
+Route::get( '{slug}', 'Homepage@index' );
