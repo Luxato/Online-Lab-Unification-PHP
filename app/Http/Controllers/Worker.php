@@ -10,9 +10,6 @@ use App\Language;
 use App\Page;
 
 class Worker extends Controller {
-	// TODO do not use $_POST variable,
-	// TODO backend validation
-	// TODO move to own controller LanguageController
 	protected function do_create_language() {
 		$title    = $_POST['title'];
 		$shortcut = $_POST['shortcut'];
@@ -27,7 +24,6 @@ class Worker extends Controller {
 
 
 	public function do_navigation_change_order() {
-		// TODO VALIDATION
 		$order_json        = $_POST['orderJSON'];
 		$order_json        = json_decode( $order_json, TRUE );
 		$i                 = 1; // First level.
@@ -73,6 +69,8 @@ class Worker extends Controller {
 			$page->parent_id = NULL;
 			$page->save();
 		}
+
+		\Session::flash( 'success', "Navigácia bola úspešne upravená." );
 
 		return back();
 	}

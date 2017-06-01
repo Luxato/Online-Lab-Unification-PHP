@@ -1,57 +1,49 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Dva Oscilátori</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <script type="text/javascript" src="kniznica.js"></script>   
-        <script type="text/javascript" src="lib/jquery.min.js"></script>
-        <script type="text/javascript" src="lib/jquery.flot.js"></script>
-        <script type="text/javascript" src="DvaOsc.js"></script>
-    </head>
-    <body id="body">
+        <script type="text/javascript" src="<?= $path ?>kniznica.js"></script>
+        <script type="text/javascript" src="<?= $path ?>lib/jquery.min.js"></script>
+        <script type="text/javascript" src="<?= $path ?>lib/jquery.flot.js"></script>
+        <script type="text/javascript" src="<?= $path ?>DvaOsc.js"></script>
+        <style>
+            label.field {
+                width: 100%;
+                max-width: 233px;
+            }
+        </style>
 
-      
-              
-              <script language="php"> 
-                                  
-                              if(@$_POST['dajHodnoty'])
+<!--        --><?php
+/*
+                              if(@$_GET['dajHodnoty'])
                                   {
                                   function vypocetHodnot()
                                   {
 
                                     
-                                    $f=$_POST['f'];
+                                    $f=$_GET['f'];
                                     
-                                    $m1=$_POST['m1'];
+                                    $m1=$_GET['m1'];
                                     
-                                    $kp1=$_POST['kp1'];
+                                    $kp1=$_GET['kp1'];
                                     
-                                    $kt1=$_POST['kt1'];
+                                    $kt1=$_GET['kt1'];
                                     
-                                    $xo1=$_POST['xo1'];
+                                    $xo1=$_GET['xo1'];
                                     
-                                    $xi1=$_POST['xi1'];
+                                    $xi1=$_GET['xi1'];
 
-                                    $m2=$_POST['m2'];
+                                    $m2=$_GET['m2'];
                                     
-                                    $kp2=$_POST['kp2'];
+                                    $kp2=$_GET['kp2'];
                                     
-                                    $kt2=$_POST['kt2'];
+                                    $kt2=$_GET['kt2'];
                                     
-                                    $xo2=$_POST['xo2'];
+                                    $xo2=$_GET['xo2'];
                                     
-                                    $xi2=$_POST['xi2'];
+                                    $xi2=$_GET['xi2'];
                                     
-                                    $cs=$_POST['cs'];
+                                    $cs=$_GET['cs'];
                                     
-                                    $ce=$_POST['ce'];
+                                    $ce=$_GET['ce'];
 
-                                    $poleVstupov;
+                                    $poleVstupov = [];
                                     $poleVstupov[0]=$f;
                                     $poleVstupov[1]=$m1;
                                     $poleVstupov[2]=$kp1;
@@ -101,17 +93,17 @@ and open the template in the editor.
                                 $request=$poz;
                                 $ch = curl_init();
                                 curl_setopt($ch, CURLOPT_URL, $appUrl);
-                                curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+                                curl_setopt($ch, CURLOPT_GETFIELDS, $request);
                                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                                 $response = curl_exec($ch);
                                 curl_close($ch);
 
 
-                                $A;
-                                $B;
-                                $C;
-                                $D;
-                                $Cas;
+                                $A = [];
+                                $B = [];
+                                $C = [];
+                                $D = [];
+                                $Cas = [];
 
                                 
 
@@ -157,34 +149,40 @@ and open the template in the editor.
                               vypocetHodnot();
                               }
 
-                      </script>
-        
-            <form id='myForm' action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
-            <fieldset>
-                <legend>Vstupne hodnoty</legend>
-                
-                <p><label class="field">Vonkajšia sila pôsobiaca na nižšie teleso:</label><input class="textbox" id="f" name="f" value="40" type="number" min="0" max="45" step="0.01"></p>
-                <p><label class="field">Hmotnosť nižšieho telesa:</label><input class="textbox" id="m1" name="m1" value="15" type="number" min="0.01" max="45" step="0.01"></p>
-                <p><label class="field">Konštanta nižšej pružiny:</label><input class="textbox" id="kp1" name="kp1" value="25" type="number" min="0" max="45" step="0.01"></p>
-                <p><label class="field">Konštanta nižšieho tlmiča:</label><input class="textbox" id="kt1" name="kt1" value="8" type="number" min="0" max="45" step="0.01"></p>
-                <p><label class="field">Počiatočná poloha nižšieho telesa:</label><input class="textbox" id="xo1" name="xo1" value="10" type="number" min="0" max="45" step="0.01"></p>
-                <p><label class="field">Počiatočná rýchlosť nižšieho telesa:</label><input class="textbox" id="xi1" name="xi1" value="0" type="number" min="0" max="45" step="0.01"></p>
-                
-                <p><label class="field">Hmotnosť vyššieho telesa:</label><input class="textbox" id="m2" name="m2" value="10" type="number" min="0.01" max="45" step="0.01"></p>
-                <p><label class="field">Konštanta vyššej pružiny:</label><input class="textbox" id="kp2" name="kp2" value="40" type="number" min="0" max="45" step="0.01"></p>
-                <p><label class="field">Konštanta vyššieho tlmiča:</label><input class="textbox" id="kt2" name="kt2" value="2" type="number" min="0" max="45" step="0.01"></p>
-                <p><label class="field">Počiatočná poloha vyššieho telesa:</label><input class="textbox" id="xo2" name="xo2" value="5" type="number" min="0" max="45" step="0.01"></p>
-                <p><label class="field">Počiatočná rýchlosť vyššieho telesa:</label><input class="textbox" id="xi2" name="xi2" value="0" type="number" min="0" max="45" step="0.01"></p>
+                      */?>
 
-                <p><label class="field">Konečný čas v sekundách:</label><input class="textbox" id="cs" name="cs" value="20" type="number" min="0" max="45" step="0.01"></p>
-                <p><label class="field">Počet hodnôt:</label><input class="textbox" id="ce" name="ce" value="200" type="number" min="0" max="500" step="0.01"></p>           
-                 </fieldset>
-        <input type="submit" id="button" name="dajHodnoty">
-        <!-- <input type="submit" onclick="spracuj();" id="button" name="dajHodnoty"> -->
-        </form>            
-         <button type="button" onclick="setDef();">set default</button>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <form id='myForm' action="" method="GET">
+                    <fieldset>
+                        <legend>Vstupne hodnoty</legend>
 
-        <div id="content-holder" style="border: 1px solid;">
-      </div>  
-    </body>
-</html>
+                        <p><label class="field">Vonkajšia sila pôsobiaca na nižšie teleso:</label><input class="textbox" id="f" name="f" value="40" type="number" min="0" max="45" step="0.01"></p>
+                        <p><label class="field">Hmotnosť nižšieho telesa:</label><input class="textbox" id="m1" name="m1" value="15" type="number" min="0.01" max="45" step="0.01"></p>
+                        <p><label class="field">Konštanta nižšej pružiny:</label><input class="textbox" id="kp1" name="kp1" value="25" type="number" min="0" max="45" step="0.01"></p>
+                        <p><label class="field">Konštanta nižšieho tlmiča:</label><input class="textbox" id="kt1" name="kt1" value="8" type="number" min="0" max="45" step="0.01"></p>
+                        <p><label class="field">Počiatočná poloha nižšieho telesa:</label><input class="textbox" id="xo1" name="xo1" value="10" type="number" min="0" max="45" step="0.01"></p>
+                        <p><label class="field">Počiatočná rýchlosť nižšieho telesa:</label><input class="textbox" id="xi1" name="xi1" value="0" type="number" min="0" max="45" step="0.01"></p>
+
+                        <p><label class="field">Hmotnosť vyššieho telesa:</label><input class="textbox" id="m2" name="m2" value="10" type="number" min="0.01" max="45" step="0.01"></p>
+                        <p><label class="field">Konštanta vyššej pružiny:</label><input class="textbox" id="kp2" name="kp2" value="40" type="number" min="0" max="45" step="0.01"></p>
+                        <p><label class="field">Konštanta vyššieho tlmiča:</label><input class="textbox" id="kt2" name="kt2" value="2" type="number" min="0" max="45" step="0.01"></p>
+                        <p><label class="field">Počiatočná poloha vyššieho telesa:</label><input class="textbox" id="xo2" name="xo2" value="5" type="number" min="0" max="45" step="0.01"></p>
+                        <p><label class="field">Počiatočná rýchlosť vyššieho telesa:</label><input class="textbox" id="xi2" name="xi2" value="0" type="number" min="0" max="45" step="0.01"></p>
+
+                        <p><label class="field">Konečný čas v sekundách:</label><input class="textbox" id="cs" name="cs" value="20" type="number" min="0" max="45" step="0.01"></p>
+                        <p><label class="field">Počet hodnôt:</label><input class="textbox" id="ce" name="ce" value="200" type="number" min="0" max="500" step="0.01"></p>
+                         </fieldset>
+                <input class="btn btn-success" type="submit" id="button" name="dajHodnoty">
+                 <button class="btn btn-info" type="button" onclick="setDef();">set default</button>
+                </form>
+
+                </div>
+                <div class="col-md-6">
+                    <div id="content-holder">
+                  </div>
+                </div>
+            </div>
+        </div>
+

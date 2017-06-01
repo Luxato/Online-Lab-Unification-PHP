@@ -25,7 +25,7 @@ CREATE TABLE `actualities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `actualities` (`id`, `name`, `content`, `language`, `category`, `thumbnail_path`, `created_at`, `updated_at`) VALUES
-(13,	'Nova aktualita',	'<p>Easy (and free!) You should check out our premium features.</p>',	0,	1,	'uploads/starwars-1491136032.jpg',	'2017-04-02 10:27:12',	'2017-04-02 10:27:12');
+(13,	'Úvodník',	'                    <p>Toto je testovacia aktualita</p>                ',	0,	1,	'uploads/default.jpg',	'2017-06-01 22:41:12',	'2017-06-01 20:40:56');
 
 DROP TABLE IF EXISTS `apikeys`;
 CREATE TABLE `apikeys` (
@@ -79,15 +79,17 @@ INSERT INTO `features` (`id`, `language_id`, `title`, `content_file`, `controlle
 (49,	0,	'Autentifikácia',	NULL,	'cuslogin'),
 (50,	1,	'Aktuality',	NULL,	'aktuality'),
 (51,	1,	'Autentifikácia',	NULL,	'cuslogin'),
-(57,	0,	'Maxima',	'maxima_sk',	'maxima'),
 (58,	0,	'LED cube',	'led-cube_sk',	'led-cube'),
 (59,	0,	'ITEP2017',	'itep2017_sk',	'itep2017'),
-(60,	0,	'Teleso medzi stenami',	'teleso-medzi-stenami_sk',	'teleso-medzi-stenami'),
-(61,	0,	'Scilab',	'scilab_sk',	'scilab'),
-(62,	0,	'Algebra API',	'algebra-api_sk',	'algebra-api'),
 (63,	0,	'Stavový priestor',	'stavovy-priestor_sk',	'stavovy-priestor'),
 (98,	0,	'3D model hydraulickej sústavy',	'3d_model_hydraulickej_sustavy_sk',	'3d_model_hydraulickej_sustavy'),
-(99,	0,	'3D Model segway vozidla',	'3d_model_segway_vozidla_sk',	'3d_model_segway_vozidla');
+(99,	0,	'3D Model segway vozidla',	'3d_model_segway_vozidla_sk',	'3d_model_segway_vozidla'),
+(242,	0,	'Scilab Dokumentácia',	'scilab-dokumentcia_sk',	'scilab-dokumentcia'),
+(243,	0,	'Computer Algebra Dokumentácia',	'computer-algebra-dokumentcia_sk',	'computer-algebra-dokumentcia'),
+(245,	0,	'Open modelica Dokumentácia',	'open_modelica_dokumentacia_sk',	'open_modelica_dokumentacia'),
+(247,	0,	'Tlmený harmonický oscilátor',	'tlmeny-harmonicky-oscilator_sk',	'tlmeny-harmonicky-oscilator'),
+(249,	0,	'Teleso medzi stenami',	'teleso-medzi-stenami_sk',	'teleso-medzi-stenami'),
+(250,	0,	'2 Oscilátory',	'2-oscilatory_sk',	'2-oscilatory');
 
 DROP TABLE IF EXISTS `feature_page`;
 CREATE TABLE `feature_page` (
@@ -116,15 +118,17 @@ INSERT INTO `feature_page` (`id`, `feature_id`, `page_id`) VALUES
 (50,	50,	54),
 (51,	49,	55),
 (52,	51,	55),
-(58,	57,	60),
 (59,	58,	61),
 (60,	59,	62),
-(61,	60,	63),
-(62,	61,	64),
-(63,	62,	65),
 (64,	63,	66),
 (97,	98,	76),
-(98,	99,	75);
+(98,	99,	75),
+(228,	242,	127),
+(229,	243,	128),
+(231,	245,	129),
+(233,	247,	131),
+(235,	249,	133),
+(236,	250,	134);
 
 DROP TABLE IF EXISTS `languages`;
 CREATE TABLE `languages` (
@@ -173,26 +177,28 @@ CREATE TABLE `navigation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `navigation` (`section_id`, `order`, `parent_id`, `updated_at`, `created_at`) VALUES
-(1,	5,	NULL,	'2017-05-30 19:24:13',	'2017-05-05 16:17:14'),
-(2,	6,	NULL,	'2017-05-30 19:24:13',	'2017-05-05 16:17:21'),
-(4,	7,	NULL,	'2017-05-30 19:24:13',	'2017-05-05 16:17:26'),
-(9,	3,	1,	'2017-05-30 19:18:19',	'2017-05-05 16:17:32'),
-(19,	6,	2,	'2017-05-30 19:18:19',	'2017-05-05 16:17:37'),
-(20,	7,	2,	'2017-05-30 19:18:19',	'2017-05-05 16:17:43'),
-(38,	4,	1,	'2017-05-30 19:18:19',	'2017-04-05 16:12:14'),
-(39,	10,	38,	'2017-05-30 19:24:13',	'2017-04-05 16:35:17'),
-(42,	11,	38,	'2017-05-30 19:24:13',	'2017-04-20 06:34:21'),
-(54,	2,	NULL,	'2017-05-30 19:24:13',	'2017-05-06 15:38:51'),
-(55,	4,	NULL,	'2017-05-30 19:24:13',	NULL),
-(60,	5,	2,	'2017-05-30 19:18:19',	'2017-05-09 16:33:30'),
-(61,	9,	9,	'2017-05-30 19:24:13',	'2017-05-10 06:34:03'),
-(62,	4,	9,	'2017-05-30 19:24:13',	'2017-05-10 06:53:13'),
-(63,	5,	9,	'2017-05-30 19:24:13',	'2017-05-10 06:57:28'),
-(64,	8,	9,	'2017-05-30 19:24:13',	'2017-05-10 07:38:12'),
-(65,	7,	9,	'2017-05-30 19:24:13',	'2017-05-10 08:03:53'),
-(66,	6,	9,	'2017-05-30 19:24:13',	'2017-05-10 08:09:18'),
-(75,	3,	9,	'2017-05-30 19:24:13',	'2017-05-14 21:09:09'),
-(76,	2,	9,	'2017-05-30 19:24:13',	'2017-05-15 14:37:38');
+(1,	3,	NULL,	'2017-05-31 21:50:11',	'2017-05-05 16:17:14'),
+(2,	4,	NULL,	'2017-05-31 21:50:11',	'2017-05-05 16:17:21'),
+(4,	5,	NULL,	'2017-05-31 21:50:11',	'2017-05-05 16:17:26'),
+(9,	1,	1,	'2017-05-31 21:50:11',	'2017-05-05 16:17:32'),
+(19,	8,	2,	'2017-06-01 16:34:36',	'2017-05-05 16:17:37'),
+(20,	9,	2,	'2017-06-01 16:34:36',	'2017-05-05 16:17:43'),
+(38,	2,	1,	'2017-05-31 21:50:11',	'2017-04-05 16:12:14'),
+(39,	9,	38,	'2017-06-01 20:41:47',	'2017-04-05 16:35:17'),
+(42,	10,	38,	'2017-06-01 20:41:47',	'2017-04-20 06:34:21'),
+(54,	1,	NULL,	'2017-05-31 21:50:11',	'2017-05-06 15:38:51'),
+(55,	2,	NULL,	'2017-05-31 21:50:11',	NULL),
+(61,	6,	9,	'2017-06-01 20:41:47',	'2017-05-10 06:34:03'),
+(62,	4,	9,	'2017-06-01 19:48:14',	'2017-05-10 06:53:13'),
+(66,	5,	9,	'2017-06-01 20:15:33',	'2017-05-10 08:09:18'),
+(75,	3,	9,	'2017-06-01 19:48:14',	'2017-05-14 21:09:09'),
+(76,	2,	9,	'2017-06-01 19:48:14',	'2017-05-15 14:37:38'),
+(127,	4,	2,	'2017-06-01 14:51:16',	'2017-05-31 21:49:40'),
+(128,	3,	2,	'2017-06-01 14:51:16',	'2017-05-31 21:51:35'),
+(129,	5,	2,	'2017-06-01 14:51:16',	'2017-06-01 14:48:43'),
+(131,	1,	9,	'2017-06-01 19:48:14',	'2017-06-01 19:37:37'),
+(133,	7,	9,	'2017-06-01 20:41:47',	'2017-06-01 20:15:16'),
+(134,	8,	9,	'2017-06-01 20:41:47',	'2017-06-01 20:22:25');
 
 DROP TABLE IF EXISTS `settings`;
 CREATE TABLE `settings` (
@@ -244,7 +250,9 @@ INSERT INTO `translations` (`id`, `field`) VALUES
 (29,	'edit'),
 (30,	'generate'),
 (31,	'mandatory_field'),
-(32,	'password_repeat');
+(32,	'password_repeat'),
+(34,	'home'),
+(35,	'loading');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -271,4 +279,4 @@ DELETE FROM apikeys WHERE id = user_id;;
 
 DELIMITER ;
 
--- 2017-05-31 22:38:16
+-- 2017-06-01 22:44:36

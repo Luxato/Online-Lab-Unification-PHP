@@ -2,6 +2,12 @@
         <script type="text/javascript" src="<?= $path ?>lib/jquery.min.js"></script>
         <script type="text/javascript" src="<?= $path ?>lib/jquery.flot.js"></script>
         <script type="text/javascript" src="<?= $path ?>TlmenyHarmOscilator.js"></script>
+        <style>
+            label.field {
+                width: 100%;
+                max-width: 233px;
+            }
+        </style>
 <?php
                 if(@$_GET['dajHodnoty']) {
                     function vypocetHodnot()

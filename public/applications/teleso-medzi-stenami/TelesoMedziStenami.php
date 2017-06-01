@@ -1,42 +1,34 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Teleso Medzi Stenami</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <script type="text/javascript" src="kniznica.js"></script>   
-        <script type="text/javascript" src="lib/jquery.min.js"></script>
-        <script type="text/javascript" src="lib/jquery.flot.js"></script>
-        <script type="text/javascript" src="TelesoMedziStenami.js"></script>
-        
-    </head>
-    <body>
-
-                
-
-              <script language="php"> 
-                    
-                if(@$_POST['dajHodnoty'])
+        <script type="text/javascript" src="<?= $path ?>kniznica.js"></script>
+        <script type="text/javascript" src="<?= $path ?>lib/jquery.min.js"></script>
+        <script type="text/javascript" src="<?= $path ?>lib/jquery.flot.js"></script>
+        <script type="text/javascript" src="<?= $path ?>TelesoMedziStenami.js"></script>
+        <style>
+            label.field {
+                width: 100%;
+                max-width: 233px;
+            }
+        </style>
+<?php
+                if(@$_GET['dajHodnoty'])
                     {
                     function vypocetHodnot()
                     {
-                    
+
+                      $f=$_GET['f'];
                       
-                      $f=$_POST['f'];
+                      $m=$_GET['m'];
                       
-                      $m=$_POST['m'];
+                      $kp=$_GET['kp'];
                       
-                      $kp=$_POST['kp'];
+                      $kt=$_GET['kt'];
                       
-                      $kt=$_POST['kt'];
+                      $xo=$_GET['xo'];
                       
-                      $xo=$_POST['xo'];
+                      $xi=$_GET['xi'];
                       
-                      $xi=$_POST['xi'];
+                      $cs=$_GET['cs'];
                       
-                      $cs=$_POST['cs'];
-                      
-                      $ce=$_POST['ce'];
+                      $ce=$_GET['ce'];
 
                       $poleVstupov;
                         $poleVstupov[0]=$f;
@@ -147,31 +139,30 @@
                 vypocetHodnot();
                 }
 
-        </script>
-        
-            <form id='myForm' action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
-            <fieldset>
-                <legend>Vstupné hodnoty</legend>
-                <p><label class="field">Vonkajšia sila pôsobiaca na systém:</label><input class="textbox" id="f" name="f" value="20" type="number" min="0" max="45" step="0.01"></p>
-                <p><label class="field">Hmotnosť telesa:</label><input class="textbox" id="m" name="m" value="5" type="number" min="0.01" max="45" step="0.01"></p>
-                <p><label class="field">Konštanta pružiny:</label><input class="textbox" id="kp" name="kp" value="20" type="number" min="0" max="45" step="0.01"></p>
-                <p><label class="field">Konštanta tlmiča:</label><input class="textbox" id="kt" name="kt" value="7" type="number" min="0" max="45" step="0.01"></p>
-                <p><label class="field">Počiatočná poloha telesa:</label><input class="textbox" id="xo" name="xo" value="12" type="number" min="0" max="45" step="0.01"></p>
-                <p><label class="field">Počiatočná rýchlosť telesa:</label><input class="textbox" id="xi" name="xi" value="0" type="number" min="0" max="45" step="0.01"></p>
-               <p><label class="field">Konečný čas v sekundách:</label><input class="textbox" id="cs" name="cs" value="20" type="number" min="0" max="45" step="0.01"></p>
-                <p><label class="field">Počet hodnôt:</label><input class="textbox" id="ce" name="ce" value="200" type="number" min="0" max="500" step="0.01"></p>
-            </fieldset>
-        
-        <input type="submit" id="button" name="dajHodnoty">
-        </form>
-            
-                <button type="button" onclick="setDef();">set default</button>
-        <div id="content-holder" style="border: 1px solid;">
-       <!----<div id="chartdiv" style="height:300px;width:450px;display: none; "></div> -->
-       
-       </div>
+        ?>
+        <form id='myForm' action="" method="GET">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset>
+                            <legend>Vstupné hodnoty</legend>
+                            <p><label class="field">Vonkajšia sila pôsobiaca na systém:</label><input class="textbox" id="f" name="f" value="20" type="number" min="0" max="45" step="0.01"></p>
+                            <p><label class="field">Hmotnosť telesa:</label><input class="textbox " id="m" name="m" value="5" type="number" min="0.01" max="45" step="0.01"></p>
+                            <p><label class="field">Konštanta pružiny:</label><input class="textbox " id="kp" name="kp" value="20" type="number" min="0" max="45" step="0.01"></p>
+                            <p><label class="field">Konštanta tlmiča:</label><input class="textbox " id="kt" name="kt" value="7" type="number" min="0" max="45" step="0.01"></p>
+                            <p><label class="field">Počiatočná poloha telesa:</label><input class="textbox " id="xo" name="xo" value="12" type="number" min="0" max="45" step="0.01"></p>
+                            <p><label class="field">Počiatočná rýchlosť telesa:</label><input class="textbox " id="xi" name="xi" value="0" type="number" min="0" max="45" step="0.01"></p>
+                           <p><label class="field">Konečný čas v sekundách:</label><input class="textbox " id="cs" name="cs" value="20" type="number" min="0" max="45" step="0.01"></p>
+                            <p><label class="field">Počet hodnôt:</label><input class="textbox " id="ce" name="ce" value="200" type="number" min="0" max="500" step="0.01"></p>
+                        </fieldset>
+                        <input class="btn btn-success" type="submit" id="button" name="dajHodnoty" value="Odoslať">
+                        <button class="btn btn-info" type="button" onclick="setDef();">set default</button>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="content-holder">
+                       </div>
+                    </div>
+                </div>
+            </div>
+            </form>
 
-    </body>
- 
-   
-</html>

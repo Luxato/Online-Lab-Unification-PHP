@@ -8,7 +8,7 @@
 
 @section('content')
 	<?php
-	$path = './applications/2-oscilatory/';
+	$path = './applications/dva-oscilatory/';
 	include $path . 'DvaOsc.php';
 	?>
 @stop
