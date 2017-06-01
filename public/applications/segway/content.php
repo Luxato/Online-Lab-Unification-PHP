@@ -3,20 +3,19 @@
 <link rel="stylesheet" type="text/css" href="<?= $path ?>ioLAB_files/style.css">
 <script src="<?= $path ?>ioLAB_files/fullscreen.js"></script>
 <!-- maxima -->
-<script type="text/javascript" src="<?= $path ?>ioLAB_files/jquery-1.6.2.js"></script>
-<script type="text/javascript" src="<?= $path ?>ioLAB_files/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?= $path ?>../common_assets/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="<?= $path ?>ioLAB_files/shCore.css" type="text/css">
 <link rel="stylesheet" href="<?= $path ?>ioLAB_files/shThemeDefault.css" type="text/css">
 <script type="text/javascript" src="<?= $path ?>ioLAB_files/shCore.js"></script>
 <script type="text/javascript" src="<?= $path ?>ioLAB_files/shBrushJScript.js"></script>
 
-<script type="text/javascript" src="<?= $path ?>ioLAB_files/jquery.jqplot.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<?= $path ?>ioLAB_files/jquery.jqplot.css">
+<script type="text/javascript" src="<?= $path ?>../common_assets/jquery.jqplot.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?= $path ?>../common_assets/jquery.jqplot.css">
 
 <script type="text/javascript" src="<?= $path ?>ioLAB_files/script.js"></script>
-<script type="text/javascript" src="<?= $path ?>ioLAB_files/ajaxupload.js"></script>
+<script type="text/javascript" src="<?= $path ?>../common_assets/ajaxupload.js"></script>
 <script type="text/javascript" src="<?= $path ?>ioLAB_files/excanvas.js"></script>
-<script type="text/javascript" src="<?= $path ?>ioLAB_files/jquery.flot.js"></script>
+<script type="text/javascript" src="<?= $path ?>../common_assets/jquery.flot0.8.3.js"></script>
 
 <script type="text/javascript" src="<?= $path ?>ioLAB_files/MathJax.js">
     MathJax.Hub.Config({
@@ -32,8 +31,8 @@
 <!-- -->
 
 <!-- prihlásenie -->
-<script src="<?= $path ?>ioLAB_files/jquery.min.js"></script>
-<script src="<?= $path ?>ioLAB_files/jquery.form.js"></script>
+<script src="<?= $path ?>../common_assets/jquery.min.js"></script>
+<script src="<?= $path ?>../common_assets/jquery.form.js"></script>
 <!--	<script type="text/javascript" src="/prihlasenie/js/bootstrap.js"></script>
 20150823 -->
 
@@ -77,8 +76,7 @@
 <div id="wrapper">
     <div id="container">
         <div id="content" style="min-height: 550px;">
-            <script type="text/javascript" src="<?= $path ?>js/jQuery.js"></script>
-            <script type="text/javascript" src="<?= $path ?>js/googleGraphs.js"></script>
+            <script type="text/javascript" src="<?= $path ?>../common_assets/googleGraphs.js"></script>
             <style>
                 .pidAll {
                     float: right;
@@ -159,15 +157,15 @@
             </div>
             <button class="btn btn-success btn-md" type="button" id="resetButton" onclick="reset()" >Reset</button>
 
-            <script src="<?= $path ?>js/three/three.min.js"></script>
-            <script src="<?= $path ?>js/three/Animation.js"></script>
-            <script src="<?= $path ?>js/three/AnimationHandler.js"></script>
-            <script src="<?= $path ?>js/three/KeyFrameAnimation.js"></script>
+            <script src="<?= $path ?>../common_assets/three/three.min.js"></script>
+            <script src="<?= $path ?>../common_assets/three/Animation.js"></script>
+            <script src="<?= $path ?>../common_assets/three/AnimationHandler.js"></script>
+            <script src="<?= $path ?>../common_assets/three/KeyFrameAnimation.js"></script>
 
-            <script src="<?= $path ?>js/three/ColladaLoader.js"></script>
-            <script src="<?= $path ?>js/three/OrbitControls.js"></script>
-            <script src="<?= $path ?>js/three/Detector.js"></script>
-            <script src="<?= $path ?>js/three/stats.min.js"></script>
+            <script src="<?= $path ?>../common_assets/three/ColladaLoader.js"></script>
+            <script src="<?= $path ?>../common_assets/three/OrbitControls.js"></script>
+            <script src="<?= $path ?>../common_assets/three/Detector.js"></script>
+            <script src="<?= $path ?>../common_assets/three/stats.min.js"></script>
             <script>
                 var path = "<?= $path ?>";
                 $('#resetButton').hide();

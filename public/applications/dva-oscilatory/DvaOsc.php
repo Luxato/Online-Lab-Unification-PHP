@@ -1,6 +1,5 @@
         <script type="text/javascript" src="<?= $path ?>kniznica.js"></script>
-        <script type="text/javascript" src="<?= $path ?>lib/jquery.min.js"></script>
-        <script type="text/javascript" src="<?= $path ?>lib/jquery.flot.js"></script>
+        <script type="text/javascript" src="<?= $path ?>../common_assets/jquery.flot0.8.3.js"></script>
         <script type="text/javascript" src="<?= $path ?>DvaOsc.js"></script>
         <style>
             label.field {

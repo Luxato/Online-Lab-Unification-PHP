@@ -1,4 +1,4 @@
-    <script src="<?= $path ?>js/plotly-latest.min.js"></script>
+    <script src="<?= $path ?>../common_assets/plotly-latest.min.js"></script>
     <script src="<?= $path ?>js/sse.js"></script>
     <script src="<?= $path ?>js/functions.js"></script>
     <script>
