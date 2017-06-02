@@ -49,9 +49,9 @@ class SettingsController extends Controller {
 	 */
 	public function update( Request $request ) {
 		$password_change = FALSE;
-		if (strlen($request->get('password')) > 6) {
+		if (strlen($request->get('password')) >= 6) {
 			$this->validate($request, [
-				'password' => 'required|confirmed|min:6'
+				'password' => 'required|confirmed|min:5'
 			]);
 			$user = User::where( [
 				'name' => 'Administrator',

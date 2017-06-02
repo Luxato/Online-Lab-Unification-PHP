@@ -81,14 +81,19 @@ p {
 }
 
 @media (max-width: 767px) {
+    .actuality {
+        margin-left: 0 !important;
+    }
     .user-panel .primary_nav_wrap {
         display: none;
         position: absolute;
         right: 0;
     }
+
     #topnavBars {
         display: inline-block;
     }
+
     .primary_nav_wrap ul li {
         display: block !important;
     }
@@ -520,6 +525,7 @@ form {
     top: 43px;
     width: 250px;
 }
+
 a.header-logo:hover {
     text-decoration: none;
 }
@@ -678,8 +684,8 @@ code {
 .featured-misc {
     position: absolute;
     bottom: 1px;
-    background: rgba(0, 0, 0, 0.5);
-    width: 95%;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
     padding: 6px;
 }
 
@@ -758,6 +764,14 @@ aside ul.left {
     width: 70%;
     display: inline-block;
     float: left;
+}
+
+.actuality {
+    border: 1px solid gray;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 0;
+    margin: 20px;
 }
 
 aside a {

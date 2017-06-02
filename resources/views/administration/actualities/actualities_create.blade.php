@@ -40,9 +40,9 @@
                 <div class="form-group">
                     <label for="categorySelection">Kategória</label>
                     <select id="categorySelection" name="category" class="form-control" required="">
-                        <option value="new" selected>Vytvoriť novú</option>
-						<?php foreach($categories as $category): ?>
-                        <option value="<?= $category->id ?>"><?= $category->name ?></option>
+                        <option value="new" >Vytvoriť novú</option>
+						<?php foreach($categories as $category): $i = 0;?>
+                        <option <?php echo $i == 0 ? 'selected' : $i++ ?> value="<?= $category->id ?>"><?= $category->name ?></option>
 						<?php endforeach; ?>
                     </select>
                 </div>

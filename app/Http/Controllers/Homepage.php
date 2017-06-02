@@ -27,9 +27,9 @@ class Homepage extends Controller {
 		\App::setlocale( $locale );
 
 		// Retrieve landing page.
-		$landing_pages      = Setting::all()[1]->setting_value;
+		$landing_pages = Setting::all()[1]->setting_value;
 		$landing_pages = (array) json_decode( $landing_pages );
-		if (isset($landing_pages[ $locale ])) {
+		if ( isset( $landing_pages[ $locale ] ) ) {
 			$this->landing_page = $landing_pages[ $locale ];
 		}
 		if ( \Session::has( 'logged_user_id' ) ) {
@@ -64,8 +64,8 @@ class Homepage extends Controller {
 		}
 		if ( ! isset( $slug ) ) {
 			$blade = 'default';
-			if ($this->landing_page == '00') {
-			    // Aktuality
+			if ( $this->landing_page == '00' ) {
+				// Aktuality
 				$data['actualities'] = Actuality::getAll();
 				$data['categories']  = [];
 				foreach ( $data['actualities'] as $actuality ) {
@@ -84,16 +84,16 @@ class Homepage extends Controller {
 				}
 
 				$blade = 'aktuality';
-			} else if ($this->landing_page == '01') {
+			} else if ( $this->landing_page == '01' ) {
 				// Default
 				//$blade = 'default';
 			} else {
-				if ($this->landing_page) {
-					$page = Page::find($this->landing_page)->feature;
+				if ( $this->landing_page ) {
+					$page      = Page::find( $this->landing_page )->feature;
 					$languages = Language::all();
-					foreach ($page as $section) {
-						foreach ($languages as $language) {
-							if ($section->language_id == $language->id) {
+					foreach ( $page as $section ) {
+						foreach ( $languages as $language ) {
+							if ( $section->language_id == $language->id ) {
 								$blade = 'user_created_pages/' . $section->content_file;
 							}
 						}
@@ -155,11 +155,19 @@ class Homepage extends Controller {
 		}
 		\App::setlocale( $locale );
 
+		if ( \Session::has( 'logged_user_id' ) ) {
+			$user = User::findOrFail( \Session::get( 'logged_user_id' ) );
+		} else {
+			$user = NULL;
+		}
+
 		$this->init_navigation( $locale );
+
 		return view( 'aktualita', [
 			'actualities' => $actualities[0],
 			'navigation'  => $this->navigation,
-			'languages'   => Language::all()->toArray()
+			'languages'   => Language::all()->toArray(),
+			'user'        => $user
 		] );
 
 	}
