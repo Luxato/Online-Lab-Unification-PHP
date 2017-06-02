@@ -40,7 +40,7 @@ CREATE TABLE `apikeys` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `apikeys` (`id`, `key`, `user_id`, `updated_at`, `created_at`) VALUES
-(10,	'c1d9190bd056897ad12293acd14ab508',	2,	'2017-04-24 12:41:31',	'2017-04-24 12:41:31');
+(10,	'ac11a2a2c0872bc988a16ffb554f2789',	2,	'2017-06-01 21:23:04',	'2017-04-24 12:41:31');
 
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
@@ -252,7 +252,8 @@ INSERT INTO `translations` (`id`, `field`) VALUES
 (31,	'mandatory_field'),
 (32,	'password_repeat'),
 (34,	'home'),
-(35,	'loading');
+(35,	'loading'),
+(36,	'your_api_key');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -269,8 +270,8 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `type`, `created_at`, `updated_at`, `remember_token`) VALUES
-(0,	'Administrátor',	'admin',	'$2y$10$n73DziPK0iCFiD8VSBFfuOQEFnG5Y0binaJxykPn/wWuc6yyix/Sm',	'administrator',	'2016-11-01 17:40:40',	'2017-05-30 10:28:35',	'FxD3suiYwZTCeSQkEGABaJRXeO5uzTn09UmSBPKRNNunwjpJz4Tp2DqZ1xfx'),
-(2,	'Tester',	'test@test.sk',	'$2y$10$hT.SLodBOz2vQUd4Ehs/2ukIqMqKJN5x/z/jUIZri7ZYajdoaQW/q',	'user',	'2017-03-08 21:41:35',	'2017-05-18 18:31:39',	NULL);
+(0,	'Administrátor',	'admin',	'$2y$10$cuOS4zgyuGhcLdPC3Grdje39f9ZwNmQi4bCrWXJLF7GGmEWXTawtS',	'administrator',	'2016-11-01 17:40:40',	'2017-06-01 22:21:24',	'AYSV5oLg0WqWYvir7jE98agoO21U72vHJZDLOWhUeJBj9OqXKAk3tmo0DpUH'),
+(2,	'Tester',	'test@test.sk',	'$2y$10$2njrc9WY.aqDFW885jeukuyqEjnP0evDMJct8sHwHq7tGkeWsLQ9W',	'user',	'2017-03-08 21:41:35',	'2017-06-01 21:23:33',	NULL);
 
 DELIMITER ;;
 
@@ -279,4 +280,4 @@ DELETE FROM apikeys WHERE id = user_id;;
 
 DELIMITER ;
 
--- 2017-06-01 22:44:36
+-- 2017-06-02 00:31:20
