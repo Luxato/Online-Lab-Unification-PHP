@@ -255,15 +255,15 @@
         <!-- Main content -->
         <section class="content">
             <?php
-	        $errors = [];
+	        $_errors = [];
 	        if (!is_writable(dirname(getcwd()) . '/resources')) {
-		        $errors[] = dirname(getcwd()) . '/resources';
+		        $_errors[] = dirname(getcwd()) . '/resources';
 	        }
 	        if (!is_writable(dirname(getcwd()) . '/public')) {
-                $errors[] = dirname(getcwd()) . '/public';
+                $_errors[] = dirname(getcwd()) . '/public';
             }
 	        ?>
-            <?php if(sizeof($errors) > 0): ?>
+            <?php if(sizeof($_errors) > 0): ?>
                 <style>
                     td a {
                         color: gray !important;
@@ -275,8 +275,8 @@
                 <div class="alert alert-danger">
                     <h2 style="margin: 0;">VAROVANIE!!!</h2>
                     <strong>Funkcionalita je vypnutá. Pre bezchybný chod aplikácie opravte prosím nasledujúce:</strong><br>
-                    <?php foreach($errors as $key => $value): ?>
-                        <?= $key + 1 . '. Nastavte rekurzívny chmod 7 pre adresár ' . $value ?>
+                    <?php foreach($_errors as $key => $value): ?>
+                        <?= $key + 1 . '. Nastavte rekurzívny chmod 777 pre adresár ' . $value ?>
                         <br>
                     <?php endforeach; ?>
                 </div>

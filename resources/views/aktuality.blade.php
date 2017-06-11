@@ -42,9 +42,9 @@
                             <a href="<?= url('aktualita/'. $actuality->id .'') ?>">
                                 <img width="252" height="182" src="<?= $actuality->thumbnail_path ?>" alt="">
                             </a>
-                            <div class="featured-misc">
-                                <h2><a href="<?= url('aktualita/'. $actuality->id .'') ?>"><?= $actuality->name ?></a></h2>
-                                <div class="featured-date"><?= $actuality->created_at ?></div>
+                            <div style="color: white;" class="featured-misc">
+                                <a href="<?= url('aktualita/'. $actuality->id .'') ?>"><h2 style="color: #fff;"><?= $actuality->name ?></h2>
+                                <div class="featured-date"><?= $actuality->created_at ?></div></a>
                             </div>
                         </div>
                     </div>

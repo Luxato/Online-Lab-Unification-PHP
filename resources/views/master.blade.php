@@ -254,15 +254,15 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
-                                            <input name="_email" type="email" class="form-control" id="email">
+                                            <input name="email" type="email" class="form-control" id="email">
                                         </div>
                                         <div class="form-group">
                                             <label for="passoword"><?= trans('translation.password') ?> <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
                                             <input name="password" type="password" class="form-control" id="passoword">
                                         </div>
                                         <div class="form-group">
-                                            <label for="password_repeat"><?= trans('translation.password_repeat') ?> <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
-                                            <input name="password_repeat" type="password" class="form-control" id="password_repeat">
+                                            <label for="password_confirmation"><?= trans('translation.password_repeat') ?> <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                            <input name="password_confirmation" type="password" class="form-control" id="password_repeat">
                                         </div>
                                         <i class="fa fa-asterisk required" aria-hidden="true"></i> - <?= trans('translation.mandatory_field') ?>
                                     </div>
@@ -312,7 +312,8 @@
         });
         var elem = document.querySelector('.js-switch');
         var t = 0;
-        var input = $('input[name=email]');
+        var input = $('#login-nav').find('input[name=email]');
+        console.log(input);
         if(elem != null) {
             elem.onchange = function() {
                 if (t % 2 == 0) {
@@ -412,7 +413,7 @@
 <?php if(count($errors) > 0): ?>
     <?php foreach($errors->all() as $error): ?>
     <script>
-        generate('warning', '<div class="activity-item"> <i class="fa fa-check" aria-hidden="true"></i> <div class="activity">{{$error}}</div> </div>');
+        generate('warning', '<div class="activity-item"> <i class="fa fa-times" aria-hidden="true"></i> <div class="activity">{{$error}}</div> </div>');
     </script>
     <?php endforeach; ?>
 <?php endif; ?>
@@ -422,7 +423,7 @@
     </script>
 @elseif (Session::has('warning'))
     <script>
-        generate('warning', '<div class="activity-item"> <i class="fa fa-check" aria-hidden="true"></i> <div class="activity"><?= trans('translation.' . Session::get('warning')) ?></div> </div>');
+        generate('warning', '<div class="activity-item"> <i class="fa fa-times" aria-hidden="true"></i> <div class="activity"><?= trans('translation.' . Session::get('warning')) ?></div> </div>');
     </script>
 @endif
 

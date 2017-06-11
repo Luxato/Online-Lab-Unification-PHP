@@ -14,7 +14,6 @@
 
 	<style>
 	#container{
-		height:500px !important;
 		visibility:visible;
 		z-index:-2;
 	}

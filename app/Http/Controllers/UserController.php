@@ -20,10 +20,10 @@ class UserController extends Controller {
 		$this->validate($request, [
 			'email' => 'required|email|unique:users',
 			'username' => 'required|min:6',
-			'password' => 'required|min:6'
+			'password' => 'required|min:6|confirmed'
 		]);
 		// First check for duplicates.
-		$user = User::where( 'email', $request->email )->first();
+		$user = User::where( 'email', $request->get('email') )->first();
 		if (isset($user)) {
 			// We have a duplicate here.
 			Session::flash( 'warning', 'duplicated_email' );

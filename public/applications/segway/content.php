@@ -1,6 +1,4 @@
 <!-- saved from url=(0100)http://www.iolab.sk/11-subjects/26-tar1/28-teoria/32-modelovanie-systemov/33-vseobecne-o-modelovani/ -->
-<link href="<?= $path ?>ioLAB_files/css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="<?= $path ?>ioLAB_files/style.css">
 <script src="<?= $path ?>ioLAB_files/fullscreen.js"></script>
 <!-- maxima -->
 <script type="text/javascript" src="<?= $path ?>../common_assets/jquery-ui.min.js"></script>
@@ -102,9 +100,6 @@
                 }
                 body {
                     padding-top: 80px;
-                }
-                footer {
-                    display: none;
                 }
             </style>
             <div class="col-sm-12 mockup">
