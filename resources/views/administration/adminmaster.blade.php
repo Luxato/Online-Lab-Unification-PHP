@@ -15,6 +15,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/font-awesome.min.css">
     <!-- Theme style -->
+    <link rel="stylesheet" href="<?= url('assets/administration/morris.css') ?>">
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/dist/css/skins/skin-blue.min.css">
     <link rel="stylesheet" href="<?= URL::to( '/' ); ?>/assets/administration/custom.css">
@@ -308,6 +309,8 @@
 <script src="<?= URL::to( '/' ); ?>/assets/administration/dist/js/app.min.js"></script>
 <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/noty/jquery.noty.packaged.min.js"></script>
 <script src="<?= URL::to( '/' ); ?>/assets/administration/plugins/parsley.min.js"></script>
+<script src="<?= url('assets/administration/raphael.min.js') ?>"></script>
+<script src="<?= url('assets/administration/morris.min.js') ?>"></script>
 <script>
     function generate(type, text) {
         var n = noty({
