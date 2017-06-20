@@ -15,11 +15,11 @@
         margin-right: 5px;
     }
 </style>
-<div id='container' style="padding: 15px;background-color: #E6E6E6;border: 1px solid black;border-radius: 19px;">
-    <fieldset style="background-color:#E6E6E6;">
+<div id='container' style="padding: 15px;">
+    <fieldset>
         <h3> Vstupné údaje chcem zadať pomocou : <br></h3>
         <table border="0">
-            <tr style="background-color:#E6E6E6;">
+            <tr>
                 <td>
                     <div id="inp1" style="float:left;"> matíc stavového priestoru
                         <input type="radio" name="inputforma" value="zmatice" style="margin-top:0px;">&nbsp&nbsp&nbsp
@@ -32,7 +32,7 @@
                 </td>
             </tr>
 
-            <tr style="background-color:#E6E6E6;">
+            <tr>
                 <td>
                     <div id="inp4" style="margin-left:0px;float:left;"> diferenciálnej rovnice
                         <input type="radio" name="inputforma" value="diff" style="margin-top:0px;"> &nbsp&nbsp&nbsp
@@ -49,7 +49,7 @@
     </fieldset>
 
 
-    <fieldset class="form-inline" id="slide1" style="background-color:#E6E6E6;display:none;">
+    <fieldset class="form-inline" id="slide1" style="display:none;">
         <legend class="legenda" style="width: 100%;">
             <img class="quit" style="display:none" src="<?= $path ?>tlacoff.png" alt="X">
             <img class="maximize" style="display:none" src="<?= $path ?>tlacdole.png" alt="---">
@@ -93,13 +93,13 @@
             </div>
             <div id="shownmat" class='showshow'></div>
             <div class="legenda">
-                <img class="minimize" style="" src="<?= $path ?>tlachore.png" alt="▲">
+                <!--<img class="minimize" style="" src="<?/*= $path */?>tlachore.png" alt="▲">-->
             </div>
         </div>
     </fieldset>
 
 
-    <fieldset id="slide2" style="background-color:#E6E6E6;display:none;">
+    <fieldset id="slide2" style="display:none;">
         <legend class="legenda">
             <img class="quit" style="display:none" src="<?= $path ?>tlacoff.png" alt="X">
             <img class="maximize" style="display:none" src="<?= $path ?>tlacdole.png" alt="---">
@@ -107,7 +107,7 @@
         </legend>
         <div>
             <table border="0">
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td>Čitateľ:</td>
                     <td><input class="form-control" type="text" name="pfcit" style="text-align: center" size="60"
                                value="[1 2]"></td>
@@ -119,7 +119,7 @@
                         <!--      <img class="help" style="" id='help_x0pf' title="stlpcový vektor začiatočných podmienok s dĺžkou n v  napr.tvare  [0 0 0]' - ' je transponovanie" src="<?= $path ?>tlacinfo.png" alt="i">
 --></td>
                 </tr>
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td>Menovateľ:</td>
                     <td><input class="form-control" type="text" name="pfmen" style="text-align: center" size="60"
                                value="[1 3 3 1]">
@@ -130,7 +130,7 @@
             </table>
             <br>
             <table border="0">
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td></td>
                     <td>
                         <button class="btn btn-success" id="showmepf" style="">Ukáž</button>
@@ -144,13 +144,12 @@
             <br>
             <div id="shownpf" class='showshow' style=""></div>
             <div class="legenda">
-                <img class="minimize" style="" src="<?= $path ?>tlachore.png" alt="▲">
             </div>
         </div>
     </fieldset>
 
 
-    <fieldset id="slide3" style="background-color:#E6E6E6;display:none;">
+    <fieldset id="slide3" style="display:none;">
 
         <legend class="legenda">
             <img class="quit" style="display:none" src="<?= $path ?>tlacoff.png" alt="X">
@@ -159,27 +158,26 @@
         </legend>
         <div>
             <table border="0">
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td><input type="radio" name="demo" value="1" style="margin-top:0px;"></td>
                     <td>nestabilný systém 2.rádu</td>
                 </tr>
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td><input type="radio" name="demo" value="2" style="margin-top:0px;"></td>
                     <td>stabilný systém 2.rádu</td>
                 </tr>
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td><input type="radio" name="demo" value="3" style="margin-top:0px;"></td>
                     <td>stabilný systém 3.rádu</td>
                 </tr>
             </table>
             <div class="legenda">
-                <img class="minimize" style="" src="<?= $path ?>tlachore.png" alt="▲">
             </div>
         </div>
     </fieldset>
 
 
-    <fieldset id="slide4" style="background-color:#E6E6E6;display:none;">
+    <fieldset id="slide4" style="display:none;">
         <legend class="legenda">
             <img class="quit" style="display:none" src="<?= $path ?>tlacoff.png" alt="X">
             <img class="maximize" style="display:none" src="<?= $path ?>tlacdole.png" alt="---">
@@ -187,7 +185,7 @@
         </legend>
         <div>
             <table border="0">
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td>Rovnica:</td>
                     <td><input class="form-control" type="text" name="diff" style="text-align: center;width:500px;"
                                size="60" value="D3y+3D2y+3Dy+y=Du+2u"></td>
@@ -195,7 +193,7 @@
                 </tr>
             </table>
             <table border="0">
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td>ŷ<sub>0</sub>= <br></td>
                     <td><input class="form-control" type="text" name="diff_y0" style="text-align: center" size="60"
                                value="[0 0 0]"></td>
@@ -205,7 +203,7 @@
             </table>
             <br>
             <table border="0">
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td></td>
                     <td>
                         <button class="btn btn-success" id="showmediff" style="">Ukáž</button>
@@ -217,13 +215,12 @@
 
             <div id="showndiff" class='showshow' style=""></div>
             <div class="legenda">
-                <img class="minimize" style="" src="<?= $path ?>tlachore.png" alt="▲">
             </div>
         </div>
     </fieldset>
 
 
-    <fieldset id="convert" style="background-color:#E6E6E6;margin-top:0px;display:none;">
+    <fieldset id="convert" style="margin-top:0px;display:none;">
         <legend class="legenda">
             <img class="quit" style="" src="<?= $path ?>tlacoff.png" alt="X">
             <img class="maximize" id="maximize1" style="display:none" src="<?= $path ?>tlacdole.png" alt="---">
@@ -231,29 +228,29 @@
         </legend>
         <div>
             <table border="0">
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td></td>
                     <td><input type="radio" name="forma" value="2" style="margin-top:0px;">Normálnej formy
                         pozorovateľnosti
                     </td>
                 </tr>
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td></td>
                     <td><input type="radio" name="forma" value="3" style="margin-top:0px;">Normálnej formy riaditeľnosti
                         <br></td>
                 </tr>
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td></td>
                     <td><input type="radio" name="forma" value="4" style="margin-top:0px;">Paralelneho modelu(pre
                         systémy s reálnymi koreňmi)<br></td>
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td></td>
                     <td>
                         <div id="convertpf" style="display:none;"><input type="radio" name="forma" value="5"
                                                                          style="margin-top:0px;">Do prenosovej funkcie
                         </div>
                     </td>
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td></td>
                     <td>
                         <div id="convertdiff" style="display:none;"><input type="radio" name="forma" value="6"
@@ -266,14 +263,13 @@
                     </td>
                 </tr>
             </table>
-            <div id="matice" style="background-color:#E6E6E6;"></div>
+            <div id="matice"></div>
             <div class="legenda">
-                <img class="minimize" style="" src="<?= $path ?>tlachore.png" alt="▲">
             </div>
         </div>
     </fieldset>
 
-    <fieldset id="riesavykresli" style="background-color:#E6E6E6;margin-top:0px;display:none;">
+    <fieldset id="riesavykresli" style="margin-top:0px;display:none;">
         <legend class="legenda">
             <img class="quit" style="" src="<?= $path ?>tlacoff.png" alt="X">
             <img class="maximize" id="maximize2" style="display:none" src="<?= $path ?>tlacdole.png" alt="---"> <br>
@@ -282,7 +278,7 @@
 
         <div>
             <table border="0">
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td><input type="checkbox" class="bothgraph" name="drawfrominput" checked> Vypočítať pre zadané
                         údaje
                     </td>
@@ -295,14 +291,14 @@
                 </tr>
             </table>
             <table border="0">
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td>u=</td>
                     <td><input class="form-control" type="text" name="matlab_u" value="1"></td>
                     <td><img class="help" style="" id='help_u'
                              title="vstupný signál napr jednotkový skok - 1 alebo rampa - pi*t"
                              src="<?= $path ?>tlacinfo.png" alt="i"></td>
                 </tr>
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td>D=</td>
                     <td><input class="form-control" type="text" name="delay" value="0"></td>
                     <td><img class="help" style="" id='help_D' title="dopravné oneskorenie"
@@ -310,20 +306,20 @@
                 </tr>
             </table>
             <table border="0">
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td></td>
                     <td><input type="checkbox" name="riesenie" checked> Vypočítať odozvu systému</td>
                     <td>
                         <input type="checkbox" name="vykresligraf" class="bothgraph"> Vykresliť graf<br></td>
                 </tr>
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td></td>
                     <td>
                         <div style="display:none" id="bothgraphs"><input type="checkbox" name="drawboth"> Vykresliť do
                             jedného grafu <br></div>
                     </td>
                 </tr>
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td></td>
                     <td></td>
                     <td>
@@ -332,10 +328,10 @@
                 </tr>
             </table>
 
-            <div id="paramgraf" style="background-color:#E6E6E6;margin-top:0px;display:none;">
+            <div id="paramgraf" style="margin-top:0px;display:none;">
                 <br> Zadaj parametre pre vykreslenie grafu <br> <br>
                 <table border="0">
-                    <tr style="background-color:#E6E6E6;">
+                    <tr>
                         <td>Časový interval od</td>
                         <td><input class="form-control" type="text" size="7" name="timestart"
                                    style="width:40px;text-align:center;" value="0"> do <input type="text" size="7"
@@ -345,7 +341,7 @@
                     </tr>
                 </table>
                 <table border="0">
-                    <tr style="background-color:#E6E6E6;">
+                    <tr>
                         <td>Presnost=</td>
                         <td><input class="form-control" type="text" name="precision" size="7"
                                    style="width:40px;text-align:center;" value="2"></td>
@@ -357,13 +353,12 @@
             </div>
 
             <div class="legenda">
-                <img class="minimize" style="" src="<?= $path ?>tlachore.png" alt="▲">
             </div>
         </div>
     </fieldset>
 
 
-    <fieldset id="vykreslenie" style="background-color:#E6E6E6;margin-top:0px;display:none;">
+    <fieldset id="vykreslenie" style="margin-top:0px;display:none;">
 
         <legend class="legenda">
             <img class="quit" style="" src="<?= $path ?>tlacoff.png" alt="X">
@@ -372,7 +367,7 @@
         </legend>
         <div>
             <table><br>
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td>
                         <div id="graf"></div>
                         <br>
@@ -386,8 +381,8 @@
                     <td>
                         <div id="udajeinput"></div>
                     </td>
-                <tr style="background-color:#E6E6E6;"></tr>
-                <tr style="background-color:#E6E6E6;">
+                <tr></tr>
+                <tr>
                     <td>
                         <div id="grafconvert"></div>
                         <br>
@@ -401,19 +396,18 @@
                     <td>
                         <div id="udajeinputconvert"></div>
                     </td>
-                <tr style="background-color:#E6E6E6;">
+                <tr>
                     <td></td>
                 </tr>
             </table>
             <div class="legenda">
-                <img class="minimize" style="" src="<?= $path ?>tlachore.png" alt="▲">
             </div>
 
         </div>
 
     </fieldset>
 
-    <fieldset id="vypis" style="background-color:#E6E6E6;margin-top:0px;display:none;">
+    <fieldset id="vypis" style="margin-top:0px;display:none;">
         <legend class="legenda">
 
             <img class="quit" style="" src="<?= $path ?>tlacoff.png" alt="X">
@@ -422,11 +416,10 @@
         </legend>
         </legend>
         <div>
-            <div id="maticeries" style="background-color:#E6E6E6;"></div>
-            <div id="maticeriesconvert" style="background-color:#E6E6E6;"></div>
+            <div id="maticeries"></div>
+            <div id="maticeriesconvert"></div>
 
             <div class="legenda">
-                <img class="minimize" style="" src="<?= $path ?>tlachore.png" alt="▲">
             </div>
         </div>
     </fieldset>
@@ -641,7 +634,7 @@
                     konvtex[i] = konvtex[i].replace("righ(t-" + $('input[name=delay]').val() + ')', 'right');
                     konvtex[i] = konvtex[i].replace("sqr(t-" + $('input[name=delay]').val() + ')', 'sqrt');
                 }
-                konvmatstr += '<tr style="background-color:#E6E6E6;font-family:MathJax_Math;">';
+                konvmatstr += '<tr style="font-family:MathJax_Math;">';
                 konvmatstr += '<td>' + polenazvov[i] + '</td><td>';
                 konvmatstr += konvtex[i];
                 if ($('input[name=delay]').val() != '0')
@@ -649,7 +642,7 @@
                 konvmatstr += '</td></tr>';
             }
             konvmatstr += '</table>';
-            document.getElementById("maticeries").innerHTML = '<center><center><tr style="background-color:#E6E6E6;font-family:MathJax_Math;">$$Riešenie$$ </tr>' + konvmatstr + '</center>';
+            document.getElementById("maticeries").innerHTML = '<center><center><tr style="font-family:MathJax_Math;">$$Riešenie$$ </tr>' + konvmatstr + '</center>';
             if ($('input[name=riesenie]').prop('checked')) {
                 konvtex = jQuery.parseJSON(dataconv.formulas['tex']);
                 var polenazvov = new Array();
@@ -665,7 +658,7 @@
                     konvtex[i] = konvtex[i].replace("lef(t-" + $('input[name=delay]').val() + ')', 'left');
                     konvtex[i] = konvtex[i].replace("righ(t-" + $('input[name=delay]').val() + ')', 'right');
                     konvtex[i] = konvtex[i].replace("sqr(t-" + $('input[name=delay]').val() + ')', 'sqrt');
-                    konvmatstr += '<tr style="background-color:#E6E6E6;font-family:MathJax_Math;">';
+                    konvmatstr += '<tr style="font-family:MathJax_Math;">';
                     konvmatstr += '<td>' + polenazvov[i] + '</td><td>';
                     konvmatstr += konvtex[i] + '';
                     if ($('input[name=delay]').val() != '0')
@@ -673,7 +666,7 @@
                     konvmatstr += '</td> </tr>';
                 }
                 konvmatstr += '</table>';
-                document.getElementById("maticeriesconvert").innerHTML = '<center><tr style="background-color:#E6E6E6;font-family:MathJax_Math;">$$Riešenie&nbsppo&nbspkonverzii$$</tr>' + konvmatstr + '</center>';
+                document.getElementById("maticeriesconvert").innerHTML = '<center><tr style="font-family:MathJax_Math;">$$Riešenie&nbsppo&nbspkonverzii$$</tr>' + konvmatstr + '</center>';
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             }
         }
@@ -769,7 +762,7 @@
                     konvtex[i] = konvtex[i].replace("righ(t-" + $('input[name=delay]').val() + ')', 'right');
                     konvtex[i] = konvtex[i].replace("sqr(t-" + $('input[name=delay]').val() + ')', 'sqrt');
                 }
-                konvmatstr += '<tr style="background-color:#E6E6E6;font-family:MathJax_Math;">';
+                konvmatstr += '<tr style="font-family:MathJax_Math;">';
                 konvmatstr += '<td>' + polenazvov[i] + '</td><td>';
                 konvmatstr += konvtex[i];
                 if ($('input[name=delay]').val() != '0')
@@ -777,7 +770,7 @@
                 konvmatstr += '</td></tr>';
             }
             konvmatstr += '</table>';
-            document.getElementById("maticeries").innerHTML = '<center><tr style="background-color:#E6E6E6;font-family:MathJax_Math;">$$Riešenie$$ </tr><center>' + konvmatstr + '</center>';
+            document.getElementById("maticeries").innerHTML = '<center><tr style="font-family:MathJax_Math;">$$Riešenie$$ </tr><center>' + konvmatstr + '</center>';
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
     }
@@ -894,7 +887,7 @@
                     konvtex[i] = konvtex[i].replace("righ(t-" + $('input[name=delay]').val() + ')', 'right');
                     konvtex[i] = konvtex[i].replace("sqr(t-" + $('input[name=delay]').val() + ')', 'sqrt');
                 }
-                konvmatstr += '<tr style="background-color:#E6E6E6;font-family:MathJax_Math;">';
+                konvmatstr += '<tr style="font-family:MathJax_Math;">';
                 konvmatstr += '<td>' + polenazvov[i] + '</td><td>';
                 konvmatstr += konvtex[i] + '';
                 if ($('input[name=delay]').val() != '0')
@@ -902,7 +895,7 @@
                 konvmatstr += '</td> </tr>';
             }
             konvmatstr += '</table>';
-            document.getElementById("maticeriesconvert").innerHTML = '<center><tr style="background-color:#E6E6E6;font-family:MathJax_Math;">$$Riešenie&nbsppo&nbspkonverzii$$</tr>' + konvmatstr + '</center>';
+            document.getElementById("maticeriesconvert").innerHTML = '<center><tr style="font-family:MathJax_Math;">$$Riešenie&nbsppo&nbspkonverzii$$</tr>' + konvmatstr + '</center>';
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
     }
@@ -1379,34 +1372,34 @@
         $("#showmediff").click(function () {
 
             document.getElementById('showndiff').innerHTML = '<table border="0" >\n\
-                        <tr style="background-color:#E6E6E6;font-family:MathJax_Math;">\n\
+                        <tr style="font-family:MathJax_Math;">\n\
                             <td></td><td>' + showinputdiff(diffcoef(cleaninput($('input[name=diff]').val()), 'y'), diffcoef(cleaninput($('input[name=diff]').val()), 'u')) + '</td></tr><table>\n\
-                             <table border="0" ><center><tr style="background-color:#E6E6E6;font-family:MathJax_Math;"><td>ŷ<sub>0</sub>=</td><td>' + showinputmatrix(cleaninput($('input[name=diff_y0]').val())) + '</center></td></td></tr><table>';
+                             <table border="0" ><center><tr style="font-family:MathJax_Math;"><td>ŷ<sub>0</sub>=</td><td>' + showinputmatrix(cleaninput($('input[name=diff_y0]').val())) + '</center></td></td></tr><table>';
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         });
         $("#showmemat").click(function () {
             document.getElementById("shownmat").innerHTML = '<table border="0" >\n\
-                        <tr style="background-color:#E6E6E6;font-family:MathJax_Math;">\n\
+                        <tr style="font-family:MathJax_Math;">\n\
                         <td>\n\
-                        <table border="0" ><tr style="background-color:#E6E6E6;font-family:MathJax_Math;"><td> A=</td><td>' + showinputmatrix(cleaninput($('input[name=matlab_A]').val())) + '</td></tr></table>\n\
+                        <table border="0" ><tr style="font-family:MathJax_Math;"><td> A=</td><td>' + showinputmatrix(cleaninput($('input[name=matlab_A]').val())) + '</td></tr></table>\n\
                         </td>\n\
                         <td>\n\
-                        <table border="0" ><tr style="background-color:#E6E6E6;font-family:MathJax_Math;"><td>b=</td><td>' + showinputmatrix(cleaninput($('input[name=matlab_b]').val())) + '</td></tr></table>\n\
+                        <table border="0" ><tr style="font-family:MathJax_Math;"><td>b=</td><td>' + showinputmatrix(cleaninput($('input[name=matlab_b]').val())) + '</td></tr></table>\n\
                         </td>\n\
                         <td></td></tr>\n\
-                        <tr style="background-color:#E6E6E6;font-family:MathJax_Math;">\n\
+                        <tr style="font-family:MathJax_Math;">\n\
                         <td>\n\
-        <table border="0" ><tr style="background-color:#E6E6E6;font-family:MathJax_Math;"><td> c<sup>t</sup>=</td><td>' + showinputmatrix(cleaninput($('input[name=matlab_ct]').val())) + '</td></tr></table>\n\
+        <table border="0" ><tr style="font-family:MathJax_Math;"><td> c<sup>t</sup>=</td><td>' + showinputmatrix(cleaninput($('input[name=matlab_ct]').val())) + '</td></tr></table>\n\
                   </td>\n\
                     <td> $${d=' + cleaninput($('input[name=matlab_d]').val()) + '}$$\n\
-                      </td></tr><tr style="background-color:#E6E6E6;font-family:MathJax_Math;">\n\
-                 <td><table border="0" ><tr style="background-color:#E6E6E6;font-family:MathJax_Math;"><td>x<sub>0</sub>=</td><td>' + showinputmatrix(cleaninput($('input[name=matlab_x0]').val())) + '</td></tr></table></td></tr></table>';
+                      </td></tr><tr style="font-family:MathJax_Math;">\n\
+                 <td><table border="0" ><tr style="font-family:MathJax_Math;"><td>x<sub>0</sub>=</td><td>' + showinputmatrix(cleaninput($('input[name=matlab_x0]').val())) + '</td></tr></table></td></tr></table>';
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         });
         $("#showmepf").click(function () {
 
             document.getElementById("shownpf").innerHTML = '<table border="0" >\n\
-                            <tr style="background-color:#E6E6E6;font-family:MathJax_Math;">\n\
+                            <tr style="font-family:MathJax_Math;">\n\
                             <td> $$G(s)={{Y(s)}\\over{U(s)}}=$$</td><td>' + showinputpf(cleaninput($('input[name=pfcit]').val()), cleaninput($('input[name=pfmen]').val())) + '\n\
                             </td></tr><table>';
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
@@ -1569,21 +1562,21 @@
                         if ($('input[name=forma]:checked').val() == '5') {
                             konvnative[2] = konvnative[2].replace('$', '').replace(/,/g, ' ');
                             konvnative[1] = konvnative[1].replace('$', '').replace(/,/g, ' ');
-                            document.getElementById("matice").innerHTML = '<table border="0" > <tr style="background-color:#E6E6E6;font-family:MathJax_Math;"> <td>G(s)=</td><td>' + showinputpf(konvnative[1], konvnative[2]) + '</td></tr>\n\</table>';
+                            document.getElementById("matice").innerHTML = '<table border="0" > <tr style="font-family:MathJax_Math;"> <td>G(s)=</td><td>' + showinputpf(konvnative[1], konvnative[2]) + '</td></tr>\n\</table>';
                             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
                             konvnative[3] = '0$'
                         } else if ($('input[name=forma]:checked').val() == '6') {
                             konvnative[2] = konvnative[2].replace('$', '').replace(/,/g, ' ');
                             konvnative[1] = konvnative[1].replace('$', '').replace(/,/g, ' ');
-                            document.getElementById("matice").innerHTML = '<table border="0" > <tr style="background-color:#E6E6E6;font-family:MathJax_Math;"> <td> </td><td>' + showinputdiff(konvnative[2], konvnative[1]) + '</td><td>ŷ<sub>0</sub>=</td><td>' + konvtex[3] + ' </td></tr>\n\</table>';
+                            document.getElementById("matice").innerHTML = '<table border="0" > <tr style="font-family:MathJax_Math;"> <td> </td><td>' + showinputdiff(konvnative[2], konvnative[1]) + '</td><td>ŷ<sub>0</sub>=</td><td>' + konvtex[3] + ' </td></tr>\n\</table>';
                             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
                         }
                         else {
                             var konvmatstr = '<table border="0" > ';
                             for (i = 0; i < konvtex.length; i++) {
                                 if (i % 2 == 0 || polenazvov[0].length > 300)
-                                    konvmatstr += '<tr style="background-color:#E6E6E6;font-family:MathJax_Math;">';
-                                konvmatstr += '<td><table border="0" ><tr style="background-color:#E6E6E6;font-family:MathJax_Math;"><td>' + polenazvov[i] + '</td><td>';
+                                    konvmatstr += '<tr style="font-family:MathJax_Math;">';
+                                konvmatstr += '<td><table border="0" ><tr style="font-family:MathJax_Math;"><td>' + polenazvov[i] + '</td><td>';
                                 if (i == 4)
                                     konvmatstr += konvtex[3] + '</td></tr></table></td>';
                                 else if (i == 3)
@@ -1632,19 +1625,19 @@
                         if ($('input[name=forma]:checked').val() == '5') {
                             konvnative[2] = konvnative[2].replace('$', '').replace(/,/g, ' ');
                             konvnative[1] = konvnative[1].replace('$', '').replace(/,/g, ' ');
-                            document.getElementById("matice").innerHTML = '<table border="0" > <tr style="background-color:#E6E6E6;font-family:MathJax_Math;"> <td>G(s)=</td><td>' + showinputdiff(konvnative[2], konvnative[1]) + '</td><td>x<sub>0</sub>=</td><td>' + konvtex[3] + ' </td></tr>\n\</table>';
+                            document.getElementById("matice").innerHTML = '<table border="0" > <tr style="font-family:MathJax_Math;"> <td>G(s)=</td><td>' + showinputdiff(konvnative[2], konvnative[1]) + '</td><td>x<sub>0</sub>=</td><td>' + konvtex[3] + ' </td></tr>\n\</table>';
                         } else if ($('input[name=forma]:checked').val() == '6') {
                             konvnative[2] = konvnative[2].replace('$', '').replace(/,/g, ' ');
                             konvnative[1] = konvnative[1].replace('$', '').replace(/,/g, ' ');
-                            document.getElementById("matice").innerHTML = '<table border="0" > <tr style="background-color:#E6E6E6;font-family:MathJax_Math;"> <td> </td><td>' + showinputdiff(konvnative[2], konvnative[1]) + '</td><td>ŷ<sub>0</sub>=</td><td>' + konvtex[3] + ' </td></tr>\n\</table>';
+                            document.getElementById("matice").innerHTML = '<table border="0" > <tr style="font-family:MathJax_Math;"> <td> </td><td>' + showinputdiff(konvnative[2], konvnative[1]) + '</td><td>ŷ<sub>0</sub>=</td><td>' + konvtex[3] + ' </td></tr>\n\</table>';
                             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
                         } else {
                             var konvmatstr = '<table border="0" > ';
                             for (i = 0; i < konvtex.length; i++) {
                                 if (i % 2 == 0 || polenazvov[0].length > 300)
-                                    konvmatstr += '<tr style="background-color:#E6E6E6;font-family:MathJax_Math;">';
+                                    konvmatstr += '<tr style="font-family:MathJax_Math;">';
 
-                                konvmatstr += '<td><table border="0" ><tr style="background-color:#E6E6E6;font-family:MathJax_Math;"><td>' + polenazvov[i] + '</td><td>';
+                                konvmatstr += '<td><table border="0" ><tr style="font-family:MathJax_Math;"><td>' + polenazvov[i] + '</td><td>';
                                 if (i == 4)
                                     konvmatstr += konvtex[3] + '</td></tr></table></td>';
                                 else if (i == 3)
@@ -1690,20 +1683,20 @@
                         polenazvov[3] = "d=";
                         polenazvov[4] = "x<sub>0</subs>=";
                         if ($('input[name=forma]:checked').val() == '5') {
-                            document.getElementById("matice").innerHTML = '<table border="0" > <tr style="background-color:#E6E6E6;font-family:MathJax_Math;"> <td> Pf=</td><td>' + showinputpf(konvnative[1].replace('$', '').replace(/,/g, ' '), konvnative[2].replace('$', '').replace(/,/g, ' ')) + '</td></tr>\n\</table>';
+                            document.getElementById("matice").innerHTML = '<table border="0" > <tr style="font-family:MathJax_Math;"> <td> Pf=</td><td>' + showinputpf(konvnative[1].replace('$', '').replace(/,/g, ' '), konvnative[2].replace('$', '').replace(/,/g, ' ')) + '</td></tr>\n\</table>';
                             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
                             konvnative[3] = '0$'
                         } else if ($('input[name=forma]:checked').val() == '6') {
-                            document.getElementById("matice").innerHTML = '<table border="0" > <tr style="background-color:#E6E6E6;font-family:MathJax_Math;"> <td> </td><td>' + showinputdiff(konvnative[2].replace('$', '').replace(/,/g, ' '), konvnative[1].replace('$', '').replace(/,/g, ' ')) + '</td><td>ŷ<sub>0</sub>=</td><td>' + konvtex[3] + ' </td></tr>\n\</table>';
+                            document.getElementById("matice").innerHTML = '<table border="0" > <tr style="font-family:MathJax_Math;"> <td> </td><td>' + showinputdiff(konvnative[2].replace('$', '').replace(/,/g, ' '), konvnative[1].replace('$', '').replace(/,/g, ' ')) + '</td><td>ŷ<sub>0</sub>=</td><td>' + konvtex[3] + ' </td></tr>\n\</table>';
                             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
                         }
                         else {
                             var konvmatstr = '<table border="0" > ';
                             for (i = 0; i < konvtex.length; i++) {
                                 if (i % 2 == 0 || polenazvov[0].length > 300)
-                                    konvmatstr += '<tr style="background-color:#E6E6E6;font-family:MathJax_Math;">';
+                                    konvmatstr += '<tr style="font-family:MathJax_Math;">';
 
-                                konvmatstr += '<td><table border="0" ><tr style="background-color:#E6E6E6;font-family:MathJax_Math;"><td>' + polenazvov[i] + '</td><td>';
+                                konvmatstr += '<td><table border="0" ><tr style="font-family:MathJax_Math;"><td>' + polenazvov[i] + '</td><td>';
                                 if (i == 4)
                                     konvmatstr += konvtex[3] + '</td></tr></table></td>';
                                 else if (i == 3)

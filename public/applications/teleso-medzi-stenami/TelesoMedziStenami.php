@@ -6,6 +6,9 @@
                 width: 100%;
                 max-width: 233px;
             }
+            fieldset {
+                width: 270px !important;
+            }
         </style>
 <?php
                 if(@$_GET['dajHodnoty'])
@@ -145,14 +148,14 @@
                     <div class="col-md-6">
                         <fieldset>
                             <legend>Vstupné hodnoty</legend>
-                            <p><label class="field">Vonkajšia sila pôsobiaca na systém:</label><input class="textbox" id="f" name="f" value="20" type="number" min="0" max="45" step="0.01"></p>
-                            <p><label class="field">Hmotnosť telesa:</label><input class="textbox " id="m" name="m" value="5" type="number" min="0.01" max="45" step="0.01"></p>
-                            <p><label class="field">Konštanta pružiny:</label><input class="textbox " id="kp" name="kp" value="20" type="number" min="0" max="45" step="0.01"></p>
-                            <p><label class="field">Konštanta tlmiča:</label><input class="textbox " id="kt" name="kt" value="7" type="number" min="0" max="45" step="0.01"></p>
-                            <p><label class="field">Počiatočná poloha telesa:</label><input class="textbox " id="xo" name="xo" value="12" type="number" min="0" max="45" step="0.01"></p>
-                            <p><label class="field">Počiatočná rýchlosť telesa:</label><input class="textbox " id="xi" name="xi" value="0" type="number" min="0" max="45" step="0.01"></p>
-                           <p><label class="field">Konečný čas v sekundách:</label><input class="textbox " id="cs" name="cs" value="20" type="number" min="0" max="45" step="0.01"></p>
-                            <p><label class="field">Počet hodnôt:</label><input class="textbox " id="ce" name="ce" value="200" type="number" min="0" max="500" step="0.01"></p>
+                            <p><label class="field">Vonkajšia sila pôsobiaca na systém:</label><input class="textbox form-control" id="f" name="f" value="20" type="number" min="0" max="45" step="0.01"></p>
+                            <p><label class="field">Hmotnosť telesa:</label><input class="textbox form-control " id="m" name="m" value="5" type="number" min="0.01" max="45" step="0.01"></p>
+                            <p><label class="field">Konštanta pružiny:</label><input class="textbox form-control " id="kp" name="kp" value="20" type="number" min="0" max="45" step="0.01"></p>
+                            <p><label class="field">Konštanta tlmiča:</label><input class="textbox form-control " id="kt" name="kt" value="7" type="number" min="0" max="45" step="0.01"></p>
+                            <p><label class="field">Počiatočná poloha telesa:</label><input class="textbox form-control " id="xo" name="xo" value="12" type="number" min="0" max="45" step="0.01"></p>
+                            <p><label class="field">Počiatočná rýchlosť telesa:</label><input class="textbox form-control " id="xi" name="xi" value="0" type="number" min="0" max="45" step="0.01"></p>
+                           <p><label class="field">Konečný čas v sekundách:</label><input class="textbox form-control " id="cs" name="cs" value="20" type="number" min="0" max="45" step="0.01"></p>
+                            <p><label class="field">Počet hodnôt:</label><input class="textbox form-control " id="ce" name="ce" value="200" type="number" min="0" max="500" step="0.01"></p>
                         </fieldset>
                         <input class="btn btn-success" type="submit" id="button" name="dajHodnoty" value="Odoslať">
                         <button class="btn btn-info" type="button" onclick="setDef();">set default</button>

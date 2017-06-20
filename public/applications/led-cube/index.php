@@ -60,7 +60,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <section id="content">
+                <section id="content" style="border: none !important;">
                     <a id="restartImg" style="color: #000;"><i style="font-size: 25px;position: relative;top: 4px;" class="fa fa-refresh" aria-hidden="true"></i></a>
                     <a style="cursor: pointer;" data-toggle="modal" data-target="#myModal"><i style="font-size: 25px; color: #000; position: relative;top: 4px;" class="fa fa-question-circle" aria-hidden="true"></i></a>
                     <div id="manualDiv">

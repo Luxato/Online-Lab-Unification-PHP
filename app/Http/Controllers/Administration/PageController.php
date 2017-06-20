@@ -200,9 +200,6 @@ class PageController extends Controller {
 			}
 			$i ++;
 		}
-		echo '<pre>';
-		print_r( $to_rename );
-		echo '</pre>';
 		//exit;
 		if ( $page->feature()->detach() ) {
 			// Delete old features

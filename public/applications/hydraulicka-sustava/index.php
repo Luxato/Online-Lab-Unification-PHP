@@ -17,7 +17,10 @@
 		visibility:visible;
 		z-index:-2;
 	}
-
+    #model {
+        position: absolute;
+        right: 0;
+    }
 	#myForm{
 		position:absolute;
 		top:30px;
@@ -89,11 +92,8 @@
 	canvas {
         margin: 0 auto;
         display: block;
-        background: rgba(0,0,0,0.05);
         padding: 6px;
-        border-radius: 55px;
     }
-
 	</style>
   <script>
 
@@ -102,10 +102,17 @@
 	//var container;
 	var camera,CubeCamera, scene, renderer;
 	var mouseX = 0, mouseY = 0;
-	var dimx=window.innerWidth / 1.2;
+	console.log(window.innerWidth);
+	if (window.innerWidth > 1200 && window.innerWidth < 1400) {
+        var dimx=window.innerWidth / 1.8;
+    } else if (window.innerWidth > 1400) {
+        var dimx=window.innerWidth / 2.8;
+    } else {
+        var dimx=window.innerWidth / 1.5;
+    }
 	var dimy=window.innerHeight / 1.5;
 
-	var windowHalfX = window.innerWidth / 2;
+	var windowHalfX = $('#model').width($('#model').width() / 3);
 	var windowHalfY = window.innerHeight / 2;
 	var korekcia_vysky=-0.8;
 	var valec_3;
@@ -2187,13 +2194,17 @@
 	<button class="btn btn-md btn-info" type="button" onclick=bezprostredia() >Bez prostredia</button>
 	<button class="btn btn-md btn-info" type="button" onclick=sustava1() >Sústava1</button>
 	<button class="btn btn-md btn-info" type="button" onclick=sustava2() >Sústava2</button>
-	</div>
-
-	<div id="placeholder"> </div>
-
-
-
-
+    <div id="model"></div>
+	<div id="placeholder"></div>
 	<div id="testovacie_pole">
 
 	</div>
+    </div>
+<script>
+    $(function(){
+        if (window.innerWidth > 1200) {
+            var element = $('#container').detach();
+            $('#model').append(element);
+        }
+    });
+</script>

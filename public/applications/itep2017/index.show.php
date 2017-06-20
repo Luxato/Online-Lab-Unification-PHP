@@ -180,7 +180,7 @@
     </style>
 
 
-   <div class="" style="margin-top: 30px;border: 1px solid black;border-radius: 14px;padding-top: 15px;">
+   <div class="" style="margin-top: 30px;padding-top: 15px;">
     <div class="input-group"> 
       <span class="input-group-addon">Select block scheme</span>
       <select id="parController" class="form-control">
@@ -256,7 +256,7 @@
     <input id="parTO" type="text" value="0" class="form-control">
   </div>
      <div style="margin: 10px 0 0 0;text-align:center">
-      <button id="addNewSimButton" class="btn btn-success">Simulate</button>
+      <button id="addNewSimButton" class="btn btn-success">Spustiť simuláciu</button>
      </div>
      
      </div>
