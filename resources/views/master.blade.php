@@ -313,7 +313,6 @@
         var elem = document.querySelector('.js-switch');
         var t = 0;
         var input = $('#login-nav').find('input[name=email]');
-        console.log(input);
         if(elem != null) {
             elem.onchange = function() {
                 if (t % 2 == 0) {
@@ -367,7 +366,6 @@
         var scrollPosition = $(window).height() + $(window).scrollTop();
         if ((scrollHeight == scrollPosition) && ($(window).scrollTop() != 0)) {
             $('#gotoTop').fadeIn();
-            console.log('test');
         } else {
             $('#gotoTop').fadeOut();
         }

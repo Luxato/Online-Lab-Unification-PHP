@@ -9,10 +9,9 @@
 @section('content')
     <link rel="stylesheet" href="<?= url('assets/css/shCore.css') ?>" type="text/css" />
     <link rel="stylesheet" href="<?= url('assets/css/shThemeDefault.css') ?>" type="text/css" />
-    <h1>Dokumentácia</h1>
+    <h1>Computer Algebra Dokumentácia</h1>
     <div class="col-md-6">
-        Adresa aplikácie:
-        <i>http://obelix.urpi.fei.stuba.sk/~targroup/slivkap/app/</i><br />
+        <a target="_blank" href="http://147.175.105.140:8001/mathnew/web/index.php/sk"><button type="button" class="btn btn-primary">Odkaz na aplikáciu</button></a><br>
         Aktuálne verzie CAS:<br />
         - Maxima 5.26.0<br />
         - GNU Octave 3.6.1<br />
@@ -158,8 +157,8 @@
 }';
 	    ?>
         <pre class="brush: js">
-        <?= $var ?>
-    </pre>
+            <?= $var ?>
+        </pre>
 	    <?php
 	    $var = '&lt;?xml version="1.0"?&gt;
 &lt;methodCall&gt;

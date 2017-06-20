@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+  <head><meta charset='utf-8'>
+  <title></title>
+  </head>
+<body>
+
+  <!--    ----------------------------------------------------------
+      Doplnit URL adresu, na ktoru ma formular smerovat
+  ----------------------------------------------------------    -->
+  
+  <form action="<% URL adresa %>" method="post" enctype="multipart/form-data">
+   
+  <!--    ----------------------------------------------------------
+      Povinna premenna, bez nej nebude preposielanie fungovat korektne
+      apikey => API kluc  - povinne
+  ----------------------------------------------------------    -->
+  
+  <input type="hidden" name="apikey" value="<% VYGENEROVANY API KLUC %>">
+
+  <!--    ----------------------------------------------------------
+      Nastavenia emailu:
+      from          => od koho
+      to            => komu - emailova adresa - povinne
+      sender        => komu - meno odosielatela - nepovinne
+      subject       => predmet  - povinne
+      redirectOk    => presmerovat po uspesnom odoslani - povinne
+      redirectFalse => presmerovat po neuspesnom odoslani  - povinne
+  ----------------------------------------------------------    -->
+
+    <input type="hidden" name="from" value="">
+    <input type="hidden" name="sender" value="">
+    <input type="hidden" name="to" value="">
+    <input type="hidden" name="subject" value="">
+    <input type="hidden" name="redirectOk" value="">
+    <input type="hidden" name="redirectFalse" value="">
+
+  <!--    ----------------------------------------------------------
+      viditelne polia formulara na samotnej stranke
+  ----------------------------------------------------------    -->
+    
+    <label>
+      Name
+      <input type="text" name="name">
+    </label>
+    <br>
+    <label>
+      Surname
+      <input type="text" name="surname">
+    <br>
+    </label>
+    <label>
+      Date of birth
+      <input type="text" name="dateOfBirth">
+    </label>
+    <br>
+    <label>
+      Text
+      <textarea name="text"></textarea>
+    </label>
+    <br>
+    <label>
+      Attachment
+      <input type="file" name="attachment">
+    </label>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+
+</body>
+</html>

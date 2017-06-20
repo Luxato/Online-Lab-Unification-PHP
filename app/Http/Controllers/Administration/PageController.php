@@ -103,10 +103,12 @@ class PageController extends Controller {
 		for ( $i = 0; $i < sizeof( $request['name'] ); $i ++ ) {
 			$feature = new Feature();
 			foreach ( $inputs as $column => $input ) {
+				if ($request->get( 'noContent' ) == 'on' && $column == 'controller') {
+				    continue;
+				}
 				$feature->{$column} = $request[ $input ][ $i ];
 			}
 			$language_shortcut = Language::findOrFail( $request['language'][ $i ] )->language_shortcut;
-
 			if ( $request->get( 'noContent' ) !== 'on' ) {
 				$feature->content_file = $request['url'][0] . '_' . $language_shortcut;
 				$this->create_page_file( $feature->content_file . '.blade.php', $request['name'][ $i ], $request['cont'][ $i ], $request['seo_description'][ $i ], $request['keywords'][ $i ] );
@@ -180,9 +182,6 @@ class PageController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, $id ) {
-		echo '<pre>';
-		print_r( $request->all() );
-		echo '</pre>';
 		// Define allowed inputs
 		$inputs          = [
 			'title'       => 'name',

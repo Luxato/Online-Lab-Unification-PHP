@@ -8,188 +8,235 @@
 @section('keywords') @stop
 
 @section('content')
-    <style>
-        p {
-            font-family:'Roboto' !important;
-        }
-    </style>
+    <link rel="stylesheet" href="<?= url('assets/css/shCore.css') ?>" type="text/css" />
+    <link rel="stylesheet" href="<?= url('assets/css/shThemeDefault.css') ?>" type="text/css" />
+
     <h1>Open Modelica príručka</h1>
-    <p style="margin-bottom: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;">Táto aplikácia umožňuje vytvoriť spojenie a komunikovať so simulačným prostredím&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">OpenModelica</span>&nbsp;cez internet prostredníctvom technológií vzdialeného volania procedúr -&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">JSON-RPC, XML-RPC</span>. Vytvorené webové služby umožňujú vykonanie&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">výpočtu matematického výrazu</span>&nbsp;alebo&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">simulácie</span>&nbsp;a to vyplnením a odoslaním formulára cez webové rozhranie alebo vzdialene, odoslaním požiadavky z aplikácie užívateľa. Aplikácia je dostupná na adrese&nbsp;<a href="http://147.175.125.30:8005/om.php" target="_blank" style="margin: 0px; padding: 0px;">http://147.175.125.30:8008/om.php</a>.</p><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><p style="margin-bottom: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;">Táto užívateľská príručka vysvetľuje základy práce s aplikáciou, popisuje komunikáciu prostredníctvom JSON-RPC aj XML-RPC a uvádza zdrojové kódy pre vzdialený prístup k aplikácii implementované v programovacom jazyku PHP:</p><ol style="margin: 10px 0px 0px 30px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><li style="margin: 0px; padding: 0px;"><a href="http://147.175.105.140:8008/#json" style="margin: 0px; padding: 0px;">JSON-RPC</a></li><li style="margin: 0px; padding: 0px;"><a href="http://147.175.105.140:8008/#xml" style="margin: 0px; padding: 0px;">XML-RPC</a></li><li style="margin: 0px; padding: 0px;"><a href="http://147.175.105.140:8008/#remote" style="margin: 0px; padding: 0px;">Vzdialený prístup</a></li></ol><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><p style="margin-bottom: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;">Dokumentácia k simulačnému prostrediu OpenModelica sa nachádza na jej oficiálnych stránkach:<br style="margin: 0px; padding: 0px;"><a target="_blank" href="https://www.openmodelica.org/images/docs/OpenModelicaUserGuide.htm" style="margin: 0px; padding: 0px;">https://www.openmodelica.org/images/docs/OpenModelicaUserGuide.htm</a></p><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h2 id="json" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;;">1 JSON-RPC</h2><p style="margin-bottom: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;">Príklad pre výpočet matematického výrazu a vykonanie simulácie spolu s príkladmi JSON-RPC požiadaviek a odpovedí.</p><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h3 style="margin-top: 10px; margin-right: 0px; margin-left: 0px; padding: 0px; font-size: 18px; font-weight: 600; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;;">1.1 Výpočet výrazu</h3><p style="margin-bottom: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;">Príklad JSON-RPC požiadavky a odpovede pre výpočet matematického výrazu 1+1. Výsledkom je hodnota členu result v JSON-RPC odpovedi.</p><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h4 style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;; font-size: medium;">request</h4><pre style="margin-bottom: 0px; padding: 0px; color: rgb(0, 0, 0);"><code class="json hljs " style="margin: 0px; padding: 0.5em; display: block; background: rgb(240, 240, 240); color: black; border: 1px dashed rgb(85, 85, 85);">
+    <a target="_blank" href="http://147.175.105.140:8008/om.php"><button type="button" class="btn btn-primary">Odkaz na aplikáciu</button></a><br>
+    <p>Táto aplikácia umožňuje vytvoriť spojenie a komunikovať so simulačným prostredím OpenModelica cez internet prostredníctvom technológií vzdialeného volania procedúr - JSON-RPC, XML-RPC. Vytvorené webové služby umožňujú vykonanie výpočtu matematického výrazu alebo simulácie a to vyplnením a odoslaním formulára cez webové rozhranie alebo vzdialene, odoslaním požiadavky z aplikácie užívateľa.</p>
+
+    <p>Táto užívateľská príručka vysvetľuje základy práce s aplikáciou, popisuje komunikáciu prostredníctvom JSON-RPC aj XML-RPC a uvádza zdrojové kódy pre vzdialený prístup k aplikácii implementované v programovacom jazyku PHP.</p>
+
+    Dokumentácia k simulačnému prostrediu OpenModelica sa nachádza na jej oficiálnych stránkach:
+    <a target="_target" href="https://www.openmodelica.org/images/docs/OpenModelicaUserGuide.htm">https://www.openmodelica.org/images/docs/OpenModelicaUserGuide.htm</a>
+
+    <h2>1 JSON-RPC</h2>
+    <p>Príklad pre výpočet matematického výrazu a vykonanie simulácie spolu s príkladmi JSON-RPC požiadaviek a odpovedí.</p>
+    <h3>1.1 Výpočet výrazu</h3>
+    <p>Príklad JSON-RPC požiadavky a odpovede pre výpočet matematického výrazu 1+1. Výsledkom je hodnota členu result v JSON-RPC odpovedi.</p>
+    <strong>request</strong>
+    <pre class="brush: js">
 {
-	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">jsonrpc</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"2.0"</span></span>,
-	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">method</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"comp"</span></span>,
-	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">params</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;">{
-		"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">expression</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"1+1"</span></span>,
-  		"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">api_key</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"..."</span> /* vas API kluc */
- 	</span>}</span>,
- 	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">id</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"bd4250c1c3ea7cb241c58e5437feb0f26ae6122e"</span>
-</span>}
-		</code></pre><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h4 style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;; font-size: medium;">response</h4><pre style="margin-bottom: 0px; padding: 0px; color: rgb(0, 0, 0);"><code class="json hljs " style="margin: 0px; padding: 0.5em; display: block; background: rgb(240, 240, 240); color: black; border: 1px dashed rgb(85, 85, 85);">
+	"jsonrpc": "2.0",
+	"method": "comp",
+	"params": {
+		"expression": "1+1",
+  		"api_key": "..." /* vas API kluc */
+ 	},
+ 	"id": "bd4250c1c3ea7cb241c58e5437feb0f26ae6122e"
+}
+    </pre>
+    <strong>response</strong>
+<pre class="brush: js">
 {
- 	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">result</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"2"</span></span>,
- 	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">id</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"bd4250c1c3ea7cb241c58e5437feb0f26ae6122e"</span></span>,
- 	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">jsonrpc</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"2.0"</span>
-</span>}
-		</code></pre><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h3 style="margin-top: 10px; margin-right: 0px; margin-left: 0px; padding: 0px; font-size: 18px; font-weight: 600; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;;">1.2 Simulácia</h3><p style="margin-bottom: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;">Príklad JSON-RPC požiadavky a odpovede pre simuláciu skúšobného modelu&nbsp;<i style="margin: 0px; padding: 0px;">BouncingBall</i>. Výsledkom je hodnota členu result v JSON-RPC odpovedi, teda cesta k súboru s hodnotami potrebnými na vykreslenie grafu.</p><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h4 style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;; font-size: medium;">request</h4><pre style="margin-bottom: 0px; padding: 0px; color: rgb(0, 0, 0);"><code class="json hljs " style="margin: 0px; padding: 0.5em; display: block; background: rgb(240, 240, 240); color: black; border: 1px dashed rgb(85, 85, 85);">
+ 	"result": "2",
+ 	"id": "bd4250c1c3ea7cb241c58e5437feb0f26ae6122e",
+ 	"jsonrpc": "2.0"
+}
+</pre>
+<h3>1.2 Simulácia</h3>
+    <p>Príklad JSON-RPC požiadavky a odpovede pre simuláciu skúšobného modelu BouncingBall. Výsledkom je hodnota členu result v JSON-RPC odpovedi, teda cesta k súboru s hodnotami potrebnými na vykreslenie grafu.</p>
+    <strong>request</strong>
+    <pre class="brush: js">
 {
-	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">jsonrpc</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"2.0"</span></span>,
- 	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">method</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"sim"</span></span>,
- 	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">params</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;">{
-  		"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">filename</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"BouncingBall_1400425342.mo"</span></span>,
-  		"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">startTime</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(0, 136, 0);">0</span></span>,
-  		"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">stopTime</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(0, 136, 0);">3</span></span>,
-  		"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">method</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"dassl"</span></span>,
-  		"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">outputFormat</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"csv"</span></span>,
-		"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">outputVariables</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;">[]</span>,
-  		"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">api_key</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"..."</span> /* vas API kluc */
- 	</span>}</span>,
- 	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">id</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"46f88b3a9c107df6d55a78a2680cb246889e8099"</span>
-</span>}
-		</code></pre><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h4 style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;; font-size: medium;">response</h4><pre style="margin-bottom: 0px; padding: 0px; color: rgb(0, 0, 0);"><code class="json hljs " style="margin: 0px; padding: 0.5em; display: block; background: rgb(240, 240, 240); color: black; border: 1px dashed rgb(85, 85, 85);">
+	"jsonrpc": "2.0",
+ 	"method": "sim",
+ 	"params": {
+  		"filename": "BouncingBall_1400425342.mo",
+  		"startTime": 0,
+  		"stopTime": 3,
+  		"method": "dassl",
+  		"outputFormat": "csv",
+		"outputVariables": [],
+  		"api_key": "..." /* vas API kluc */
+ 	},
+ 	"id": "46f88b3a9c107df6d55a78a2680cb246889e8099"
+}
+    </pre>
+    <strong>response</strong>
+    <pre class="brush: js">
 {
- 	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">result</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"/var/www/json-rpc/BouncingBall_res.csv"</span></span>,
- 	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">id</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"46f88b3a9c107df6d55a78a2680cb246889e8099"</span></span>,
- 	"<span class="hljs-attribute" style="margin: 0px; padding: 0px;">jsonrpc</span>": <span class="hljs-value" style="margin: 0px; padding: 0px;"><span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"2.0"</span>
-</span>}
-		</code></pre><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h2 id="xml" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;;">2 XML-RPC</h2><p style="margin-bottom: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;">Príklad pre výpočet matematického výrazu a vykonanie simulácie spolu s príkladmi XML-RPC požiadaviek a odpovedí.</p><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h3 style="margin-top: 10px; margin-right: 0px; margin-left: 0px; padding: 0px; font-size: 18px; font-weight: 600; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;;">2.1 Výpočet výrazu</h3><p style="margin-bottom: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;">Príklad XML-RPC požiadavky a odpovede pre výpočet matematického výrazu 1+1.</p><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h4 style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;; font-size: medium;">request</h4><pre style="margin-bottom: 0px; padding: 0px; color: rgb(0, 0, 0);"><code class="xml hljs " style="margin: 0px; padding: 0.5em; display: block; background: rgb(240, 240, 240); color: black; border: 1px dashed rgb(85, 85, 85);">
-<span class="hljs-pi" style="margin: 0px; padding: 0px; color: rgb(136, 136, 255);">&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">methodCall</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">methodName</span>&gt;</span>comp<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">methodName</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">params</span>&gt;</span>
- <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">param</span>&gt;</span>
-  <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-   <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">struct</span>&gt;</span>
-	<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-	 <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>expression<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>
-	 <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-	  <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>1+1<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>
-	 <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-	<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-	<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-	 <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>api_key<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>
-	 <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-	  <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>...<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>
-	 <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-	<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-   <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">struct</span>&gt;</span>
-  <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
- <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">param</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">params</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">methodCall</span>&gt;</span>
-		</code></pre><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h4 style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;; font-size: medium;">response</h4><pre style="margin-bottom: 0px; padding: 0px; color: rgb(0, 0, 0);"><code class="xml hljs " style="margin: 0px; padding: 0.5em; display: block; background: rgb(240, 240, 240); color: black; border: 1px dashed rgb(85, 85, 85);">
-<span class="hljs-pi" style="margin: 0px; padding: 0px; color: rgb(136, 136, 255);">&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">methodResponse</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">params</span>&gt;</span>
- <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">param</span>&gt;</span>
-  <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-   <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>2<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>
-  <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
- <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">param</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">params</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">methodResponse</span>&gt;</span>
-		</code></pre><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h3 style="margin-top: 10px; margin-right: 0px; margin-left: 0px; padding: 0px; font-size: 18px; font-weight: 600; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;;">2.2 Simulácia</h3><p style="margin-bottom: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;">Príklad XML-RPC požiadavky a odpovede pre simuláciu skúšobného modelu&nbsp;<i style="margin: 0px; padding: 0px;">BouncingBall</i>. Výsledkom je cesta k súboru s hodnotami potrebnými na vykreslenie grafu.</p><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h4 style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;; font-size: medium;">request</h4><pre style="margin-bottom: 0px; padding: 0px; color: rgb(0, 0, 0);"><code class="xml hljs " style="margin: 0px; padding: 0.5em; display: block; background: rgb(240, 240, 240); color: black; border: 1px dashed rgb(85, 85, 85);">
-<span class="hljs-pi" style="margin: 0px; padding: 0px; color: rgb(136, 136, 255);">&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">methodCall</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">methodName</span>&gt;</span>sim<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">methodName</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">params</span>&gt;</span>
- <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">param</span>&gt;</span>
-  <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-   <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">struct</span>&gt;</span>
-    <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>filename<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-      <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>BouncingBall_1400425342.mo<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-    <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-    <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>startTime<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-      <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">int</span>&gt;</span>0<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">int</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-    <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-    <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>stopTime<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-      <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">int</span>&gt;</span>3<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">int</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-    <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-    <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>method<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-      <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>dassl<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-    <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-    <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>outputFormat<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-      <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>csv<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-    <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-    <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>api_key<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">name</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-      <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>...<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>
-     <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-    <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">member</span>&gt;</span>
-   <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">struct</span>&gt;</span>
-  <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
- <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">param</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">params</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">methodCall</span>&gt;</span>
-		</code></pre><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h4 style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;; font-size: medium;">response</h4><pre style="margin-bottom: 0px; padding: 0px; color: rgb(0, 0, 0);"><code class="xml hljs " style="margin: 0px; padding: 0.5em; display: block; background: rgb(240, 240, 240); color: black; border: 1px dashed rgb(85, 85, 85);">
-<span class="hljs-pi" style="margin: 0px; padding: 0px; color: rgb(136, 136, 255);">&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">methodResponse</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">params</span>&gt;</span>
- <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">param</span>&gt;</span>
-  <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
-   <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>/var/www/xml-rpc/BouncingBall_res.csv<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">string</span>&gt;</span>
-  <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">value</span>&gt;</span>
- <span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">param</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">params</span>&gt;</span>
-<span class="hljs-tag" style="margin: 0px; padding: 0px;">&lt;/<span class="hljs-title" style="margin: 0px; padding: 0px; font-weight: bold;">methodResponse</span>&gt;</span>
-		</code></pre><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h2 id="remote" style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;;">3 Vzdialený prístup</h2><p style="margin-bottom: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;">Nasledujúce zdrojové kódy ukazujú ako využívať vytvorené služby vzdialene - z vlastnej aplikácie. Využíva sa knižnica cURL, ktorú je potrebné pred používaním povoliť v konfigurácii PHP.</p><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h3 style="margin-top: 10px; margin-right: 0px; margin-left: 0px; padding: 0px; font-size: 18px; font-weight: 600; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;;">3.1 Výpočet pomocou JSON-RPC</h3><pre style="margin-bottom: 0px; padding: 0px; color: rgb(0, 0, 0);"><code class="php hljs " style="margin: 0px; padding: 0.5em; display: block; background: rgb(240, 240, 240); color: black; border: 1px dashed rgb(85, 85, 85);">
-<span class="hljs-preprocessor" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">&lt;?php</span>
-<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// url</span>
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$url</span> = <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"http://147.175.125.30:8008/json-rpc/server.php"</span>;
- 
-<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// request array</span>
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$request</span> = <span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">array</span>(
-		<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"jsonrpc"</span> =&gt; <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"2.0"</span>, 
-		<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"method"</span> =&gt; <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"ext_comp"</span>, 
-		<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"params"</span> =&gt; <span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">array</span>(
-			<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"expression"</span> =&gt; <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"1+1"</span>,
-			<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"api_key"</span> =&gt; <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"..."</span> <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">/* vas API kluc */</span>
+    "result": "/var/www/json-rpc/BouncingBall_res.csv",
+    "id": "46f88b3a9c107df6d55a78a2680cb246889e8099",
+    "jsonrpc": "2.0"
+}
+    </pre>
+
+    <h2>2 XML-RPC</h2>
+    <p>Príklad pre výpočet matematického výrazu a vykonanie simulácie spolu s príkladmi XML-RPC požiadaviek a odpovedí.</p>
+    <h3>2.1 Výpočet výrazu</h3>
+    <p>Príklad XML-RPC požiadavky a odpovede pre výpočet matematického výrazu 1+1.</p>
+    <strong>request</strong>
+    <pre class="brush: xml">
+
+<?xml version="1.0" encoding="iso-8859-1"?>
+        <methodCall>
+<methodName>comp</methodName>
+<params>
+ <param>
+  <value>
+   <struct>
+	<member>
+	 <name>expression</name>
+	 <value>
+	  <string>1+1</string>
+	 </value>
+	</member>
+	<member>
+	 <name>api_key</name>
+	 <value>
+	  <string>...</string>
+	 </value>
+	</member>
+   </struct>
+  </value>
+    </param>
+</params>
+</methodCall>
+    </pre>
+
+    <strong>response</strong>
+    <pre class="brush: xml">
+<?xml version="1.0" encoding="iso-8859-1"?>
+<methodResponse>
+<params>
+ <param>
+  <value>
+   <string>2</string>
+  </value>
+    </param>
+</params>
+</methodResponse>
+
+    </pre>
+    <h2>2.2 Simulácia</h2>
+    <p>Príklad XML-RPC požiadavky a odpovede pre simuláciu skúšobného modelu BouncingBall. Výsledkom je cesta k súboru s hodnotami potrebnými na vykreslenie grafu.
+    </p>
+    <strong>request</strong>
+    <pre class="brush: xml">
+<?xml version="1.0" encoding="iso-8859-1"?>
+        <methodCall>
+<methodName>sim</methodName>
+<params>
+ <param>
+  <value>
+   <struct>
+    <member>
+     <name>filename</name>
+     <value>
+      <string>BouncingBall_1400425342.mo</string>
+     </value>
+    </member>
+    <member>
+     <name>startTime</name>
+     <value>
+      <int>0</int>
+     </value>
+    </member>
+    <member>
+     <name>stopTime</name>
+     <value>
+      <int>3</int>
+     </value>
+    </member>
+    <member>
+     <name>method</name>
+     <value>
+      <string>dassl</string>
+     </value>
+    </member>
+    <member>
+     <name>outputFormat</name>
+     <value>
+      <string>csv</string>
+     </value>
+    </member>
+    <member>
+     <name>api_key</name>
+     <value>
+      <string>...</string>
+     </value>
+    </member>
+   </struct>
+  </value>
+    </param>
+</params>
+</methodCall>
+    </pre>
+
+    <strong>response</strong>
+    <pre class="brush: xml">
+<?xml version="1.0" encoding="iso-8859-1"?>
+<methodResponse>
+<params>
+ <param>
+  <value>
+   <string>/var/www/xml-rpc/BouncingBall_res.csv</string>
+  </value>
+    </param>
+</params>
+</methodResponse>
+    </pre>
+    <h2>3 Vzdialený prístup</h2>
+<p>Nasledujúce zdrojové kódy ukazujú ako využívať vytvorené služby vzdialene - z vlastnej aplikácie. Využíva sa knižnica cURL, ktorú je potrebné pred používaním povoliť v konfigurácii PHP.</p>
+<h3>3.1 Výpočet pomocou JSON-RPC</h3>
+    <pre class="brush: php">
+&lt;?php
+	// url
+	$url = "http://147.175.125.30:8008/json-rpc/server.php";
+
+	// request array
+	$request = array(
+		"jsonrpc" => "2.0",
+		"method" => "ext_comp",
+		"params" => array(
+			"expression" => "1+1",
+			"api_key" => "..." /* vas API kluc */
 		),
-		<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"id"</span> =&gt; <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(0, 136, 0);">1</span>
+		"id" => 1
 	);
+	// send request
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, array("jsonrpc" => json_encode($request)));
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	$response = curl_exec($ch);
+	curl_close($ch);
 
-<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// send request</span>
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span> = curl_init();
-curl_setopt(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>, CURLOPT_URL, <span class="hljs-variable" style="margin: 0px; padding: 0px;">$url</span>);
-curl_setopt(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>, CURLOPT_POSTFIELDS, <span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">array</span>(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"jsonrpc"</span> =&gt; json_encode(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$request</span>)));
-curl_setopt(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(0, 136, 0);">1</span>);
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span> = curl_exec(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>);
-curl_close(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>);
- 
-<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// decode response and print result</span>
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span> = json_decode(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span>);
-<span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">echo</span> <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"Expression: "</span> . <span class="hljs-variable" style="margin: 0px; padding: 0px;">$request</span>[<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">'params'</span>][<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">'expression'</span>] . <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"&lt;br /&gt;"</span>;
-<span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">echo</span> <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"Result: "</span> . <span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span>-&gt;result;
-<span class="hljs-preprocessor" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">?&gt;</span>
-		</code></pre><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h3 style="margin-top: 10px; margin-right: 0px; margin-left: 0px; padding: 0px; font-size: 18px; font-weight: 600; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;;">3.2 Simulácia pomocou JSON-RPC</h3><p style="margin-bottom: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;">Člen&nbsp;<i style="margin: 0px; padding: 0px;">outputFormat</i>&nbsp;môže nadobúdať hodnoty:&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">csv, mat, plt</span>&nbsp;a&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">array</span>. V prípade, že hodnotu nastavíme na&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">array</span>&nbsp;sa ako výsledok vráti pole/polia s hodnotami, ak zvolime&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">csv, mat</span>&nbsp;alebo&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">plt</span>, súbor s výsledkami sa automaticky stiahne.</p><p style="margin-bottom: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;">Člen&nbsp;<i style="margin: 0px; padding: 0px;">outputVariables</i>&nbsp;môže obsahovať aj viacero dvojíc premenných. Ak by sme chceli sledovať aj závislosť rýchlosti od času, vyzeral by tento člen takto:&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">"outputVariables": [[time, h], [time, v]]</span>. Služba v takomto prípade vráti 2 polia s hodnotami.</p><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><pre style="margin-bottom: 0px; padding: 0px; color: rgb(0, 0, 0);"><code class="php hljs " style="margin: 0px; padding: 0.5em; display: block; background: rgb(240, 240, 240); color: black; border: 1px dashed rgb(85, 85, 85);">
-<span class="hljs-preprocessor" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">&lt;?php</span>
-<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// url	</span>
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$url</span> = <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">'http://147.175.125.30:8008/json-rpc/server.php'</span>;
+	// decode response and print result
+	$response = json_decode($response);
+	echo "Expression: " . $request['params']['expression'] . "<br />";
+	echo "Result: " . $response->result;
+?&gt;
+</pre>
+<h3>3.2 Simulácia pomocou JSON-RPC</h3>
+    <p>Člen outputFormat môže nadobúdať hodnoty: csv, mat, plt a array. V prípade, že hodnotu nastavíme na array sa ako výsledok vráti pole/polia s hodnotami, ak zvolime csv, mat alebo plt, súbor s výsledkami sa automaticky stiahne.</p>
+    <p>Člen outputVariables môže obsahovať aj viacero dvojíc premenných. Ak by sme chceli sledovať aj závislosť rýchlosti od času, vyzeral by tento člen takto: "outputVariables": [[time, h], [time, v]]. Služba v takomto prípade vráti 2 polia s hodnotami.</p>
 
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$modelName</span> = <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"BouncingBall.mo"</span>;
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$file_name_with_full_path</span> = realpath(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">'/home/ubuntu/OPENMODELICA_1_8_1/Examples/'</span> . <span class="hljs-variable" style="margin: 0px; padding: 0px;">$modelName</span>);
+<pre class="brush: php">
+    &lt;?php
+	// url
+	$url = 'http://147.175.125.30:8008/json-rpc/server.php';
 
-<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// request in JSON format</span>
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$request</span> = <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">'{
-		"jsonrpc": "2.0", 
-		"method": "ext_sim", 
+	$modelName = "BouncingBall.mo";
+	$file_name_with_full_path = realpath('/home/ubuntu/OPENMODELICA_1_8_1/Examples/' . $modelName);
+
+	// request in JSON format
+	$request = '{
+		"jsonrpc": "2.0",
+		"method": "ext_sim",
 		"params": {
-			"filename": "'</span> . <span class="hljs-variable" style="margin: 0px; padding: 0px;">$modelName</span> . <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">'",
+			"filename": "' . $modelName . '",
 			"startTime": 0,
 			"stopTime": 2,
 			"method": "dassl",
@@ -198,60 +245,75 @@ curl_close(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</s
 			"api_key": "..." /* vas API kluc */
 		},
 		"id": 1
-	    }'</span>;
+	    }';
 
-<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// send request    </span>
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span> = curl_init();
-curl_setopt(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>, CURLOPT_URL, <span class="hljs-variable" style="margin: 0px; padding: 0px;">$url</span>);
-curl_setopt(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>, CURLOPT_POST,<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(0, 136, 0);">1</span>);
-curl_setopt(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>, CURLOPT_POSTFIELDS, <span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">array</span>(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"jsonrpc"</span> =&gt; <span class="hljs-variable" style="margin: 0px; padding: 0px;">$request</span>, <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"filename"</span> =&gt; <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"@"</span>.<span class="hljs-variable" style="margin: 0px; padding: 0px;">$file_name_with_full_path</span>));
-curl_setopt(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>, CURLOPT_RETURNTRANSFER,<span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(0, 136, 0);">1</span>);
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span> = curl_exec(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>);
-curl_close (<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>);
+	// send request
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_POST,1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, array("jsonrpc" => $request, "filename" => "@".$file_name_with_full_path));
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+	$response = curl_exec($ch);
+	curl_close ($ch);
 
-<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// decode response	</span>
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span> = json_decode(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span>);
+	// decode response
+	$response = json_decode($response);
 
-<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// check errors</span>
-<span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">if</span>(<span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">isset</span>(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span>-&gt;result-&gt;error)) {
-	<span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">die</span>(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span>-&gt;result-&gt;error);
-}
-<span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">else</span> {
-	<span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">if</span>(json_decode(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$request</span>)-&gt;params-&gt;outputFormat == <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"array"</span>) {
-		print_r(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span>-&gt;result);
+	// check errors
+	if(isset($response->result->error)) {
+		die($response->result->error);
 	}
-	<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// download result file</span>
-	<span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">else</span> {
-		header(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"Content-Type: application/octet-stream"</span>);
-		header(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"Content-Transfer-Encoding: Binary"</span>); 
-		header(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"Content-disposition: attachment; filename=\""</span> . basename(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span>-&gt;result) . <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"\""</span>); 
-		readfile(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span>-&gt;result);
+	else {
+		if(json_decode($request)->params->outputFormat == "array") {
+			print_r($response->result);
+		}
+		// download result file
+		else {
+			header("Content-Type: application/octet-stream");
+			header("Content-Transfer-Encoding: Binary");
+			header("Content-disposition: attachment; filename=\"" . basename($response->result) . "\"");
+			readfile($response->result);
+		}
 	}
-}
-<span class="hljs-preprocessor" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">?&gt;</span>
-		</code></pre><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><p style="margin-bottom: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;">Dôležité je, aby bol request&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">zakódovaný do požadovaného formátu</span>, v tomto prípade do formátu&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">JSON</span>. Na to slúži funkcia&nbsp;<i style="margin: 0px; padding: 0px;">json_encode()</i>, ktorá je súčasťou jadra PHP od jeho verzie 5.2.&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">XML-RPC</span>&nbsp;requesty zakódujeme pomocou funkcie&nbsp;<i style="margin: 0px; padding: 0px;">xmlrpc_encode_request()</i>, ktorá je dostupná&nbsp;<span class="semibold" style="margin: 0px; padding: 0px; font-weight: 600;">v balíčku XML-RPC</span>&nbsp;(ten je ale potrebné doinštalovať, pretože štadardne nieje povolený).</p><br style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;; font-size: medium;"><h3 style="margin-top: 10px; margin-right: 0px; margin-left: 0px; padding: 0px; font-size: 18px; font-weight: 600; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;;">3.3 Výpočet pomocou XML-RPC</h3><pre style="margin-bottom: 0px; padding: 0px; color: rgb(0, 0, 0);"><code class="php hljs " style="margin: 0px; padding: 0.5em; display: block; background: rgb(240, 240, 240); color: black; border: 1px dashed rgb(85, 85, 85);">
-<span class="hljs-preprocessor" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">&lt;?php</span>
-<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// url</span>
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$url</span> = <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">'http://147.175.125.30:8005/xml-rpc/server.php'</span>;
+	?&gt;
+</pre>
+<p>Dôležité je, aby bol request zakódovaný do požadovaného formátu, v tomto prípade do formátu JSON. Na to slúži funkcia json_encode(), ktorá je súčasťou jadra PHP od jeho verzie 5.2. XML-RPC requesty zakódujeme pomocou funkcie xmlrpc_encode_request(), ktorá je dostupná v balíčku XML-RPC (ten je ale potrebné doinštalovať, pretože štadardne nieje povolený).</p>
+<h3>3.3 Výpočet pomocou XML-RPC</h3>
+<pre class="brush: php">
+    &lt;?php
+    // url
+$url = 'http://147.175.125.30:8005/xml-rpc/server.php';
 
-<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// request array</span>
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$request</span> = <span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">array</span>(
-		<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"expression"</span> =&gt; <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"1+1"</span>,
-		<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"api_key"</span> =&gt; <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"..."</span> <span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">/* vas API kluc */</span>
+// request array
+$request = array(
+		"expression" => "1+1",
+		"api_key" => "..." /* vas API kluc */
 		  );
 
-<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// send request</span>
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span> = curl_init();
-curl_setopt( <span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>, CURLOPT_URL, <span class="hljs-variable" style="margin: 0px; padding: 0px;">$url</span>);
-curl_setopt(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>, CURLOPT_POSTFIELDS, xmlrpc_encode_request(<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"comp"</span>, <span class="hljs-variable" style="margin: 0px; padding: 0px;">$request</span>));
-curl_setopt(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="hljs-number" style="margin: 0px; padding: 0px; color: rgb(0, 136, 0);">1</span>);
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span> = curl_exec(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>);
-curl_close(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$ch</span>);
+// send request
+$ch = curl_init();
+curl_setopt( $ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_POSTFIELDS, xmlrpc_encode_request("comp", $request));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$response = curl_exec($ch);
+curl_close($ch);
 
-<span class="hljs-comment" style="margin: 0px; padding: 0px; color: rgb(136, 136, 136);">// decode response and print result</span>
-<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span> = xmlrpc_decode(<span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span>);
-<span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">echo</span> <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"Expression: "</span> . <span class="hljs-variable" style="margin: 0px; padding: 0px;">$request</span>[<span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">'expression'</span>] . <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"&lt;br /&gt;"</span>;
-<span class="hljs-keyword" style="margin: 0px; padding: 0px; font-weight: bold;">echo</span> <span class="hljs-string" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">"Result: "</span> . <span class="hljs-variable" style="margin: 0px; padding: 0px;">$response</span>;
-<span class="hljs-preprocessor" style="margin: 0px; padding: 0px; color: rgb(136, 0, 0);">?&gt;</span>
-	</code></pre>                    
+// decode response and print result
+$response = xmlrpc_decode($response);
+echo "Expression: " . $request['expression'] . "<br />";
+echo "Result: " . $response;
+    ?&gt;
+</pre>
+
+    <script type="text/javascript" src="<?= url('assets/js/syntaxhighlihter') ?>/shCore.js"></script>
+    <script type="text/javascript" src="<?= url('assets/js/syntaxhighlihter') ?>/shBrushJScript.js"></script>
+    <script src="<?= url('assets/js/syntaxhighlihter') ?>/shAutoloader.js"></script>
+    <script>
+        SyntaxHighlighter.autoloader(
+            'php  <?= url('assets/js/syntaxhighlihter') ?>/shBroshPhp.js',
+            'xml <?= url('assets/js/syntaxhighlihter') ?>/shBrushXml.js',
+            'js <?= url('assets/js/syntaxhighlihter') ?>/shBrushJScript.js'
+        );
+        SyntaxHighlighter.all();
+    </script>
 @stop
