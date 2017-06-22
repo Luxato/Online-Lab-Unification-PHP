@@ -214,7 +214,7 @@
     </header>
     <?php endif; ?>
 
-<div class="breadcrumb-wrapper">
+<div class="breadcrumb-wrapper" style="<?= Route::getCurrentRoute()->uri() != '/' ? 'margin-top:30px;' : '' ?>">
     <ol class="breadcrumb">
         <li><a href="<?= URL( '/' ) ?>"><?= trans('translation.home') ?></a></li>
         <li class="active">@yield('title')</li>

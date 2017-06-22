@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Apikey;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Auth;
+use DateTime;
+use DateTimeZone;
 class UserController extends Controller {
 
 	/**
@@ -35,6 +38,15 @@ class UserController extends Controller {
 		$user->password = Hash::make(trim($request['password']));
 		$user->type = 'user';
 		$user->save();
+
+		// Create API key
+		$date = new DateTime(null, new DateTimeZone('Europe/London'));
+		$new_key = md5(date_timestamp_get($date));
+		$api = new Apikey();
+		$api->user_id = $user->id;
+		$api->key = $new_key;
+		$api->save();
+
 		Session::set( 'logged_user_id', $user->id );
 		Session::set( 'logged_email', $user->email );
 

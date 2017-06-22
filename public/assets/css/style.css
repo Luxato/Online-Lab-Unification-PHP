@@ -84,6 +84,7 @@ p {
     .actuality {
         margin-left: 0 !important;
     }
+
     .user-panel .primary_nav_wrap {
         display: none;
         position: absolute;
@@ -800,6 +801,7 @@ aside ul, .months ul {
 .logged .navbar {
     top: 30px;
 }
+
 
 .logged header {
     margin-top: 30px;
