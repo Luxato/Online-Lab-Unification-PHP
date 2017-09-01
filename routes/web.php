@@ -9,6 +9,7 @@
 | by your application. Just tell Laravel the URIs it should respond
 | to using a Closure or controller method. Build something great!
 |
+
 */
 // ADMIN resources
 //Route::post( 'admin/page_create/', 'Admin@do_page_create' );
@@ -25,6 +26,20 @@ Route::get( '/admin/settings', [ 'uses' => 'Administration\SettingsController@in
 Route::post( 'admin/settings/', 'Administration\SettingsController@update' );
 // Resource for languages
 Route::resource( 'admin/languages', 'Administration\LanguageController' );
+// Administration authentication Routes...
+$this->get( 'login', 'Auth\LoginController@showLoginForm' )->name( 'login' );
+$this->post( 'login', 'Auth\LoginController@login' );
+$this->post( 'logout', 'Auth\LoginController@logout' )->name( 'logout' );
+// User authentification Routes...
+$this->get( 'register', 'Auth\RegisterController@showRegistrationForm' )->name( 'register' );
+$this->post( 'register', 'Auth\RegisterController@register' );
+Route::post( '/login/custom', [
+	'uses' => 'LoginController@login',
+	'as'   => 'login.custom'
+] );
+Route::post( '/login/ldap', [
+	'uses' => 'LoginController@login_ldap'
+] );
 
 // FRONT reources
 // Resource for users
@@ -46,21 +61,6 @@ Route::post( '/worker/do_navigation_change_order', [
 	'uses'       => 'Worker@do_navigation_change_order'
 ] );
 
-// Administration authentication Routes...
-$this->get( 'login', 'Auth\LoginController@showLoginForm' )->name( 'login' );
-$this->post( 'login', 'Auth\LoginController@login' );
-$this->post( 'logout', 'Auth\LoginController@logout' )->name( 'logout' );
-
-// User authentification Routes...
-$this->get( 'register', 'Auth\RegisterController@showRegistrationForm' )->name( 'register' );
-$this->post( 'register', 'Auth\RegisterController@register' );
-Route::post( '/login/custom', [
-	'uses' => 'LoginController@login',
-	'as'   => 'login.custom'
-] );
-Route::post( '/login/ldap', [
-	'uses' => 'LoginController@login_ldap'
-] );
 $this->get( '/login/logout', 'LoginController@logout' );
 	$this->post( '/user/profile', 'UserController@editProfile' );
 

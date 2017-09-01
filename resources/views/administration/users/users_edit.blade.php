@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Nové Heslo</label>
-                    <input id="title-input" class="form-control" name="newPassword" type="password">
+                    <input id="title-input" class="form-control" name="newPassword" type="password" <?= !isset($user['password']) ? 'readonly' : '' ?>>
                 </div>
             </div>
             <div class="col-md-6">

@@ -19,7 +19,7 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$users = User::all()->where( 'type', 'user' );
+		$users = User::where( 'type', 'user' )->orWhere('type', 'ldap')->get();
 
 		return view( 'administration/users/users_list', [ 'users' => $users ] );
 	}

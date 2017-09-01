@@ -1,41 +1,16 @@
 # Online Laboratory Unification
-Install instructions:
-```
-git clone https://github.com/Luxato/Online-Lab-Unification-PHP.git
-composer update
-php artisan key:generate
+The aim of this thesis was to create web portal for online laboratory, that would access
+experiments for students of faculty and as well as general public. Part of the work was
+to study options of development web applications using scripting languages. Thanks to
+acquired knowledge we were able to consider more software solutions during design. The
+thesis contains described web application, which represent solution of the studied issue.
+The result of thesis is implemented web application, which contains required functionality.
+Web application is secured in terms of safety and can be used in the branch of education.
 
-set CHMOD resources/views/user_created_pages to 777
-set CHMOD resources to 777
-```
 
-TODO :
-1# change logo to .svg
-
-2# Remove online sources to offline
-
-##List of used libraries and packages
-1# Bootstrap
-
-2# jQuery
-
-3# github.com/fontenele/bootstrap-navbar-dropdowns
-
-4# github.com/VincentGarreau/particles.js
-
-5# https://laravelcollective.com/docs/5.0/html#installation
-
-6# http://silviomoreto.github.io/bootstrap-select/
-
-7# https://github.com/dangrossman/bootstrap-daterangepicker
-
-...
-wysiwyg/ckeditor, jquery nestable, switchery
-notyjs
-
-#Use Case
+# Use Case
 
 ![alt tag](http://showcase.stranovsky.sk/github/usecase.png)
 
-#Database model
+# Database model
 ![alt tag](http://showcase.stranovsky.sk/github/database_model.png)
