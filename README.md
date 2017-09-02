@@ -9,8 +9,7 @@ Web application is secured in terms of safety and can be used in the branch of e
 
 
 # Use Case
-
-![alt tag](http://showcase.stranovsky.sk/github/usecase.png)
+![alt tag](http://showcase.stranovsky.sk/github/usecasex.png)
 
 # Database model
-![alt tag](http://showcase.stranovsky.sk/github/database_model.png)
+![alt tag](http://showcase.stranovsky.sk/github/database_model.jpg)
